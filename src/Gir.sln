@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gir", "Gir\Gir.csproj", "{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gir.Tests", "Gir.Tests\Gir.Tests.csproj", "{51FB7677-5684-4664-A59C-075CA6976F57}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Debug|x86.ActiveCfg = Debug|x86
+		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Debug|x86.Build.0 = Debug|x86
+		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Release|x86.ActiveCfg = Release|x86
+		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Release|x86.Build.0 = Release|x86
+		{51FB7677-5684-4664-A59C-075CA6976F57}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{51FB7677-5684-4664-A59C-075CA6976F57}.Debug|x86.Build.0 = Debug|Any CPU
+		{51FB7677-5684-4664-A59C-075CA6976F57}.Release|x86.ActiveCfg = Release|Any CPU
+		{51FB7677-5684-4664-A59C-075CA6976F57}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
