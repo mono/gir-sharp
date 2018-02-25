@@ -43,6 +43,9 @@ namespace Gir
         [XmlElement("type")]
         public Type Type;
 
+        [XmlElement("varargs")]
+        public Varargs Varargs;
+
         public bool IsPointer => Type.CType.EndsWith("*");
 
         public bool IsArray => Type.Array != null;
