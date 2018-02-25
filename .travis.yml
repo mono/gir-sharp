@@ -1,0 +1,16 @@
+sudo: required
+dist: trusty
+language: csharp
+mono:
+  - latest
+solution: Gir.sln
+
+install:
+  - sudo apt-get update -qq > /dev/null
+  - nuget restore solution-name.sln
+  - nuget install NUnit.ConsoleRunner -Version 3.8.0 -OutputDirectory testrunner
+
+script:
+  - msbuild /p:Configuration=Release src/Gir.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./src/Gir.Tests/bin/Release/Gir.Tests.dll
+
