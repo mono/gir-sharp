@@ -1,0 +1,18 @@
+# Gir# Code Owners File
+#
+# GitHub uses this file to determine who to assign for reviews
+# on pull requests. Please keep this file alphabetically sorted.
+#
+# References:
+#
+# https://github.com/blog/2392-introducing-code-owners
+# https://help.github.com/articles/about-codeowners
+
+
+# These owners will be the default owners for everything in the repo.
+* @therzok
+
+# Order is important. The last matching pattern has the most precedence.
+
+#/src @someone
+
