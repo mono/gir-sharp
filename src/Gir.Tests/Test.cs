@@ -9,22 +9,8 @@ using NUnit.Framework;
 namespace Gir.Tests
 {
 	[TestFixture]
-	public class Test
+	public class ParserTests : GenerationTestBase
 	{
-		IEnumerable<Stream> GetAllGIRFiles ()
-		{
-			var assembly = Assembly.GetExecutingAssembly();
-
-			var names = assembly.GetManifestResourceNames();
-			foreach (var name in names)
-			{
-				if (!name.EndsWith(".gir", StringComparison.OrdinalIgnoreCase))
-					continue;
-
-				yield return assembly.GetManifestResourceStream(name);
-			}
-		}
-
 		[Test]
 		public void CanLoadGirFiles()
 		{

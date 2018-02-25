@@ -48,7 +48,7 @@ namespace Gir
 			//if (dir != "" || assembly_name != "" || glue_filename != "" || glue_includes != "" || gluelib_name != "")
 			//gen_info = new GenerationInfo(dir, custom_dir, assembly_name, glue_filename, glue_includes, gluelib_name);
 
-			var genOpts = new GenerationOptions(opt.dir, opt.ns);
+			var genOpts = new GenerationOptions(opt.dir, opt.ns, false);
 			foreach (IGeneratable gen in opt.gens)
 			{
 				gen.Generate(genOpts);

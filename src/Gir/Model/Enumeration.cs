@@ -6,7 +6,7 @@ namespace Gir
 	public partial class Enumeration
 	{
         [XmlAttribute("name")]
-        public string Name;
+		public string Name { get; set; }
 
         [XmlAttribute("version")]
         public string Version;

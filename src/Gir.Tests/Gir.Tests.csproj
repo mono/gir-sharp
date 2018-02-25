@@ -35,6 +35,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Test.cs" />
+    <Compile Include="EnumerationTests.cs" />
+    <Compile Include="GenerationTestBase.cs" />
+    <Compile Include="GenerationOptionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestFiles\" />
