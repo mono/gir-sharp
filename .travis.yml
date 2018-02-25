@@ -1,13 +1,11 @@
-sudo: required
 dist: trusty
 language: csharp
 mono:
   - latest
-solution: Gir.sln
+solution: src/Gir.sln
 
 install:
-  - sudo apt-get update -qq > /dev/null
-  - nuget restore solution-name.sln
+  - nuget restore src/Gir.sln
   - nuget install NUnit.ConsoleRunner -Version 3.8.0 -OutputDirectory testrunner
 
 script:
