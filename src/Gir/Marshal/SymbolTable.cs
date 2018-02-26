@@ -30,12 +30,18 @@ namespace Gir
 			statistics.RegisterType(symbol);
 		}
 
+		public ISymbol this[string type] {
+			get {
+				// Handle alias.
+				return typeMap[type];
+			}
+		}
+
 		public void ProcessAliases ()
 		{
 			var copy = typeMap.ToDictionary(x => x.Key, x => x.Value);
 			foreach (var kvp in copy) {
-				var target = kvp.Value;
-				if (target is Alias alias) {
+				if (kvp.Value is Alias alias) {
 					typeMap[kvp.Key] = Dealias(alias);
 				}
 			}
@@ -46,7 +52,7 @@ namespace Gir
 			ISymbol target = original;
 			while (target is Alias alias) {
 				if (!typeMap.TryGetValue(alias.Type.CType, out target)) {
-					statistics.RegisterError(new RegistrationError(alias));
+					statistics.RegisterError(new AliasRegistrationError(alias));
 					return this["void"];
 				}
 			}
@@ -61,26 +67,6 @@ namespace Gir
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();
-		}
-
-		public ISymbol this[string type]
-		{
-			get {
-				// Handle alias.
-				return typeMap[type];
-			}
-		}
-
-		class RegistrationError : Error
-		{
-			Alias alias;
-
-			public RegistrationError (Alias alias)
-			{
-				this.alias = alias;
-			}
-
-			public override string Message => string.Format ("Alias {0} pointing to non-registered {1}, setting to 'void'", alias.CType, alias.Type.CType);
 		}
 	}
 }
