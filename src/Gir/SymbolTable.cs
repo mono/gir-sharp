@@ -113,12 +113,12 @@ namespace Gir.Symbols
 			AddType(new Primitive("gconstpointer", "IntPtr", "IntPtr.Zero"));
 		}
 
-		public void AddType(IGeneratable gen)
+		public void AddType (IGeneratable gen)
 		{
 			types[gen.Name] = gen;
 		}
 
-		public void AddTypes(IGeneratable[] gens)
+		public void AddType (IEnumerable<IGeneratable> gens)
 		{
 			foreach (IGeneratable gen in gens)
 				types[gen.Name] = gen;

@@ -9,7 +9,7 @@ namespace Gir
 		string ns = String.Empty;
 		string default_value = String.Empty;
 
-		public SimpleBase(string ctype, string type, string default_value)
+		protected SimpleBase(string ctype, string type, string default_value)
 		{
 			string[] toks = type.Split('.');
 			this.ctype = ctype;

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using Gir.Symbols;
-using System.Linq;
 
 namespace Gir
 {
@@ -119,15 +118,15 @@ namespace Gir
 			Repository repo = p.Parse();
 			opt.ns = repo.Namespace;
 
-			// No SymbolTable for now
-			table.AddTypes(repo.GetGeneratables().ToArray());
+			table.AddType (repo.GetGeneratables ());
 			if (!opt.generate)
 			{
-				//foreach (var gen in repo.GetGeneratables())
-					//gen.Validate();
+				//foreach (var gen in repo.GetGeneratables ())
+					//gen.Validate ();
 			}
+
 			if (opt.generate)
-				opt.gens.AddRange(repo.GetGeneratables ());
+				opt.gens.AddRange (repo.GetGeneratables ());
 		}
 	}
 }
