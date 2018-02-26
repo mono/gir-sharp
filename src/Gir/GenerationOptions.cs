@@ -8,6 +8,7 @@ namespace Gir
 		public string DirectoryPath { get; }
 		public Namespace Namespace { get; }
 		public Stream RedirectStream { get; set; }
+		public SymbolTable SymbolTable { get; } = new SymbolTable();
 
 		bool compat;
 		public bool GenerateDocumentation { get { return !compat; } }

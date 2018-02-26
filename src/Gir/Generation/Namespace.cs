@@ -12,9 +12,6 @@ namespace Gir
 			foreach (var bitfield in Bitfields)
 				yield return bitfield;
 
-			foreach (var alias in Aliases)
-				yield return alias;
-
 			// TODO: Add others
 		}
 	}
