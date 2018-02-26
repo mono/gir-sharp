@@ -79,6 +79,14 @@
     <Compile Include="GenerationOptions.cs" />
     <Compile Include="Generation\Bitfield.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="Generation\Alias.cs" />
+    <Compile Include="Generation\SimpleBase.cs" />
+    <Compile Include="Generation\Primitive.cs" />
+    <Compile Include="Generation\Interface.cs" />
+    <Compile Include="Generation\IntPtrGen.cs" />
+    <Compile Include="Generation\IAccessor.cs" />
+    <Compile Include="Generation\UIntPtrGen.cs" />
+    <Compile Include="SymbolTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />
