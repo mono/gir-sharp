@@ -88,6 +88,9 @@
     <Compile Include="Marshal\SymbolTable.cs" />
     <Compile Include="Marshal\Enumeration.cs" />
     <Compile Include="Marshal\Alias.cs" />
+    <Compile Include="Statistics.cs" />
+    <Compile Include="Marshal\SymbolTable.Builtin.cs" />
+    <Compile Include="Error.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />

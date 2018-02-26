@@ -58,8 +58,7 @@ namespace Gir.Tests
 				RedirectStream = new MemoryStream(),
 			};
 
-			foreach (var symbol in repo.GetSymbols())
-				opts.SymbolTable.AddType(symbol);
+			opts.SymbolTable.AddTypes(repo.GetSymbols());
 			opts.SymbolTable.ProcessAliases();
 
 			return opts;

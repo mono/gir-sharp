@@ -47,9 +47,7 @@ namespace Gir
 			//gen_info = new GenerationInfo(dir, custom_dir, assembly_name, glue_filename, glue_includes, gluelib_name);
 
 			var genOpts = new GenerationOptions(opt.dir, opt.ns, false);
-
-			foreach (var symbol in opt.symbols)
-				genOpts.SymbolTable.AddType(symbol);
+			genOpts.SymbolTable.AddTypes(opt.symbols);
 
 			genOpts.SymbolTable.ProcessAliases();
 			
