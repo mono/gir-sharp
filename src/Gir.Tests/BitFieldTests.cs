@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Gir.Tests
 {
 	[TestFixture]
-	public class BitFieldGenerationTests : GenerationTestBase
+	public class BitFieldTests : GenerationTestBase
 	{
 		[Test]
 		public void GenerateDocumentationWhenCompatFalse()

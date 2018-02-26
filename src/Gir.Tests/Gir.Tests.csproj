@@ -38,7 +38,7 @@
     <Compile Include="EnumerationTests.cs" />
     <Compile Include="GenerationTestBase.cs" />
     <Compile Include="GenerationOptionsTests.cs" />
-    <Compile Include="BitFieldGenerationTests.cs" />
+    <Compile Include="BitFieldTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestFiles\" />
