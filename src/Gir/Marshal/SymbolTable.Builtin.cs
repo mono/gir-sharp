@@ -41,7 +41,6 @@ namespace Gir
 			AddType(new Primitive("gdouble", "double", "0.0"));
 			AddType(new Primitive("double", "double", "0.0"));
 			AddType(new Primitive("goffset", "long", "0"));
-			AddType(new Primitive("GQuark", "int", "0"));
 		}
 
 	}
