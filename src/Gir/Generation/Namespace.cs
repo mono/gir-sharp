@@ -11,6 +11,9 @@ namespace Gir
 			foreach (var en in Enumerations)
 				yield return en;
 
+			foreach (var bitfield in Bitfields)
+				yield return bitfield;
+
 			// TODO: Add others
 		}
 	}

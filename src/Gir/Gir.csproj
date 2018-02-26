@@ -77,6 +77,8 @@
     <Compile Include="Generation\Enumeration.cs" />
     <Compile Include="Generation\IndentWriter.cs" />
     <Compile Include="GenerationOptions.cs" />
+    <Compile Include="Generation\Bitfield.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />
