@@ -53,10 +53,15 @@ namespace Gir.Tests
 
 		protected static GenerationOptions GetOptions(Repository repo, bool compat = false)
 		{
-			return new GenerationOptions("", repo.Namespace, compat)
+			var opts = new GenerationOptions("", repo.Namespace, compat)
 			{
 				RedirectStream = new MemoryStream(),
 			};
+
+			opts.SymbolTable.AddTypes(repo.GetSymbols());
+			opts.SymbolTable.ProcessAliases();
+
+			return opts;
 		}
 
 		protected static void Generate (Repository repo, GenerationOptions opts, string name)

@@ -15,6 +15,7 @@ namespace Gir
 			public string glue_filename = "";
 			public string glue_includes = "";
 			public string gluelib_name = "";
+			public List<ISymbol> symbols = new List<ISymbol>();
 			public List<IGeneratable> gens = new List<IGeneratable>();
 			public Namespace ns;
 		}
@@ -26,7 +27,6 @@ namespace Gir
 				return 0;
 			}
 
-			//SymbolTable table = SymbolTable.Table;
 			var opt = new OptionSet();
 			foreach (string arg in args) {
 				ParseArg(opt, arg);
@@ -47,11 +47,15 @@ namespace Gir
 			//gen_info = new GenerationInfo(dir, custom_dir, assembly_name, glue_filename, glue_includes, gluelib_name);
 
 			var genOpts = new GenerationOptions(opt.dir, opt.ns, false);
+			genOpts.SymbolTable.AddTypes(opt.symbols);
+
+			genOpts.SymbolTable.ProcessAliases();
+			
 			foreach (IGeneratable gen in opt.gens) {
 				gen.Generate(genOpts);
 			}
 
-			//Statistics.Report();
+			genOpts.Statistics.ReportStatistics();
 			return 0;
 		}
 
@@ -110,6 +114,7 @@ namespace Gir
 			//	foreach (var gen in curr_gens)
 			//		gen.Validate();
 			//}
+			opt.symbols.AddRange(repo.GetSymbols());
 			if (opt.generate)
 				opt.gens.AddRange(repo.GetGeneratables());
 		}

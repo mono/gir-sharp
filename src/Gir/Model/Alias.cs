@@ -8,7 +8,7 @@ namespace Gir
 		public string Name { get; set; }
 
 		[XmlAttribute("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
-		public string CType;
+		public string CType { get; set; }
 
 		[XmlElement("doc")]
 		public Documentation Doc { get; set; }
