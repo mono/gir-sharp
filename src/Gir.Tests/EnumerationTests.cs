@@ -12,18 +12,7 @@ namespace Gir.Tests
 		[Test]
 		public void PangoAlignmentIsGenerated ()
 		{
-			var gir = GetGIRFile("Pango-1.0");
-			var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Repository));
-			var repo = (Repository)serializer.Deserialize(gir);
-
-			var sw = new MemoryStream();
-			var opts = new GenerationOptions("", repo.Namespace) {
-				RedirectStream  = sw,
-			};
-
-			repo.GetGeneratables().First(x => x.Name == "Alignment").Generate (opts);
-
-			var result = Encoding.UTF8.GetString(sw.ToArray());
+			var result = GenerateType(Pango, "Alignment");
 
 			Assert.AreEqual(@"namespace Pango
 {

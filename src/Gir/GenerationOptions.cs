@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Gir
 {
-	public class GenerationOptions
+	public sealed class GenerationOptions
 	{
 		public string DirectoryPath { get; }
 		public Namespace Namespace { get; }

@@ -12,19 +12,7 @@ namespace Gir.Tests
 		[Test]
 		public void GenerateDocumentationWhenCompatFalse()
 		{
-			var gir = GetGIRFile("Pango-1.0");
-			var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Repository));
-			var repo = (Repository)serializer.Deserialize(gir);
-
-			var sw = new MemoryStream();
-			var opts = new GenerationOptions("", repo.Namespace) {
-				RedirectStream = sw,
-			};
-
-			repo.GetGeneratables().First(x => x.Name == "FontMask").Generate(opts);
-
-			var result = Encoding.UTF8.GetString(sw.ToArray());
-
+			var result = GenerateType(Pango, "FontMask");
 			Assert.AreEqual(@"namespace Pango
 {
 	///<summary>
@@ -56,18 +44,7 @@ namespace Gir.Tests
 		[Test]
 		public void GenerateNoDocumentationWhenCompatTrue()
 		{
-			var gir = GetGIRFile("Pango-1.0");
-			var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Repository));
-			var repo = (Repository)serializer.Deserialize(gir);
-
-			var sw = new MemoryStream();
-			var opts = new GenerationOptions("", repo.Namespace, true) {
-				RedirectStream = sw,
-			};
-
-			repo.GetGeneratables().First(x => x.Name == "FontMask").Generate(opts);
-
-			var result = Encoding.UTF8.GetString(sw.ToArray());
+			var result = GenerateType(Pango, "FontMask", compat: true);
 
 			Assert.AreEqual(@"namespace Pango
 {
