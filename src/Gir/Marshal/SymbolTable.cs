@@ -7,6 +7,7 @@ namespace Gir
 {
 	public partial class SymbolTable : IEnumerable<ISymbol>
 	{
+		// FIXME: Known issue with pointers. We need to figure that one out.
 		readonly Dictionary<string, ISymbol> typeMap = new Dictionary<string, ISymbol>();
 		Statistics statistics;
 
