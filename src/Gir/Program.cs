@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+
+using Gir.Symbols;
+using System.Linq;
 
 namespace Gir
 {
@@ -26,11 +28,11 @@ namespace Gir
 				return 0;
 			}
 
-			//SymbolTable table = SymbolTable.Table;
+			SymbolTable table = SymbolTable.Table;
 			var opt = new OptionSet();
 			foreach (string arg in args)
 			{
-				ParseArg(opt, arg);
+				ParseArg(opt, arg, table);
 			}
 
 			// Now that everything is loaded, validate all the to-be-
@@ -58,7 +60,7 @@ namespace Gir
 			return 0;
 		}
 
-		static void ParseArg (OptionSet opt, string arg)
+		static void ParseArg (OptionSet opt, string arg, SymbolTable table)
 		{
 			string filename = arg;
 			if (arg == "--generate")
@@ -118,12 +120,12 @@ namespace Gir
 			opt.ns = repo.Namespace;
 
 			// No SymbolTable for now
-			//table.AddTypes(curr_gens);
-			//if (!generate)
-			//{
-			//	foreach (var gen in curr_gens)
-			//		gen.Validate();
-			//}
+			table.AddTypes(repo.GetGeneratables().ToArray());
+			if (!opt.generate)
+			{
+				//foreach (var gen in repo.GetGeneratables())
+					//gen.Validate();
+			}
 			if (opt.generate)
 				opt.gens.AddRange(repo.GetGeneratables ());
 		}

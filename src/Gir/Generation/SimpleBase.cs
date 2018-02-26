@@ -90,7 +90,7 @@ namespace Gir
 		{
 		}
 
-		void Generate(GenerationOptions opts)
+		public void Generate(GenerationOptions opts)
 		{
 			// FIXME, actually generate stuff, or not?
 		}

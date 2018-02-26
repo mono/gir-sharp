@@ -82,7 +82,7 @@
     <Compile Include="Generation\Alias.cs" />
     <Compile Include="Symbols\SymbolTable.cs" />
     <Compile Include="Generation\SimpleBase.cs" />
-    <Compile Include="Generation\Simple.cs" />
+    <Compile Include="Generation\Primitive.cs" />
     <Compile Include="Generation\Interface.cs" />
   </ItemGroup>
   <ItemGroup>

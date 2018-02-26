@@ -3,10 +3,10 @@ using System.Xml.Serialization;
 
 namespace Gir
 {
-	public partial class Interface
+	public partial class Interface : IGeneratable
 	{
         [XmlAttribute("name")]
-        public string Name;
+		public string Name { get; set; }
 
         [XmlAttribute("version")]
         public string Version;
