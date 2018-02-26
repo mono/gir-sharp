@@ -8,8 +8,7 @@ namespace Gir
 		public void Generate(GenerationOptions opts)
 		{
 			var path = Path.Combine(opts.DirectoryPath, Name + ".cs");
-			using (var writer = IndentWriter.OpenWrite(path, opts))
-			{
+			using (var writer = IndentWriter.OpenWrite(path, opts)) {
 				writer.WriteLine("namespace " + opts.Namespace.Name);
 				writer.WriteLine("{");
 				writer.Indent();

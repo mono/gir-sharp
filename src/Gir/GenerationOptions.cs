@@ -12,7 +12,7 @@ namespace Gir
 		bool compat;
 		public bool GenerateDocumentation { get { return !compat; } }
 
-		public GenerationOptions (string dir, Namespace ns, bool compat = false)
+		public GenerationOptions(string dir, Namespace ns, bool compat = false)
 		{
 			DirectoryPath = dir;
 			Namespace = ns;

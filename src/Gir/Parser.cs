@@ -12,10 +12,9 @@ namespace Gir
 			this.fileName = fileName;
 		}
 
-		public Repository Parse ()
+		public Repository Parse()
 		{
-			using (var fs = File.OpenRead (fileName))
-			{
+			using (var fs = File.OpenRead(fileName)) {
 				var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Repository));
 				return (Repository)serializer.Deserialize(fs);
 			}

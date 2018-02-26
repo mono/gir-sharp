@@ -12,10 +12,8 @@ namespace Gir
 			var sb = new StringBuilder(cname.Length);
 
 			bool isUpper = true;
-			foreach (var c in cname)
-			{
-				if (c == '_')
-				{
+			foreach (var c in cname) {
+				if (c == '_') {
 					isUpper = true;
 					continue;
 				}

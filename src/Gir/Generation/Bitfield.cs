@@ -30,12 +30,12 @@ namespace Gir
 		void GenerateMembers(IndentWriter writer)
 		{
 			foreach (var member in Members) {
-				writer.WriteDocumentation (member.Doc);
-				writer.WriteLine (member.Name.ToCSharp () + " = " + HexFormat (member.Value) + ",");
+				writer.WriteDocumentation(member.Doc);
+				writer.WriteLine(member.Name.ToCSharp() + " = " + HexFormat(member.Value) + ",");
 			}
 		}
 
-		string HexFormat (string text)
+		string HexFormat(string text)
 		{
 			int value = int.Parse(text);
 

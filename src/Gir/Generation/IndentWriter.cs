@@ -12,18 +12,14 @@ namespace Gir
 		public static IndentWriter OpenWrite (string path, GenerationOptions opts)
 		{
 			StreamWriter sw;
-			if (opts.RedirectStream != null)
-			{
+			if (opts.RedirectStream != null) {
 				sw = new StreamWriter(opts.RedirectStream);
-			}
-			else
-			{
+			} else {
 				var fs = File.Open(path, FileMode.Create);
 				sw = new StreamWriter(fs);
 			}
 
-			return new IndentWriter(sw)
-			{
+			return new IndentWriter(sw) {
 				opts = opts,
 			};
 		}
@@ -45,8 +41,7 @@ namespace Gir
 				return this;
 			
 			var text = doc.Text.Split('\n');
-			if (text.Length == 1)
-			{
+			if (text.Length == 1) {
 				WriteIndent();
 				return Write("///<summary>").Write(text[0]).Write("</summary>").WriteLine ();
 			}

@@ -28,18 +28,16 @@ namespace Gir
 
 			//SymbolTable table = SymbolTable.Table;
 			var opt = new OptionSet();
-			foreach (string arg in args)
-			{
+			foreach (string arg in args) {
 				ParseArg(opt, arg);
 			}
 
 			// Now that everything is loaded, validate all the to-be-
 			// generated generatables and then remove the invalid ones.
 			var invalids = new List<IGeneratable>();
-			foreach (IGeneratable gen in opt.gens)
-			{
+			foreach (IGeneratable gen in opt.gens) {
 				//if (!gen.Validate())
-					//invalids.Add(gen);
+				//invalids.Add(gen);
 			}
 			foreach (IGeneratable gen in invalids)
 				opt.gens.Remove(gen);
@@ -49,8 +47,7 @@ namespace Gir
 			//gen_info = new GenerationInfo(dir, custom_dir, assembly_name, glue_filename, glue_includes, gluelib_name);
 
 			var genOpts = new GenerationOptions(opt.dir, opt.ns, false);
-			foreach (IGeneratable gen in opt.gens)
-			{
+			foreach (IGeneratable gen in opt.gens) {
 				gen.Generate(genOpts);
 			}
 
@@ -58,56 +55,45 @@ namespace Gir
 			return 0;
 		}
 
-		static void ParseArg (OptionSet opt, string arg)
+		static void ParseArg(OptionSet opt, string arg)
 		{
 			string filename = arg;
-			if (arg == "--generate")
-			{
+			if (arg == "--generate") {
 				opt.generate = true;
 				return;
 			}
-			if (arg == "--include")
-			{
+			if (arg == "--include") {
 				opt.generate = false;
 				return;
 			}
-			if (arg.StartsWith("-I:"))
-			{
+			if (arg.StartsWith("-I:")) {
 				opt.generate = false;
 				filename = filename.Substring(3);
-			}
-			else if (arg.StartsWith("--outdir="))
-			{
+			} else if (arg.StartsWith("--outdir=")) {
 				opt.generate = false;
 				opt.dir = arg.Substring(9);
 				return;
-			}
-			else if (arg.StartsWith("--customdir="))
-			{
+			} else if (arg.StartsWith("--customdir=")) {
 				opt.generate = false;
 				opt.custom_dir = arg.Substring(12);
 				return;
 			}
-			if (arg.StartsWith("--assembly-name="))
-			{
+			if (arg.StartsWith("--assembly-name=")) {
 				opt.generate = false;
 				opt.assembly_name = arg.Substring(16);
 				return;
 			}
-			if (arg.StartsWith("--glue-filename="))
-			{
+			if (arg.StartsWith("--glue-filename=")) {
 				opt.generate = false;
 				opt.glue_filename = arg.Substring(16);
 				return;
 			}
-			if (arg.StartsWith("--glue-includes="))
-			{
+			if (arg.StartsWith("--glue-includes=")) {
 				opt.generate = false;
 				opt.glue_includes = arg.Substring(16);
 				return;
 			}
-			if (arg.StartsWith("--gluelib-name="))
-			{
+			if (arg.StartsWith("--gluelib-name=")) {
 				opt.generate = false;
 				opt.gluelib_name = arg.Substring(15);
 				return;
@@ -125,7 +111,7 @@ namespace Gir
 			//		gen.Validate();
 			//}
 			if (opt.generate)
-				opt.gens.AddRange(repo.GetGeneratables ());
+				opt.gens.AddRange(repo.GetGeneratables());
 		}
 	}
 }

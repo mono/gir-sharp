@@ -1,7 +1,7 @@
 ﻿namespace Gir
 {
-    public partial class Varargs
-    {
-        
-    }
+	public partial class Varargs
+	{
+
+	}
 }

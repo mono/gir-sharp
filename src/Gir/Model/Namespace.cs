@@ -16,14 +16,14 @@ namespace Gir
 		[XmlAttribute("shared-library")]
 		public string SharedLibary { get; set; }
 
-		[XmlAttribute("identifier-prefix", Namespace ="http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute("identifier-prefix", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string IdentifierPrefix { get; set; }
 
 		[XmlAttribute("symbol-prefixes", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string SymbolPrefixes { get; set; }
 
 		[XmlElement("alias")]
-		public List<Alias> Aliases { get; set;}
+		public List<Alias> Aliases { get; set; }
 
 		[XmlElement("record")]
 		public List<Record> Records { get; set; }
@@ -38,7 +38,7 @@ namespace Gir
 		public List<Interface> Interfaces { get; set; }
 
 		[XmlElement("callback")]
-		public List<Callback> Callbacks { get; set;}
+		public List<Callback> Callbacks { get; set; }
 
 		[XmlElement("function")]
 		public List<Function> Functions { get; set; }

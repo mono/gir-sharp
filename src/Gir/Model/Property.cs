@@ -3,42 +3,42 @@ using System.Xml.Serialization;
 
 namespace Gir
 {
-    public partial class Property
-    {
-        [XmlAttribute("construct")]
-        public bool Construct;
+	public partial class Property
+	{
+		[XmlAttribute("construct")]
+		public bool Construct;
 
-        [XmlAttribute("construct-only")]
-        public bool ConstructOnly;
+		[XmlAttribute("construct-only")]
+		public bool ConstructOnly;
 
-        [XmlAttribute("deprecated")]
-        public bool Deprecated;
+		[XmlAttribute("deprecated")]
+		public bool Deprecated;
 
-        [XmlAttribute("deprecated-version")]
-        public string DeprecatedVersion;
+		[XmlAttribute("deprecated-version")]
+		public string DeprecatedVersion;
 
-        [XmlAttribute("introspectable")]
-        public bool Introspectable;
+		[XmlAttribute("introspectable")]
+		public bool Introspectable;
 
-        [XmlAttribute("name")]
-        public string Name;
+		[XmlAttribute("name")]
+		public string Name;
 
-        [XmlAttribute("readable")]
-        public bool Readable;
+		[XmlAttribute("readable")]
+		public bool Readable;
 
-        [XmlAttribute("transfer-ownership")]
-        public TransferOwnership TransferOwnership;
+		[XmlAttribute("transfer-ownership")]
+		public TransferOwnership TransferOwnership;
 
-        [XmlAttribute("version")]
-        public string Version;
+		[XmlAttribute("version")]
+		public string Version;
 
-        [XmlAttribute("writable")]
-        public bool Writable;
+		[XmlAttribute("writable")]
+		public bool Writable;
 
-        [XmlElement("doc")]
-        public Documentation Doc { get; set; }
+		[XmlElement("doc")]
+		public Documentation Doc { get; set; }
 
-        [XmlElement("type")]
-        public Type Type;
-    }
+		[XmlElement("type")]
+		public Type Type;
+	}
 }
