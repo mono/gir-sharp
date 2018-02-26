@@ -12,7 +12,7 @@ namespace Gir
         public string Version;
 
         [XmlAttribute("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
-        public string CType;
+		public string CType { get; set; }
 
         [XmlAttribute("error-domain", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
         public string GLibErrorDomain;

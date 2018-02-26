@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Gir
 {
-	public partial class Enumeration : IGeneratable
+	public partial class Enumeration : IGeneratable, IType
 	{
 		public void Generate(GenerationOptions opts)
 		{
@@ -31,7 +31,7 @@ namespace Gir
 		{
 			foreach (var member in Members) {
 				writer.WriteDocumentation(member.Doc);
-				writer.WriteLine(member.Name + " = " + member.Value + ",");
+				writer.WriteLine(member.Name.ToCSharp () + " = " + member.Value + ",");
 			}
 		}
 	}

@@ -35,11 +35,11 @@ namespace Gir.Tests
 	enum Alignment
 	{
 		///<summary>Put all available space on the right</summary>
-		left = 0,
+		Left = 0,
 		///<summary>Center the line within the available space</summary>
-		center = 1,
+		Center = 1,
 		///<summary>Put all available space on the left</summary>
-		right = 2,
+		Right = 2,
 	}
 }
 ", result);
