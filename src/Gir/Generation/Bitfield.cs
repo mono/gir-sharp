@@ -31,8 +31,16 @@ namespace Gir
 		{
 			foreach (var member in Members) {
 				writer.WriteDocumentation (member.Doc);
-				writer.WriteLine (Utils.UppercaseFirst (member.Name) + " = " + member.Value + ",");
+				writer.WriteLine (member.Name.ToCSharp () + " = " + HexFormat (member.Value) + ",");
 			}
+		}
+
+		string HexFormat (string text)
+		{
+			int value = int.Parse(text);
+
+			// Maybe pad with leading zeroes based on the value?
+			return string.Format("0x{0:X}", value);
 		}
 	}
 }

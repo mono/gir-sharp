@@ -1,17 +1,30 @@
 ﻿using System;
+using System.Text;
 
 namespace Gir
 {
 	public static class Utils
 	{
-		public static string UppercaseFirst(string s)
+		// Perf - maybe cache this?
+		public static string ToCSharp(this string cname)
 		{
-			if (string.IsNullOrEmpty(s))
-				return string.Empty;
+			// Capitalize the first letter, and parse for underscores, capitalizing the letters after them
+			var sb = new StringBuilder(cname.Length);
 
-			char[] a = s.ToCharArray();
-			a[0] = char.ToUpper(a[0]);
-			return new string(a);
+			bool isUpper = true;
+			foreach (var c in cname)
+			{
+				if (c == '_')
+				{
+					isUpper = true;
+					continue;
+				}
+
+				sb.Append(isUpper ? char.ToUpper(c) : c);
+				isUpper = false;
+			}
+
+			return sb.ToString();
 		}
 	}
 }

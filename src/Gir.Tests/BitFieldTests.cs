@@ -35,19 +35,19 @@ namespace Gir.Tests
 	public enum FontMask
 	{
 		///<summary>the font family is specified.</summary>
-		Family = 1,
+		Family = 0x1,
 		///<summary>the font style is specified.</summary>
-		Style = 2,
+		Style = 0x2,
 		///<summary>the font variant is specified.</summary>
-		Variant = 4,
+		Variant = 0x4,
 		///<summary>the font weight is specified.</summary>
-		Weight = 8,
+		Weight = 0x8,
 		///<summary>the font stretch is specified.</summary>
-		Stretch = 16,
+		Stretch = 0x10,
 		///<summary>the font size is specified.</summary>
-		Size = 32,
+		Size = 0x20,
 		///<summary>the font gravity is specified (Since: 1.16.)</summary>
-		Gravity = 64,
+		Gravity = 0x40,
 	}
 }
 ", result);
@@ -74,13 +74,13 @@ namespace Gir.Tests
 	[Flags]
 	public enum FontMask
 	{
-		Family = 1,
-		Style = 2,
-		Variant = 4,
-		Weight = 8,
-		Stretch = 16,
-		Size = 32,
-		Gravity = 64,
+		Family = 0x1,
+		Style = 0x2,
+		Variant = 0x4,
+		Weight = 0x8,
+		Stretch = 0x10,
+		Size = 0x20,
+		Gravity = 0x40,
 	}
 }
 ", result);
