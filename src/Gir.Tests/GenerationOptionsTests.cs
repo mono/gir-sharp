@@ -33,7 +33,7 @@ namespace Gir.Tests
 	/// available space. If the #PangoLayout is set to justify
 	/// using pango_layout_set_justify(), this only has effect for partial lines.
 	///</summary>
-	enum Alignment
+	public enum Alignment
 	{
 		///<summary>Put all available space on the right</summary>
 		Left = 0,
@@ -65,7 +65,7 @@ namespace Gir.Tests
 
 			Assert.AreEqual(@"namespace Pango
 {
-	enum Alignment
+	public enum Alignment
 	{
 		Left = 0,
 		Center = 1,
