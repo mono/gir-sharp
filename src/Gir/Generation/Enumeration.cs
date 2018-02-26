@@ -7,21 +7,19 @@ namespace Gir
 	{
 		public void Generate(GenerationOptions opts)
 		{
-			var path = Path.Combine(opts.DirectoryPath, Name + ".cs");
-			using (var writer = IndentWriter.OpenWrite(path, opts)) {
+			using (var writer = this.GetWriter(opts)) {
 				writer.WriteLine("namespace " + opts.Namespace.Name);
 				writer.WriteLine("{");
-				writer.Indent();
-				writer.WriteDocumentation(Doc);
-				writer.WriteLine("public enum " + Name);
-				writer.WriteLine("{");
-				writer.Indent();
+				using (writer.Indent()) {
+					writer.WriteDocumentation(Doc);
+					writer.WriteLine("public enum " + Name);
+					writer.WriteLine("{");
 
-				GenerateMembers(writer);
-
-				writer.Unindent();
-				writer.WriteLine("}");
-				writer.Unindent();
+					using (writer.Indent()) {
+						GenerateMembers(writer);
+					}
+					writer.WriteLine("}");
+				}
 				writer.WriteLine("}");
 			}
 		}

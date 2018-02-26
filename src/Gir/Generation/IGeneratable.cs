@@ -9,9 +9,4 @@ namespace Gir
 		//void Process();
 		void Generate(GenerationOptions opts);
 	}
-
-	public interface IType
-	{
-		string CType { get; set; }
-	}
 }

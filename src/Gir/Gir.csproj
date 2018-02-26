@@ -80,6 +80,9 @@
     <Compile Include="Generation\Bitfield.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Generation\Alias.cs" />
+    <Compile Include="Marshal\IType.cs" />
+    <Compile Include="Marshal\ITypeExtensions.cs" />
+    <Compile Include="Generation\IGeneratableExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />
@@ -90,6 +93,7 @@
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Generation\" />
+    <Folder Include="Marshal\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
