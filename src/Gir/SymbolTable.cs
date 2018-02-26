@@ -5,18 +5,11 @@ namespace Gir.Symbols
 {
 	public class SymbolTable
 	{
-		static SymbolTable table;
+		static SymbolTable table = new SymbolTable();
 
 		Dictionary<string, IGeneratable> types = new Dictionary<string, IGeneratable>();
 
-		public static SymbolTable Table {
-			get {
-				if (table == null)
-					table = new SymbolTable();
-
-				return table;
-			}
-		}
+		public static SymbolTable Table => table;
 
 		public SymbolTable()
 		{
@@ -131,17 +124,9 @@ namespace Gir.Symbols
 				types[gen.Name] = gen;
 		}
 
-		public int Count {
-			get {
-				return types.Count;
-			}
-		}
+		public int Count => types.Count;
 
-		public IEnumerable<IGeneratable> Generatables {
-			get {
-				return types.Values;
-			}
-		}
+		public IEnumerable<IGeneratable> Generatables => types.Values;
 
 		public IGeneratable this[string ctype] {
 			get {
@@ -274,48 +259,32 @@ namespace Gir.Symbols
 
 		//public bool IsOpaque(string c_type)
 		//{
-		//	if (this[c_type] is OpaqueGen)
-		//		return true;
-
-		//	return false;
+		//	return this[c_type] is OpaqueGen;
 		//}
 
 		//public bool IsBoxed(string c_type)
 		//{
-		//	if (this[c_type] is BoxedGen)
-		//		return true;
-
-		//	return false;
+		//	return this[c_type] is BoxedGen;
 		//}
 
-		//public bool IsStruct(string c_type)
-		//{
-		//	if (this[c_type] is StructGen)
-		//		return true;
-
-		//	return false;
-		//}
+		public bool IsStruct(string c_type)
+		{
+			return this[c_type] is Record;
+		}
 
 		public bool IsEnum(string c_type)
 		{
-			if (this[c_type] is Enumeration)
-				return true;
-
-			return false;
+			return this[c_type] is Enumeration;
 		}
 
-		//public bool IsEnumFlags(string c_type)
-		//{
-		//	Enumeration gen = this[c_type] as Enumeration;
-		//	return (gen != null && gen.Elem.GetAttribute("type") == "flags");
-		//}
+		public bool IsEnumFlags(string c_type)
+		{
+			return this[c_type] is Bitfield;
+		}
 
 		public bool IsInterface(string c_type)
 		{
-			if (this[c_type] is Interface)
-				return true;
-
-			return false;
+			return this[c_type] is Interface;
 		}
 
 		//public ClassBase GetClassGen(string c_type)
@@ -325,26 +294,17 @@ namespace Gir.Symbols
 
 		//public bool IsObject(string c_type)
 		//{
-		//	if (this[c_type] is ObjectGen)
-		//		return true;
-
-		//	return false;
+		//	return this[c_type] is ObjectGen;
 		//}
 
-		//public bool IsCallback(string c_type)
-		//{
-		//	if (this[c_type] is CallbackGen)
-		//		return true;
-
-		//	return false;
-		//}
+		public bool IsCallback(string c_type)
+		{
+			return this[c_type] is Callback;
+		}
 
 		//public bool IsManuallyWrapped(string c_type)
 		//{
-		//	if (this[c_type] is ManualGen)
-		//		return true;
-
-		//	return false;
+		//	return this[c_type] is ManualGen;
 		//}
 
 		public string MangleName(string name)
