@@ -84,6 +84,9 @@
     <Compile Include="Generation\SimpleBase.cs" />
     <Compile Include="Generation\Primitive.cs" />
     <Compile Include="Generation\Interface.cs" />
+    <Compile Include="Generation\IntPtrGen.cs" />
+    <Compile Include="Generation\IAccessor.cs" />
+    <Compile Include="Generation\UIntPtrGen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />

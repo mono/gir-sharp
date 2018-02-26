@@ -62,22 +62,22 @@ namespace Gir.Symbols
 			AddType (new Primitive ("gulong", "uint", "0"));
 			AddType (new Primitive ("unsigned long", "uint", "0"));
 #else
-			//AddType(new LPGen("long"));
-			//AddType(new LPGen("glong"));
-			//AddType(new LPUGen("ulong"));
-			//AddType(new LPUGen("gulong"));
-			//AddType(new LPUGen("unsigned long"));
+			AddType(new IntPtrGen("long"));
+			AddType(new IntPtrGen("glong"));
+			AddType(new UIntPtrGen("ulong"));
+			AddType(new UIntPtrGen("gulong"));
+			AddType(new UIntPtrGen("unsigned long"));
 #endif
 
-			//AddType(new LPGen("ssize_t"));
-			//AddType(new LPGen("gssize"));
-			//AddType(new LPUGen("size_t"));
-			//AddType(new LPUGen("gsize"));
+			AddType(new IntPtrGen("ssize_t"));
+			AddType(new IntPtrGen("gssize"));
+			AddType(new UIntPtrGen("size_t"));
+			AddType(new UIntPtrGen("gsize"));
 
 #if OFF_T_8
 			AddType (new AliasGen ("off_t", "long"));
 #else
-			//AddType(new LPGen("off_t"));
+			AddType(new IntPtrGen("off_t"));
 #endif
 
 			// string types
