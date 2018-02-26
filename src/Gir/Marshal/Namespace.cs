@@ -7,11 +7,7 @@ namespace Gir
 	{
 		public IEnumerable<ISymbol> GetSymbols()
 		{
-			foreach (var en in Enumerations)
-				yield return en;
-
-			foreach (var alias in Aliases)
-				yield return alias;
+			return Utils.GetAllCollectionMembers<ISymbol>(this);
 		}
 	}
 }
