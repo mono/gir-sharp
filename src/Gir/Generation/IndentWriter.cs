@@ -89,14 +89,29 @@ namespace Gir
 			return this;
 		}
 
-		public void Indent()
+		public IDisposable Indent()
 		{
 			indent++;
+			return new IndentDisposable(this);
 		}
 
 		public void Unindent()
 		{
 			indent--;
+		}
+
+		class IndentDisposable : IDisposable
+		{
+			IndentWriter writer;
+			public IndentDisposable (IndentWriter writer)
+			{
+				this.writer = writer;
+			}
+
+			public void Dispose ()
+			{
+				writer.indent--;
+			}
 		}
 	}
 }

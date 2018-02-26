@@ -10,18 +10,17 @@ namespace Gir
 			using (var writer = this.GetWriter (opts)) {
 				writer.WriteLine("namespace " + opts.Namespace.Name);
 				writer.WriteLine("{");
-				writer.Indent();
-				writer.WriteDocumentation(Doc);
-				writer.WriteLine("[Flags]");
-				writer.WriteLine("public enum " + Name);
-				writer.WriteLine("{");
-				writer.Indent();
+				using (writer.Indent()) {
+					writer.WriteDocumentation(Doc);
+					writer.WriteLine("[Flags]");
+					writer.WriteLine("public enum " + Name);
+					writer.WriteLine("{");
 
-				GenerateMembers(writer);
-
-				writer.Unindent();
-				writer.WriteLine("}");
-				writer.Unindent();
+					using (writer.Indent()) {
+						GenerateMembers(writer);
+					}
+					writer.WriteLine("}");
+				}
 				writer.WriteLine("}");
 			}
 		}
