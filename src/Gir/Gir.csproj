@@ -79,6 +79,7 @@
     <Compile Include="GenerationOptions.cs" />
     <Compile Include="Generation\Bitfield.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="Generation\Alias.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />
