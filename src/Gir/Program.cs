@@ -55,7 +55,7 @@ namespace Gir
 				gen.Generate(genOpts);
 			}
 
-			//Statistics.Report();
+			genOpts.Statistics.ReportStatistics();
 			return 0;
 		}
 
