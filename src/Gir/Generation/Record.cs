@@ -1,9 +1,7 @@
 ﻿using System;
-using System.IO;
-
 namespace Gir
 {
-	public partial class Enumeration : IGeneratable
+	public partial class Record : IGeneratable
 	{
 		public void Generate(GenerationOptions opts)
 		{
@@ -12,7 +10,7 @@ namespace Gir
 				writer.WriteLine("{");
 				using (writer.Indent()) {
 					writer.WriteDocumentation(Doc);
-					writer.WriteLine("public enum " + Name);
+					writer.WriteLine("public struct " + Name);
 					writer.WriteLine("{");
 
 					using (writer.Indent()) {

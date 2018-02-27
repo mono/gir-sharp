@@ -23,7 +23,10 @@ namespace Gir
 		[XmlAttribute("writable")]
 		public bool Writable;
 
+		[XmlElement("doc")]
+		public Documentation Doc;
+
 		[XmlElement("type")]
-		public Type Type;
+		public Type Type { get; set; }
 	}
 }

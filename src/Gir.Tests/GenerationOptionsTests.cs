@@ -23,8 +23,10 @@ namespace Gir.Tests
 	{
 		///<summary>Put all available space on the right</summary>
 		Left = 0,
+
 		///<summary>Center the line within the available space</summary>
 		Center = 1,
+
 		///<summary>Put all available space on the left</summary>
 		Right = 2,
 	}

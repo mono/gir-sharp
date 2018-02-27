@@ -40,6 +40,7 @@
     <Compile Include="GenerationOptionsTests.cs" />
     <Compile Include="BitFieldTests.cs" />
     <Compile Include="SymbolTableTests.cs" />
+    <Compile Include="RecordTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestFiles\" />
