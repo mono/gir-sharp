@@ -27,10 +27,10 @@ namespace Gir.Tests
 			}
 		}
 
-		static protected IEnumerable<Repository> ParseAllGirFiles()
+		static protected IEnumerable<IEnumerable<Repository>> ParseAllGirFiles()
 		{
 			foreach (var stream in GetResourceStreams()) {
-				yield return ParseGirStream(stream);
+				yield return ParseGirStream (stream, out Repository mainRepository);
 			}
 		}
 
@@ -39,14 +39,14 @@ namespace Gir.Tests
 			return GetResourceStreams(name).Single();
 		}
 
-		static protected Repository ParseGirFile (string name)
+		static protected IEnumerable<Repository> ParseGirFile (string name, out Repository mainRepository)
 		{
-			return ParseGirStream(GetGIRFile(name));
+			return ParseGirStream(GetGIRFile(name), out mainRepository);
 		}
 
-		static protected Repository ParseGirStream (Stream gir)
+		static protected IEnumerable<Repository> ParseGirStream (Stream gir, out Repository mainRepository)
 		{
-			return Parser.Parse(gir);
+			return Parser.Parse(gir, Directory.GetCurrentDirectory(), out mainRepository);
 		}
 
 
@@ -56,10 +56,13 @@ namespace Gir.Tests
 			return Encoding.UTF8.GetString(ms.ToArray());
 		}
 
-		protected static GenerationOptions GetOptions(Repository repo, bool compat = false)
+		protected static GenerationOptions GetOptions(IEnumerable<Repository> repositories, Repository mainRepository, bool compat = false)
 		{
-			var opts = new GenerationOptions("", repo.Namespace, compat, new MemoryStream ());
-			opts.SymbolTable.AddTypes(repo.GetSymbols());
+			var opts = new GenerationOptions("", mainRepository.Namespace, compat, new MemoryStream ());
+			foreach (var repository in repositories) {
+				opts.SymbolTable.AddTypes(repository.GetSymbols());
+			}
+
 			opts.SymbolTable.ProcessAliases();
 			return opts;
 		}
@@ -71,10 +74,10 @@ namespace Gir.Tests
 
 		protected static string GenerateType (string girFile, string name, bool compat = false)
 		{
-			var repo = ParseGirFile(girFile);
-			var opts = GetOptions(repo, compat);
-
-			Generate(repo, opts, name);
+			var repositories = ParseGirFile(girFile, out var mainRepository);
+			var opts = GetOptions(repositories, mainRepository, compat);
+			
+			Generate(mainRepository, opts, name);
 
 			return GetGenerationResult(opts);
 		}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Gir
 {
@@ -15,6 +16,7 @@ namespace Gir
 			public string glue_filename = "";
 			public string glue_includes = "";
 			public string gluelib_name = "";
+			public string include_dir = "/usr/share/gir-1.0/";
 			public List<ISymbol> symbols = new List<ISymbol>();
 			public List<IGeneratable> gens = new List<IGeneratable>();
 			public Namespace ns;
@@ -101,9 +103,13 @@ namespace Gir
 				opt.gluelib_name = arg.Substring(15);
 				return;
 			}
+			if (arg.StartsWith("--include-dir=")) {
+				opt.include_dir = arg.Substring(15);
+				return;
+			}
 
-			Repository repo = Parser.Parse(filename);
-			opt.ns = repo.Namespace;
+			var repositories = Parser.Parse(filename, opt.include_dir, out var mainRepository);
+			opt.ns = mainRepository.Namespace;
 
 			// No SymbolTable for now
 			//table.AddTypes(curr_gens);
@@ -112,9 +118,11 @@ namespace Gir
 			//	foreach (var gen in curr_gens)
 			//		gen.Validate();
 			//}
-			opt.symbols.AddRange(repo.GetSymbols());
+			foreach (var repository in repositories) {
+				opt.symbols.AddRange(repository.GetSymbols());
+			}
 			if (opt.generate)
-				opt.gens.AddRange(repo.GetGeneratables());
+				opt.gens.AddRange(mainRepository.GetGeneratables());
 		}
 	}
 }
