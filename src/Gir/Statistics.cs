@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Gir
 {
@@ -16,7 +17,7 @@ namespace Gir
 				Console.WriteLine(line);
 			}
 
-			foreach (var line in GetErrors ()) {
+			foreach (var line in GetErrorsContent ()) {
 				Console.Error.WriteLine(line);
 			}
 		}
@@ -28,7 +29,7 @@ namespace Gir
 			}
 		}
 
-		public IEnumerable<string> GetErrors ()
+		public IEnumerable<string> GetErrorsContent ()
 		{
 			foreach (var kvp in RegisteredErrors) {
 				yield return kvp.Key.ToString ();
@@ -38,6 +39,8 @@ namespace Gir
 				}
 			}
 		}
+
+		public IEnumerable<Error> Errors => RegisteredErrors.SelectMany (x => x.Value);
 
 		public void RegisterType (ISymbol symbol)
 		{
@@ -50,7 +53,7 @@ namespace Gir
 		{
 			var type = error.GetType();
 			if (!RegisteredErrors.TryGetValue(type, out var list)) {
-				list = new List<Error>();
+				RegisteredErrors[type] = list = new List<Error>();
 			}
 			list.Add(error);
 		}

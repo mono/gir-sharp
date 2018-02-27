@@ -31,6 +31,7 @@ namespace Gir
 			DirectoryPath = dir;
 			Namespace = ns;
 			this.compat = compat;
+			RedirectStream = redirectStream;
 
 			SymbolTable = new SymbolTable(Statistics, win64Longs);
 		}

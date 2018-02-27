@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Gir
 {
-	public partial class Enumeration : IGeneratable, ISymbol
+	public partial class Enumeration : IGeneratable
 	{
 		public void Generate(GenerationOptions opts)
 		{

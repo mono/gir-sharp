@@ -11,7 +11,7 @@ namespace Gir
 
 		void RegisterPrimitives (bool nativeWin64)
 		{
-			AddType(new Primitive("void", "void", String.Empty));
+			AddType(new Primitive("void", "void", string.Empty));
 			AddType(new Primitive("gpointer", "IntPtr", "IntPtr.Zero"));
 			AddType(new Primitive("gboolean", "bool", "false"));
 			AddType(new Primitive("gint", "int", "0"));
@@ -19,13 +19,11 @@ namespace Gir
 			AddType(new Primitive("int", "int", "0"));
 			AddType(new Primitive("unsigned", "uint", "0"));
 			AddType(new Primitive("unsigned int", "uint", "0"));
-			AddType(new Primitive("unsigned-int", "uint", "0"));
 			AddType(new Primitive("gshort", "short", "0"));
 			AddType(new Primitive("gushort", "ushort", "0"));
 			AddType(new Primitive("short", "short", "0"));
 			AddType(new Primitive("guchar", "byte", "0"));
 			AddType(new Primitive("unsigned char", "byte", "0"));
-			AddType(new Primitive("unsigned-char", "byte", "0"));
 			AddType(new Primitive("guint1", "bool", "false"));
 			AddType(new Primitive("uint1", "bool", "false"));
 			AddType(new Primitive("gint8", "sbyte", "0"));
