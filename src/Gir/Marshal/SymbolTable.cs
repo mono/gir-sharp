@@ -7,7 +7,6 @@ namespace Gir
 {
 	public partial class SymbolTable : IEnumerable<ISymbol>
 	{
-		// FIXME: Known issue with pointers. We need to figure that one out.
 		readonly Dictionary<string, ISymbol> typeMap = new Dictionary<string, ISymbol>();
 		Statistics statistics;
 
@@ -40,9 +39,9 @@ namespace Gir
 
 			// Look for the first pointer symbol
 			int end = type.IndexOf('*', start, type.Length - start);
-			if (end == -1)
+			if (end == -1) {
 				end = type.Length;
-			else if (type.IndexOf ("void", start, StringComparison.Ordinal) == 0) {
+			} else if (type.IndexOf ("void", start, StringComparison.Ordinal) == 0) {
 				// Special case in case of pointers for void*,
 				// otherwise we'll get void from the symbol table
 				return "gpointer";

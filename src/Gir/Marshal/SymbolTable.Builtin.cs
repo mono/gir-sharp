@@ -3,7 +3,7 @@ namespace Gir
 {
 	public partial class SymbolTable
 	{
-		// Only call this
+		// Only call this, not the ones below.
 		void RegisterBuiltIn(bool nativeWin64)
 		{
 			RegisterPrimitives(nativeWin64);
