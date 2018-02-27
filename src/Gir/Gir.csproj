@@ -95,6 +95,10 @@
     <Compile Include="Error.cs" />
     <Compile Include="Marshal\SymbolTable.RegistrationError.cs" />
     <Compile Include="Marshal\Bitfield.cs" />
+    <Compile Include="Marshal\IPassByValue.cs" />
+    <Compile Include="Generation\Record.cs" />
+    <Compile Include="Generation\Member.cs" />
+    <Compile Include="Generation\Field.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />

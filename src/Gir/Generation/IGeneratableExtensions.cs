@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Gir
@@ -11,6 +12,19 @@ namespace Gir
 		{
 			var path = Path.Combine(opts.DirectoryPath, gen.Name + CSharpFileExtension);
 			return IndentWriter.OpenWrite(path, opts);
+		}
+
+		public static void GenerateMembers (this IGeneratable gen, IndentWriter writer)
+		{
+			foreach (var member in gen.GetMemberGeneratables())
+			{
+				member.Generate(gen, writer);
+			}
+		}
+
+		static IEnumerable<IMemberGeneratable> GetMemberGeneratables (this IGeneratable gen)
+		{
+			return Utils.GetAllCollectionMembers<IMemberGeneratable>(gen);
 		}
 	}
 }

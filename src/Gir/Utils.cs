@@ -31,6 +31,7 @@ namespace Gir
 
 		internal static IEnumerable<T> GetAllCollectionMembers<T> (object container)
 		{
+			// This doesn't yield things like: <record><union/></record>
 			foreach (var collection in GetCollectionsOf<T>(container)) {
 				foreach (var item in collection)
 					yield return (T)item;

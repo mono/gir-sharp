@@ -7,6 +7,8 @@ namespace Gir
 		public string Name { get; }
 		public string DefaultValue { get; }
 
+		public string ByValueMarshalType => Name;
+
 		public Primitive(string ctype, string name, string defaultValue)
 		{
 			CType = ctype;
