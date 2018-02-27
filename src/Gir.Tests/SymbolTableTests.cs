@@ -16,10 +16,10 @@ namespace Gir.Tests
 			Assert.AreEqual(opts.SymbolTable["guint8"], opts.SymbolTable["GDateDay"]);
 		}
 
-		[TestCase(Gdk3, 0)]
+		[TestCase(Gdk3, 3)]
 		[TestCase(GLib, 0)]
-		[TestCase(Gtk3, 1)]
-		[TestCase(Pango, 1)]
+		[TestCase(Gtk3, 5)]
+		[TestCase(Pango, 3)]
 		public void TestSymbolTableErrorsTracker(string girFile, int errorCount)
 		{
 			var repo = ParseGirFile(girFile, out var mainRepository);
@@ -54,6 +54,15 @@ namespace Gir.Tests
 			var opts = GetOptions(repo, mainRepository);
 
 			Assert.AreEqual("gpointer", opts.SymbolTable["void*"].CType);
+		}
+		
+		[Test]
+		public void CanResolveIncludedFiles ()
+		{
+			var repo = ParseGirFile(Gtk3, out var mainRepository);
+			var opts = GetOptions(repo, mainRepository);
+
+			Assert.NotNull(opts.SymbolTable["GdkPixbufError"]);
 		}
 	}
 }
