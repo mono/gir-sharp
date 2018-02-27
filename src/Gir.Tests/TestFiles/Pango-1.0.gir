@@ -189,18 +189,16 @@ are colors.</doc>
         <type name="Color" c:type="PangoColor"/>
       </field>
     </record>
-    <callback name="AttrDataCopyFunc" c:type="PangoAttrDataCopyFunc">
+    <callback name="AttrDataCopyFunc"
+              c:type="PangoAttrDataCopyFunc"
+              introspectable="0">
       <doc xml:space="preserve">Type of a function that can duplicate user data for an attribute.</doc>
-      <return-value transfer-ownership="none" nullable="1">
+      <return-value>
         <doc xml:space="preserve">new copy of @user_data.</doc>
         <type name="gpointer" c:type="gpointer"/>
       </return-value>
       <parameters>
-        <parameter name="user_data"
-                   transfer-ownership="none"
-                   nullable="1"
-                   allow-none="1"
-                   closure="0">
+        <parameter name="user_data" transfer-ownership="none" closure="0">
           <doc xml:space="preserve">user data to copy</doc>
           <type name="gpointer" c:type="gconstpointer"/>
         </parameter>
@@ -218,11 +216,7 @@ filtering, %FALSE otherwise.</doc>
           <doc xml:space="preserve">a Pango attribute</doc>
           <type name="Attribute" c:type="PangoAttribute*"/>
         </parameter>
-        <parameter name="user_data"
-                   transfer-ownership="none"
-                   nullable="1"
-                   allow-none="1"
-                   closure="1">
+        <parameter name="user_data" transfer-ownership="none" closure="1">
           <doc xml:space="preserve">user data passed to the function</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
@@ -601,10 +595,7 @@ a new list.</doc>
        if an attribute should be filtered out.</doc>
             <type name="AttrFilterFunc" c:type="PangoAttrFilterFunc"/>
           </parameter>
-          <parameter name="data"
-                     transfer-ownership="none"
-                     nullable="1"
-                     allow-none="1">
+          <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve">Data to be passed to @func</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -754,7 +745,7 @@ impose shape restrictions.</doc>
         <doc xml:space="preserve">user data set (see pango_attr_shape_new_with_data())</doc>
         <type name="gpointer" c:type="gpointer"/>
       </field>
-      <field name="copy_func" writable="1">
+      <field name="copy_func" introspectable="0" writable="1">
         <doc xml:space="preserve">copy function for the user data</doc>
         <type name="AttrDataCopyFunc" c:type="PangoAttrDataCopyFunc"/>
       </field>
@@ -806,10 +797,7 @@ rendering the glyph.</doc>
             <doc xml:space="preserve">logical rectangle to assign to each character</doc>
             <type name="Rectangle" c:type="const PangoRectangle*"/>
           </parameter>
-          <parameter name="data"
-                     transfer-ownership="none"
-                     nullable="1"
-                     allow-none="1">
+          <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve">user data pointer</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -2586,10 +2574,12 @@ size in device units.</doc>
           </instance-parameter>
         </parameters>
       </virtual-method>
-      <virtual-method name="find_shaper" invoker="find_shaper">
+      <virtual-method name="find_shaper"
+                      invoker="find_shaper"
+                      introspectable="0">
         <doc xml:space="preserve">Finds the best matching shaper for a font for a particular
 language tag and character point.</doc>
-        <return-value transfer-ownership="none">
+        <return-value>
           <doc xml:space="preserve">the best matching shaper.</doc>
           <type name="EngineShape" c:type="PangoEngineShape*"/>
         </return-value>
@@ -2598,8 +2588,7 @@ language tag and character point.</doc>
             <doc xml:space="preserve">a #PangoFont</doc>
             <type name="Font" c:type="PangoFont*"/>
           </instance-parameter>
-          <parameter name="language" transfer-ownership="none">
-            <doc xml:space="preserve">the language tag</doc>
+          <parameter name="lang" transfer-ownership="none">
             <type name="Language" c:type="PangoLanguage*"/>
           </parameter>
           <parameter name="ch" transfer-ownership="none">
@@ -2622,8 +2611,7 @@ language tag and character point.</doc>
             <doc xml:space="preserve">a #PangoFont</doc>
             <type name="Font" c:type="PangoFont*"/>
           </instance-parameter>
-          <parameter name="language" transfer-ownership="none">
-            <doc xml:space="preserve">the language tag</doc>
+          <parameter name="lang" transfer-ownership="none">
             <type name="Language" c:type="PangoLanguage*"/>
           </parameter>
         </parameters>
@@ -2766,10 +2754,12 @@ size in points.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="find_shaper" c:identifier="pango_font_find_shaper">
+      <method name="find_shaper"
+              c:identifier="pango_font_find_shaper"
+              introspectable="0">
         <doc xml:space="preserve">Finds the best matching shaper for a font for a particular
 language tag and character point.</doc>
-        <return-value transfer-ownership="none">
+        <return-value>
           <doc xml:space="preserve">the best matching shaper.</doc>
           <type name="EngineShape" c:type="PangoEngineShape*"/>
         </return-value>
@@ -2951,16 +2941,15 @@ output variables and returns.</doc>
               <doc xml:space="preserve">a #PangoFont</doc>
               <type name="Font" c:type="PangoFont*"/>
             </parameter>
-            <parameter name="language" transfer-ownership="none">
-              <doc xml:space="preserve">the language tag</doc>
+            <parameter name="lang" transfer-ownership="none">
               <type name="Language" c:type="PangoLanguage*"/>
             </parameter>
           </parameters>
         </callback>
       </field>
-      <field name="find_shaper">
-        <callback name="find_shaper">
-          <return-value transfer-ownership="none">
+      <field name="find_shaper" introspectable="0">
+        <callback name="find_shaper" introspectable="0">
+          <return-value>
             <doc xml:space="preserve">the best matching shaper.</doc>
             <type name="EngineShape" c:type="PangoEngineShape*"/>
           </return-value>
@@ -2969,8 +2958,7 @@ output variables and returns.</doc>
               <doc xml:space="preserve">a #PangoFont</doc>
               <type name="Font" c:type="PangoFont*"/>
             </parameter>
-            <parameter name="language" transfer-ownership="none">
-              <doc xml:space="preserve">the language tag</doc>
+            <parameter name="lang" transfer-ownership="none">
               <type name="Language" c:type="PangoLanguage*"/>
             </parameter>
             <parameter name="ch" transfer-ownership="none">
@@ -5013,10 +5001,7 @@ each one. If @func returns %TRUE, that stops the iteration.</doc>
             <doc xml:space="preserve">Callback function</doc>
             <type name="FontsetForeachFunc" c:type="PangoFontsetForeachFunc"/>
           </parameter>
-          <parameter name="data"
-                     transfer-ownership="none"
-                     nullable="1"
-                     allow-none="1">
+          <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve">data to pass to the callback function</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -5085,10 +5070,7 @@ each one. If @func returns %TRUE, that stops the iteration.</doc>
             <doc xml:space="preserve">Callback function</doc>
             <type name="FontsetForeachFunc" c:type="PangoFontsetForeachFunc"/>
           </parameter>
-          <parameter name="data"
-                     transfer-ownership="none"
-                     nullable="1"
-                     allow-none="1">
+          <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve">data to pass to the callback function</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
@@ -5204,10 +5186,7 @@ a particular #PangoFontset implementation.</doc>
               <type name="FontsetForeachFunc"
                     c:type="PangoFontsetForeachFunc"/>
             </parameter>
-            <parameter name="data"
-                       transfer-ownership="none"
-                       nullable="1"
-                       allow-none="1">
+            <parameter name="data" transfer-ownership="none">
               <doc xml:space="preserve">data to pass to the callback function</doc>
               <type name="gpointer" c:type="gpointer"/>
             </parameter>
@@ -5261,11 +5240,7 @@ the fonts in a fontset.</doc>
           <doc xml:space="preserve">a font from @fontset</doc>
           <type name="Font" c:type="PangoFont*"/>
         </parameter>
-        <parameter name="user_data"
-                   transfer-ownership="none"
-                   nullable="1"
-                   allow-none="1"
-                   closure="2">
+        <parameter name="user_data" transfer-ownership="none" closure="2">
           <doc xml:space="preserve">callback data</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
@@ -7346,8 +7321,8 @@ is simply a convenience function around pango_layout_get_extents().</doc>
           </instance-parameter>
           <parameter name="width"
                      direction="out"
-                     caller-allocates="0"
-                     transfer-ownership="full"
+                     caller-allocates="1"
+                     transfer-ownership="none"
                      optional="1"
                      allow-none="1">
             <doc xml:space="preserve">location to store the logical width, or %NULL</doc>
@@ -7355,8 +7330,8 @@ is simply a convenience function around pango_layout_get_extents().</doc>
           </parameter>
           <parameter name="height"
                      direction="out"
-                     caller-allocates="0"
-                     transfer-ownership="full"
+                     caller-allocates="1"
+                     transfer-ownership="none"
                      optional="1"
                      allow-none="1">
             <doc xml:space="preserve">location to store the logical height, or %NULL</doc>
@@ -8054,7 +8029,7 @@ index to the character at that logical position. If the
 Y position is not inside the layout, the closest position is chosen
 (the position will be clamped inside the layout). If the
 X position is not within the layout, then the start or the
-end of the line is chosen as described for pango_layout_line_x_to_index().
+end of the line is chosen as  described for pango_layout_xy_to_index().
 If either the X or Y positions were not inside the layout, then the
 function returns %FALSE; on an exact hit, it returns %TRUE.</doc>
         <return-value transfer-ownership="none">
@@ -8565,7 +8540,7 @@ code specific to each rendering system.</doc>
         <doc xml:space="preserve">list of runs in the
        line, from left to right</doc>
         <type name="GLib.SList" c:type="GSList*">
-          <type name="LayoutRun"/>
+          <type name="gpointer" c:type="gpointer"/>
         </type>
       </field>
       <field name="is_paragraph_start" writable="1" bits="1">
@@ -11109,180 +11084,6 @@ base glyph to which it is attached</doc>
               glib:nick="takri">
         <doc xml:space="preserve">Takri. Since: 1.32</doc>
       </member>
-      <member name="bassa_vah"
-              value="88"
-              c:identifier="PANGO_SCRIPT_BASSA_VAH"
-              glib:nick="bassa-vah">
-        <doc xml:space="preserve">Bassa. Since: 1.40</doc>
-      </member>
-      <member name="caucasian_albanian"
-              value="89"
-              c:identifier="PANGO_SCRIPT_CAUCASIAN_ALBANIAN"
-              glib:nick="caucasian-albanian">
-        <doc xml:space="preserve">Caucasian Albanian. Since: 1.40</doc>
-      </member>
-      <member name="duployan"
-              value="90"
-              c:identifier="PANGO_SCRIPT_DUPLOYAN"
-              glib:nick="duployan">
-        <doc xml:space="preserve">Duployan. Since: 1.40</doc>
-      </member>
-      <member name="elbasan"
-              value="91"
-              c:identifier="PANGO_SCRIPT_ELBASAN"
-              glib:nick="elbasan">
-        <doc xml:space="preserve">Elbasan. Since: 1.40</doc>
-      </member>
-      <member name="grantha"
-              value="92"
-              c:identifier="PANGO_SCRIPT_GRANTHA"
-              glib:nick="grantha">
-        <doc xml:space="preserve">Grantha. Since: 1.40</doc>
-      </member>
-      <member name="khojki"
-              value="93"
-              c:identifier="PANGO_SCRIPT_KHOJKI"
-              glib:nick="khojki">
-        <doc xml:space="preserve">Kjohki. Since: 1.40</doc>
-      </member>
-      <member name="khudawadi"
-              value="94"
-              c:identifier="PANGO_SCRIPT_KHUDAWADI"
-              glib:nick="khudawadi">
-        <doc xml:space="preserve">Khudawadi, Sindhi. Since: 1.40</doc>
-      </member>
-      <member name="linear_a"
-              value="95"
-              c:identifier="PANGO_SCRIPT_LINEAR_A"
-              glib:nick="linear-a">
-        <doc xml:space="preserve">Linear A. Since: 1.40</doc>
-      </member>
-      <member name="mahajani"
-              value="96"
-              c:identifier="PANGO_SCRIPT_MAHAJANI"
-              glib:nick="mahajani">
-        <doc xml:space="preserve">Mahajani. Since: 1.40</doc>
-      </member>
-      <member name="manichaean"
-              value="97"
-              c:identifier="PANGO_SCRIPT_MANICHAEAN"
-              glib:nick="manichaean">
-        <doc xml:space="preserve">Manichaean. Since: 1.40</doc>
-      </member>
-      <member name="mende_kikakui"
-              value="98"
-              c:identifier="PANGO_SCRIPT_MENDE_KIKAKUI"
-              glib:nick="mende-kikakui">
-        <doc xml:space="preserve">Mende Kikakui. Since: 1.40</doc>
-      </member>
-      <member name="modi"
-              value="99"
-              c:identifier="PANGO_SCRIPT_MODI"
-              glib:nick="modi">
-        <doc xml:space="preserve">Modi. Since: 1.40</doc>
-      </member>
-      <member name="mro"
-              value="100"
-              c:identifier="PANGO_SCRIPT_MRO"
-              glib:nick="mro">
-        <doc xml:space="preserve">Mro. Since: 1.40</doc>
-      </member>
-      <member name="nabataean"
-              value="101"
-              c:identifier="PANGO_SCRIPT_NABATAEAN"
-              glib:nick="nabataean">
-        <doc xml:space="preserve">Nabataean. Since: 1.40</doc>
-      </member>
-      <member name="old_north_arabian"
-              value="102"
-              c:identifier="PANGO_SCRIPT_OLD_NORTH_ARABIAN"
-              glib:nick="old-north-arabian">
-        <doc xml:space="preserve">Old North Arabian. Since: 1.40</doc>
-      </member>
-      <member name="old_permic"
-              value="103"
-              c:identifier="PANGO_SCRIPT_OLD_PERMIC"
-              glib:nick="old-permic">
-        <doc xml:space="preserve">Old Permic. Since: 1.40</doc>
-      </member>
-      <member name="pahawh_hmong"
-              value="104"
-              c:identifier="PANGO_SCRIPT_PAHAWH_HMONG"
-              glib:nick="pahawh-hmong">
-        <doc xml:space="preserve">Pahawh Hmong. Since: 1.40</doc>
-      </member>
-      <member name="palmyrene"
-              value="105"
-              c:identifier="PANGO_SCRIPT_PALMYRENE"
-              glib:nick="palmyrene">
-        <doc xml:space="preserve">Palmyrene. Since: 1.40</doc>
-      </member>
-      <member name="pau_cin_hau"
-              value="106"
-              c:identifier="PANGO_SCRIPT_PAU_CIN_HAU"
-              glib:nick="pau-cin-hau">
-        <doc xml:space="preserve">Pau Cin Hau. Since: 1.40</doc>
-      </member>
-      <member name="psalter_pahlavi"
-              value="107"
-              c:identifier="PANGO_SCRIPT_PSALTER_PAHLAVI"
-              glib:nick="psalter-pahlavi">
-        <doc xml:space="preserve">Psalter Pahlavi. Since: 1.40</doc>
-      </member>
-      <member name="siddham"
-              value="108"
-              c:identifier="PANGO_SCRIPT_SIDDHAM"
-              glib:nick="siddham">
-        <doc xml:space="preserve">Siddham. Since: 1.40</doc>
-      </member>
-      <member name="tirhuta"
-              value="109"
-              c:identifier="PANGO_SCRIPT_TIRHUTA"
-              glib:nick="tirhuta">
-        <doc xml:space="preserve">Tirhuta. Since: 1.40</doc>
-      </member>
-      <member name="warang_citi"
-              value="110"
-              c:identifier="PANGO_SCRIPT_WARANG_CITI"
-              glib:nick="warang-citi">
-        <doc xml:space="preserve">Warang Citi. Since: 1.40</doc>
-      </member>
-      <member name="ahom"
-              value="111"
-              c:identifier="PANGO_SCRIPT_AHOM"
-              glib:nick="ahom">
-        <doc xml:space="preserve">Ahom. Since: 1.40</doc>
-      </member>
-      <member name="anatolian_hieroglyphs"
-              value="112"
-              c:identifier="PANGO_SCRIPT_ANATOLIAN_HIEROGLYPHS"
-              glib:nick="anatolian-hieroglyphs">
-        <doc xml:space="preserve">Anatolian Hieroglyphs. Since: 1.40</doc>
-      </member>
-      <member name="hatran"
-              value="113"
-              c:identifier="PANGO_SCRIPT_HATRAN"
-              glib:nick="hatran">
-        <doc xml:space="preserve">Hatran. Since: 1.40</doc>
-      </member>
-      <member name="multani"
-              value="114"
-              c:identifier="PANGO_SCRIPT_MULTANI"
-              glib:nick="multani">
-        <doc xml:space="preserve">Multani. Since: 1.40</doc>
-      </member>
-      <member name="old_hungarian"
-              value="115"
-              c:identifier="PANGO_SCRIPT_OLD_HUNGARIAN"
-              glib:nick="old-hungarian">
-        <doc xml:space="preserve">Old Hungarian. Since: 1.40</doc>
-      </member>
-      <member name="signwriting"
-              value="116"
-              c:identifier="PANGO_SCRIPT_SIGNWRITING"
-              glib:nick="signwriting">
-        <doc xml:space="preserve">Signwriting. Since: 1.40</doc>
-      </member>
       <function name="for_unichar"
                 c:identifier="pango_script_for_unichar"
                 version="1.4">
@@ -11846,24 +11647,6 @@ cases a contrasting color may automatically
 be used. This type of underlining is available since Pango 1.4.</doc>
       </member>
     </enumeration>
-    <constant name="VERSION_MIN_REQUIRED"
-              value="2"
-              c:type="PANGO_VERSION_MIN_REQUIRED"
-              version="1.42">
-      <doc xml:space="preserve">A macro that should be defined by the user prior to including
-the pango.h header.
-The definition should be one of the predefined Pango version
-macros: %PANGO_VERSION_1_2, %PANGO_VERSION_1_4,...
-
-This macro defines the earliest version of Pango that the package is
-required to be able to compile against.
-
-If the compiler is configured to warn about the use of deprecated
-functions, then using functions that were deprecated in version
-%PANGO_VERSION_MIN_REQUIRED or earlier will cause warnings (but
-using functions deprecated in later releases will not).</doc>
-      <type name="gint" c:type="gint"/>
-    </constant>
     <enumeration name="Variant"
                  glib:type-name="PangoVariant"
                  glib:get-type="pango_variant_get_type"
@@ -13485,10 +13268,7 @@ unmodified.</doc>
         <type name="gint" c:type="gint"/>
       </return-value>
       <parameters>
-        <parameter name="stream"
-                   transfer-ownership="none"
-                   nullable="1"
-                   allow-none="1">
+        <parameter name="stream" transfer-ownership="none">
           <doc xml:space="preserve">a stdio stream</doc>
           <type name="gpointer" c:type="FILE*"/>
         </parameter>

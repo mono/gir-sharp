@@ -34,15 +34,18 @@ namespace Gir.Tests
 			}
 		}
 
-		/*[Test]
+		[Test]
 		public void NoAliasTypeAfterProcessing ()
 		{
-			foreach (var repo in ParseAllGirFiles ()) {
+			foreach (var tpl in ParseAllGirFiles ()) {
+				var repo = tpl.Item2;
+				var mainRepository = tpl.Item1;
+				
 				var opts = GetOptions(repo, mainRepository);
 
 				Assert.AreEqual(0, opts.SymbolTable.OfType<Alias>().Count());
 			}
-		}*/
+		}
 
 		[Test]
 		public void VoidPointerWorks ()

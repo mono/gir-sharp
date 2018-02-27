@@ -27,10 +27,17 @@ namespace Gir.Tests
 			}
 		}
 
-		static protected IEnumerable<IEnumerable<Repository>> ParseAllGirFiles()
+		static string GetIncludeDirectory ()
+		{
+			return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "TestFiles");
+		}
+
+		static protected IEnumerable<Tuple<Repository, IEnumerable<Repository>>> ParseAllGirFiles()
 		{
 			foreach (var stream in GetResourceStreams()) {
-				yield return ParseGirStream (stream, out Repository mainRepository);
+				var repos = ParseGirStream (stream, out Repository mainRepository);
+				
+				yield return new Tuple<Repository, IEnumerable<Repository>>(mainRepository, repos);
 			}
 		}
 
@@ -46,7 +53,7 @@ namespace Gir.Tests
 
 		static protected IEnumerable<Repository> ParseGirStream (Stream gir, out Repository mainRepository)
 		{
-			return Parser.Parse(gir, Directory.GetCurrentDirectory(), out mainRepository);
+			return Parser.Parse(gir, GetIncludeDirectory(), out mainRepository);
 		}
 
 
