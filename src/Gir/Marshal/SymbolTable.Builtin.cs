@@ -48,15 +48,9 @@ namespace Gir
 
 			// FIXME: Add these eventually.
 			//AddType(new MarshalGen("time_t", "System.DateTime", "IntPtr", "GLib.Marshaller.DateTimeTotime_t ({0})", "GLib.Marshaller.time_tToDateTime ({0})"));
-
-			//AddType(new ConstStringGen("const-gchar"));
-			//AddType(new ConstStringGen("const-xmlChar"));
-			//AddType(new ConstStringGen("const-char"));
-			//AddType(new ConstFilenameGen("const-gfilename"));
 			//AddType(new StringMarshalGen("gfilename", "string", "IntPtr", "GLib.Marshaller.StringToFilenamePtr({0})", "GLib.Marshaller.FilenamePtrToStringGFree({0})"));
 			//AddType(new StringMarshalGen("gchar", "string", "IntPtr", "GLib.Marshaller.StringToPtrGStrdup({0})", "GLib.Marshaller.PtrToStringGFree({0})"));
 			//AddType(new StringMarshalGen("char", "string", "IntPtr", "GLib.Marshaller.StringToPtrGStrdup({0})", "GLib.Marshaller.PtrToStringGFree({0})"));
-			//AddType(new SimpleGen("GStrv", "string[]", "null"));
 
 			RegisterLongTypes(nativeWin64);
 		}
