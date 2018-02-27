@@ -24,7 +24,7 @@ namespace Gir
 		public bool Writable;
 
 		[XmlElement("doc")]
-		public Documentation Doc;
+		public Documentation Doc { get; set; }
 
 		[XmlElement("type")]
 		public Type Type { get; set; }

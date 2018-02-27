@@ -15,14 +15,22 @@ namespace Gir
 			return IndentWriter.OpenWrite(path, opts);
 		}
 
-		public static void GenerateMembers (this IGeneratable gen, GenerationOptions opts, IndentWriter writer)
+		public static void GenerateDocumentation (this IDocumented gen, IndentWriter writer)
+		{
+			writer.WriteDocumentation(gen.Doc);
+		}
+
+		public static void GenerateMembers (this IGeneratable gen, IndentWriter writer)
 		{
 			var array = gen.GetMemberGeneratables().ToArray ();
 			for (int i = 0; i < array.Length; ++i) {
 				var member = array[i];
-				member.Generate(opts, gen, writer);
 
-				if (i != array.Length - 1 && member.NewlineAfterGeneration (opts))
+				if (member is IDocumented doc)
+					doc.GenerateDocumentation(writer);
+				member.Generate(gen, writer);
+
+				if (i != array.Length - 1 && member.NewlineAfterGeneration (writer.Options))
 					writer.WriteLine();
 			}
 		}

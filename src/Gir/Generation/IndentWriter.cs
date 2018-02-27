@@ -7,7 +7,8 @@ namespace Gir
 	{
 		TextWriter writer;
 		int indent;
-		GenerationOptions opts;
+
+		public GenerationOptions Options { get; private set; }
 
 		public static IndentWriter OpenWrite (string path, GenerationOptions opts)
 		{
@@ -15,7 +16,7 @@ namespace Gir
 			var sw = new StreamWriter(toStream);
 
 			return new IndentWriter(sw) {
-				opts = opts,
+				Options = opts,
 			};
 		}
 
@@ -32,7 +33,7 @@ namespace Gir
 
 		public IndentWriter WriteDocumentation (Documentation doc)
 		{
-			if (!opts.GenerateDocumentation)
+			if (!Options.GenerateDocumentation)
 				return this;
 
 			var text = doc.Text.Split('\n');

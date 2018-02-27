@@ -1,14 +1,14 @@
 ﻿using System;
 namespace Gir
 {
-	public partial class Member : IMemberGeneratable
+	public partial class Member : IMemberGeneratable, IDocumented
 	{
 		public bool NewlineAfterGeneration(GenerationOptions opts)
 		{
 			return opts.GenerateDocumentation;
 		}
 
-		public void Generate(GenerationOptions opts, IGeneratable parent, IndentWriter writer)
+		public void Generate(IGeneratable parent, IndentWriter writer)
 		{
 			writer.WriteDocumentation(Doc);
 

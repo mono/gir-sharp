@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Gir
 {
-	public partial class Record : IGeneratable
+	public partial class Record : IGeneratable, IDocumented
 	{
 		public void Generate(GenerationOptions opts)
 		{
@@ -9,12 +9,12 @@ namespace Gir
 				writer.WriteLine("namespace " + opts.Namespace.Name);
 				writer.WriteLine("{");
 				using (writer.Indent()) {
-					writer.WriteDocumentation(Doc);
+					this.GenerateDocumentation(writer);
 					writer.WriteLine("public struct " + Name);
 					writer.WriteLine("{");
 
 					using (writer.Indent()) {
-						this.GenerateMembers(opts, writer);
+						this.GenerateMembers(writer);
 					}
 					writer.WriteLine("}");
 				}
