@@ -3,9 +3,9 @@ namespace Gir
 {
 	public class Primitive : ISymbol
 	{
-		public string CType { get; private set; }
-		public string Name { get; private set; }
-		public string DefaultValue { get; private set; }
+		public string CType { get; }
+		public string Name { get; }
+		public string DefaultValue { get; }
 
 		public Primitive(string ctype, string name, string defaultValue)
 		{

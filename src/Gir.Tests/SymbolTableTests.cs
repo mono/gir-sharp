@@ -33,5 +33,24 @@ namespace Gir.Tests
 				Console.WriteLine(error.Message);
 			}
 		}
+
+		[Test]
+		public void NoAliasTypeAfterProcessing ()
+		{
+			foreach (var repo in ParseAllGirFiles ()) {
+				var opts = GetOptions(repo);
+
+				Assert.AreEqual(0, opts.SymbolTable.OfType<Alias>().Count());
+			}
+		}
+
+		[Test]
+		public void VoidPointerWorks ()
+		{
+			var repo = ParseGirFile(GLib);
+			var opts = GetOptions(repo);
+
+			Assert.AreEqual("gpointer", opts.SymbolTable["void*"].CType);
+		}
 	}
 }

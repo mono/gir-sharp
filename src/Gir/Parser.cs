@@ -3,21 +3,19 @@ using System.IO;
 
 namespace Gir
 {
-	public class Parser
+	public static class Parser
 	{
-		readonly string fileName;
-
-		public Parser(string fileName)
-		{
-			this.fileName = fileName;
-		}
-
-		public Repository Parse()
+		public static Repository Parse(string fileName)
 		{
 			using (var fs = File.OpenRead(fileName)) {
-				var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Repository));
-				return (Repository)serializer.Deserialize(fs);
+				return Parse(fs);
 			}
+		}
+
+		public static Repository Parse(Stream s)
+		{
+			var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Repository));
+			return (Repository)serializer.Deserialize(s);
 		}
 	}
 }

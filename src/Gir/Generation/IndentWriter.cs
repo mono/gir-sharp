@@ -11,13 +11,8 @@ namespace Gir
 
 		public static IndentWriter OpenWrite (string path, GenerationOptions opts)
 		{
-			StreamWriter sw;
-			if (opts.RedirectStream != null) {
-				sw = new StreamWriter(opts.RedirectStream);
-			} else {
-				var fs = File.Open(path, FileMode.Create);
-				sw = new StreamWriter(fs);
-			}
+			var toStream = opts.RedirectStream ?? File.Open(path, FileMode.Create);
+			var sw = new StreamWriter(toStream);
 
 			return new IndentWriter(sw) {
 				opts = opts,
@@ -39,7 +34,7 @@ namespace Gir
 		{
 			if (!opts.GenerateDocumentation)
 				return this;
-			
+
 			var text = doc.Text.Split('\n');
 			if (text.Length == 1) {
 				WriteIndent();
@@ -102,7 +97,7 @@ namespace Gir
 
 		class IndentDisposable : IDisposable
 		{
-			IndentWriter writer;
+			readonly IndentWriter writer;
 			public IndentDisposable (IndentWriter writer)
 			{
 				this.writer = writer;
