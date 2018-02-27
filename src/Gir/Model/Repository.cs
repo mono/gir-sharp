@@ -24,7 +24,7 @@ namespace Gir
 		[XmlElement("namespace")]
 		public Namespace Namespace { get; set; }
 
-		public string GirName => $"{Namespace.Name}-{Version}.gir";
+		public string GirName => $"{Namespace.Name}-{Namespace.Version}.gir";
 	}
 }
 
