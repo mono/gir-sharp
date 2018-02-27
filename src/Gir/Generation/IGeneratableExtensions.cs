@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Gir
 {
@@ -14,11 +15,15 @@ namespace Gir
 			return IndentWriter.OpenWrite(path, opts);
 		}
 
-		public static void GenerateMembers (this IGeneratable gen, IndentWriter writer)
+		public static void GenerateMembers (this IGeneratable gen, GenerationOptions opts, IndentWriter writer)
 		{
-			foreach (var member in gen.GetMemberGeneratables())
-			{
-				member.Generate(gen, writer);
+			var array = gen.GetMemberGeneratables().ToArray ();
+			for (int i = 0; i < array.Length; ++i) {
+				var member = array[i];
+				member.Generate(opts, gen, writer);
+
+				if (i != array.Length - 1 && member.NewlineAfterGeneration (opts))
+					writer.WriteLine();
 			}
 		}
 

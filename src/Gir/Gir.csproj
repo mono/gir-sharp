@@ -99,6 +99,9 @@
     <Compile Include="Generation\Record.cs" />
     <Compile Include="Generation\Member.cs" />
     <Compile Include="Generation\Field.cs" />
+    <Compile Include="Marshal\Type.cs" />
+    <Compile Include="Marshal\IHasType.cs" />
+    <Compile Include="Marshal\Field.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />

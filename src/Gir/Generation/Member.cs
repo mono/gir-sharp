@@ -3,7 +3,12 @@ namespace Gir
 {
 	public partial class Member : IMemberGeneratable
 	{
-		public void Generate(IGeneratable parent, IndentWriter writer)
+		public bool NewlineAfterGeneration(GenerationOptions opts)
+		{
+			return opts.GenerateDocumentation;
+		}
+
+		public void Generate(GenerationOptions opts, IGeneratable parent, IndentWriter writer)
 		{
 			writer.WriteDocumentation(Doc);
 

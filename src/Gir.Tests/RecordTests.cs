@@ -10,23 +10,24 @@ namespace Gir.Tests
 		public void TestRecordIsGenerated()
 		{
 			// Test is incomplete, as record is not fully generated atm.
-			var result = GenerateType(GLib, "Array");
+			var result = GenerateType(GLib, "ByteArray");
 
+
+			// Need to map pointers at symbol level.
+			Console.WriteLine(result);
 			Assert.AreEqual(@"namespace GLib
 {
-	///<summary>Contains the public fields of a GArray.</summary>
-	public struct Array
+	///<summary>Contains the public fields of a GByteArray.</summary>
+	public struct ByteArray
 	{
 		///<summary>
 		/// a pointer to the element data. The data may be moved as
-		///     elements are added to the #GArray.
+		///     elements are added to the #GByteArray
 		///</summary>
-		utf8 data;
-		///<summary>
-		/// the number of elements in the #GArray not including the
-		///     possible terminating zero element.
-		///</summary>
-		guint len;
+		byte data;
+
+		///<summary>the number of elements in the #GByteArray</summary>
+		uint len;
 	}
 }
 ", result);

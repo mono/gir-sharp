@@ -14,6 +14,7 @@ namespace Gir
 	// When generated as part of another generatable
 	public interface IMemberGeneratable
 	{
-		void Generate(IGeneratable parent, IndentWriter writer);
+		bool NewlineAfterGeneration(GenerationOptions opts);
+		void Generate(GenerationOptions opts, IGeneratable parent, IndentWriter writer);
 	}
 }

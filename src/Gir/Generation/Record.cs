@@ -14,7 +14,7 @@ namespace Gir
 					writer.WriteLine("{");
 
 					using (writer.Indent()) {
-						this.GenerateMembers(writer);
+						this.GenerateMembers(opts, writer);
 					}
 					writer.WriteLine("}");
 				}

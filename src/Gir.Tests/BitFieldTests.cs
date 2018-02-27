@@ -24,16 +24,22 @@ namespace Gir.Tests
 	{
 		///<summary>the font family is specified.</summary>
 		Family = 0x1,
+
 		///<summary>the font style is specified.</summary>
 		Style = 0x2,
+
 		///<summary>the font variant is specified.</summary>
 		Variant = 0x4,
+
 		///<summary>the font weight is specified.</summary>
 		Weight = 0x8,
+
 		///<summary>the font stretch is specified.</summary>
 		Stretch = 0x10,
+
 		///<summary>the font size is specified.</summary>
 		Size = 0x20,
+
 		///<summary>the font gravity is specified (Since: 1.16.)</summary>
 		Gravity = 0x40,
 	}
