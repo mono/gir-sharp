@@ -17,8 +17,8 @@ namespace Gir.Tests
 		}
 
 		[TestCase(Gdk3, 0)]
-		[TestCase(GLib, 1)]
-		[TestCase(Gtk3, 2)]
+		[TestCase(GLib, 0)]
+		[TestCase(Gtk3, 1)]
 		[TestCase(Pango, 1)]
 		public void TestSymbolTableErrorsTracker(string girFile, int errorCount)
 		{
