@@ -48,7 +48,6 @@ namespace Gir
 
 			var genOpts = new GenerationOptions(opt.dir, opt.ns, false);
 			genOpts.SymbolTable.AddTypes(opt.symbols);
-
 			genOpts.SymbolTable.ProcessAliases();
 			
 			foreach (IGeneratable gen in opt.gens) {

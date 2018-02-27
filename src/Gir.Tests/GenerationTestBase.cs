@@ -27,9 +27,11 @@ namespace Gir.Tests
 			}
 		}
 
-		static protected IEnumerable<Stream> GetAllGIRFiles()
+		static protected IEnumerable<Repository> ParseAllGirFiles()
 		{
-			return GetResourceStreams();
+			foreach (var stream in GetResourceStreams()) {
+				yield return ParseGirStream(stream);
+			}
 		}
 
 		static protected Stream GetGIRFile (string name)
@@ -39,7 +41,11 @@ namespace Gir.Tests
 
 		static protected Repository ParseGirFile (string name)
 		{
-			var gir = GetGIRFile(name);
+			return ParseGirStream(GetGIRFile(name));
+		}
+
+		static protected Repository ParseGirStream (Stream gir)
+		{
 			var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Repository));
 			return (Repository)serializer.Deserialize(gir);
 		}
@@ -53,14 +59,9 @@ namespace Gir.Tests
 
 		protected static GenerationOptions GetOptions(Repository repo, bool compat = false)
 		{
-			var opts = new GenerationOptions("", repo.Namespace, compat)
-			{
-				RedirectStream = new MemoryStream(),
-			};
-
+			var opts = new GenerationOptions("", repo.Namespace, compat, new MemoryStream ());
 			opts.SymbolTable.AddTypes(repo.GetSymbols());
 			opts.SymbolTable.ProcessAliases();
-
 			return opts;
 		}
 

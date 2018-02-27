@@ -11,11 +11,11 @@ namespace Gir
 		readonly Dictionary<string, ISymbol> typeMap = new Dictionary<string, ISymbol>();
 		Statistics statistics;
 
-		public SymbolTable(Statistics statistics)
+		public SymbolTable(Statistics statistics, bool nativeWin64)
 		{
 			this.statistics = statistics;
 
-			RegisterPrimitives();
+			RegisterBuiltIn(nativeWin64);
 		}
 
 		public void AddTypes (IEnumerable<ISymbol> symbols)
@@ -30,10 +30,32 @@ namespace Gir
 			statistics.RegisterType(symbol);
 		}
 
+		const string constPrefix = "const ";
+		static string TrimConstAndPointer (string type)
+		{
+			int start = 0;
+			if (type.StartsWith (constPrefix, StringComparison.Ordinal)) {
+				start = constPrefix.Length;
+			}
+
+			// Look for the first pointer symbol
+			int end = type.IndexOf('*', start, type.Length - start);
+			if (end == -1)
+				end = type.Length;
+			else if (type.IndexOf ("void", start, StringComparison.Ordinal) == 0) {
+				// Special case in case of pointers for void*,
+				// otherwise we'll get void from the symbol table
+				return "gpointer";
+			}
+
+			return type.Substring(start, end - start);
+		}
+
 		public ISymbol this[string type] {
 			get {
-				// Handle alias.
-				return typeMap[type];
+				var actualType = TrimConstAndPointer(type);
+
+				return typeMap[actualType];
 			}
 		}
 
@@ -51,7 +73,8 @@ namespace Gir
 		{
 			ISymbol target = original;
 			while (target is Alias alias) {
-				if (!typeMap.TryGetValue(alias.Type.CType, out target)) {
+				var toType = TrimConstAndPointer(alias.Type.CType);
+				if (!typeMap.TryGetValue(toType, out target)) {
 					statistics.RegisterError(new AliasRegistrationError(alias));
 					return this["void"];
 				}

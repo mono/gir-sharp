@@ -94,6 +94,7 @@
     <Compile Include="Marshal\SymbolTable.Builtin.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Marshal\SymbolTable.RegistrationError.cs" />
+    <Compile Include="Marshal\Bitfield.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />
