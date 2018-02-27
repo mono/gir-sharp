@@ -102,8 +102,7 @@ namespace Gir
 				return;
 			}
 
-			var p = new Parser(filename);
-			Repository repo = p.Parse();
+			Repository repo = Parser.Parse(filename);
 			opt.ns = repo.Namespace;
 
 			// No SymbolTable for now

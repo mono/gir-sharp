@@ -46,8 +46,7 @@ namespace Gir.Tests
 
 		static protected Repository ParseGirStream (Stream gir)
 		{
-			var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Repository));
-			return (Repository)serializer.Deserialize(gir);
+			return Parser.Parse(gir);
 		}
 
 
