@@ -11,11 +11,11 @@ namespace Gir
 		readonly Dictionary<string, ISymbol> typeMap = new Dictionary<string, ISymbol>();
 		Statistics statistics;
 
-		public SymbolTable(Statistics statistics)
+		public SymbolTable(Statistics statistics, bool nativeWin64)
 		{
 			this.statistics = statistics;
 
-			RegisterPrimitives();
+			RegisterBuiltIn(nativeWin64);
 		}
 
 		public void AddTypes (IEnumerable<ISymbol> symbols)
@@ -32,7 +32,11 @@ namespace Gir
 
 		public ISymbol this[string type] {
 			get {
-				// Handle alias.
+				// Handle pointer trimming
+				// The main idea is to figure out the number of pointer symbols trimmed
+				// And use that in marshalling.
+
+
 				return typeMap[type];
 			}
 		}

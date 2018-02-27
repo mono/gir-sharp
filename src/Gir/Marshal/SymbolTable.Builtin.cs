@@ -3,12 +3,13 @@ namespace Gir
 {
 	public partial class SymbolTable
 	{
-		void RegisterBuiltIn()
+		// Only call this
+		void RegisterBuiltIn(bool nativeWin64)
 		{
-			RegisterPrimitives();
+			RegisterPrimitives(nativeWin64);
 		}
 
-		void RegisterPrimitives ()
+		void RegisterPrimitives (bool nativeWin64)
 		{
 			AddType(new Primitive("void", "void", String.Empty));
 			AddType(new Primitive("gpointer", "IntPtr", "IntPtr.Zero"));
@@ -41,7 +42,42 @@ namespace Gir
 			AddType(new Primitive("gdouble", "double", "0.0"));
 			AddType(new Primitive("double", "double", "0.0"));
 			AddType(new Primitive("goffset", "long", "0"));
+
+			AddType(new Primitive("ssize_t", "IntPtr", "IntPtr.Zero"));
+			AddType(new Primitive("gssize", "IntPtr", "IntPtr.Zero"));
+			AddType(new Primitive("size_t", "UIntPtr", "UIntPtr.Zero"));
+			AddType(new Primitive("gsize", "UIntPtr", "UIntPtr.Zero"));
+
+			// FIXME: Add these eventually.
+			//AddType(new MarshalGen("time_t", "System.DateTime", "IntPtr", "GLib.Marshaller.DateTimeTotime_t ({0})", "GLib.Marshaller.time_tToDateTime ({0})"));
+
+			//AddType(new ConstStringGen("const-gchar"));
+			//AddType(new ConstStringGen("const-xmlChar"));
+			//AddType(new ConstStringGen("const-char"));
+			//AddType(new ConstFilenameGen("const-gfilename"));
+			//AddType(new StringMarshalGen("gfilename", "string", "IntPtr", "GLib.Marshaller.StringToFilenamePtr({0})", "GLib.Marshaller.FilenamePtrToStringGFree({0})"));
+			//AddType(new StringMarshalGen("gchar", "string", "IntPtr", "GLib.Marshaller.StringToPtrGStrdup({0})", "GLib.Marshaller.PtrToStringGFree({0})"));
+			//AddType(new StringMarshalGen("char", "string", "IntPtr", "GLib.Marshaller.StringToPtrGStrdup({0})", "GLib.Marshaller.PtrToStringGFree({0})"));
+			//AddType(new SimpleGen("GStrv", "string[]", "null"));
+
+			RegisterLongTypes(nativeWin64);
 		}
 
+		void RegisterLongTypes(bool nativeWin64)
+		{
+			if (nativeWin64) {
+				AddType(new Primitive("long", "int", "0"));
+				AddType(new Primitive("glong", "int", "0"));
+				AddType(new Primitive("ulong", "uint", "0"));
+				AddType(new Primitive("gulong", "uint", "0"));
+				AddType(new Primitive("unsigned long", "uint", "0"));
+			} else {
+				AddType(new Primitive("long", "IntPtr", "IntPtr.Zero"));
+				AddType(new Primitive("glong", "IntPtr", "IntPtr.Zero"));
+				AddType(new Primitive("ulong", "UIntPtr", "UIntPtr.Zero"));
+				AddType(new Primitive("gulong", "UIntPtr", "IntPtr.Zero"));
+				AddType(new Primitive("unsigned long", "UIntPtr", "IntPtr.Zero"));
+			}
+		}
 	}
 }
