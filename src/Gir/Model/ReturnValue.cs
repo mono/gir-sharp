@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace Gir
 {
-	public partial class ReturnValue
+	public partial class ReturnValue : IDocumented
 	{
 		[XmlAttribute("nullable")]
 		public bool Nullable;
@@ -16,5 +16,8 @@ namespace Gir
 
 		[XmlElement("type")]
 		public Type Type;
+
+		[XmlElement("array")]
+		public Array Array;
 	}
 }

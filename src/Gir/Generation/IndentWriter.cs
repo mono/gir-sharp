@@ -31,7 +31,7 @@ namespace Gir
 			writer = null;
 		}
 
-		public IndentWriter WriteDocumentation (Documentation doc)
+		public IndentWriter WriteDocumentation (Documentation doc, string tag)
 		{
 			if (!Options.GenerateDocumentation)
 				return this;
@@ -39,13 +39,13 @@ namespace Gir
 			var text = doc.Text.Split('\n');
 			if (text.Length == 1) {
 				WriteIndent();
-				return Write("///<summary>").Write(text[0]).Write("</summary>").WriteLine ();
+				return Write($"///<{tag}>").Write(text[0]).Write($"</{tag}>").WriteLine ();
 			}
 
-			WriteLine("///<summary>");
+			WriteLine($"///<{tag}>");
 			foreach (var line in text)
 				WriteLine("/// " + line);
-			return WriteLine("///</summary>");
+			return WriteLine($"///</{tag}>");
 		}
 
 		public IndentWriter WriteIndent()

@@ -1,9 +1,9 @@
 ﻿using System;
 namespace Gir
 {
-	public partial class Method : ICallable
+	public partial class Function : ICallable
 	{
-		public string Modifiers => string.Empty;
+		public string Modifiers => "static";
 
 		public void Generate(IGeneratable parent, IndentWriter writer)
 		{

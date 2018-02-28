@@ -5,7 +5,7 @@ namespace Gir
 	public partial class Member
 	{
 		[XmlAttribute("name")]
-		public string Name;
+		public string Name { get; set; }
 
 		[XmlAttribute("value")]
 		public string Value;

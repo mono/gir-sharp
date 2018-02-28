@@ -15,9 +15,6 @@ namespace Gir
 			writer.WriteLine($"{managedType.CSharpType} {Name};");
 		}
 
-		public bool NewlineAfterGeneration(GenerationOptions opts)
-		{
-			return true;
-		}
+		public bool NewlineAfterGeneration(GenerationOptions opts) => true;
 	}
 }
