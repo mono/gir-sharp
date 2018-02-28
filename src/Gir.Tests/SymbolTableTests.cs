@@ -10,20 +10,20 @@ namespace Gir.Tests
 		[Test]
 		public void TestAliasMapping ()
 		{
-			var repo = ParseGirFile(GLib);
-			var opts = GetOptions(repo);
+			var repo = ParseGirFile(GLib, out var mainRepository);
+			var opts = GetOptions(repo, mainRepository);
 
 			Assert.AreEqual(opts.SymbolTable["guint8"], opts.SymbolTable["GDateDay"]);
 		}
 
-		[TestCase(Gdk3, 0)]
-		[TestCase(GLib, 1)]
-		[TestCase(Gtk3, 2)]
-		[TestCase(Pango, 1)]
+		[TestCase(Gdk3, 3)]
+		[TestCase(GLib, 0)]
+		[TestCase(Gtk3, 5)]
+		[TestCase(Pango, 3)]
 		public void TestSymbolTableErrorsTracker(string girFile, int errorCount)
 		{
-			var repo = ParseGirFile(girFile);
-			var opts = GetOptions(repo);
+			var repo = ParseGirFile(girFile, out var mainRepository);
+			var opts = GetOptions(repo, mainRepository);
 
 			var stats = opts.Statistics.Errors.ToArray ();
 
@@ -37,8 +37,11 @@ namespace Gir.Tests
 		[Test]
 		public void NoAliasTypeAfterProcessing ()
 		{
-			foreach (var repo in ParseAllGirFiles ()) {
-				var opts = GetOptions(repo);
+			foreach (var tpl in ParseAllGirFiles ()) {
+				var repo = tpl.Item2;
+				var mainRepository = tpl.Item1;
+				
+				var opts = GetOptions(repo, mainRepository);
 
 				Assert.AreEqual(0, opts.SymbolTable.OfType<Alias>().Count());
 			}
@@ -47,10 +50,19 @@ namespace Gir.Tests
 		[Test]
 		public void VoidPointerWorks ()
 		{
-			var repo = ParseGirFile(GLib);
-			var opts = GetOptions(repo);
+			var repo = ParseGirFile(GLib, out var mainRepository);
+			var opts = GetOptions(repo, mainRepository);
 
 			Assert.AreEqual("gpointer", opts.SymbolTable["void*"].CType);
+		}
+		
+		[Test]
+		public void CanResolveIncludedFiles ()
+		{
+			var repo = ParseGirFile(Gtk3, out var mainRepository);
+			var opts = GetOptions(repo, mainRepository);
+
+			Assert.NotNull(opts.SymbolTable["GdkPixbufError"]);
 		}
 	}
 }

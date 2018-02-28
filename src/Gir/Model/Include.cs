@@ -11,5 +11,7 @@ namespace Gir
 
 		[XmlAttribute("version")]
 		public string Version { get; set; }
+
+		public string GirName => $"{Name}-{Version}.gir";
 	}
 }
