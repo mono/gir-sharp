@@ -23,9 +23,9 @@ namespace Gir
 			writer.WriteDocumentation(gen.Doc, gen is ReturnValue ? "returns" : "summary");
 		}
 
-		public static void GenerateMembers (this IGeneratable gen, IndentWriter writer)
+		public static void GenerateMembers (this IGeneratable gen, IndentWriter writer, Func<IMemberGeneratable, bool> where = null)
 		{
-			var array = gen.GetMemberGeneratables().ToArray ();
+			var array = gen.GetMemberGeneratables().Where (x => where == null || where (x)).ToArray ();
 			for (int i = 0; i < array.Length; ++i) {
 				var member = array[i];
 

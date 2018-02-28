@@ -68,17 +68,36 @@ namespace Gir.Tests
 			return new GenerationOptions("", repositories, mainRepository, compat, new MemoryStream ());
 		}
 
-		protected static void Generate (Repository repo, GenerationOptions opts, string name)
+		protected static void GenerateType (Repository repo, GenerationOptions opts, string typeName)
 		{
-			repo.GetGeneratables().First(x => x.Name == name).Generate(opts);
+			repo.GetGeneratables().First(x => x.Name == typeName).Generate(opts);
 		}
 
-		protected static string GenerateType (string girFile, string name, bool compat = false)
+		protected static void GenerateMember(Repository repo, GenerationOptions opts, string typeName, string memberName)
+		{
+			var type = repo.GetGeneratables().First(x => x.Name == typeName);
+
+			using (var writer = type.GetWriter(opts)) {
+				type.GenerateMembers(writer, x => x.Name == memberName);
+			}
+		}
+
+		protected static string GenerateType (string girFile, string typeName, bool compat = false)
 		{
 			var repositories = ParseGirFile(girFile, out var mainRepository);
 			var opts = GetOptions(repositories, mainRepository, compat);
 			
-			Generate(mainRepository, opts, name);
+			GenerateType(mainRepository, opts, typeName);
+
+			return GetGenerationResult(opts);
+		}
+
+		protected static string GenerateMember(string girFile, string typeName, string memberName, bool compat = false)
+		{
+			var repositories = ParseGirFile(girFile, out var mainRepository);
+			var opts = GetOptions(repositories, mainRepository, compat);
+
+			GenerateMember(mainRepository, opts, typeName, memberName);
 
 			return GetGenerationResult(opts);
 		}

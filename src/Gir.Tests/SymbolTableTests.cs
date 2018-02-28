@@ -16,10 +16,10 @@ namespace Gir.Tests
 			Assert.AreEqual(opts.SymbolTable["guint8"], opts.SymbolTable["GDateDay"]);
 		}
 
-		[TestCase(Gdk3, 3)]
+		[TestCase(Gdk3, 2)]
 		[TestCase(GLib, 0)]
-		[TestCase(Gtk3, 5)]
-		[TestCase(Pango, 3)]
+		[TestCase(Gtk3, 2)]
+		[TestCase(Pango, 2)]
 		public void TestSymbolTableErrorsTracker(string girFile, int errorCount)
 		{
 			var repo = ParseGirFile(girFile, out var mainRepository);
