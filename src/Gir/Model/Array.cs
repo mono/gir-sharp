@@ -11,12 +11,12 @@ namespace Gir
 		public int Length;
 
 		[XmlAttribute("name")]
-		public string Name;
+		public string Name { get; set; }
 
 		[XmlAttribute("zero-terminated")]
 		public bool ZeroTerminated;
 
 		[XmlAttribute("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
-		public string CType;
+		public string CType { get; set; }
 	}
 }
