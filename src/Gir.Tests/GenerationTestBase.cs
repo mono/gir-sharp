@@ -65,13 +65,7 @@ namespace Gir.Tests
 
 		protected static GenerationOptions GetOptions(IEnumerable<Repository> repositories, Repository mainRepository, bool compat = false)
 		{
-			var opts = new GenerationOptions("", mainRepository.Namespace, compat, new MemoryStream ());
-			foreach (var repository in repositories) {
-				opts.SymbolTable.AddTypes(repository.GetSymbols());
-			}
-
-			opts.SymbolTable.ProcessAliases();
-			return opts;
+			return new GenerationOptions("", repositories, mainRepository, compat, new MemoryStream ());
 		}
 
 		protected static void Generate (Repository repo, GenerationOptions opts, string name)
