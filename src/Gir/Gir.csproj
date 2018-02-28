@@ -102,6 +102,8 @@
     <Compile Include="Marshal\Type.cs" />
     <Compile Include="Marshal\IHasType.cs" />
     <Compile Include="Marshal\Field.cs" />
+    <Compile Include="Generation\Array.cs" />
+    <Compile Include="Marshal\Array.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />
