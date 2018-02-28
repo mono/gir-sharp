@@ -14,7 +14,6 @@ namespace Gir.Tests
 
 
 			// Need to map pointers at symbol level.
-			Console.WriteLine(result);
 			Assert.AreEqual(@"namespace GLib
 {
 	///<summary>Contains the public fields of a GByteArray.</summary>

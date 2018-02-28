@@ -3,8 +3,16 @@ using System.IO;
 
 namespace Gir
 {
-	public partial class Bitfield : IGeneratable, IDocumented
+	public partial class Bitfield : IGeneratable, IDocumented, IEnumFormatter
 	{
+		public string FormatValue(string value)
+		{
+			int intValue = int.Parse(value);
+
+			// Maybe pad with leading zeroes based on the value?
+			return string.Format("0x{0:X}", intValue);
+		}
+
 		public void Generate(GenerationOptions opts)
 		{
 			using (var writer = this.GetWriter (opts)) {
