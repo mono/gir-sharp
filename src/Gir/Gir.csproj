@@ -104,6 +104,8 @@
     <Compile Include="Marshal\Field.cs" />
     <Compile Include="Generation\Array.cs" />
     <Compile Include="Marshal\Array.cs" />
+    <Compile Include="Marshal\Constant.cs" />
+    <Compile Include="Generation\Constant.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />
