@@ -10,8 +10,6 @@ namespace Gir
 
 		public void Generate(IGeneratable parent, IndentWriter writer)
 		{
-			writer.WriteDocumentation(Doc);
-
 			string value = Value;
 			// Make this smarter, probably pass in some options and key them.
 			if (parent is Bitfield)

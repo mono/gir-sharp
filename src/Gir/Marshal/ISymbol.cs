@@ -3,7 +3,7 @@ namespace Gir
 {
 	public interface ISymbol
 	{
-		string Name { get; }
+		string CSharpType { get; }
 		string CType { get; }
 		string DefaultValue { get; }
 	}

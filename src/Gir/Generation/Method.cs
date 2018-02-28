@@ -5,7 +5,7 @@ namespace Gir
 	{
 		public void Generate(IGeneratable parent, IndentWriter writer)
 		{
-			var returnType = ReturnValue.Type.GetSymbol(writer.Options).Name;
+			var returnType = ReturnValue.Type.GetSymbol(writer.Options).CSharpType;
 			// generate ReturnValue then Parameters
 			writer.WriteLine(string.Format("{0} {1} {2}", returnType, Name, "PARAMS"));
 			writer.WriteLine("{");
