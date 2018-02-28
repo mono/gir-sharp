@@ -25,6 +25,11 @@ namespace Gir
 		public Namespace Namespace { get; set; }
 
 		public string GirName => $"{Namespace.Name}-{Namespace.Version}.gir";
+
+		public override string ToString()
+		{
+			return $"{Package.Name}";
+		}
 	}
 }
 
