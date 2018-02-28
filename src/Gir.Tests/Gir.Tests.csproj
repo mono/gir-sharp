@@ -41,6 +41,7 @@
     <Compile Include="BitFieldTests.cs" />
     <Compile Include="SymbolTableTests.cs" />
     <Compile Include="RecordTests.cs" />
+    <Compile Include="FunctionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestFiles\" />

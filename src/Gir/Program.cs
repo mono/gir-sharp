@@ -9,23 +9,31 @@ namespace Gir
 	{
 		class OptionSet
 		{
-			public bool generate = false;
-			public string dir = "generated";
+			public string CustomGeneratedAssemblyName;
+			public string OutputDirectory = "generated";
+
+			public string GeneratedAssemblyName => CustomGeneratedAssemblyName ?? GenerationRepository.Namespace.Name;
+			public string IncludeSearchDirectory = GetDefaultSearchDirectory ();
+
+			public Repository GenerationRepository;
+			public IEnumerable<Repository> AllRepositories;
+
 			public string custom_dir = "";
-			public string assembly_name = "";
 			public string glue_filename = "";
 			public string glue_includes = "";
 			public string gluelib_name = "";
-			public string include_dir = "/usr/share/gir-1.0/";
-			public List<ISymbol> symbols = new List<ISymbol>();
-			public List<IGeneratable> gens = new List<IGeneratable>();
-			public Namespace ns;
+
+			static string GetDefaultSearchDirectory ()
+			{
+				// if (IsLinux)
+				return "/usr/share/gir-1.0/";
+			}
 		}
 
 		public static int Main(string[] args)
 		{
 			if (args.Length < 2) {
-				Console.WriteLine("Usage: gir.exe --generate <filename1...>");
+				Console.WriteLine("Usage: gir.exe <file.gir>");
 				return 0;
 			}
 
@@ -34,25 +42,13 @@ namespace Gir
 				ParseArg(opt, arg);
 			}
 
-			// Now that everything is loaded, validate all the to-be-
-			// generated generatables and then remove the invalid ones.
-			var invalids = new List<IGeneratable>();
-			foreach (IGeneratable gen in opt.gens) {
-				//if (!gen.Validate())
-				//invalids.Add(gen);
-			}
-			foreach (IGeneratable gen in invalids)
-				opt.gens.Remove(gen);
-
 			//GenerationInfo gen_info = null;
 			//if (dir != "" || assembly_name != "" || glue_filename != "" || glue_includes != "" || gluelib_name != "")
 			//gen_info = new GenerationInfo(dir, custom_dir, assembly_name, glue_filename, glue_includes, gluelib_name);
 
-			var genOpts = new GenerationOptions(opt.dir, opt.ns, false);
-			genOpts.SymbolTable.AddTypes(opt.symbols);
-			genOpts.SymbolTable.ProcessAliases();
+			var genOpts = new GenerationOptions(opt.OutputDirectory, opt.AllRepositories, opt.GenerationRepository, false);
 			
-			foreach (IGeneratable gen in opt.gens) {
+			foreach (IGeneratable gen in opt.GenerationRepository.GetGeneratables ()) {
 				gen.Generate(genOpts);
 			}
 
@@ -60,69 +56,43 @@ namespace Gir
 			return 0;
 		}
 
+		const string customOutputDir = "--outdir=";
+		const string customAssemblyNameArg = "--assembly-name=";
+		const string customIncludeDirArg = "--include-dir=";
+
 		static void ParseArg(OptionSet opt, string arg)
 		{
 			string filename = arg;
-			if (arg == "--generate") {
-				opt.generate = true;
+			if (arg.StartsWith(customOutputDir)) {
+				opt.OutputDirectory = arg.Substring(customOutputDir.Length);
 				return;
 			}
-			if (arg == "--include") {
-				opt.generate = false;
-				return;
-			}
-			if (arg.StartsWith("-I:")) {
-				opt.generate = false;
-				filename = filename.Substring(3);
-			} else if (arg.StartsWith("--outdir=")) {
-				opt.generate = false;
-				opt.dir = arg.Substring(9);
-				return;
-			} else if (arg.StartsWith("--customdir=")) {
-				opt.generate = false;
+			if (arg.StartsWith("--customdir=")) {
 				opt.custom_dir = arg.Substring(12);
 				return;
 			}
-			if (arg.StartsWith("--assembly-name=")) {
-				opt.generate = false;
-				opt.assembly_name = arg.Substring(16);
+			if (arg.StartsWith(customAssemblyNameArg)) {
+				opt.CustomGeneratedAssemblyName = arg.Substring(customAssemblyNameArg.Length);
 				return;
 			}
 			if (arg.StartsWith("--glue-filename=")) {
-				opt.generate = false;
 				opt.glue_filename = arg.Substring(16);
 				return;
 			}
 			if (arg.StartsWith("--glue-includes=")) {
-				opt.generate = false;
 				opt.glue_includes = arg.Substring(16);
 				return;
 			}
 			if (arg.StartsWith("--gluelib-name=")) {
-				opt.generate = false;
 				opt.gluelib_name = arg.Substring(15);
 				return;
 			}
-			if (arg.StartsWith("--include-dir=")) {
-				opt.include_dir = arg.Substring(15);
+			if (arg.StartsWith(customIncludeDirArg)) {
+				opt.IncludeSearchDirectory = arg.Substring(customIncludeDirArg.Length);
 				return;
 			}
 
-			var repositories = Parser.Parse(filename, opt.include_dir, out var mainRepository);
-			opt.ns = mainRepository.Namespace;
-
-			// No SymbolTable for now
-			//table.AddTypes(curr_gens);
-			//if (!generate)
-			//{
-			//	foreach (var gen in curr_gens)
-			//		gen.Validate();
-			//}
-			foreach (var repository in repositories) {
-				opt.symbols.AddRange(repository.GetSymbols());
-			}
-			if (opt.generate)
-				opt.gens.AddRange(mainRepository.GetGeneratables());
+			opt.AllRepositories = Parser.Parse(filename, opt.IncludeSearchDirectory, out opt.GenerationRepository);
 		}
 	}
 }

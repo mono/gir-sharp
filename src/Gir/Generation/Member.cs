@@ -1,31 +1,22 @@
 ﻿using System;
 namespace Gir
 {
-	public partial class Member : IMemberGeneratable
+	public partial class Member : IMemberGeneratable, IDocumented
 	{
-		public bool NewlineAfterGeneration(GenerationOptions opts)
-		{
-			return opts.GenerateDocumentation;
-		}
+		public bool NewlineAfterGeneration(GenerationOptions opts) => opts.GenerateDocumentation;
 
-		public void Generate(GenerationOptions opts, IGeneratable parent, IndentWriter writer)
+		public void Generate(IGeneratable parent, IndentWriter writer)
 		{
-			writer.WriteDocumentation(Doc);
-
 			string value = Value;
-			// Make this smarter, probably pass in some options and key them.
-			if (parent is Bitfield)
-				value = HexFormat(value);
+			if (parent is IEnumFormatter formatter)
+				value = formatter.FormatValue(value);
 
 			writer.WriteLine(Name.ToCSharp() + " = " + value + ",");
 		}
+	}
 
-		string HexFormat(string text)
-		{
-			int value = int.Parse(text);
-
-			// Maybe pad with leading zeroes based on the value?
-			return string.Format("0x{0:X}", value);
-		}
+	public interface IEnumFormatter
+	{
+		string FormatValue(string value);
 	}
 }

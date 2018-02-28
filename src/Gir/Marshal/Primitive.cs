@@ -4,15 +4,15 @@ namespace Gir
 	public class Primitive : ISymbol
 	{
 		public string CType { get; }
-		public string Name { get; }
+		public string CSharpType { get; }
 		public string DefaultValue { get; }
 
-		public string ByValueMarshalType => Name;
+		public string ByValueMarshalType => CSharpType;
 
-		public Primitive(string ctype, string name, string defaultValue)
+		public Primitive(string ctype, string csharpType, string defaultValue)
 		{
 			CType = ctype;
-			Name = name;
+			CSharpType = csharpType;
 			DefaultValue = defaultValue;
 		}
 	}

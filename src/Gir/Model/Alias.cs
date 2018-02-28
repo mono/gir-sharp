@@ -2,7 +2,7 @@
 
 namespace Gir
 {
-	public partial class Alias
+	public partial class Alias : IDocumented
 	{
 		[XmlAttribute("name")]
 		public string Name { get; set; }

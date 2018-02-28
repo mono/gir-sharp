@@ -2,7 +2,7 @@
 
 namespace Gir
 {
-	public partial class Constant
+	public partial class Constant : IDocumented
 	{
 		[XmlAttribute("deprecated")]
 		public bool Deprecated;

@@ -18,7 +18,7 @@ namespace Gir
 		public string MovedTo;
 
 		[XmlAttribute("name")]
-		public string Name;
+		public string Name { get; set; }
 
 		[XmlAttribute("shadowed-by")]
 		public string ShadowedBy;
@@ -39,11 +39,11 @@ namespace Gir
 		public Documentation Doc { get; set; }
 
 		[XmlElement("return-value")]
-		public ReturnValue ReturnValue;
+		public ReturnValue ReturnValue { get; set; }
 
 		[XmlArray("parameters")]
 		[XmlArrayItem("parameter", Type = typeof(Parameter))]
 		[XmlArrayItem("instance-parameter", Type = typeof(InstanceParameter))]
-		public List<Parameter> Parameters;
+		public List<Parameter> Parameters { get; set; }
 	}
 }

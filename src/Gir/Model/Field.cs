@@ -12,7 +12,7 @@ namespace Gir
 		public bool Introspectable;
 
 		[XmlAttribute("name")]
-		public string Name;
+		public string Name { get; set; }
 
 		[XmlAttribute("private")]
 		public bool Private;
@@ -24,7 +24,7 @@ namespace Gir
 		public bool Writable;
 
 		[XmlElement("doc")]
-		public Documentation Doc;
+		public Documentation Doc { get; set; }
 
 		[XmlElement("type")]
 		public Type Type { get; set; }
