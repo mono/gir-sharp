@@ -15,6 +15,8 @@ namespace Gir.Tests
 		protected const string GLib = "GLib-2.0";
 		protected const string Gtk3 = "Gtk-3.0";
 		protected const string Pango = "Pango-1.0";
+		protected const string Gio2 = "Gio-2.0";
+		protected const string Atk1 = "Atk-1.0";
 
 		static IEnumerable<Stream> GetResourceStreams (string name = null)
 		{
