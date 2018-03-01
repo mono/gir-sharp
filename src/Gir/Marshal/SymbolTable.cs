@@ -25,6 +25,18 @@ namespace Gir
 
 		public void AddType (ISymbol symbol)
 		{
+			// TODO, not all <class> tags have a CType
+			// https://raw.githubusercontent.com/gtk-rs/gir-files/master/Gtk-3.0.gir
+			// <class name="EntryIconAccessible"
+			//     c: symbol - prefix = "entry_icon_accessible"
+			//     parent = "Atk.Object"
+			//     glib: type - name = "GtkEntryIconAccessible"
+			//     glib: get - type = "gtk_entry_icon_accessible_get_type" >
+			//   <implements name = "Atk.Action" />
+			//   <implements name = "Atk.Component" />
+			// </class>
+			if (symbol.CType == null) return;
+
 			typeMap[symbol.CType] = symbol;
 			statistics.RegisterType(symbol);
 		}
