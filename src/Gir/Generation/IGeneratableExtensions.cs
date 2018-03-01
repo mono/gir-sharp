@@ -88,18 +88,17 @@ namespace Gir
 
 		public static (string both, string names) BuildParameters(List<Parameter> parameters)
 		{
-			var typeAndName = new Dictionary<string, string>();
-			foreach (var parameter in parameters)
-				typeAndName.Add(parameter.Type.Name, parameter.Name);
-
-			var sb = new StringBuilder();
-			foreach (var pair in typeAndName) {
-				sb.AppendFormat("{0} {1}, ", pair.Key, pair.Value);
+			// PERF: Use an array as the string[] overload of Join is way more efficient than the IEnumerable<string> one.
+			var typeAndName = new string[parameters.Count];
+			var parameterNames = new string[parameters.Count];
+			for (int i = 0; i < parameters.Count; ++i) {
+				var parameter = parameters[i];
+				typeAndName[i] = parameter.Type.Name + " " + parameter.Name;
+				parameterNames[i] = parameter.Name;
 			}
-			string parameterString = sb.ToString();
-			parameterString = parameterString.Substring(0, parameterString.Length - 2);
 
-			string baseParams = string.Join(", ", typeAndName.Values);
+			string parameterString = string.Join(", ", typeAndName);
+			string baseParams = string.Join(", ", parameterNames);
 
 			return (parameterString, baseParams);
 		}
