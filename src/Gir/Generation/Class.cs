@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Gir
 {
@@ -11,7 +12,9 @@ namespace Gir
 				writer.WriteLine("{");
 				using (writer.Indent()) {
 					this.GenerateDocumentation(writer);
-					writer.WriteLine($"public class {Name} : {String.Join(", ", Implements)}");
+
+					var inheritanceList = string.Join(", ", Implements.Select(x => x.Name).ToArray());
+					writer.WriteLine($"public class {Name} : {inheritanceList}");
 					writer.WriteLine("{");
 
 					using (writer.Indent()) {

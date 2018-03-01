@@ -7,10 +7,5 @@ namespace Gir
 	{
 		[XmlAttribute("name")]
 		public string Name;
-
-		public override string ToString()
-		{
-			return Name;
-		}
 	}
 }
