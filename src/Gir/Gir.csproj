@@ -111,6 +111,7 @@
     <Compile Include="Generation\Class.cs" />
     <Compile Include="Generation\Interface.cs" />
     <Compile Include="Marshal\Interface.cs" />
+    <Compile Include="Generation\Constructor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />

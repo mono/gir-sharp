@@ -35,6 +35,18 @@ namespace Gir.Tests
 	///</summary>
 	public class BufferedOutputStream : Seekable
 	{
+		///<summary>Creates a new buffered output stream for a base stream.</summary>
+		///<returns>a #GOutputStream for the given @base_stream.</returns>
+		public BufferedOutputStream(OutputStream base_stream) : base (base_stream)
+		{
+		}
+
+		///<summary>Creates a new buffered output stream with a given buffer size.</summary>
+		///<returns>a #GOutputStream with an internal buffer set to @size.</returns>
+		public BufferedOutputStream(OutputStream base_stream, gsize size) : base (base_stream, size)
+		{
+		}
+
 		FilterOutputStream parent_instance;
 
 		BufferedOutputStreamPrivate priv;
