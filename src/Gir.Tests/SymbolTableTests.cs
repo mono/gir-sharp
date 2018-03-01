@@ -13,7 +13,7 @@ namespace Gir.Tests
 			var repo = ParseGirFile (GLib, out var mainRepository);
 			var opts = GetOptions (repo, mainRepository);
 
-			Assert.AreEqual (opts.SymbolTable ["guint8"], opts.SymbolTable ["GDateDay"]);
+			Assert.AreEqual (opts.SymbolTable ["guint8"], opts.SymbolTable ["DateDay"]);
 		}
 
 		[TestCase (Gdk3, 0)]
@@ -62,7 +62,7 @@ namespace Gir.Tests
 			var repo = ParseGirFile (Gtk3, out var mainRepository);
 			var opts = GetOptions (repo, mainRepository);
 
-			Assert.NotNull (opts.SymbolTable ["GdkPixbufError"]);
+			Assert.NotNull (opts.SymbolTable ["Gdk.PixbufError"]);
 		}
 	}
 }
