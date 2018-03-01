@@ -6,7 +6,7 @@ namespace Gir
 	public partial class Interface
 	{
 		[XmlAttribute("name")]
-		public string Name;
+		public string Name { get; set; }
 
 		[XmlAttribute("version")]
 		public string Version;
@@ -15,7 +15,7 @@ namespace Gir
 		public string CSymbolPrefix;
 
 		[XmlAttribute("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
-		public string CType;
+		public string CType { get; set; }
 
 		[XmlAttribute("get-type", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibGetType;
