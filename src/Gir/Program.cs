@@ -32,21 +32,25 @@ namespace Gir
 
 		public static int Main(string[] args)
 		{
-			if (args.Length < 2) {
+			if (args.Length < 1) {
 				Console.WriteLine("Usage: gir.exe <file.gir>");
 				return 0;
 			}
 
 			var opt = new OptionSet();
-			foreach (string arg in args) {
+			foreach (string arg in args)
 				ParseArg(opt, arg);
-			}
+
+			opt.AllRepositories = Parser.Parse(args[0], opt.IncludeSearchDirectory, out opt.GenerationRepository);
 
 			//GenerationInfo gen_info = null;
 			//if (dir != "" || assembly_name != "" || glue_filename != "" || glue_includes != "" || gluelib_name != "")
 			//gen_info = new GenerationInfo(dir, custom_dir, assembly_name, glue_filename, glue_includes, gluelib_name);
 
 			var genOpts = new GenerationOptions(opt.OutputDirectory, opt.AllRepositories, opt.GenerationRepository, false);
+
+			if (!Directory.Exists(opt.OutputDirectory))
+				Directory.CreateDirectory(opt.OutputDirectory);
 			
 			foreach (IGeneratable gen in opt.GenerationRepository.GetGeneratables ()) {
 				gen.Generate(genOpts);
@@ -62,7 +66,6 @@ namespace Gir
 
 		static void ParseArg(OptionSet opt, string arg)
 		{
-			string filename = arg;
 			if (arg.StartsWith(customOutputDir)) {
 				opt.OutputDirectory = arg.Substring(customOutputDir.Length);
 				return;
@@ -91,8 +94,6 @@ namespace Gir
 				opt.IncludeSearchDirectory = arg.Substring(customIncludeDirArg.Length);
 				return;
 			}
-
-			opt.AllRepositories = Parser.Parse(filename, opt.IncludeSearchDirectory, out opt.GenerationRepository);
 		}
 	}
 }
