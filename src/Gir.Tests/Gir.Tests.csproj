@@ -43,6 +43,7 @@
     <Compile Include="RecordTests.cs" />
     <Compile Include="FunctionTests.cs" />
     <Compile Include="ClassTests.cs" />
+    <Compile Include="InterfaceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestFiles\" />

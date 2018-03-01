@@ -109,6 +109,8 @@
     <Compile Include="Marshal\Record.cs" />
     <Compile Include="Marshal\Class.cs" />
     <Compile Include="Generation\Class.cs" />
+    <Compile Include="Generation\Interface.cs" />
+    <Compile Include="Marshal\Interface.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />
