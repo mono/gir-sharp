@@ -32,7 +32,7 @@ namespace Gir
 
 		public static int Main(string[] args)
 		{
-			if (args.Length < 2) {
+			if (args.Length < 1) {
 				Console.WriteLine("Usage: gir.exe <file.gir>");
 				return 0;
 			}
