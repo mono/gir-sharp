@@ -107,6 +107,8 @@
     <Compile Include="Generation\Method.cs" />
     <Compile Include="Generation\Function.cs" />
     <Compile Include="Marshal\Record.cs" />
+    <Compile Include="Marshal\Class.cs" />
+    <Compile Include="Generation\Class.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />

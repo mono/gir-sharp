@@ -9,7 +9,7 @@ namespace Gir
 		public bool Abstract;
 
 		[XmlAttribute("name")]
-		public string Name;
+		public string Name { get; set; }
 
 		[XmlAttribute("parent")]
 		public string Parent;
@@ -76,5 +76,9 @@ namespace Gir
 
 		[XmlElement("signal", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public List<Signal> Signals;
+
+		public Class()
+		{
+		}
 	}
 }

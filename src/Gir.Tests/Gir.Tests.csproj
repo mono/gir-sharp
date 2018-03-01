@@ -42,6 +42,7 @@
     <Compile Include="SymbolTableTests.cs" />
     <Compile Include="RecordTests.cs" />
     <Compile Include="FunctionTests.cs" />
+    <Compile Include="ClassTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestFiles\" />
