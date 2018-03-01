@@ -88,7 +88,7 @@ namespace Gir
 		{
 			ISymbol target = original;
 			while (target is Alias alias) {
-				var toType = alias.Type.CType;
+				var toType = alias.Type.Name;
 				if (!typeMap.TryGetValue(toType, out target)) {
 					statistics.RegisterError(new AliasRegistrationError(alias));
 					return this["void"];
