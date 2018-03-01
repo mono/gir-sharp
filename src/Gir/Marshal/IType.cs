@@ -10,7 +10,7 @@ namespace Gir
 	{
 		public static ISymbol GetSymbol (this IType type, GenerationOptions opts)
 		{
-			return opts.SymbolTable [type.Type.CType];
+			return opts.SymbolTable [type.Type.Name];
 		}
 	}
 }

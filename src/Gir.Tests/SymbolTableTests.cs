@@ -53,7 +53,7 @@ namespace Gir.Tests
 			var repo = ParseGirFile (GLib, out var mainRepository);
 			var opts = GetOptions (repo, mainRepository);
 
-			Assert.AreEqual ("gpointer", opts.SymbolTable ["void*"].CType);
+			Assert.AreEqual ("gpointer", opts.SymbolTable ["void*"].Name);
 		}
 
 		[Test]

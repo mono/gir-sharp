@@ -35,9 +35,9 @@ namespace Gir
 			//   <implements name = "Atk.Action" />
 			//   <implements name = "Atk.Component" />
 			// </class>
-			if (symbol.CType == null) return;
+			if (symbol.Name == null) return;
 
-			typeMap [symbol.CType] = symbol;
+			typeMap [symbol.Name] = symbol;
 			statistics.RegisterType (symbol);
 		}
 
@@ -72,13 +72,7 @@ namespace Gir
 			return type.Substring (start, end - start);
 		}
 
-		public ISymbol this [string type] {
-			get {
-				var actualType = TrimConstAndPointer (type);
-
-				return typeMap [actualType];
-			}
-		}
+		public ISymbol this[string type] => typeMap[type];
 
 		public void ProcessAliases ()
 		{
@@ -94,10 +88,10 @@ namespace Gir
 		{
 			ISymbol target = original;
 			while (target is Alias alias) {
-				var toType = TrimConstAndPointer (alias.Type.CType);
-				if (!typeMap.TryGetValue (toType, out target)) {
-					statistics.RegisterError (new AliasRegistrationError (alias));
-					return this ["void"];
+				var toType = alias.Type.CType;
+				if (!typeMap.TryGetValue(toType, out target)) {
+					statistics.RegisterError(new AliasRegistrationError(alias));
+					return this["void"];
 				}
 			}
 			return target;
