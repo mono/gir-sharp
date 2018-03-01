@@ -15,6 +15,8 @@ namespace Gir
 		public Namespace Namespace => Repository.Namespace;
 		public Repository Repository { get; }
 		public Stream RedirectStream { get; }
+
+		public string LibraryName => Repository.Namespace.SharedLibrary;
 		#endregion
 
 		#region Generation toggles

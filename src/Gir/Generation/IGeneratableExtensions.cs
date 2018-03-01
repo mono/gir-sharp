@@ -30,9 +30,15 @@ namespace Gir
 			for (int i = 0; i < array.Length; ++i) {
 				var member = array[i];
 
-				// Always generate documentation
+				// Generate pinvoke signature for a method
+				if (member is ICallable callable)
+					callable.GenerateImport(gen, writer);
+
+				// Generate documentation is a member supports it.
 				if (member is IDocumented doc)
 					doc.GenerateDocumentation(writer);
+
+				// Call the main member generation implementation.
 				member.Generate(gen, writer);
 
 				if (i != array.Length - 1 && member.NewlineAfterGeneration(writer.Options))
@@ -40,9 +46,12 @@ namespace Gir
 			}
 		}
 
-		static IEnumerable<IMemberGeneratable> GetMemberGeneratables(this IGeneratable gen)
+		static void GenerateImport(this ICallable callable, IGeneratable parent, IndentWriter writer)
 		{
-			return Utils.GetAllCollectionMembers<IMemberGeneratable>(gen);
+			var retType = GetReturnCSharpType(callable, writer);
+
+			writer.WriteLine($"static extern {retType} {callable.CIdentifier} PARAMS");
+			writer.WriteLine();
 		}
 
 		static string GetReturnCSharpType(this ICallable callable, IndentWriter writer)
@@ -62,7 +71,7 @@ namespace Gir
 			var returnType = callable.GetReturnCSharpType(writer);
 
 			// generate ReturnValue then Parameters
-			writer.Write(string.Format("{0} {1} {2}", returnType, callable.Name, "PARAMS"));
+			writer.Write(string.Format("{0} {1} {2}", returnType, callable.Name.ToCSharp (), "PARAMS"));
 			writer.WriteLine();
 		}
 
@@ -101,6 +110,11 @@ namespace Gir
 			string baseParams = string.Join(", ", parameterNames);
 
 			return (parameterString, baseParams);
+		}
+
+		static IEnumerable<IMemberGeneratable> GetMemberGeneratables(this IGeneratable gen)
+		{
+			return Utils.GetAllCollectionMembers<IMemberGeneratable>(gen);
 		}
 	}
 }

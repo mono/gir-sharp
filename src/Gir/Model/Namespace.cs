@@ -14,7 +14,7 @@ namespace Gir
 		public string Version { get; set; }
 
 		[XmlAttribute("shared-library")]
-		public string SharedLibary { get; set; }
+		public string SharedLibrary { get; set; }
 
 		[XmlAttribute("identifier-prefix", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string IdentifierPrefix { get; set; }

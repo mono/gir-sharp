@@ -28,12 +28,16 @@ namespace Gir.Tests
 		///<summary>the number of elements in the #GByteArray</summary>
 		uint len;
 
+		static extern void g_byte_array_append PARAMS
+
 		///<summary>
 		/// Adds the given bytes to the end of the #GByteArray.
 		/// The array will grow in size automatically if necessary.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void append PARAMS
+		static void Append PARAMS
+
+		static extern byte g_byte_array_free PARAMS
 
 		///<summary>
 		/// Frees the memory allocated by the #GByteArray. If @free_segment is
@@ -45,7 +49,9 @@ namespace Gir.Tests
 		/// the element data if @free_segment is %FALSE, otherwise
 		///          %NULL.  The element data should be freed using g_free().
 		///</returns>
-		static byte free PARAMS
+		static byte Free PARAMS
+
+		static extern Bytes g_byte_array_free_to_bytes PARAMS
 
 		///<summary>
 		/// Transfers the data from the #GByteArray into a new immutable #GBytes.
@@ -61,39 +67,51 @@ namespace Gir.Tests
 		/// a new immutable #GBytes representing same
 		///     byte data that was in the array
 		///</returns>
-		static Bytes free_to_bytes PARAMS
+		static Bytes FreeToBytes PARAMS
+
+		static extern void g_byte_array_new PARAMS
 
 		///<summary>Creates a new #GByteArray with a reference count of 1.</summary>
 		///<returns>the new #GByteArray</returns>
-		static void new PARAMS
+		static void New PARAMS
+
+		static extern void g_byte_array_new_take PARAMS
 
 		///<summary>
 		/// Create byte array containing the data. The data will be owned by the array
 		/// and will be freed with g_free(), i.e. it could be allocated using g_strdup().
 		///</summary>
 		///<returns>a new #GByteArray</returns>
-		static void new_take PARAMS
+		static void NewTake PARAMS
+
+		static extern void g_byte_array_prepend PARAMS
 
 		///<summary>
 		/// Adds the given data to the start of the #GByteArray.
 		/// The array will grow in size automatically if necessary.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void prepend PARAMS
+		static void Prepend PARAMS
+
+		static extern void g_byte_array_ref PARAMS
 
 		///<summary>
 		/// Atomically increments the reference count of @array by one.
 		/// This function is thread-safe and may be called from any thread.
 		///</summary>
 		///<returns>The passed in #GByteArray</returns>
-		static void ref PARAMS
+		static void Ref PARAMS
+
+		static extern void g_byte_array_remove_index PARAMS
 
 		///<summary>
 		/// Removes the byte at the given index from a #GByteArray.
 		/// The following bytes are moved down one place.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void remove_index PARAMS
+		static void RemoveIndex PARAMS
+
+		static extern void g_byte_array_remove_index_fast PARAMS
 
 		///<summary>
 		/// Removes the byte at the given index from a #GByteArray. The last
@@ -102,18 +120,24 @@ namespace Gir.Tests
 		/// than g_byte_array_remove_index().
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void remove_index_fast PARAMS
+		static void RemoveIndexFast PARAMS
+
+		static extern void g_byte_array_remove_range PARAMS
 
 		///<summary>
 		/// Removes the given number of bytes starting at the given index from a
 		/// #GByteArray.  The following elements are moved to close the gap.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void remove_range PARAMS
+		static void RemoveRange PARAMS
+
+		static extern void g_byte_array_set_size PARAMS
 
 		///<summary>Sets the size of the #GByteArray, expanding it if necessary.</summary>
 		///<returns>the #GByteArray</returns>
-		static void set_size PARAMS
+		static void SetSize PARAMS
+
+		static extern void g_byte_array_sized_new PARAMS
 
 		///<summary>
 		/// Creates a new #GByteArray with @reserved_size bytes preallocated.
@@ -122,7 +146,9 @@ namespace Gir.Tests
 		/// 0.
 		///</summary>
 		///<returns>the new #GByteArray</returns>
-		static void sized_new PARAMS
+		static void SizedNew PARAMS
+
+		static extern void g_byte_array_sort PARAMS
 
 		///<summary>
 		/// Sorts a byte array, using @compare_func which should be a
@@ -136,13 +162,17 @@ namespace Gir.Tests
 		/// if two elements would otherwise compare equal, compares them by
 		/// their addresses.
 		///</summary>
-		static void sort PARAMS
+		static void Sort PARAMS
+
+		static extern void g_byte_array_sort_with_data PARAMS
 
 		///<summary>
 		/// Like g_byte_array_sort(), but the comparison function takes an extra
 		/// user data argument.
 		///</summary>
-		static void sort_with_data PARAMS
+		static void SortWithData PARAMS
+
+		static extern void g_byte_array_unref PARAMS
 
 		///<summary>
 		/// Atomically decrements the reference count of @array by one. If the
@@ -150,7 +180,7 @@ namespace Gir.Tests
 		/// released. This function is thread-safe and may be called from any
 		/// thread.
 		///</summary>
-		static void unref PARAMS
+		static void Unref PARAMS
 	}
 }
 ", result);

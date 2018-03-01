@@ -35,11 +35,15 @@ namespace Gir.Tests
 	///</summary>
 	public class BufferedOutputStream : Seekable
 	{
+		static extern OutputStream g_buffered_output_stream_new PARAMS
+
 		///<summary>Creates a new buffered output stream for a base stream.</summary>
 		///<returns>a #GOutputStream for the given @base_stream.</returns>
 		public BufferedOutputStream(OutputStream base_stream) : base (base_stream)
 		{
 		}
+
+		static extern OutputStream g_buffered_output_stream_new_sized PARAMS
 
 		///<summary>Creates a new buffered output stream with a given buffer size.</summary>
 		///<returns>a #GOutputStream with an internal buffer set to @size.</returns>
@@ -51,16 +55,22 @@ namespace Gir.Tests
 
 		BufferedOutputStreamPrivate priv;
 
+		static extern bool g_buffered_output_stream_get_auto_grow PARAMS
+
 		///<summary>Checks if the buffer automatically grows as data is added.</summary>
 		///<returns>
 		/// %TRUE if the @stream's buffer automatically grows,
 		/// %FALSE otherwise.
 		///</returns>
-		bool get_auto_grow PARAMS
+		bool GetAutoGrow PARAMS
+
+		static extern UIntPtr g_buffered_output_stream_get_buffer_size PARAMS
 
 		///<summary>Gets the size of the buffer in the @stream.</summary>
 		///<returns>the current size of the buffer.</returns>
-		UIntPtr get_buffer_size PARAMS
+		UIntPtr GetBufferSize PARAMS
+
+		static extern void g_buffered_output_stream_set_auto_grow PARAMS
 
 		///<summary>
 		/// Sets whether or not the @stream's buffer should automatically grow.
@@ -68,10 +78,12 @@ namespace Gir.Tests
 		/// larger, and you must manually flush the buffer to actually write out
 		/// the data to the underlying stream.
 		///</summary>
-		void set_auto_grow PARAMS
+		void SetAutoGrow PARAMS
+
+		static extern void g_buffered_output_stream_set_buffer_size PARAMS
 
 		///<summary>Sets the size of the internal buffer to @size.</summary>
-		void set_buffer_size PARAMS
+		void SetBufferSize PARAMS
 	}
 }
 ", result);

@@ -33,7 +33,7 @@ namespace Gir
 		public string Version;
 
 		[XmlAttribute("identifier", Namespace = "http://www.gtk.org/introspection/c/1.0")]
-		public string CIdentifier;
+		public string CIdentifier { get; set; }
 
 		[XmlElement("doc")]
 		public Documentation Doc { get; set; }

@@ -13,7 +13,6 @@ namespace Gir.Tests
 			// Test is incomplete, as record is not fully generated atm.
 			var result = GenerateType(Gio2, "Seekable");
 
-
 			// Need to map pointers at symbol level.
 			Assert.AreEqual(@"namespace Gio
 {
@@ -35,13 +34,19 @@ namespace Gir.Tests
 	///</summary>
 	public interface Seekable
 	{
+		static extern bool g_seekable_can_seek PARAMS
+
 		///<summary>Tests if the stream supports the #GSeekableIface.</summary>
 		///<returns>%TRUE if @seekable can be seeked. %FALSE otherwise.</returns>
-		bool can_seek PARAMS
+		bool CanSeek PARAMS
+
+		static extern bool g_seekable_can_truncate PARAMS
 
 		///<summary>Tests if the stream can be truncated.</summary>
 		///<returns>%TRUE if the stream can be truncated, %FALSE otherwise.</returns>
-		bool can_truncate PARAMS
+		bool CanTruncate PARAMS
+
+		static extern bool g_seekable_seek PARAMS
 
 		///<summary>
 		/// Seeks in the stream by the given @offset, modified by @type.
@@ -64,11 +69,15 @@ namespace Gir.Tests
 		///     has occurred, this function will return %FALSE and set @error
 		///     appropriately if present.
 		///</returns>
-		bool seek PARAMS
+		bool Seek PARAMS
+
+		static extern long g_seekable_tell PARAMS
 
 		///<summary>Tells the current position within the stream.</summary>
 		///<returns>the offset from the beginning of the buffer.</returns>
-		long tell PARAMS
+		long Tell PARAMS
+
+		static extern bool g_seekable_truncate PARAMS
 
 		///<summary>
 		/// Truncates a stream with a given #offset.
@@ -84,7 +93,7 @@ namespace Gir.Tests
 		///     has occurred, this function will return %FALSE and set @error
 		///     appropriately if present.
 		///</returns>
-		bool truncate PARAMS
+		bool Truncate PARAMS
 	}
 }
 ", result);
