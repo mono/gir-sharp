@@ -6,14 +6,10 @@ namespace Gir.Tests
 	[TestFixture]
 	public class InterfaceTests : GenerationTestBase
 	{
-		[Test]
-		public void TestClassIsGenerated ()
+		public void TestSeekableInterfaceIsGenerated()
 		{
-			// Test is incomplete, as record is not fully generated atm.
-			var result = GenerateType (Gio2, "Seekable");
-
-			// Need to map pointers at symbol level.
-			Assert.AreEqual (@"namespace Gio
+			var result = GenerateType(Gio2, "Seekable");
+			Assert.AreEqual(@"namespace Gio
 {
 	///<summary>
 	/// #GSeekable is implemented by streams (implementations of
