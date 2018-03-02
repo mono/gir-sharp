@@ -15,7 +15,7 @@ namespace Gir
 		public bool Introspectable;
 
 		[XmlAttribute ("name")]
-		public string Name;
+		public string Name { get; set; }
 
 		[XmlAttribute ("throws")]
 		public bool Throws;
@@ -24,7 +24,7 @@ namespace Gir
 		public string Version;
 
 		[XmlAttribute ("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
-		public string CType;
+		public string CType { get; set; }
 
 		[XmlArray ("parameters")]
 		[XmlArrayItem ("parameter", Type = typeof (Parameter))]

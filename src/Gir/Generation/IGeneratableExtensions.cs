@@ -30,7 +30,7 @@ namespace Gir
 				var member = array [i];
 
 				// Generate pinvoke signature for a method
-				if (member is ICallable callable)
+				if (!(gen is Interface) && member is ICallable callable)
 					callable.GenerateImport (gen, writer);
 
 				// Generate documentation is a member supports it.
@@ -49,30 +49,36 @@ namespace Gir
 		{
 			var retType = GetReturnCSharpType (callable, writer);
 
-			var (typesAndNames, names) = BuildParameters (callable.Parameters);
+			var (typesAndNames, names) = BuildParameters (callable, writer.Options, appendInstanceParameters: true);
 			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} ({typesAndNames});");
 			writer.WriteLine ();
 		}
 
 		static string GetReturnCSharpType (this ICallable callable, IndentWriter writer)
 		{
-			// This can also be array
-			return callable.ReturnValue?.Type?.GetSymbol (writer.Options).CSharpType ?? "void";
+			var retVal = callable.ReturnValue;
+			if (retVal == null)
+				return "void";
+
+			// TODO: Handle marshalling.
+
+			// Try getting the array return value, then the type one.
+			var retSymbol = retVal.Resolve (writer.Options);
+			return retSymbol.CSharpType;
 		}
 
-		public static void GenerateCallableDefinition (this ICallable callable, IndentWriter writer)
+		public static void GenerateCallableDefinition (this ICallable callable, IGeneratable gen, IndentWriter writer)
 		{
 			callable.ReturnValue.GenerateDocumentation (writer);
 
 			writer.WriteIndent ();
-			if (!string.IsNullOrEmpty (callable.Modifiers))
-				writer.Write (callable.Modifiers + " ");
+			if (!string.IsNullOrEmpty (callable.GetModifiers (gen, writer.Options)) && !(gen is Interface))
+				writer.Write (callable.GetModifiers (gen, writer.Options) + " ");
 
 			var returnType = callable.GetReturnCSharpType (writer);
 
 			// generate ReturnValue then Parameters
-			// FIXME, probably don't need the instance parameters?
-			var (typesAndNames, names) = BuildParameters (callable.Parameters);
+			var (typesAndNames, names) = BuildParameters (callable, writer.Options, !callable.IsInstanceCallable (gen, writer.Options));
 			writer.Write (string.Format ("{0} {1} ({2});", returnType, callable.Name.ToCSharp (), typesAndNames));
 			writer.WriteLine ();
 		}
@@ -81,36 +87,41 @@ namespace Gir
 		{
 			callable.ReturnValue.GenerateDocumentation (writer);
 
-			var modifier = "";
-			if (parent is Class) {
-				if (!(parent as Class).Abstract)
-					modifier = "public ";
-				else
-					modifier = "protected ";
-			}
+			var modifier = callable.GetModifiers (parent, writer.Options);
 
-			var (typesAndNames, names) = BuildParameters (callable.Parameters);
+			var (typesAndNames, names) = BuildParameters (callable, writer.Options, !callable.IsInstanceCallable (parent, writer.Options));
 
 			// FIXME, should check to see if it is deprecated
-			writer.WriteLine ($"{modifier}{parent.Name}({typesAndNames}) : base ({names})");
+			writer.WriteLine ($"{modifier} {parent.Name} ({typesAndNames}) : base ({names})");
 			writer.WriteLine ("{");
 			writer.WriteLine ("}");
 		}
 
-		public static (string both, string names) BuildParameters (List<Parameter> parameters)
+		public static (string both, string names) BuildParameters (ICallable callable, GenerationOptions opts, bool appendInstanceParameters)
 		{
-			// FIXME, Arrays don't have a 'Type' set
-			// PERF: Use an array as the string[] overload of Join is way more efficient than the IEnumerable<string> one.
-			var typeAndName = new string [parameters.Count];
-			var parameterNames = new string [parameters.Count];
+			var parameters = callable.Parameters;
+			var typeAndName = new List<string> (parameters.Count);
+			var parameterNames = new List<string> (parameters.Count);
+
 			for (int i = 0; i < parameters.Count; ++i) {
 				var parameter = parameters [i];
-				typeAndName [i] = parameter.Type?.Name + " " + parameter.Name;
-				parameterNames [i] = parameter.Name;
+				if (!appendInstanceParameters) {
+					if (parameter is InstanceParameter)
+						continue;
+					
+					// HACK: Make this proper
+					if (i == 0 && callable is Function)
+						continue;
+				}
+
+				var symbol = parameter.Resolve(opts);
+				typeAndName.Add(symbol.CSharpType + " " + parameter.Name);
+				parameterNames.Add(parameter.Name);
 			}
 
-			string parameterString = string.Join (", ", typeAndName);
-			string baseParams = string.Join (", ", parameterNames);
+			// PERF: Use an array as the string[] overload of Join is way more efficient than the IEnumerable<string> one.
+			string parameterString = string.Join (", ", typeAndName.ToArray ());
+			string baseParams = string.Join (", ", parameterNames.ToArray ());
 
 			return (parameterString, baseParams);
 		}
