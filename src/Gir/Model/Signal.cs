@@ -21,7 +21,7 @@ namespace Gir
 		public bool Introspectable;
 
 		[XmlAttribute ("name")]
-		public string Name;
+		public string Name { get; set; }
 
 		[XmlAttribute ("no-hooks")]
 		public bool NoHooks;
@@ -45,6 +45,5 @@ namespace Gir
 		[XmlArrayItem ("parameter", Type = typeof (Parameter))]
 		[XmlArrayItem ("instance-parameter", Type = typeof (InstanceParameter))]
 		public List<Parameter> Parameters { get; set; }
-
 	}
 }

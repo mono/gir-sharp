@@ -271,6 +271,8 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		///<summary>Set the size of the @component in terms of width and height.</summary>
 		///<returns>%TRUE or %FALSE whether the size was set or not</returns>
 		public bool SetSize (Component component, gint width, gint height);
+
+		event Bounds-changed;
 	}
 }
 ", result);
@@ -346,6 +348,8 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		static extern bool atk_component_set_size (Component component, gint width, gint height);
 
 		public bool SetSize (Component component, gint width, gint height);
+
+		event Bounds-changed;
 	}
 }
 ", result);

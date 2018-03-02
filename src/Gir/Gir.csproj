@@ -112,6 +112,7 @@
     <Compile Include="Marshal\Interface.cs" />
     <Compile Include="Generation\Constructor.cs" />
     <Compile Include="Generation\Property.cs" />
+    <Compile Include="Generation\Signal.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />
