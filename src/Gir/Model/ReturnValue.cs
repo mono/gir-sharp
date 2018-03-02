@@ -14,9 +14,9 @@ namespace Gir
 		public Documentation Doc { get; set; }
 
 		[XmlElement ("type")]
-		public Type Type;
+		public Type Type { get; set;  }
 
 		[XmlElement ("array")]
-		public Array Array;
+		public Array Array { get; set; }
 	}
 }

@@ -3,7 +3,13 @@ namespace Gir
 {
 	public partial class Constructor : ICallable, IDocumented
 	{
-		public string Modifiers => string.Empty;
+		public string GetModifiers (IGeneratable parent)
+		{
+			if (parent is Class @class && @class.Abstract)
+				return "protected";
+
+			return "public";
+		}
 
 		public void Generate (IGeneratable parent, IndentWriter writer)
 		{

@@ -113,6 +113,7 @@
     <Compile Include="Generation\Constructor.cs" />
     <Compile Include="Generation\Property.cs" />
     <Compile Include="Generation\Signal.cs" />
+    <Compile Include="Marshal\Array.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />

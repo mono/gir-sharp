@@ -28,7 +28,7 @@ namespace Gir
 	{
 		bool IsInstanceCallable { get; }
 		string CIdentifier { get; }
-		string Modifiers { get; }
+		string GetModifiers (IGeneratable parent);
 		ReturnValue ReturnValue { get; }
 		List<Parameter> Parameters { get; }
 	}

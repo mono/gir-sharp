@@ -56,8 +56,15 @@ namespace Gir
 
 		static string GetReturnCSharpType (this ICallable callable, IndentWriter writer)
 		{
-			// This can also be array
-			return callable.ReturnValue?.Type?.GetSymbol (writer.Options).CSharpType ?? "void";
+			var retVal = callable.ReturnValue;
+			if (retVal == null)
+				return "void";
+
+			// TODO: Handle marshalling.
+
+			// Try getting the array return value, then the type one.
+			var retSymbol = retVal.Array?.GetSymbol (writer.Options) ?? retVal.Type.GetSymbol (writer.Options);
+			return retSymbol.CSharpType;
 		}
 
 		public static void GenerateCallableDefinition (this ICallable callable, IGeneratable gen, IndentWriter writer)
@@ -65,13 +72,12 @@ namespace Gir
 			callable.ReturnValue.GenerateDocumentation (writer);
 
 			writer.WriteIndent ();
-			if (!string.IsNullOrEmpty (callable.Modifiers) && !(gen is Interface))
-				writer.Write (callable.Modifiers + " ");
+			if (!string.IsNullOrEmpty (callable.GetModifiers (gen)) && !(gen is Interface))
+				writer.Write (callable.GetModifiers (gen) + " ");
 
 			var returnType = callable.GetReturnCSharpType (writer);
 
 			// generate ReturnValue then Parameters
-			// FIXME, probably don't need the instance parameters?
 			var (typesAndNames, names) = BuildParameters (callable.Parameters, !callable.IsInstanceCallable);
 			writer.Write (string.Format ("{0} {1} ({2});", returnType, callable.Name.ToCSharp (), typesAndNames));
 			writer.WriteLine ();
@@ -81,18 +87,12 @@ namespace Gir
 		{
 			callable.ReturnValue.GenerateDocumentation (writer);
 
-			var modifier = "";
-			if (parent is Class) {
-				if (!(parent as Class).Abstract)
-					modifier = "public ";
-				else
-					modifier = "protected ";
-			}
+			var modifier = callable.GetModifiers (parent);
 
 			var (typesAndNames, names) = BuildParameters (callable.Parameters, !callable.IsInstanceCallable);
 
 			// FIXME, should check to see if it is deprecated
-			writer.WriteLine ($"{modifier}{parent.Name}({typesAndNames}) : base ({names})");
+			writer.WriteLine ($"{modifier} {parent.Name} ({typesAndNames}) : base ({names})");
 			writer.WriteLine ("{");
 			writer.WriteLine ("}");
 		}

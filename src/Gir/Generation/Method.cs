@@ -4,7 +4,7 @@ namespace Gir
 {
 	public partial class Method : ICallable
 	{
-		public string Modifiers { get; set; }
+		public string GetModifiers (IGeneratable parent) => "public";
 
 		public void Generate (IGeneratable parent, IndentWriter writer)
 		{
