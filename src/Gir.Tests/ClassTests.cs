@@ -31,7 +31,7 @@ namespace Gir.Tests
 	/// g_buffered_output_stream_set_buffer_size(). Note that the buffer's
 	/// size cannot be reduced below the size of the data within the buffer.
 	///</summary>
-	public class BufferedOutputStream : Seekable
+	public class BufferedOutputStream : FilterOutputStream, ISeekable
 	{
 		static extern OutputStream g_buffered_output_stream_new (OutputStream base_stream);
 

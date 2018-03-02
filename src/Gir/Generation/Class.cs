@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Gir
 {
@@ -12,8 +13,13 @@ namespace Gir
 				using (writer.Indent ()) {
 					this.GenerateDocumentation (writer);
 
-					var inheritanceList = string.Join (", ", Implements.Select (x => x.Name).ToArray ());
-					writer.WriteLine ($"public class {Name} : {inheritanceList}");
+					var inheritanceList = new List<string> ();
+					if (!string.IsNullOrEmpty (Parent))
+						inheritanceList.Add (Parent);
+					inheritanceList.AddRange (Implements.Select (x => opts.GenerateInterfacesWithIPrefix ? "I" + x.Name : x.Name));
+
+					var inheritanceString = string.Join (", ", inheritanceList.ToArray ());
+					writer.WriteLine ($"public class {Name} : {inheritanceString}");
 					writer.WriteLine ("{");
 
 					using (writer.Indent ()) {
