@@ -30,7 +30,7 @@ namespace Gir
 				var member = array [i];
 
 				// Generate pinvoke signature for a method
-				if (!(gen is Interface) && member is ICallable callable)
+				if (!(gen is Interface) && member is INativeCallable callable)
 					callable.GenerateImport (gen, writer);
 
 				// Generate documentation is a member supports it.
@@ -45,16 +45,25 @@ namespace Gir
 			}
 		}
 
-		static void GenerateImport (this ICallable callable, IGeneratable parent, IndentWriter writer)
+		static void GenerateImport (this INativeCallable callable, IGeneratable parent, IndentWriter writer)
 		{
 			var retType = GetReturnCSharpType (callable, writer);
 
 			var (typesAndNames, names) = BuildParameters (callable, writer.Options, appendInstanceParameters: true);
+
+			// TODO: Better than using the constant string, insert a custom generatable which contains the import string as a constant.
+			/* i.e.
+static class <LibraryName>Constants
+{
+	public const string GLib = "libglib-2.0.so";
+}
+			 */
+			//writer.WriteLine ($"[DllImport (\"{writer.Options.LibraryName}\", CallingConvention=CallingConvention.Cdecl)]");
 			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} ({typesAndNames});");
 			writer.WriteLine ();
 		}
 
-		static string GetReturnCSharpType (this ICallable callable, IndentWriter writer)
+		public static string GetReturnCSharpType (this IMethodLike callable, IndentWriter writer)
 		{
 			var retVal = callable.ReturnValue;
 			if (retVal == null)
@@ -67,7 +76,7 @@ namespace Gir
 			return retSymbol.CSharpType;
 		}
 
-		public static void GenerateCallableDefinition (this ICallable callable, IGeneratable gen, IndentWriter writer)
+		public static void GenerateCallableDefinition (this INativeCallable callable, IGeneratable gen, IndentWriter writer)
 		{
 			callable.ReturnValue.GenerateDocumentation (writer);
 
@@ -83,7 +92,7 @@ namespace Gir
 			writer.WriteLine ();
 		}
 
-		public static void GenerateConstructor (this ICallable callable, IGeneratable parent, IndentWriter writer)
+		public static void GenerateConstructor (this INativeCallable callable, IGeneratable parent, IndentWriter writer)
 		{
 			callable.ReturnValue.GenerateDocumentation (writer);
 
@@ -97,7 +106,7 @@ namespace Gir
 			writer.WriteLine ("}");
 		}
 
-		public static (string both, string names) BuildParameters (ICallable callable, GenerationOptions opts, bool appendInstanceParameters)
+		public static (string both, string names) BuildParameters (this IMethodLike callable, GenerationOptions opts, bool appendInstanceParameters)
 		{
 			var parameters = callable.Parameters;
 			var typeAndName = new List<string> (parameters.Count);

@@ -2,7 +2,7 @@
 
 namespace Gir
 {
-	public partial class Function : ICallable
+	public partial class Function : INativeCallable
 	{
 		// TODO: Decide what to do here if we have functions which work
 		// on instances (instance-parameter is not set)

@@ -1,7 +1,7 @@
 ﻿
 namespace Gir
 {
-	public partial class Constructor : ICallable, IDocumented
+	public partial class Constructor : INativeCallable, IDocumented
 	{
 		public string GetModifiers (IGeneratable parent, GenerationOptions opts)
 		{
@@ -16,11 +16,7 @@ namespace Gir
 			this.GenerateConstructor (parent, writer);
 		}
 
-		public bool NewlineAfterGeneration (GenerationOptions opts)
-		{
-			return true;
-		}
-
-		bool ICallable.IsInstanceCallable (IGeneratable parent, GenerationOptions opts) => false;
+		public bool NewlineAfterGeneration (GenerationOptions opts) => true;
+		bool INativeCallable.IsInstanceCallable (IGeneratable parent, GenerationOptions opts) => false;
 	}
 }

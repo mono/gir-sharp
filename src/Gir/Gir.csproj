@@ -116,6 +116,7 @@
     <Compile Include="Marshal\Array.cs" />
     <Compile Include="Marshal\ITypeOrArray.cs" />
     <Compile Include="Marshal\Callback.cs" />
+    <Compile Include="Generation\Callback.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />
