@@ -26,6 +26,9 @@ namespace Gir
 
 	public interface ICallable : IMemberGeneratable, IDocumented
 	{
+		// TODO: Check if only one param and prefixed with Get/Set.
+		//bool CanGenerateAsProperty (IGeneratable parent, GenerationOptions opts);
+
 		bool IsInstanceCallable (IGeneratable parent, GenerationOptions opts);
 		string GetModifiers (IGeneratable parent, GenerationOptions opts);
 
