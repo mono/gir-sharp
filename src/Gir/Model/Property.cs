@@ -20,7 +20,7 @@ namespace Gir
 		public bool Introspectable;
 
 		[XmlAttribute ("name")]
-		public string Name;
+		public string Name { get; set; }
 
 		[XmlAttribute ("readable")]
 		public bool Readable;
