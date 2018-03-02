@@ -5,12 +5,12 @@ namespace Gir
 	{
 		public string Modifiers => string.Empty;
 
-		public void Generate(IGeneratable parent, IndentWriter writer)
+		public void Generate (IGeneratable parent, IndentWriter writer)
 		{
-			this.GenerateConstructor(parent, writer);
+			this.GenerateConstructor (parent, writer);
 		}
 
-		public bool NewlineAfterGeneration(GenerationOptions opts)
+		public bool NewlineAfterGeneration (GenerationOptions opts)
 		{
 			return true;
 		}

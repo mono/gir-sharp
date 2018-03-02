@@ -5,46 +5,46 @@ namespace Gir
 {
 	public partial class Interface
 	{
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name { get; set; }
 
-		[XmlAttribute("version")]
+		[XmlAttribute ("version")]
 		public string Version;
 
-		[XmlAttribute("symbol-prefix", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute ("symbol-prefix", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CSymbolPrefix;
 
-		[XmlAttribute("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute ("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CType { get; set; }
 
-		[XmlAttribute("get-type", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("get-type", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibGetType;
 
-		[XmlAttribute("type-name", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("type-name", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibTypeName;
 
-		[XmlAttribute("type-struct", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("type-struct", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibTypeStruct;
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("prerequisite")]
+		[XmlElement ("prerequisite")]
 		public List<Prerequisite> Prerequisites;
 
-		[XmlElement("property")]
+		[XmlElement ("property")]
 		public List<Property> Properties;
 
-		[XmlElement("method")]
+		[XmlElement ("method")]
 		public List<Method> Methods;
 
-		[XmlElement("virtual-method")]
+		[XmlElement ("virtual-method")]
 		public List<VirtualMethod> VirtualMethods;
 
-		[XmlElement("function")]
+		[XmlElement ("function")]
 		public List<Function> Functions;
 
-		[XmlElement("signal", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlElement ("signal", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public List<Signal> Signals;
 
 	}

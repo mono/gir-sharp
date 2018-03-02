@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 namespace Gir
 {
 	public partial class Bitfield : ISymbol

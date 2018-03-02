@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿
 using NUnit.Framework;
 
 namespace Gir.Tests
@@ -12,9 +9,9 @@ namespace Gir.Tests
 		[Test]
 		public void PangoAlignmentIsGenerated ()
 		{
-			var result = GenerateType(Pango, "Alignment");
+			var result = GenerateType (Pango, "Alignment");
 
-			Assert.AreEqual(@"namespace Pango
+			Assert.AreEqual (@"namespace Pango
 {
 	///<summary>
 	/// A #PangoAlignment describes how to align the lines of a #PangoLayout within the

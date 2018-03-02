@@ -1,15 +1,14 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Gir
 {
 	public enum Direction
 	{
-		[XmlEnum("out")]
+		[XmlEnum ("out")]
 		Out,
-		[XmlEnum("in")]
+		[XmlEnum ("in")]
 		In,
-		[XmlEnum("inout")]
+		[XmlEnum ("inout")]
 		InOut
 	}
 }

@@ -4,16 +4,16 @@ namespace Gir
 {
 	public partial class Alias : IDocumented
 	{
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name { get; set; }
 
-		[XmlAttribute("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute ("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CType { get; set; }
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("type")]
+		[XmlElement ("type")]
 		public Type Type;
 	}
 }

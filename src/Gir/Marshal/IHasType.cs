@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 namespace Gir
 {
 	public interface IHasType
@@ -8,9 +8,9 @@ namespace Gir
 
 	public static class IHasTypeExtensions
 	{
-		public static ISymbol GetSymbol(this IHasType type, GenerationOptions opts)
+		public static ISymbol GetSymbol (this IHasType type, GenerationOptions opts)
 		{
-			return opts.SymbolTable[type.Type.CType];
+			return opts.SymbolTable [type.Type.CType];
 		}
 	}
 }

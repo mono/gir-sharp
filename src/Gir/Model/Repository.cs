@@ -1,32 +1,31 @@
 ﻿using System;
-using System.Xml.Serialization;
 using System.Collections.Generic;
-using System.Collections;
+using System.Xml.Serialization;
 
 namespace Gir
 {
 	[Serializable]
-	[XmlRoot("repository", Namespace = "http://www.gtk.org/introspection/core/1.0")]
+	[XmlRoot ("repository", Namespace = "http://www.gtk.org/introspection/core/1.0")]
 	public partial class Repository
 	{
-		[XmlAttribute("version")]
+		[XmlAttribute ("version")]
 		public string Version { get; set; }
 
-		[XmlElement("include")]
+		[XmlElement ("include")]
 		public List<Include> Includes { get; set; }
 
-		[XmlElement("package")]
+		[XmlElement ("package")]
 		public Package Package { get; set; }
 
-		[XmlElement("include", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlElement ("include", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public CInclude CInclude { get; set; }
 
-		[XmlElement("namespace")]
+		[XmlElement ("namespace")]
 		public Namespace Namespace { get; set; }
 
 		public string GirName => $"{Namespace.Name}-{Namespace.Version}.gir";
 
-		public override string ToString()
+		public override string ToString ()
 		{
 			return $"{Package.Name}";
 		}

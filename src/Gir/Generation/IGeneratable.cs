@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Gir
 {
@@ -9,7 +7,7 @@ namespace Gir
 	{
 		string Name { get; }
 		//void Process();
-		void Generate(GenerationOptions opts);
+		void Generate (GenerationOptions opts);
 	}
 
 	// IDocumented might end up being added to IGeneratable/IMemberGeneratable
@@ -22,8 +20,8 @@ namespace Gir
 	public interface IMemberGeneratable
 	{
 		string Name { get; }
-		bool NewlineAfterGeneration(GenerationOptions opts);
-		void Generate(IGeneratable parent, IndentWriter writer);
+		bool NewlineAfterGeneration (GenerationOptions opts);
+		void Generate (IGeneratable parent, IndentWriter writer);
 	}
 
 	public interface ICallable : IMemberGeneratable, IDocumented

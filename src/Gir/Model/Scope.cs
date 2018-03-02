@@ -1,15 +1,14 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Gir
 {
 	public enum Scope
 	{
-		[XmlEnum("call")]
+		[XmlEnum ("call")]
 		Call,
-		[XmlEnum("async")]
+		[XmlEnum ("async")]
 		Async,
-		[XmlEnum("notified")]
+		[XmlEnum ("notified")]
 		Notified
 	}
 }

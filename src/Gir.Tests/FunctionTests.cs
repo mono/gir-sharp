@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using NUnit.Framework;
 
 namespace Gir.Tests
@@ -7,12 +7,12 @@ namespace Gir.Tests
 	public class FunctionTests : GenerationTestBase
 	{
 		[Test]
-		public void TestRecordFunctionIsGenerated()
+		public void TestRecordFunctionIsGenerated ()
 		{
 			// Test is incomplete, as record is not fully generated atm.
-			var result = GenerateMember(GLib, "ByteArray", "append");
+			var result = GenerateMember (GLib, "ByteArray", "append");
 
-			Assert.AreEqual(@"static extern void g_byte_array_append PARAMS
+			Assert.AreEqual (@"static extern void g_byte_array_append PARAMS
 
 ///<summary>
 /// Adds the given bytes to the end of the #GByteArray.

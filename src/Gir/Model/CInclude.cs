@@ -4,7 +4,7 @@ namespace Gir
 {
 	public partial class CInclude
 	{
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name;
 	}
 }

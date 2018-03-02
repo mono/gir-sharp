@@ -4,7 +4,7 @@ namespace Gir
 {
 	public partial class Package
 	{
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name { get; set; }
 	}
 }

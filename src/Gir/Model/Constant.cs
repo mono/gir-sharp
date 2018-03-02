@@ -4,28 +4,28 @@ namespace Gir
 {
 	public partial class Constant : IDocumented
 	{
-		[XmlAttribute("deprecated")]
+		[XmlAttribute ("deprecated")]
 		public bool Deprecated;
 
-		[XmlAttribute("deprecated-version")]
+		[XmlAttribute ("deprecated-version")]
 		public string DeprecatedVersion;
 
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name { get; set; }
 
-		[XmlAttribute("value")]
+		[XmlAttribute ("value")]
 		public string Value;
 
-		[XmlAttribute("version")]
+		[XmlAttribute ("version")]
 		public string Version;
 
-		[XmlAttribute("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute ("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CType { get; set; }
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("type")]
+		[XmlElement ("type")]
 		public Type Type;
 	}
 }

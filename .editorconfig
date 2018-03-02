@@ -46,6 +46,9 @@ csharp_space_between_method_declaration_name_and_open_parenthesis = true
 csharp_space_between_method_call_name_and_opening_parenthesis = true
 csharp_space_after_keywords_in_control_flow_statements = true
 
+# spaces before []
+csharp_space_before_open_square_brackets = true
+
 # Newline settings
 csharp_new_line_before_open_brace = types,methods
 csharp_new_line_before_else = true

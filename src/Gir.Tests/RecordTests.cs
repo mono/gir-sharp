@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using NUnit.Framework;
 
 namespace Gir.Tests
@@ -7,14 +7,14 @@ namespace Gir.Tests
 	public class RecordTests : GenerationTestBase
 	{
 		[Test]
-		public void TestRecordIsGenerated()
+		public void TestRecordIsGenerated ()
 		{
 			// Test is incomplete, as record is not fully generated atm.
-			var result = GenerateType(GLib, "ByteArray");
+			var result = GenerateType (GLib, "ByteArray");
 
 
 			// Need to map pointers at symbol level.
-			Assert.AreEqual(@"namespace GLib
+			Assert.AreEqual (@"namespace GLib
 {
 	///<summary>Contains the public fields of a GByteArray.</summary>
 	public struct ByteArray
@@ -191,11 +191,11 @@ namespace Gir.Tests
 		public void CanGenerateActionIfaceRecord ()
 		{
 			// Test is incomplete, as record is not fully generated atm.
-			var result = GenerateType(Atk1, "ActionIface");
+			var result = GenerateType (Atk1, "ActionIface");
 
 
 			// Need to map pointers at symbol level.
-			Assert.AreEqual(@"namespace Atk
+			Assert.AreEqual (@"namespace Atk
 {
 }", result);
 		}

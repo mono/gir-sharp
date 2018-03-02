@@ -5,33 +5,33 @@ namespace Gir
 {
 	public partial class Callback
 	{
-		[XmlAttribute("deprecated")]
+		[XmlAttribute ("deprecated")]
 		public bool Deprecated;
 
-		[XmlAttribute("deprecated-version")]
+		[XmlAttribute ("deprecated-version")]
 		public string DeprecatedVersion;
 
-		[XmlAttribute("introspectable")]
+		[XmlAttribute ("introspectable")]
 		public bool Introspectable;
 
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name;
 
-		[XmlAttribute("throws")]
+		[XmlAttribute ("throws")]
 		public bool Throws;
 
-		[XmlAttribute("version")]
+		[XmlAttribute ("version")]
 		public string Version;
 
-		[XmlAttribute("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute ("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CType;
 
-		[XmlArray("parameters")]
-		[XmlArrayItem("parameter", Type = typeof(Parameter))]
-		[XmlArrayItem("instance-parameter", Type = typeof(InstanceParameter))]
+		[XmlArray ("parameters")]
+		[XmlArrayItem ("parameter", Type = typeof (Parameter))]
+		[XmlArrayItem ("instance-parameter", Type = typeof (InstanceParameter))]
 		public List<Parameter> Parameters { get; set; }
 
-		[XmlElement("return-value")]
+		[XmlElement ("return-value")]
 		public ReturnValue ReturnValue { get; set; }
 	}
 }

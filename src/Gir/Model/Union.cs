@@ -5,22 +5,22 @@ namespace Gir
 {
 	public partial class Union
 	{
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name;
 
-		[XmlAttribute("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute ("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CType { get; set; }
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("field")]
+		[XmlElement ("field")]
 		public List<Field> Fields;
 
-		[XmlElement("method")]
+		[XmlElement ("method")]
 		public List<Method> Methods;
 
-		[XmlElement("record")]
+		[XmlElement ("record")]
 		public List<Record> Records;
 	}
 }

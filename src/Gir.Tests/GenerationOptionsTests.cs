@@ -1,5 +1,4 @@
-﻿using System.Linq;
-
+﻿
 using NUnit.Framework;
 
 namespace Gir.Tests
@@ -8,11 +7,11 @@ namespace Gir.Tests
 	public class GenerationOptionsTests : GenerationTestBase
 	{
 		[Test]
-		public void GenerateDocumentationWhenCompatFalse()
+		public void GenerateDocumentationWhenCompatFalse ()
 		{
-			var result = GenerateType(Pango, "Alignment");
+			var result = GenerateType (Pango, "Alignment");
 
-			Assert.AreEqual(@"namespace Pango
+			Assert.AreEqual (@"namespace Pango
 {
 	///<summary>
 	/// A #PangoAlignment describes how to align the lines of a #PangoLayout within the
@@ -35,11 +34,11 @@ namespace Gir.Tests
 		}
 
 		[Test]
-		public void GenerateNoDocumentationWhenCompatTrue()
+		public void GenerateNoDocumentationWhenCompatTrue ()
 		{
-			var result = GenerateType(Pango, "Alignment", compat: true);
+			var result = GenerateType (Pango, "Alignment", compat: true);
 
-			Assert.AreEqual(@"namespace Pango
+			Assert.AreEqual (@"namespace Pango
 {
 	public enum Alignment
 	{

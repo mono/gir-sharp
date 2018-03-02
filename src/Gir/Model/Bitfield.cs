@@ -5,34 +5,34 @@ namespace Gir
 {
 	public partial class Bitfield
 	{
-		[XmlAttribute("deprecated")]
+		[XmlAttribute ("deprecated")]
 		public bool Deprecated;
 
-		[XmlAttribute("deprecated-version")]
+		[XmlAttribute ("deprecated-version")]
 		public string DeprecatedVersion;
 
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name { get; set; }
 
-		[XmlAttribute("version")]
+		[XmlAttribute ("version")]
 		public string Version;
 
-		[XmlAttribute("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute ("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CType { get; set; }
 
-		[XmlAttribute("get-type", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("get-type", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibGetType;
 
-		[XmlAttribute("type-name", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("type-name", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibTypeName;
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("member")]
+		[XmlElement ("member")]
 		public List<Member> Members;
 
-		[XmlElement("function")]
+		[XmlElement ("function")]
 		public List<Function> Function;
 	}
 }

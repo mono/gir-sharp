@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 namespace Gir
 {
 	public class Primitive : ISymbol
@@ -9,7 +9,7 @@ namespace Gir
 
 		public string ByValueMarshalType => CSharpType;
 
-		public Primitive(string ctype, string csharpType, string defaultValue)
+		public Primitive (string ctype, string csharpType, string defaultValue)
 		{
 			CType = ctype;
 			CSharpType = csharpType;

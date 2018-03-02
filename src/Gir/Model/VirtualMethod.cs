@@ -5,36 +5,36 @@ namespace Gir
 {
 	public partial class VirtualMethod
 	{
-		[XmlAttribute("deprecated")]
+		[XmlAttribute ("deprecated")]
 		public bool Deprecated;
 
-		[XmlAttribute("deprecated-version")]
+		[XmlAttribute ("deprecated-version")]
 		public string DeprecatedVersion;
 
-		[XmlAttribute("introspectable")]
+		[XmlAttribute ("introspectable")]
 		public bool Introspectable;
 
-		[XmlAttribute("invoker")]
+		[XmlAttribute ("invoker")]
 		public string Invoker;
 
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name;
 
-		[XmlAttribute("throws")]
+		[XmlAttribute ("throws")]
 		public bool Throws;
 
-		[XmlAttribute("version")]
+		[XmlAttribute ("version")]
 		public string Version;
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("return-value")]
+		[XmlElement ("return-value")]
 		public ReturnValue ReturnValue { get; set; }
 
-		[XmlArray("parameters")]
-		[XmlArrayItem("parameter", Type = typeof(Parameter))]
-		[XmlArrayItem("instance-parameter", Type = typeof(InstanceParameter))]
+		[XmlArray ("parameters")]
+		[XmlArrayItem ("parameter", Type = typeof (Parameter))]
+		[XmlArrayItem ("instance-parameter", Type = typeof (InstanceParameter))]
 		public List<Parameter> Parameters { get; set; }
 
 	}
