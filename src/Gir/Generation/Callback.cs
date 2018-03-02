@@ -1,7 +1,7 @@
 using System;
 namespace Gir
 {
-	public partial class Callback : IGeneratable
+	public partial class Callback : IGeneratable, IMethodLike
 	{
 		public void Generate (GenerationOptions opts)
 		{
@@ -14,15 +14,17 @@ namespace Gir
 					// Otherwise, we need to generate code which uses a non-static callback.
 
 					var returnType = GetReturnType (writer);
+					var (typesAndNames, names) = this.BuildParameters (opts, true);
 					
 					// Public API delegate which uses managed types.
 					writer.WriteLine ("[UnmanagedFunctionPointer (CallingConvention.Cdecl)]");
-					writer.WriteLine ($"public delegate {returnType} {Name} PARAMS");
+					writer.WriteLine ($"public delegate {returnType} {Name} ({typesAndNames})");
 					writer.WriteLine ();
 
 					// Internal API delegate which uses unmanaged types.
 					writer.WriteLine ("[UnmanagedFunctionPointer (CallingConvention.Cdecl)]");
-					writer.WriteLine ($"internal delegate {returnType} {Name}Native PARAMS");
+					// TODO: Use native marshal types.
+					writer.WriteLine ($"internal delegate {returnType} {Name}Native ({typesAndNames})");
 					writer.WriteLine ();
 
 					// Generate wrapper class - static if we can use gchandle, otherwise instance

@@ -11,14 +11,13 @@ namespace Gir.Tests
 		{
 			var result = GenerateType (Gtk3, "TreeModelFilterModifyFunc");
 
-			Console.WriteLine (result);
 			Assert.AreEqual (@"namespace Gtk
 {
 	[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
-	public delegate void TreeModelFilterModifyFunc PARAMS
+	public delegate void TreeModelFilterModifyFunc (ITreeModel model, TreeIter iter, Value value, int column, IntPtr data)
 
 	[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
-	internal delegate void TreeModelFilterModifyFuncNative PARAMS
+	internal delegate void TreeModelFilterModifyFuncNative (ITreeModel model, TreeIter iter, Value value, int column, IntPtr data)
 
 }
 ", result);

@@ -24,7 +24,13 @@ namespace Gir
 		void Generate (IGeneratable parent, IndentWriter writer);
 	}
 
-	public interface ICallable : IMemberGeneratable, IDocumented
+	public interface IMethodLike
+	{
+		ReturnValue ReturnValue { get; }
+		List<Parameter> Parameters { get; }
+	}
+
+	public interface INativeCallable : IMemberGeneratable, IMethodLike, IDocumented
 	{
 		// TODO: Check if only one param and prefixed with Get/Set.
 		//bool CanGenerateAsProperty (IGeneratable parent, GenerationOptions opts);
@@ -33,7 +39,5 @@ namespace Gir
 		string GetModifiers (IGeneratable parent, GenerationOptions opts);
 
 		string CIdentifier { get; }
-		ReturnValue ReturnValue { get; }
-		List<Parameter> Parameters { get; }
 	}
 }

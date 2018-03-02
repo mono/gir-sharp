@@ -2,7 +2,7 @@ using System;
 
 namespace Gir
 {
-	public partial class Method : ICallable
+	public partial class Method : INativeCallable
 	{
 		public string GetModifiers (IGeneratable parent, GenerationOptions opts) => "public";
 
