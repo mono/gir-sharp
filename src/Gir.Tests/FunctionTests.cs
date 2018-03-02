@@ -12,7 +12,7 @@ namespace Gir.Tests
 			// Test is incomplete, as record is not fully generated atm.
 			var result = GenerateMember (GLib, "ByteArray", "append");
 
-			Assert.AreEqual (@"static extern void g_byte_array_append ( array, guint8 data, guint len)
+			Assert.AreEqual (@"static extern void g_byte_array_append ( array, guint8 data, guint len);
 
 ///<summary>
 /// Adds the given bytes to the end of the #GByteArray.

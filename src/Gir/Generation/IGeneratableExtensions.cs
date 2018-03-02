@@ -50,7 +50,7 @@ namespace Gir
 			var retType = GetReturnCSharpType (callable, writer);
 
 			var (typesAndNames, names) = BuildParameters (callable.Parameters);
-			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} ({typesAndNames})");
+			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} ({typesAndNames});");
 			writer.WriteLine ();
 		}
 
