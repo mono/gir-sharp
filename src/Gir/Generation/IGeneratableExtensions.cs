@@ -52,7 +52,6 @@ namespace Gir
 			var (typesAndNames, names) = BuildParameters (callable, writer.Options, appendInstanceParameters: true);
 
 			// TODO: Better than using the constant string, insert a custom generatable which contains the import string as a constant.
-			// Also, glib-2.0.gir is problematic, it contains 2 library names :(
 			/* i.e.
 static class <LibraryName>Constants
 {
