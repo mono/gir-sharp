@@ -50,6 +50,16 @@ namespace Gir
 			var retType = GetReturnCSharpType (callable, writer);
 
 			var (typesAndNames, names) = BuildParameters (callable, writer.Options, appendInstanceParameters: true);
+
+			// TODO: Better than using the constant string, insert a custom generatable which contains the import string as a constant.
+			// Also, glib-2.0.gir is problematic, it contains 2 library names :(
+			/* i.e.
+static class <LibraryName>Constants
+{
+	public const string GLib = "libglib-2.0.so";
+}
+			 */
+			//writer.WriteLine ($"[DllImport (\"{writer.Options.LibraryName}\", CallingConvention=CallingConvention.Cdecl)]");
 			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} ({typesAndNames});");
 			writer.WriteLine ();
 		}
