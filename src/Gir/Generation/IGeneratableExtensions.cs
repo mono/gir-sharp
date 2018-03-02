@@ -49,7 +49,8 @@ namespace Gir
 		{
 			var retType = GetReturnCSharpType (callable, writer);
 
-			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} PARAMS");
+			var (typesAndNames, names) = BuildParameters (callable.Parameters);
+			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} ({typesAndNames});");
 			writer.WriteLine ();
 		}
 
@@ -70,7 +71,9 @@ namespace Gir
 			var returnType = callable.GetReturnCSharpType (writer);
 
 			// generate ReturnValue then Parameters
-			writer.Write (string.Format ("{0} {1} {2}", returnType, callable.Name.ToCSharp (), "PARAMS"));
+			// FIXME, probably don't need the instance parameters?
+			var (typesAndNames, names) = BuildParameters (callable.Parameters);
+			writer.Write (string.Format ("{0} {1} ({2});", returnType, callable.Name.ToCSharp (), typesAndNames));
 			writer.WriteLine ();
 		}
 
@@ -96,12 +99,13 @@ namespace Gir
 
 		public static (string both, string names) BuildParameters (List<Parameter> parameters)
 		{
+			// FIXME, Arrays don't have a 'Type' set
 			// PERF: Use an array as the string[] overload of Join is way more efficient than the IEnumerable<string> one.
 			var typeAndName = new string [parameters.Count];
 			var parameterNames = new string [parameters.Count];
 			for (int i = 0; i < parameters.Count; ++i) {
 				var parameter = parameters [i];
-				typeAndName [i] = parameter.Type.Name + " " + parameter.Name;
+				typeAndName [i] = parameter.Type?.Name + " " + parameter.Name;
 				parameterNames [i] = parameter.Name;
 			}
 

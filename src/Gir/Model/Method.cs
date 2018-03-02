@@ -38,7 +38,10 @@ namespace Gir
 		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement ("return-value")]
+		[XmlElement("doc-deprecated")]
+		public Documentation DocDeprecated { get; set; }
+
+		[XmlElement("return-value")]
 		public ReturnValue ReturnValue { get; set; }
 
 		[XmlArray ("parameters")]

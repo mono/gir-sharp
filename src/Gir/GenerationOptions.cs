@@ -20,7 +20,8 @@ namespace Gir
 
 		#region Generation toggles
 		readonly bool compat;
-		public bool GenerateDocumentation { get { return !compat; } }
+		public bool GenerateDocumentation => !compat;
+		public bool GenerateInterfacesWithIPrefix => !compat;
 
 		// Try to find better logic for detecting this.
 		public bool NativeWin64 { get; }

@@ -12,7 +12,6 @@ namespace Gir.Tests
 			// Test is incomplete, as record is not fully generated atm.
 			var result = GenerateType (GLib, "ByteArray");
 
-
 			// Need to map pointers at symbol level.
 			Assert.AreEqual (@"namespace GLib
 {
@@ -23,21 +22,21 @@ namespace Gir.Tests
 		/// a pointer to the element data. The data may be moved as
 		///     elements are added to the #GByteArray
 		///</summary>
-		byte data;
+		byte Data;
 
 		///<summary>the number of elements in the #GByteArray</summary>
-		uint len;
+		uint Len;
 
-		static extern void g_byte_array_append PARAMS
+		static extern void g_byte_array_append ( array, guint8 data, guint len);
 
 		///<summary>
 		/// Adds the given bytes to the end of the #GByteArray.
 		/// The array will grow in size automatically if necessary.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void Append PARAMS
+		static void Append ( array, guint8 data, guint len);
 
-		static extern byte g_byte_array_free PARAMS
+		static extern byte g_byte_array_free ( array, gboolean free_segment);
 
 		///<summary>
 		/// Frees the memory allocated by the #GByteArray. If @free_segment is
@@ -49,9 +48,9 @@ namespace Gir.Tests
 		/// the element data if @free_segment is %FALSE, otherwise
 		///          %NULL.  The element data should be freed using g_free().
 		///</returns>
-		static byte Free PARAMS
+		static byte Free ( array, gboolean free_segment);
 
-		static extern Bytes g_byte_array_free_to_bytes PARAMS
+		static extern Bytes g_byte_array_free_to_bytes ( array);
 
 		///<summary>
 		/// Transfers the data from the #GByteArray into a new immutable #GBytes.
@@ -67,51 +66,51 @@ namespace Gir.Tests
 		/// a new immutable #GBytes representing same
 		///     byte data that was in the array
 		///</returns>
-		static Bytes FreeToBytes PARAMS
+		static Bytes FreeToBytes ( array);
 
-		static extern void g_byte_array_new PARAMS
+		static extern void g_byte_array_new ();
 
 		///<summary>Creates a new #GByteArray with a reference count of 1.</summary>
 		///<returns>the new #GByteArray</returns>
-		static void New PARAMS
+		static void New ();
 
-		static extern void g_byte_array_new_take PARAMS
+		static extern void g_byte_array_new_take ( data, gsize len);
 
 		///<summary>
 		/// Create byte array containing the data. The data will be owned by the array
 		/// and will be freed with g_free(), i.e. it could be allocated using g_strdup().
 		///</summary>
 		///<returns>a new #GByteArray</returns>
-		static void NewTake PARAMS
+		static void NewTake ( data, gsize len);
 
-		static extern void g_byte_array_prepend PARAMS
+		static extern void g_byte_array_prepend ( array, guint8 data, guint len);
 
 		///<summary>
 		/// Adds the given data to the start of the #GByteArray.
 		/// The array will grow in size automatically if necessary.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void Prepend PARAMS
+		static void Prepend ( array, guint8 data, guint len);
 
-		static extern void g_byte_array_ref PARAMS
+		static extern void g_byte_array_ref ( array);
 
 		///<summary>
 		/// Atomically increments the reference count of @array by one.
 		/// This function is thread-safe and may be called from any thread.
 		///</summary>
 		///<returns>The passed in #GByteArray</returns>
-		static void Ref PARAMS
+		static void Ref ( array);
 
-		static extern void g_byte_array_remove_index PARAMS
+		static extern void g_byte_array_remove_index ( array, guint index_);
 
 		///<summary>
 		/// Removes the byte at the given index from a #GByteArray.
 		/// The following bytes are moved down one place.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void RemoveIndex PARAMS
+		static void RemoveIndex ( array, guint index_);
 
-		static extern void g_byte_array_remove_index_fast PARAMS
+		static extern void g_byte_array_remove_index_fast ( array, guint index_);
 
 		///<summary>
 		/// Removes the byte at the given index from a #GByteArray. The last
@@ -120,24 +119,24 @@ namespace Gir.Tests
 		/// than g_byte_array_remove_index().
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void RemoveIndexFast PARAMS
+		static void RemoveIndexFast ( array, guint index_);
 
-		static extern void g_byte_array_remove_range PARAMS
+		static extern void g_byte_array_remove_range ( array, guint index_, guint length);
 
 		///<summary>
 		/// Removes the given number of bytes starting at the given index from a
 		/// #GByteArray.  The following elements are moved to close the gap.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void RemoveRange PARAMS
+		static void RemoveRange ( array, guint index_, guint length);
 
-		static extern void g_byte_array_set_size PARAMS
+		static extern void g_byte_array_set_size ( array, guint length);
 
 		///<summary>Sets the size of the #GByteArray, expanding it if necessary.</summary>
 		///<returns>the #GByteArray</returns>
-		static void SetSize PARAMS
+		static void SetSize ( array, guint length);
 
-		static extern void g_byte_array_sized_new PARAMS
+		static extern void g_byte_array_sized_new (guint reserved_size);
 
 		///<summary>
 		/// Creates a new #GByteArray with @reserved_size bytes preallocated.
@@ -146,9 +145,9 @@ namespace Gir.Tests
 		/// 0.
 		///</summary>
 		///<returns>the new #GByteArray</returns>
-		static void SizedNew PARAMS
+		static void SizedNew (guint reserved_size);
 
-		static extern void g_byte_array_sort PARAMS
+		static extern void g_byte_array_sort ( array, CompareFunc compare_func);
 
 		///<summary>
 		/// Sorts a byte array, using @compare_func which should be a
@@ -162,17 +161,17 @@ namespace Gir.Tests
 		/// if two elements would otherwise compare equal, compares them by
 		/// their addresses.
 		///</summary>
-		static void Sort PARAMS
+		static void Sort ( array, CompareFunc compare_func);
 
-		static extern void g_byte_array_sort_with_data PARAMS
+		static extern void g_byte_array_sort_with_data ( array, CompareDataFunc compare_func, gpointer user_data);
 
 		///<summary>
 		/// Like g_byte_array_sort(), but the comparison function takes an extra
 		/// user data argument.
 		///</summary>
-		static void SortWithData PARAMS
+		static void SortWithData ( array, CompareDataFunc compare_func, gpointer user_data);
 
-		static extern void g_byte_array_unref PARAMS
+		static extern void g_byte_array_unref ( array);
 
 		///<summary>
 		/// Atomically decrements the reference count of @array by one. If the
@@ -180,24 +179,24 @@ namespace Gir.Tests
 		/// released. This function is thread-safe and may be called from any
 		/// thread.
 		///</summary>
-		static void Unref PARAMS
+		static void Unref ( array);
 	}
 }
 ", result);
 		}
 
-		[Test]
-		[Ignore ("This currently fails. NRE w/ do_action field")]
-		public void CanGenerateActionIfaceRecord ()
-		{
-			// Test is incomplete, as record is not fully generated atm.
-			var result = GenerateType (Atk1, "ActionIface");
+//		[Test]
+//		[Ignore ("This currently fails. NRE w/ do_action field")]
+//		public void CanGenerateActionIfaceRecord ()
+//		{
+//			// Test is incomplete, as record is not fully generated atm.
+//			var result = GenerateType(Atk1, "ActionIface");
 
 
-			// Need to map pointers at symbol level.
-			Assert.AreEqual (@"namespace Atk
-{
-}", result);
-		}
+//			// Need to map pointers at symbol level.
+//			Assert.AreEqual(@"namespace Atk
+//{
+//}", result);
+//}
 	}
 }
