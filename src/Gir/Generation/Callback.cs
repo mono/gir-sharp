@@ -13,7 +13,7 @@ namespace Gir
 					// TODO: Validation if we have an userdata parameter we can use so we can write this code.
 					// Otherwise, we need to generate code which uses a non-static callback.
 
-					var returnType = GetReturnType (writer);
+					var returnType = this.GetReturnCSharpType (writer);
 					var (typesAndNames, names) = this.BuildParameters (opts, true);
 					
 					// Public API delegate which uses managed types.
@@ -41,20 +41,6 @@ namespace Gir
 				}
 				writer.WriteLine ("}");
 			}
-		}
-
-		string GetReturnType (IndentWriter writer)
-		{
-			// Write the managed delegate signature.
-			var retVal = ReturnValue;
-			if (retVal == null)
-				return "void";
-
-			// TODO: Handle marshalling.
-
-			// Try getting the array return value, then the type one.
-			var retSymbol = retVal.Resolve (writer.Options);
-			return retSymbol.CSharpType;
 		}
 	}
 }

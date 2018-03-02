@@ -63,7 +63,7 @@ static class <LibraryName>Constants
 			writer.WriteLine ();
 		}
 
-		static string GetReturnCSharpType (this INativeCallable callable, IndentWriter writer)
+		public static string GetReturnCSharpType (this IMethodLike callable, IndentWriter writer)
 		{
 			var retVal = callable.ReturnValue;
 			if (retVal == null)
