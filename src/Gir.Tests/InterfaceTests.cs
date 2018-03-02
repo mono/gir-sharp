@@ -153,6 +153,8 @@ namespace Gir.Tests
 		/// when this object receives focus events (in or out). If the handler is
 		/// already added it is not added again
 		///</summary>
+		[Obsolete (""(Version: 2.9.4) If you need to track when an object gains or
+lose the focus, use the #AtkObject::state-change ""focused"" notification instead."")]
 		///<returns>
 		/// a handler id which can be used in atk_component_remove_focus_handler()
 		/// or zero if the handler was already added.
@@ -214,11 +216,13 @@ namespace Gir.Tests
 		/// Gets the position of @component in the form of
 		/// a point specifying @component's top-left corner.
 		///</summary>
+		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
 		public void GetPosition (Component component, gint x, gint y, CoordType coord_type);
 
 		static extern void atk_component_get_size (Component component, gint width, gint height);
 
 		///<summary>Gets the size of the @component in terms of width and height.</summary>
+		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
 		public void GetSize (Component component, gint width, gint height);
 
 		static extern bool atk_component_grab_focus (Component component);
@@ -246,6 +250,8 @@ namespace Gir.Tests
 		/// functions to be executed when this object receives focus events
 		/// (in or out).
 		///</summary>
+		[Obsolete (""(Version: 2.9.4) If you need to track when an object gains or
+lose the focus, use the #AtkObject::state-change ""focused"" notification instead."")]
 		public void RemoveFocusHandler (Component component, guint handler_id);
 
 		static extern bool atk_component_set_extents (Component component, gint x, gint y, gint width, gint height, CoordType coord_type);
@@ -281,6 +287,8 @@ namespace Gir.Tests
 	{
 		static extern uint atk_component_add_focus_handler (Component component, FocusHandler handler);
 
+		[Obsolete (""(Version: 2.9.4) If you need to track when an object gains or
+lose the focus, use the #AtkObject::state-change ""focused"" notification instead."")]
 		public uint AddFocusHandler (Component component, FocusHandler handler);
 
 		static extern bool atk_component_contains (Component component, gint x, gint y, CoordType coord_type);
@@ -305,10 +313,12 @@ namespace Gir.Tests
 
 		static extern void atk_component_get_position (Component component, gint x, gint y, CoordType coord_type);
 
+		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
 		public void GetPosition (Component component, gint x, gint y, CoordType coord_type);
 
 		static extern void atk_component_get_size (Component component, gint width, gint height);
 
+		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
 		public void GetSize (Component component, gint width, gint height);
 
 		static extern bool atk_component_grab_focus (Component component);
@@ -321,6 +331,8 @@ namespace Gir.Tests
 
 		static extern void atk_component_remove_focus_handler (Component component, guint handler_id);
 
+		[Obsolete (""(Version: 2.9.4) If you need to track when an object gains or
+lose the focus, use the #AtkObject::state-change ""focused"" notification instead."")]
 		public void RemoveFocusHandler (Component component, guint handler_id);
 
 		static extern bool atk_component_set_extents (Component component, gint x, gint y, gint width, gint height, CoordType coord_type);

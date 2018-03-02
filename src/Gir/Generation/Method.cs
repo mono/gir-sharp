@@ -1,4 +1,5 @@
-﻿
+using System;
+
 namespace Gir
 {
 	public partial class Method : ICallable
@@ -10,7 +11,10 @@ namespace Gir
 			if (parent is Interface)
 				Modifiers = "public";
 
-			this.GenerateCallableDefinition(writer);
+			if (Deprecated)
+				writer.WriteLine ($"[Obsolete (\"(Version: {DeprecatedVersion}) {DocDeprecated.Text}\")]");
+
+			this.GenerateCallableDefinition (writer);
 		}
 
 		public bool NewlineAfterGeneration (GenerationOptions opts) => true;
