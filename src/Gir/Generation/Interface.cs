@@ -10,7 +10,7 @@ namespace Gir
 				writer.WriteLine ("{");
 				using (writer.Indent ()) {
 					this.GenerateDocumentation (writer);
-					var interfaceName = (opts.Compat) ? Name : $"I{Name}";
+					var interfaceName = (opts.GenerateInterfacesWithIPrefix) ? $"I{Name}" : Name;
 					writer.WriteLine ($"public interface {interfaceName}");
 					writer.WriteLine ("{");
 

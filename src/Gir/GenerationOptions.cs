@@ -19,8 +19,9 @@ namespace Gir
 		#endregion
 
 		#region Generation toggles
-		public bool Compat { get; }
-		public bool GenerateDocumentation { get { return !Compat; } }
+		readonly bool compat;
+		public bool GenerateDocumentation => !compat;
+		public bool GenerateInterfacesWithIPrefix => !compat;
 
 		// Try to find better logic for detecting this.
 		public bool NativeWin64 { get; }
@@ -34,7 +35,7 @@ namespace Gir
 		{
 			DirectoryPath = dir;
 			Repository = repo;
-			Compat = compat;
+			this.compat = compat;
 			RedirectStream = redirectStream;
 
 			SymbolTable = new SymbolTable (Statistics, win64Longs);
