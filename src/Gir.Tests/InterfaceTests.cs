@@ -92,15 +92,15 @@ namespace Gir.Tests
 {
 	public interface Seekable
 	{
-		bool CanSeek (Seekable seekable);
+		bool CanSeek ();
 
-		bool CanTruncate (Seekable seekable);
+		bool CanTruncate ();
 
-		bool Seek (Seekable seekable, gint64 offset, GLib.SeekType type, Cancellable cancellable);
+		bool Seek (gint64 offset, GLib.SeekType type, Cancellable cancellable);
 
-		long Tell (Seekable seekable);
+		long Tell ();
 
-		bool Truncate (Seekable seekable, gint64 offset, Cancellable cancellable);
+		bool Truncate (gint64 offset, Cancellable cancellable);
 	}
 }
 ", result);
@@ -137,7 +137,7 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		/// a handler id which can be used in atk_component_remove_focus_handler()
 		/// or zero if the handler was already added.
 		///</returns>
-		uint AddFocusHandler (Component component, FocusHandler handler);
+		uint AddFocusHandler (FocusHandler handler);
 
 		///<summary>
 		/// Checks whether the specified point is within the extent of the @component.
@@ -150,7 +150,7 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		/// %TRUE or %FALSE indicating whether the specified point is within
 		/// the extent of the @component or not
 		///</returns>
-		bool Contains (Component component, gint x, gint y, CoordType coord_type);
+		bool Contains (gint x, gint y, CoordType coord_type);
 
 		///<summary>
 		/// Returns the alpha value (i.e. the opacity) for this
@@ -158,14 +158,14 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		/// (fully opaque).
 		///</summary>
 		///<returns>An alpha value from 0 to 1.0, inclusive.</returns>
-		double GetAlpha (Component component);
+		double GetAlpha ();
 
 		///<summary>Gets the rectangle which gives the extent of the @component.</summary>
-		void GetExtents (Component component, gint x, gint y, gint width, gint height, CoordType coord_type);
+		void GetExtents (gint x, gint y, gint width, gint height, CoordType coord_type);
 
 		///<summary>Gets the layer of the component.</summary>
 		///<returns>an #AtkLayer which is the layer of the component</returns>
-		Layer GetLayer (Component component);
+		Layer GetLayer ();
 
 		///<summary>
 		/// Gets the zorder of the component. The value G_MININT will be returned
@@ -176,22 +176,22 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		/// which the component is shown in relation to other components in the same
 		/// container.
 		///</returns>
-		int GetMdiZorder (Component component);
+		int GetMdiZorder ();
 
 		///<summary>
 		/// Gets the position of @component in the form of
 		/// a point specifying @component's top-left corner.
 		///</summary>
 		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
-		void GetPosition (Component component, gint x, gint y, CoordType coord_type);
+		void GetPosition (gint x, gint y, CoordType coord_type);
 
 		///<summary>Gets the size of the @component in terms of width and height.</summary>
 		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
-		void GetSize (Component component, gint width, gint height);
+		void GetSize (gint width, gint height);
 
 		///<summary>Grabs focus for this @component.</summary>
 		///<returns>%TRUE if successful, %FALSE otherwise.</returns>
-		bool GrabFocus (Component component);
+		bool GrabFocus ();
 
 		///<summary>
 		/// Gets a reference to the accessible child, if one exists, at the
@@ -201,7 +201,7 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		/// a reference to the accessible
 		/// child, if one exists
 		///</returns>
-		Object RefAccessibleAtPoint (Component component, gint x, gint y, CoordType coord_type);
+		Object RefAccessibleAtPoint (gint x, gint y, CoordType coord_type);
 
 		///<summary>
 		/// Remove the handler specified by @handler_id from the list of
@@ -210,19 +210,19 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		///</summary>
 		[Obsolete (""(Version: 2.9.4) If you need to track when an object gains or
 lose the focus, use the #AtkObject::state-change ""focused"" notification instead."")]
-		void RemoveFocusHandler (Component component, guint handler_id);
+		void RemoveFocusHandler (guint handler_id);
 
 		///<summary>Sets the extents of @component.</summary>
 		///<returns>%TRUE or %FALSE whether the extents were set or not</returns>
-		bool SetExtents (Component component, gint x, gint y, gint width, gint height, CoordType coord_type);
+		bool SetExtents (gint x, gint y, gint width, gint height, CoordType coord_type);
 
 		///<summary>Sets the postition of @component.</summary>
 		///<returns>%TRUE or %FALSE whether or not the position was set or not</returns>
-		bool SetPosition (Component component, gint x, gint y, CoordType coord_type);
+		bool SetPosition (gint x, gint y, CoordType coord_type);
 
 		///<summary>Set the size of the @component in terms of width and height.</summary>
 		///<returns>%TRUE or %FALSE whether the size was set or not</returns>
-		bool SetSize (Component component, gint width, gint height);
+		bool SetSize (gint width, gint height);
 
 		event Bounds-changed;
 	}
@@ -241,37 +241,37 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 	{
 		[Obsolete (""(Version: 2.9.4) If you need to track when an object gains or
 lose the focus, use the #AtkObject::state-change ""focused"" notification instead."")]
-		uint AddFocusHandler (Component component, FocusHandler handler);
+		uint AddFocusHandler (FocusHandler handler);
 
-		bool Contains (Component component, gint x, gint y, CoordType coord_type);
+		bool Contains (gint x, gint y, CoordType coord_type);
 
-		double GetAlpha (Component component);
+		double GetAlpha ();
 
-		void GetExtents (Component component, gint x, gint y, gint width, gint height, CoordType coord_type);
+		void GetExtents (gint x, gint y, gint width, gint height, CoordType coord_type);
 
-		Layer GetLayer (Component component);
+		Layer GetLayer ();
 
-		int GetMdiZorder (Component component);
-
-		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
-		void GetPosition (Component component, gint x, gint y, CoordType coord_type);
+		int GetMdiZorder ();
 
 		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
-		void GetSize (Component component, gint width, gint height);
+		void GetPosition (gint x, gint y, CoordType coord_type);
 
-		bool GrabFocus (Component component);
+		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
+		void GetSize (gint width, gint height);
 
-		Object RefAccessibleAtPoint (Component component, gint x, gint y, CoordType coord_type);
+		bool GrabFocus ();
+
+		Object RefAccessibleAtPoint (gint x, gint y, CoordType coord_type);
 
 		[Obsolete (""(Version: 2.9.4) If you need to track when an object gains or
 lose the focus, use the #AtkObject::state-change ""focused"" notification instead."")]
-		void RemoveFocusHandler (Component component, guint handler_id);
+		void RemoveFocusHandler (guint handler_id);
 
-		bool SetExtents (Component component, gint x, gint y, gint width, gint height, CoordType coord_type);
+		bool SetExtents (gint x, gint y, gint width, gint height, CoordType coord_type);
 
-		bool SetPosition (Component component, gint x, gint y, CoordType coord_type);
+		bool SetPosition (gint x, gint y, CoordType coord_type);
 
-		bool SetSize (Component component, gint width, gint height);
+		bool SetSize (gint width, gint height);
 
 		event Bounds-changed;
 	}

@@ -26,6 +26,7 @@ namespace Gir
 
 	public interface ICallable : IMemberGeneratable, IDocumented
 	{
+		bool IsInstanceCallable { get; }
 		string CIdentifier { get; }
 		string Modifiers { get; }
 		ReturnValue ReturnValue { get; }

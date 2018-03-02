@@ -49,7 +49,7 @@ namespace Gir
 		{
 			var retType = GetReturnCSharpType (callable, writer);
 
-			var (typesAndNames, names) = BuildParameters (callable.Parameters);
+			var (typesAndNames, names) = BuildParameters (callable.Parameters, appendInstanceParameters: true);
 			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} ({typesAndNames});");
 			writer.WriteLine ();
 		}
@@ -72,7 +72,7 @@ namespace Gir
 
 			// generate ReturnValue then Parameters
 			// FIXME, probably don't need the instance parameters?
-			var (typesAndNames, names) = BuildParameters (callable.Parameters);
+			var (typesAndNames, names) = BuildParameters (callable.Parameters, !callable.IsInstanceCallable);
 			writer.Write (string.Format ("{0} {1} ({2});", returnType, callable.Name.ToCSharp (), typesAndNames));
 			writer.WriteLine ();
 		}
@@ -89,7 +89,7 @@ namespace Gir
 					modifier = "protected ";
 			}
 
-			var (typesAndNames, names) = BuildParameters (callable.Parameters);
+			var (typesAndNames, names) = BuildParameters (callable.Parameters, !callable.IsInstanceCallable);
 
 			// FIXME, should check to see if it is deprecated
 			writer.WriteLine ($"{modifier}{parent.Name}({typesAndNames}) : base ({names})");
@@ -97,20 +97,25 @@ namespace Gir
 			writer.WriteLine ("}");
 		}
 
-		public static (string both, string names) BuildParameters (List<Parameter> parameters)
+		public static (string both, string names) BuildParameters (List<Parameter> parameters, bool appendInstanceParameters)
 		{
-			// FIXME, Arrays don't have a 'Type' set
-			// PERF: Use an array as the string[] overload of Join is way more efficient than the IEnumerable<string> one.
-			var typeAndName = new string [parameters.Count];
-			var parameterNames = new string [parameters.Count];
+			var typeAndName = new List<string> (parameters.Count);
+			var parameterNames = new List<string> (parameters.Count);
+
 			for (int i = 0; i < parameters.Count; ++i) {
 				var parameter = parameters [i];
-				typeAndName [i] = parameter.Type?.Name + " " + parameter.Name;
-				parameterNames [i] = parameter.Name;
+				if (!appendInstanceParameters && parameter is InstanceParameter) {
+					continue;
+				}
+
+				// FIXME, Arrays don't have a 'Type' set
+				typeAndName.Add(parameter.Type?.Name + " " + parameter.Name);
+				parameterNames.Add(parameter.Name);
 			}
 
-			string parameterString = string.Join (", ", typeAndName);
-			string baseParams = string.Join (", ", parameterNames);
+			// PERF: Use an array as the string[] overload of Join is way more efficient than the IEnumerable<string> one.
+			string parameterString = string.Join (", ", typeAndName.ToArray ());
+			string baseParams = string.Join (", ", parameterNames.ToArray ());
 
 			return (parameterString, baseParams);
 		}

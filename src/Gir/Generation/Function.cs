@@ -11,5 +11,6 @@ namespace Gir
 		}
 
 		public bool NewlineAfterGeneration (GenerationOptions opts) => true;
+		public bool IsInstanceCallable => false;
 	}
 }

@@ -14,5 +14,7 @@ namespace Gir
 		{
 			return true;
 		}
+
+		public bool IsInstanceCallable => false;
 	}
 }
