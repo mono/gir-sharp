@@ -33,7 +33,7 @@ namespace Gir.Tests
 	///</summary>
 	public class BufferedOutputStream : Seekable
 	{
-		static extern OutputStream g_buffered_output_stream_new PARAMS
+		static extern OutputStream g_buffered_output_stream_new (OutputStream base_stream)
 
 		///<summary>Creates a new buffered output stream for a base stream.</summary>
 		///<returns>a #GOutputStream for the given @base_stream.</returns>
@@ -41,7 +41,7 @@ namespace Gir.Tests
 		{
 		}
 
-		static extern OutputStream g_buffered_output_stream_new_sized PARAMS
+		static extern OutputStream g_buffered_output_stream_new_sized (OutputStream base_stream, gsize size)
 
 		///<summary>Creates a new buffered output stream with a given buffer size.</summary>
 		///<returns>a #GOutputStream with an internal buffer set to @size.</returns>
@@ -53,7 +53,7 @@ namespace Gir.Tests
 
 		BufferedOutputStreamPrivate Priv;
 
-		static extern bool g_buffered_output_stream_get_auto_grow PARAMS
+		static extern bool g_buffered_output_stream_get_auto_grow (BufferedOutputStream stream)
 
 		///<summary>Checks if the buffer automatically grows as data is added.</summary>
 		///<returns>
@@ -62,13 +62,13 @@ namespace Gir.Tests
 		///</returns>
 		bool GetAutoGrow (BufferedOutputStream stream);
 
-		static extern UIntPtr g_buffered_output_stream_get_buffer_size PARAMS
+		static extern UIntPtr g_buffered_output_stream_get_buffer_size (BufferedOutputStream stream)
 
 		///<summary>Gets the size of the buffer in the @stream.</summary>
 		///<returns>the current size of the buffer.</returns>
 		UIntPtr GetBufferSize (BufferedOutputStream stream);
 
-		static extern void g_buffered_output_stream_set_auto_grow PARAMS
+		static extern void g_buffered_output_stream_set_auto_grow (BufferedOutputStream stream, gboolean auto_grow)
 
 		///<summary>
 		/// Sets whether or not the @stream's buffer should automatically grow.
@@ -78,7 +78,7 @@ namespace Gir.Tests
 		///</summary>
 		void SetAutoGrow (BufferedOutputStream stream, gboolean auto_grow);
 
-		static extern void g_buffered_output_stream_set_buffer_size PARAMS
+		static extern void g_buffered_output_stream_set_buffer_size (BufferedOutputStream stream, gsize size)
 
 		///<summary>Sets the size of the internal buffer to @size.</summary>
 		void SetBufferSize (BufferedOutputStream stream, gsize size);

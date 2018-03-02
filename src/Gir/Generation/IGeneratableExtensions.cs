@@ -49,7 +49,8 @@ namespace Gir
 		{
 			var retType = GetReturnCSharpType (callable, writer);
 
-			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} PARAMS");
+			var (typesAndNames, names) = BuildParameters (callable.Parameters);
+			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} ({typesAndNames})");
 			writer.WriteLine ();
 		}
 
@@ -72,8 +73,8 @@ namespace Gir
 			// generate ReturnValue then Parameters
 			// FIXME, probably don't need the instance parameters?
 			var (typesAndNames, names) = BuildParameters (callable.Parameters);
-			writer.Write(string.Format("{0} {1} ({2});", returnType, callable.Name.ToCSharp (), typesAndNames));
-			writer.WriteLine();
+			writer.Write (string.Format ("{0} {1} ({2});", returnType, callable.Name.ToCSharp (), typesAndNames));
+			writer.WriteLine ();
 		}
 
 		public static void GenerateConstructor (this ICallable callable, IGeneratable parent, IndentWriter writer)

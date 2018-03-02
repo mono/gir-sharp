@@ -12,7 +12,6 @@ namespace Gir.Tests
 			// Test is incomplete, as record is not fully generated atm.
 			var result = GenerateType (GLib, "ByteArray");
 
-
 			// Need to map pointers at symbol level.
 			Assert.AreEqual (@"namespace GLib
 {
@@ -28,7 +27,7 @@ namespace Gir.Tests
 		///<summary>the number of elements in the #GByteArray</summary>
 		uint Len;
 
-		static extern void g_byte_array_append PARAMS
+		static extern void g_byte_array_append ( array, guint8 data, guint len)
 
 		///<summary>
 		/// Adds the given bytes to the end of the #GByteArray.
@@ -37,7 +36,7 @@ namespace Gir.Tests
 		///<returns>the #GByteArray</returns>
 		static void Append ( array, guint8 data, guint len);
 
-		static extern byte g_byte_array_free PARAMS
+		static extern byte g_byte_array_free ( array, gboolean free_segment)
 
 		///<summary>
 		/// Frees the memory allocated by the #GByteArray. If @free_segment is
@@ -51,7 +50,7 @@ namespace Gir.Tests
 		///</returns>
 		static byte Free ( array, gboolean free_segment);
 
-		static extern Bytes g_byte_array_free_to_bytes PARAMS
+		static extern Bytes g_byte_array_free_to_bytes ( array)
 
 		///<summary>
 		/// Transfers the data from the #GByteArray into a new immutable #GBytes.
@@ -69,13 +68,13 @@ namespace Gir.Tests
 		///</returns>
 		static Bytes FreeToBytes ( array);
 
-		static extern void g_byte_array_new PARAMS
+		static extern void g_byte_array_new ()
 
 		///<summary>Creates a new #GByteArray with a reference count of 1.</summary>
 		///<returns>the new #GByteArray</returns>
 		static void New ();
 
-		static extern void g_byte_array_new_take PARAMS
+		static extern void g_byte_array_new_take ( data, gsize len)
 
 		///<summary>
 		/// Create byte array containing the data. The data will be owned by the array
@@ -84,7 +83,7 @@ namespace Gir.Tests
 		///<returns>a new #GByteArray</returns>
 		static void NewTake ( data, gsize len);
 
-		static extern void g_byte_array_prepend PARAMS
+		static extern void g_byte_array_prepend ( array, guint8 data, guint len)
 
 		///<summary>
 		/// Adds the given data to the start of the #GByteArray.
@@ -93,7 +92,7 @@ namespace Gir.Tests
 		///<returns>the #GByteArray</returns>
 		static void Prepend ( array, guint8 data, guint len);
 
-		static extern void g_byte_array_ref PARAMS
+		static extern void g_byte_array_ref ( array)
 
 		///<summary>
 		/// Atomically increments the reference count of @array by one.
@@ -102,7 +101,7 @@ namespace Gir.Tests
 		///<returns>The passed in #GByteArray</returns>
 		static void Ref ( array);
 
-		static extern void g_byte_array_remove_index PARAMS
+		static extern void g_byte_array_remove_index ( array, guint index_)
 
 		///<summary>
 		/// Removes the byte at the given index from a #GByteArray.
@@ -111,7 +110,7 @@ namespace Gir.Tests
 		///<returns>the #GByteArray</returns>
 		static void RemoveIndex ( array, guint index_);
 
-		static extern void g_byte_array_remove_index_fast PARAMS
+		static extern void g_byte_array_remove_index_fast ( array, guint index_)
 
 		///<summary>
 		/// Removes the byte at the given index from a #GByteArray. The last
@@ -122,7 +121,7 @@ namespace Gir.Tests
 		///<returns>the #GByteArray</returns>
 		static void RemoveIndexFast ( array, guint index_);
 
-		static extern void g_byte_array_remove_range PARAMS
+		static extern void g_byte_array_remove_range ( array, guint index_, guint length)
 
 		///<summary>
 		/// Removes the given number of bytes starting at the given index from a
@@ -131,13 +130,13 @@ namespace Gir.Tests
 		///<returns>the #GByteArray</returns>
 		static void RemoveRange ( array, guint index_, guint length);
 
-		static extern void g_byte_array_set_size PARAMS
+		static extern void g_byte_array_set_size ( array, guint length)
 
 		///<summary>Sets the size of the #GByteArray, expanding it if necessary.</summary>
 		///<returns>the #GByteArray</returns>
 		static void SetSize ( array, guint length);
 
-		static extern void g_byte_array_sized_new PARAMS
+		static extern void g_byte_array_sized_new (guint reserved_size)
 
 		///<summary>
 		/// Creates a new #GByteArray with @reserved_size bytes preallocated.
@@ -148,7 +147,7 @@ namespace Gir.Tests
 		///<returns>the new #GByteArray</returns>
 		static void SizedNew (guint reserved_size);
 
-		static extern void g_byte_array_sort PARAMS
+		static extern void g_byte_array_sort ( array, CompareFunc compare_func)
 
 		///<summary>
 		/// Sorts a byte array, using @compare_func which should be a
@@ -164,7 +163,7 @@ namespace Gir.Tests
 		///</summary>
 		static void Sort ( array, CompareFunc compare_func);
 
-		static extern void g_byte_array_sort_with_data PARAMS
+		static extern void g_byte_array_sort_with_data ( array, CompareDataFunc compare_func, gpointer user_data)
 
 		///<summary>
 		/// Like g_byte_array_sort(), but the comparison function takes an extra
@@ -172,7 +171,7 @@ namespace Gir.Tests
 		///</summary>
 		static void SortWithData ( array, CompareDataFunc compare_func, gpointer user_data);
 
-		static extern void g_byte_array_unref PARAMS
+		static extern void g_byte_array_unref ( array)
 
 		///<summary>
 		/// Atomically decrements the reference count of @array by one. If the
