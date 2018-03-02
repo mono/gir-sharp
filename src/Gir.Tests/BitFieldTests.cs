@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-using System.Text;
-
+﻿
 using NUnit.Framework;
 
 namespace Gir.Tests
@@ -10,10 +7,10 @@ namespace Gir.Tests
 	public class BitFieldTests : GenerationTestBase
 	{
 		[Test]
-		public void GenerateDocumentationWhenCompatFalse()
+		public void GenerateDocumentationWhenCompatFalse ()
 		{
-			var result = GenerateType(Pango, "FontMask");
-			Assert.AreEqual(@"namespace Pango
+			var result = GenerateType (Pango, "FontMask");
+			Assert.AreEqual (@"namespace Pango
 {
 	///<summary>
 	/// The bits in a #PangoFontMask correspond to fields in a
@@ -48,11 +45,11 @@ namespace Gir.Tests
 		}
 
 		[Test]
-		public void GenerateNoDocumentationWhenCompatTrue()
+		public void GenerateNoDocumentationWhenCompatTrue ()
 		{
-			var result = GenerateType(Pango, "FontMask", compat: true);
+			var result = GenerateType (Pango, "FontMask", compat: true);
 
-			Assert.AreEqual(@"namespace Pango
+			Assert.AreEqual (@"namespace Pango
 {
 	[Flags]
 	public enum FontMask

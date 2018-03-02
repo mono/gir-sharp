@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 using NUnit.Framework;
 
 namespace Gir.Tests
@@ -8,13 +7,13 @@ namespace Gir.Tests
 	public class InterfaceTests : GenerationTestBase
 	{
 		[Test]
-		public void TestClassIsGenerated()
+		public void TestClassIsGenerated ()
 		{
 			// Test is incomplete, as record is not fully generated atm.
-			var result = GenerateType(Gio2, "Seekable");
+			var result = GenerateType (Gio2, "Seekable");
 
 			// Need to map pointers at symbol level.
-			Assert.AreEqual(@"namespace Gio
+			Assert.AreEqual (@"namespace Gio
 {
 	///<summary>
 	/// #GSeekable is implemented by streams (implementations of

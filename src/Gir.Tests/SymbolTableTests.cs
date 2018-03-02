@@ -10,27 +10,27 @@ namespace Gir.Tests
 		[Test]
 		public void TestAliasMapping ()
 		{
-			var repo = ParseGirFile(GLib, out var mainRepository);
-			var opts = GetOptions(repo, mainRepository);
+			var repo = ParseGirFile (GLib, out var mainRepository);
+			var opts = GetOptions (repo, mainRepository);
 
-			Assert.AreEqual(opts.SymbolTable["guint8"], opts.SymbolTable["GDateDay"]);
+			Assert.AreEqual (opts.SymbolTable ["guint8"], opts.SymbolTable ["GDateDay"]);
 		}
 
-		[TestCase(Gdk3, 2)]
-		[TestCase(GLib, 0)]
-		[TestCase(Gtk3, 2)]
-		[TestCase(Pango, 2)]
-		public void TestSymbolTableErrorsTracker(string girFile, int errorCount)
+		[TestCase (Gdk3, 2)]
+		[TestCase (GLib, 0)]
+		[TestCase (Gtk3, 2)]
+		[TestCase (Pango, 2)]
+		public void TestSymbolTableErrorsTracker (string girFile, int errorCount)
 		{
-			var repo = ParseGirFile(girFile, out var mainRepository);
-			var opts = GetOptions(repo, mainRepository);
+			var repo = ParseGirFile (girFile, out var mainRepository);
+			var opts = GetOptions (repo, mainRepository);
 
 			var stats = opts.Statistics.Errors.ToArray ();
 
 			// FUTURE: This should be 0.
-			Assert.AreEqual(errorCount, stats.Length);
+			Assert.AreEqual (errorCount, stats.Length);
 			foreach (var error in stats) {
-				Console.WriteLine(error.Message);
+				Console.WriteLine (error.Message);
 			}
 		}
 
@@ -40,29 +40,29 @@ namespace Gir.Tests
 			foreach (var tpl in ParseAllGirFiles ()) {
 				var repo = tpl.Item2;
 				var mainRepository = tpl.Item1;
-				
-				var opts = GetOptions(repo, mainRepository);
 
-				Assert.AreEqual(0, opts.SymbolTable.OfType<Alias>().Count());
+				var opts = GetOptions (repo, mainRepository);
+
+				Assert.AreEqual (0, opts.SymbolTable.OfType<Alias> ().Count ());
 			}
 		}
 
 		[Test]
 		public void VoidPointerWorks ()
 		{
-			var repo = ParseGirFile(GLib, out var mainRepository);
-			var opts = GetOptions(repo, mainRepository);
+			var repo = ParseGirFile (GLib, out var mainRepository);
+			var opts = GetOptions (repo, mainRepository);
 
-			Assert.AreEqual("gpointer", opts.SymbolTable["void*"].CType);
+			Assert.AreEqual ("gpointer", opts.SymbolTable ["void*"].CType);
 		}
-		
+
 		[Test]
 		public void CanResolveIncludedFiles ()
 		{
-			var repo = ParseGirFile(Gtk3, out var mainRepository);
-			var opts = GetOptions(repo, mainRepository);
+			var repo = ParseGirFile (Gtk3, out var mainRepository);
+			var opts = GetOptions (repo, mainRepository);
 
-			Assert.NotNull(opts.SymbolTable["GdkPixbufError"]);
+			Assert.NotNull (opts.SymbolTable ["GdkPixbufError"]);
 		}
 	}
 }

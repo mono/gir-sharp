@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 using NUnit.Framework;
 
 namespace Gir.Tests
@@ -8,14 +7,14 @@ namespace Gir.Tests
 	public class ClassTests : GenerationTestBase
 	{
 		[Test]
-		public void TestClassIsGenerated()
+		public void TestClassIsGenerated ()
 		{
 			// Test is incomplete, as record is not fully generated atm.
-			var result = GenerateType(Gio2, "BufferedOutputStream");
+			var result = GenerateType (Gio2, "BufferedOutputStream");
 
 
 			// Need to map pointers at symbol level.
-			Assert.AreEqual(@"namespace Gio
+			Assert.AreEqual (@"namespace Gio
 {
 	///<summary>
 	/// Buffered output stream implements #GFilterOutputStream and provides
