@@ -50,9 +50,9 @@ namespace Gir.Tests
 		{
 		}
 
-		FilterOutputStream parent_instance;
+		FilterOutputStream ParentInstance;
 
-		BufferedOutputStreamPrivate priv;
+		BufferedOutputStreamPrivate Priv;
 
 		static extern bool g_buffered_output_stream_get_auto_grow PARAMS
 

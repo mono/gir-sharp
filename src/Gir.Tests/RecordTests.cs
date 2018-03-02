@@ -23,10 +23,10 @@ namespace Gir.Tests
 		/// a pointer to the element data. The data may be moved as
 		///     elements are added to the #GByteArray
 		///</summary>
-		byte data;
+		byte Data;
 
 		///<summary>the number of elements in the #GByteArray</summary>
-		uint len;
+		uint Len;
 
 		static extern void g_byte_array_append PARAMS
 

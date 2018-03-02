@@ -33,13 +33,13 @@ namespace Gir.Tests
 
 		///<summary>Tests if the stream supports the #GSeekableIface.</summary>
 		///<returns>%TRUE if @seekable can be seeked. %FALSE otherwise.</returns>
-		bool CanSeek PARAMS
+		public bool CanSeek PARAMS
 
 		static extern bool g_seekable_can_truncate PARAMS
 
 		///<summary>Tests if the stream can be truncated.</summary>
 		///<returns>%TRUE if the stream can be truncated, %FALSE otherwise.</returns>
-		bool CanTruncate PARAMS
+		public bool CanTruncate PARAMS
 
 		static extern bool g_seekable_seek PARAMS
 
@@ -64,13 +64,13 @@ namespace Gir.Tests
 		///     has occurred, this function will return %FALSE and set @error
 		///     appropriately if present.
 		///</returns>
-		bool Seek PARAMS
+		public bool Seek PARAMS
 
 		static extern long g_seekable_tell PARAMS
 
 		///<summary>Tells the current position within the stream.</summary>
 		///<returns>the offset from the beginning of the buffer.</returns>
-		long Tell PARAMS
+		public long Tell PARAMS
 
 		static extern bool g_seekable_truncate PARAMS
 
@@ -88,7 +88,7 @@ namespace Gir.Tests
 		///     has occurred, this function will return %FALSE and set @error
 		///     appropriately if present.
 		///</returns>
-		bool Truncate PARAMS
+		public bool Truncate PARAMS
 	}
 }
 ", result);
@@ -104,23 +104,23 @@ namespace Gir.Tests
 	{
 		static extern bool g_seekable_can_seek PARAMS
 
-		bool CanSeek PARAMS
+		public bool CanSeek PARAMS
 
 		static extern bool g_seekable_can_truncate PARAMS
 
-		bool CanTruncate PARAMS
+		public bool CanTruncate PARAMS
 
 		static extern bool g_seekable_seek PARAMS
 
-		bool Seek PARAMS
+		public bool Seek PARAMS
 
 		static extern long g_seekable_tell PARAMS
 
-		long Tell PARAMS
+		public long Tell PARAMS
 
 		static extern bool g_seekable_truncate PARAMS
 
-		bool Truncate PARAMS
+		public bool Truncate PARAMS
 	}
 }
 ", result);
@@ -157,7 +157,7 @@ namespace Gir.Tests
 		/// a handler id which can be used in atk_component_remove_focus_handler()
 		/// or zero if the handler was already added.
 		///</returns>
-		uint AddFocusHandler PARAMS
+		public uint AddFocusHandler PARAMS
 
 		static extern bool atk_component_contains PARAMS
 
@@ -172,7 +172,7 @@ namespace Gir.Tests
 		/// %TRUE or %FALSE indicating whether the specified point is within
 		/// the extent of the @component or not
 		///</returns>
-		bool Contains PARAMS
+		public bool Contains PARAMS
 
 		static extern double atk_component_get_alpha PARAMS
 
@@ -182,18 +182,18 @@ namespace Gir.Tests
 		/// (fully opaque).
 		///</summary>
 		///<returns>An alpha value from 0 to 1.0, inclusive.</returns>
-		double GetAlpha PARAMS
+		public double GetAlpha PARAMS
 
 		static extern void atk_component_get_extents PARAMS
 
 		///<summary>Gets the rectangle which gives the extent of the @component.</summary>
-		void GetExtents PARAMS
+		public void GetExtents PARAMS
 
 		static extern Layer atk_component_get_layer PARAMS
 
 		///<summary>Gets the layer of the component.</summary>
 		///<returns>an #AtkLayer which is the layer of the component</returns>
-		Layer GetLayer PARAMS
+		public Layer GetLayer PARAMS
 
 		static extern int atk_component_get_mdi_zorder PARAMS
 
@@ -206,7 +206,7 @@ namespace Gir.Tests
 		/// which the component is shown in relation to other components in the same
 		/// container.
 		///</returns>
-		int GetMdiZorder PARAMS
+		public int GetMdiZorder PARAMS
 
 		static extern void atk_component_get_position PARAMS
 
@@ -214,18 +214,18 @@ namespace Gir.Tests
 		/// Gets the position of @component in the form of
 		/// a point specifying @component's top-left corner.
 		///</summary>
-		void GetPosition PARAMS
+		public void GetPosition PARAMS
 
 		static extern void atk_component_get_size PARAMS
 
 		///<summary>Gets the size of the @component in terms of width and height.</summary>
-		void GetSize PARAMS
+		public void GetSize PARAMS
 
 		static extern bool atk_component_grab_focus PARAMS
 
 		///<summary>Grabs focus for this @component.</summary>
 		///<returns>%TRUE if successful, %FALSE otherwise.</returns>
-		bool GrabFocus PARAMS
+		public bool GrabFocus PARAMS
 
 		static extern Object atk_component_ref_accessible_at_point PARAMS
 
@@ -237,7 +237,7 @@ namespace Gir.Tests
 		/// a reference to the accessible
 		/// child, if one exists
 		///</returns>
-		Object RefAccessibleAtPoint PARAMS
+		public Object RefAccessibleAtPoint PARAMS
 
 		static extern void atk_component_remove_focus_handler PARAMS
 
@@ -246,25 +246,25 @@ namespace Gir.Tests
 		/// functions to be executed when this object receives focus events
 		/// (in or out).
 		///</summary>
-		void RemoveFocusHandler PARAMS
+		public void RemoveFocusHandler PARAMS
 
 		static extern bool atk_component_set_extents PARAMS
 
 		///<summary>Sets the extents of @component.</summary>
 		///<returns>%TRUE or %FALSE whether the extents were set or not</returns>
-		bool SetExtents PARAMS
+		public bool SetExtents PARAMS
 
 		static extern bool atk_component_set_position PARAMS
 
 		///<summary>Sets the postition of @component.</summary>
 		///<returns>%TRUE or %FALSE whether or not the position was set or not</returns>
-		bool SetPosition PARAMS
+		public bool SetPosition PARAMS
 
 		static extern bool atk_component_set_size PARAMS
 
 		///<summary>Set the size of the @component in terms of width and height.</summary>
 		///<returns>%TRUE or %FALSE whether the size was set or not</returns>
-		bool SetSize PARAMS
+		public bool SetSize PARAMS
 	}
 }
 ", result);

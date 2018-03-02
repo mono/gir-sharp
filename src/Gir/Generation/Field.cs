@@ -12,7 +12,7 @@ namespace Gir
 			// including the number of pointers.
 			// For now, generate normal info.
 
-			writer.WriteLine ($"{managedType.CSharpType} {Name};");
+			writer.WriteLine($"{managedType.CSharpType} {Name.ToCSharp ()};");
 		}
 
 		public bool NewlineAfterGeneration (GenerationOptions opts) => true;
