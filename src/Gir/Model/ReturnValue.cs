@@ -1,23 +1,22 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Gir
 {
 	public partial class ReturnValue : IDocumented
 	{
-		[XmlAttribute("nullable")]
+		[XmlAttribute ("nullable")]
 		public bool Nullable;
 
-		[XmlAttribute("transfer-ownership")]
+		[XmlAttribute ("transfer-ownership")]
 		public TransferOwnership TransferOwnership;
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("type")]
+		[XmlElement ("type")]
 		public Type Type;
 
-		[XmlElement("array")]
+		[XmlElement ("array")]
 		public Array Array;
 	}
 }

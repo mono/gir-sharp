@@ -1,44 +1,43 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Gir
 {
 	public partial class Property
 	{
-		[XmlAttribute("construct")]
+		[XmlAttribute ("construct")]
 		public bool Construct;
 
-		[XmlAttribute("construct-only")]
+		[XmlAttribute ("construct-only")]
 		public bool ConstructOnly;
 
-		[XmlAttribute("deprecated")]
+		[XmlAttribute ("deprecated")]
 		public bool Deprecated;
 
-		[XmlAttribute("deprecated-version")]
+		[XmlAttribute ("deprecated-version")]
 		public string DeprecatedVersion;
 
-		[XmlAttribute("introspectable")]
+		[XmlAttribute ("introspectable")]
 		public bool Introspectable;
 
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name;
 
-		[XmlAttribute("readable")]
+		[XmlAttribute ("readable")]
 		public bool Readable;
 
-		[XmlAttribute("transfer-ownership")]
+		[XmlAttribute ("transfer-ownership")]
 		public TransferOwnership TransferOwnership;
 
-		[XmlAttribute("version")]
+		[XmlAttribute ("version")]
 		public string Version;
 
-		[XmlAttribute("writable")]
+		[XmlAttribute ("writable")]
 		public bool Writable;
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("type")]
+		[XmlElement ("type")]
 		public Type Type;
 	}
 }

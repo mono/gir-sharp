@@ -1,11 +1,10 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Gir
 {
 	public partial class Implements
 	{
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name;
 	}
 }

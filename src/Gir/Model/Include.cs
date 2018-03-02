@@ -6,10 +6,10 @@ namespace Gir
 	[Serializable]
 	public partial class Include
 	{
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name { get; set; }
 
-		[XmlAttribute("version")]
+		[XmlAttribute ("version")]
 		public string Version { get; set; }
 
 		public string GirName => $"{Name}-{Version}.gir";

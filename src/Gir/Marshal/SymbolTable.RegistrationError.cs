@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 namespace Gir
 {
 	public partial class SymbolTable
@@ -8,12 +8,12 @@ namespace Gir
 		{
 			readonly Alias alias;
 
-			public AliasRegistrationError(Alias alias)
+			public AliasRegistrationError (Alias alias)
 			{
 				this.alias = alias;
 			}
 
-			public override string Message => string.Format("Alias {0} pointing to non-registered {1}, setting to 'void'", alias.CType, alias.Type.CType);
+			public override string Message => string.Format ("Alias {0} pointing to non-registered {1}, setting to 'void'", alias.CType, alias.Type.CType);
 
 			string DebuggerDisplay => $"{alias.CType} alias failure to {alias.Type.CType}";
 		}

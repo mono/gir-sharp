@@ -5,80 +5,76 @@ namespace Gir
 {
 	public partial class Class
 	{
-		[XmlAttribute("abstract")]
+		[XmlAttribute ("abstract")]
 		public bool Abstract;
 
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name { get; set; }
 
-		[XmlAttribute("parent")]
+		[XmlAttribute ("parent")]
 		public string Parent;
 
-		[XmlAttribute("version")]
+		[XmlAttribute ("version")]
 		public string Version;
 
-		[XmlAttribute("symbol-prefix", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute ("symbol-prefix", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CSymbolPrefix;
 
-		[XmlAttribute("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute ("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CType { get; set; }
 
-		[XmlAttribute("fundamental", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("fundamental", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public bool Fundamental;
 
-		[XmlAttribute("get-type", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("get-type", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibGetType;
 
-		[XmlAttribute("get-value-func", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("get-value-func", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibGetValueFunct;
 
-		[XmlAttribute("ref-func", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("ref-func", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibRefFunc;
 
-		[XmlAttribute("set-value-func", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("set-value-func", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibSetValueFunc;
 
-		[XmlAttribute("type-name", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("type-name", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibTypeName;
 
-		[XmlAttribute("type-struct", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("type-struct", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibTypeStruct;
 
-		[XmlAttribute("unref-func", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("unref-func", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibUnrefFunc;
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("implements")]
+		[XmlElement ("implements")]
 		public List<Implements> Implements;
 
-		[XmlElement("constructor")]
+		[XmlElement ("constructor")]
 		public List<Constructor> Constructors;
 
-		[XmlElement("field")]
+		[XmlElement ("field")]
 		public List<Field> Fields;
 
-		[XmlElement("property")]
+		[XmlElement ("property")]
 		public List<Property> Properties;
 
-		[XmlElement("union")]
+		[XmlElement ("union")]
 		public List<Union> Unions;
 
-		[XmlElement("method")]
+		[XmlElement ("method")]
 		public List<Method> Methods;
 
-		[XmlElement("virtual-method")]
+		[XmlElement ("virtual-method")]
 		public List<VirtualMethod> VirtualMethods;
 
-		[XmlElement("function")]
+		[XmlElement ("function")]
 		public List<Function> Functions;
 
-		[XmlElement("signal", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlElement ("signal", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public List<Signal> Signals;
-
-		public Class()
-		{
-		}
 	}
 }

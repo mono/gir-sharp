@@ -4,19 +4,19 @@ namespace Gir
 {
 	public partial class Member
 	{
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name { get; set; }
 
-		[XmlAttribute("value")]
+		[XmlAttribute ("value")]
 		public string Value;
 
-		[XmlAttribute("identifier", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute ("identifier", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CIdentifier;
 
-		[XmlAttribute("nick", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
+		[XmlAttribute ("nick", Namespace = "http://www.gtk.org/introspection/glib/1.0")]
 		public string GLibNick;
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 	}
 }

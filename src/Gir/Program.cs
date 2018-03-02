@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace Gir
 {
@@ -30,33 +29,33 @@ namespace Gir
 			}
 		}
 
-		public static int Main(string[] args)
+		public static int Main (string[] args)
 		{
 			if (args.Length < 1) {
-				Console.WriteLine("Usage: gir.exe <file.gir>");
+				Console.WriteLine ("Usage: gir.exe <file.gir>");
 				return 0;
 			}
 
-			var opt = new OptionSet();
+			var opt = new OptionSet ();
 			foreach (string arg in args)
-				ParseArg(opt, arg);
+				ParseArg (opt, arg);
 
-			opt.AllRepositories = Parser.Parse(args[0], opt.IncludeSearchDirectory, out opt.GenerationRepository);
+			opt.AllRepositories = Parser.Parse (args [0], opt.IncludeSearchDirectory, out opt.GenerationRepository);
 
 			//GenerationInfo gen_info = null;
 			//if (dir != "" || assembly_name != "" || glue_filename != "" || glue_includes != "" || gluelib_name != "")
 			//gen_info = new GenerationInfo(dir, custom_dir, assembly_name, glue_filename, glue_includes, gluelib_name);
 
-			var genOpts = new GenerationOptions(opt.OutputDirectory, opt.AllRepositories, opt.GenerationRepository, false);
+			var genOpts = new GenerationOptions (opt.OutputDirectory, opt.AllRepositories, opt.GenerationRepository, false);
 
-			if (!Directory.Exists(opt.OutputDirectory))
-				Directory.CreateDirectory(opt.OutputDirectory);
-			
+			if (!Directory.Exists (opt.OutputDirectory))
+				Directory.CreateDirectory (opt.OutputDirectory);
+
 			foreach (IGeneratable gen in opt.GenerationRepository.GetGeneratables ()) {
-				gen.Generate(genOpts);
+				gen.Generate (genOpts);
 			}
 
-			genOpts.Statistics.ReportStatistics();
+			genOpts.Statistics.ReportStatistics ();
 			return 0;
 		}
 
@@ -64,34 +63,34 @@ namespace Gir
 		const string customAssemblyNameArg = "--assembly-name=";
 		const string customIncludeDirArg = "--include-dir=";
 
-		static void ParseArg(OptionSet opt, string arg)
+		static void ParseArg (OptionSet opt, string arg)
 		{
-			if (arg.StartsWith(customOutputDir)) {
-				opt.OutputDirectory = arg.Substring(customOutputDir.Length);
+			if (arg.StartsWith (customOutputDir)) {
+				opt.OutputDirectory = arg.Substring (customOutputDir.Length);
 				return;
 			}
-			if (arg.StartsWith("--customdir=")) {
-				opt.custom_dir = arg.Substring(12);
+			if (arg.StartsWith ("--customdir=")) {
+				opt.custom_dir = arg.Substring (12);
 				return;
 			}
-			if (arg.StartsWith(customAssemblyNameArg)) {
-				opt.CustomGeneratedAssemblyName = arg.Substring(customAssemblyNameArg.Length);
+			if (arg.StartsWith (customAssemblyNameArg)) {
+				opt.CustomGeneratedAssemblyName = arg.Substring (customAssemblyNameArg.Length);
 				return;
 			}
-			if (arg.StartsWith("--glue-filename=")) {
-				opt.glue_filename = arg.Substring(16);
+			if (arg.StartsWith ("--glue-filename=")) {
+				opt.glue_filename = arg.Substring (16);
 				return;
 			}
-			if (arg.StartsWith("--glue-includes=")) {
-				opt.glue_includes = arg.Substring(16);
+			if (arg.StartsWith ("--glue-includes=")) {
+				opt.glue_includes = arg.Substring (16);
 				return;
 			}
-			if (arg.StartsWith("--gluelib-name=")) {
-				opt.gluelib_name = arg.Substring(15);
+			if (arg.StartsWith ("--gluelib-name=")) {
+				opt.gluelib_name = arg.Substring (15);
 				return;
 			}
-			if (arg.StartsWith(customIncludeDirArg)) {
-				opt.IncludeSearchDirectory = arg.Substring(customIncludeDirArg.Length);
+			if (arg.StartsWith (customIncludeDirArg)) {
+				opt.IncludeSearchDirectory = arg.Substring (customIncludeDirArg.Length);
 				return;
 			}
 		}

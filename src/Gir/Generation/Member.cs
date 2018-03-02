@@ -1,22 +1,22 @@
-﻿using System;
+﻿
 namespace Gir
 {
 	public partial class Member : IMemberGeneratable, IDocumented
 	{
-		public bool NewlineAfterGeneration(GenerationOptions opts) => opts.GenerateDocumentation;
+		public bool NewlineAfterGeneration (GenerationOptions opts) => opts.GenerateDocumentation;
 
-		public void Generate(IGeneratable parent, IndentWriter writer)
+		public void Generate (IGeneratable parent, IndentWriter writer)
 		{
 			string value = Value;
 			if (parent is IEnumFormatter formatter)
-				value = formatter.FormatValue(value);
+				value = formatter.FormatValue (value);
 
-			writer.WriteLine(Name.ToCSharp() + " = " + value + ",");
+			writer.WriteLine (Name.ToCSharp () + " = " + value + ",");
 		}
 	}
 
 	public interface IEnumFormatter
 	{
-		string FormatValue(string value);
+		string FormatValue (string value);
 	}
 }

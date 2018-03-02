@@ -7,20 +7,20 @@ namespace Gir
 {
 	public partial class SymbolTable : IEnumerable<ISymbol>
 	{
-		readonly Dictionary<string, ISymbol> typeMap = new Dictionary<string, ISymbol>();
+		readonly Dictionary<string, ISymbol> typeMap = new Dictionary<string, ISymbol> ();
 		Statistics statistics;
 
-		public SymbolTable(Statistics statistics, bool nativeWin64)
+		public SymbolTable (Statistics statistics, bool nativeWin64)
 		{
 			this.statistics = statistics;
 
-			RegisterBuiltIn(nativeWin64);
+			RegisterBuiltIn (nativeWin64);
 		}
 
 		public void AddTypes (IEnumerable<ISymbol> symbols)
 		{
 			foreach (var symbol in symbols)
-				AddType(symbol);
+				AddType (symbol);
 		}
 
 		public void AddType (ISymbol symbol)
@@ -37,8 +37,8 @@ namespace Gir
 			// </class>
 			if (symbol.CType == null) return;
 
-			typeMap[symbol.CType] = symbol;
-			statistics.RegisterType(symbol);
+			typeMap [symbol.CType] = symbol;
+			statistics.RegisterType (symbol);
 		}
 
 		const string constPrefix = "const ";
@@ -50,32 +50,33 @@ namespace Gir
 			}
 
 			// Look for the first pointer symbol
-			int end = type.IndexOf('*', start, type.Length - start);
+			int end = type.IndexOf ('*', start, type.Length - start);
 			if (end == -1) {
 				end = type.Length;
-			} else if (type.IndexOf ("void", start, StringComparison.Ordinal) == 0) {
+			}
+			else if (type.IndexOf ("void", start, StringComparison.Ordinal) == 0) {
 				// Special case in case of pointers for void*,
 				// otherwise we'll get void from the symbol table
 				return "gpointer";
 			}
 
-			return type.Substring(start, end - start);
+			return type.Substring (start, end - start);
 		}
 
-		public ISymbol this[string type] {
+		public ISymbol this [string type] {
 			get {
-				var actualType = TrimConstAndPointer(type);
+				var actualType = TrimConstAndPointer (type);
 
-				return typeMap[actualType];
+				return typeMap [actualType];
 			}
 		}
 
 		public void ProcessAliases ()
 		{
-			var copy = typeMap.ToDictionary(x => x.Key, x => x.Value);
+			var copy = typeMap.ToDictionary (x => x.Key, x => x.Value);
 			foreach (var kvp in copy) {
 				if (kvp.Value is Alias alias) {
-					typeMap[kvp.Key] = Dealias(alias);
+					typeMap [kvp.Key] = Dealias (alias);
 				}
 			}
 		}
@@ -84,23 +85,23 @@ namespace Gir
 		{
 			ISymbol target = original;
 			while (target is Alias alias) {
-				var toType = TrimConstAndPointer(alias.Type.CType);
-				if (!typeMap.TryGetValue(toType, out target)) {
-					statistics.RegisterError(new AliasRegistrationError(alias));
-					return this["void"];
+				var toType = TrimConstAndPointer (alias.Type.CType);
+				if (!typeMap.TryGetValue (toType, out target)) {
+					statistics.RegisterError (new AliasRegistrationError (alias));
+					return this ["void"];
 				}
 			}
 			return target;
 		}
 
-		public IEnumerator<ISymbol> GetEnumerator()
+		public IEnumerator<ISymbol> GetEnumerator ()
 		{
-			return typeMap.Values.GetEnumerator();
+			return typeMap.Values.GetEnumerator ();
 		}
 
-		IEnumerator IEnumerable.GetEnumerator()
+		IEnumerator IEnumerable.GetEnumerator ()
 		{
-			return GetEnumerator();
+			return GetEnumerator ();
 		}
 	}
 }

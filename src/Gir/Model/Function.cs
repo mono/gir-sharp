@@ -5,45 +5,45 @@ namespace Gir
 {
 	public partial class Function
 	{
-		[XmlAttribute("deprecated")]
+		[XmlAttribute ("deprecated")]
 		public bool Deprecated;
 
-		[XmlAttribute("deprecated-version")]
+		[XmlAttribute ("deprecated-version")]
 		public string DeprecatedVersion;
 
-		[XmlAttribute("introspectable")]
+		[XmlAttribute ("introspectable")]
 		public bool Introspectable;
 
-		[XmlAttribute("moved-to")]
+		[XmlAttribute ("moved-to")]
 		public string MovedTo;
 
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name { get; set; }
 
-		[XmlAttribute("shadowed-by")]
+		[XmlAttribute ("shadowed-by")]
 		public string ShadowedBy;
 
-		[XmlAttribute("shadows")]
+		[XmlAttribute ("shadows")]
 		public string Shadows;
 
-		[XmlAttribute("throws")]
+		[XmlAttribute ("throws")]
 		public bool Throws;
 
-		[XmlAttribute("version")]
+		[XmlAttribute ("version")]
 		public string Version;
 
-		[XmlAttribute("identifier", Namespace = "http://www.gtk.org/introspection/c/1.0")]
+		[XmlAttribute ("identifier", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CIdentifier { get; set; }
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("return-value")]
+		[XmlElement ("return-value")]
 		public ReturnValue ReturnValue { get; set; }
 
-		[XmlArray("parameters")]
-		[XmlArrayItem("parameter", Type = typeof(Parameter))]
-		[XmlArrayItem("instance-parameter", Type = typeof(InstanceParameter))]
+		[XmlArray ("parameters")]
+		[XmlArrayItem ("parameter", Type = typeof (Parameter))]
+		[XmlArrayItem ("instance-parameter", Type = typeof (InstanceParameter))]
 		public List<Parameter> Parameters { get; set; }
 	}
 }

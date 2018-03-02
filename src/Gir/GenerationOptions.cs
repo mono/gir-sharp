@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -8,7 +7,7 @@ namespace Gir
 	public sealed class GenerationOptions
 	{
 		public SymbolTable SymbolTable { get; }
-		public Statistics Statistics { get; } = new Statistics();
+		public Statistics Statistics { get; } = new Statistics ();
 
 		#region Generation information
 		public string DirectoryPath { get; }
@@ -31,16 +30,16 @@ namespace Gir
 
 		#endregion
 
-		public GenerationOptions(string dir, IEnumerable<Repository> allRepos, Repository repo, bool compat = false, Stream redirectStream = null, bool win64Longs = false)
+		public GenerationOptions (string dir, IEnumerable<Repository> allRepos, Repository repo, bool compat = false, Stream redirectStream = null, bool win64Longs = false)
 		{
 			DirectoryPath = dir;
 			Repository = repo;
 			this.compat = compat;
 			RedirectStream = redirectStream;
 
-			SymbolTable = new SymbolTable(Statistics, win64Longs);
-			SymbolTable.AddTypes(allRepos.SelectMany (x => x.GetSymbols ()));
-			SymbolTable.ProcessAliases();
+			SymbolTable = new SymbolTable (Statistics, win64Longs);
+			SymbolTable.AddTypes (allRepos.SelectMany (x => x.GetSymbols ()));
+			SymbolTable.ProcessAliases ();
 		}
 	}
 }

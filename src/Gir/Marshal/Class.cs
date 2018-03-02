@@ -5,6 +5,6 @@ namespace Gir
 	{
 		public string CSharpType => Name;
 
-		public string DefaultValue => throw new System.NotImplementedException();
+		public string DefaultValue => throw new System.NotImplementedException ();
 	}
 }

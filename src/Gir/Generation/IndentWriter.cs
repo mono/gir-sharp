@@ -12,22 +12,22 @@ namespace Gir
 
 		public static IndentWriter OpenWrite (string path, GenerationOptions opts)
 		{
-			var toStream = opts.RedirectStream ?? File.Open(path, FileMode.Create);
-			var sw = new StreamWriter(toStream);
+			var toStream = opts.RedirectStream ?? File.Open (path, FileMode.Create);
+			var sw = new StreamWriter (toStream);
 
-			return new IndentWriter(sw) {
+			return new IndentWriter (sw) {
 				Options = opts,
 			};
 		}
 
-		public IndentWriter(TextWriter tw)
+		public IndentWriter (TextWriter tw)
 		{
 			writer = tw;
 		}
 
 		public void Dispose ()
 		{
-			writer?.Dispose();
+			writer?.Dispose ();
 			writer = null;
 		}
 
@@ -36,62 +36,62 @@ namespace Gir
 			if (!Options.GenerateDocumentation)
 				return this;
 
-			var text = doc.Text.Split('\n');
+			var text = doc.Text.Split ('\n');
 			if (text.Length == 1) {
-				WriteIndent();
-				return Write($"///<{tag}>").Write(text[0]).Write($"</{tag}>").WriteLine ();
+				WriteIndent ();
+				return Write ($"///<{tag}>").Write (text [0]).Write ($"</{tag}>").WriteLine ();
 			}
 
-			WriteLine($"///<{tag}>");
+			WriteLine ($"///<{tag}>");
 			foreach (var line in text)
-				WriteLine("/// " + line);
-			return WriteLine($"///</{tag}>");
+				WriteLine ("/// " + line);
+			return WriteLine ($"///</{tag}>");
 		}
 
-		public IndentWriter WriteIndent()
+		public IndentWriter WriteIndent ()
 		{
-			writer.Write(new String('\t', indent));
+			writer.Write (new string ('\t', indent));
 			return this;
 		}
 
-		public IndentWriter Write(string s)
+		public IndentWriter Write (string s)
 		{
-			writer.Write(s);
+			writer.Write (s);
 			return this;
 		}
 
-		public IndentWriter WriteLine()
+		public IndentWriter WriteLine ()
 		{
-			writer.WriteLine();
+			writer.WriteLine ();
 			return this;
 		}
 
-		public IndentWriter WriteLine(string s)
+		public IndentWriter WriteLine (string s)
 		{
-			return WriteIndent().Write(s).WriteLine ();
+			return WriteIndent ().Write (s).WriteLine ();
 		}
 
-		public IndentWriter WriteLineAndIndent(string s)
+		public IndentWriter WriteLineAndIndent (string s)
 		{
-			WriteLine(s);
-			Indent();
+			WriteLine (s);
+			Indent ();
 			return this;
 		}
 
-		public IndentWriter WriteLineAndUnindent(string s)
+		public IndentWriter WriteLineAndUnindent (string s)
 		{
-			Unindent();
-			WriteLine(s);
+			Unindent ();
+			WriteLine (s);
 			return this;
 		}
 
-		public IDisposable Indent()
+		public IDisposable Indent ()
 		{
 			indent++;
-			return new IndentDisposable(this);
+			return new IndentDisposable (this);
 		}
 
-		public void Unindent()
+		public void Unindent ()
 		{
 			indent--;
 		}

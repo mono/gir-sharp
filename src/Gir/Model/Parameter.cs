@@ -1,52 +1,50 @@
-﻿using System;
-using System.Runtime.ConstrainedExecution;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Gir
 {
-	[XmlInclude(typeof(InstanceParameter))]
+	[XmlInclude (typeof (InstanceParameter))]
 	public partial class Parameter
 	{
-		[XmlAttribute("allow-none")]
+		[XmlAttribute ("allow-none")]
 		public bool AllowNone;
 
-		[XmlAttribute("caller-allocates")]
+		[XmlAttribute ("caller-allocates")]
 		public bool CallerAllocates;
 
-		[XmlAttribute("closure")]
+		[XmlAttribute ("closure")]
 		public int Closure;
 
-		[XmlAttribute("destroy")]
+		[XmlAttribute ("destroy")]
 		public int Destroy;
 
-		[XmlAttribute("direction")]
+		[XmlAttribute ("direction")]
 		public Direction Direction;
 
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name;
 
-		[XmlAttribute("nullable")]
+		[XmlAttribute ("nullable")]
 		public bool Nullable;
 
-		[XmlAttribute("optional")]
+		[XmlAttribute ("optional")]
 		public bool Optional;
 
-		[XmlAttribute("skip")]
+		[XmlAttribute ("skip")]
 		public bool Skip;
 
-		[XmlAttribute("transfer-ownership")]
+		[XmlAttribute ("transfer-ownership")]
 		public TransferOwnership TransferOwnership;
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("type")]
+		[XmlElement ("type")]
 		public Type Type;
 
-		[XmlElement("varargs")]
+		[XmlElement ("varargs")]
 		public Varargs Varargs;
 
-		public bool IsPointer => Type.CType.EndsWith("*");
+		public bool IsPointer => Type.CType.EndsWith ("*", System.StringComparison.Ordinal);
 
 		public bool IsArray => Type.Array != null;
 	}

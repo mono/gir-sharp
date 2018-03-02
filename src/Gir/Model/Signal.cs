@@ -5,45 +5,45 @@ namespace Gir
 {
 	public partial class Signal
 	{
-		[XmlAttribute("action")]
+		[XmlAttribute ("action")]
 		public string Action;
 
-		[XmlAttribute("deprecated")]
+		[XmlAttribute ("deprecated")]
 		public bool Deprecated;
 
-		[XmlAttribute("deprecated-version")]
+		[XmlAttribute ("deprecated-version")]
 		public string DeprecatedVersion;
 
-		[XmlAttribute("detailed")]
+		[XmlAttribute ("detailed")]
 		public bool Detailed;
 
-		[XmlAttribute("introspectable")]
+		[XmlAttribute ("introspectable")]
 		public bool Introspectable;
 
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name;
 
-		[XmlAttribute("no-hooks")]
+		[XmlAttribute ("no-hooks")]
 		public bool NoHooks;
 
-		[XmlAttribute("no-recurse")]
+		[XmlAttribute ("no-recurse")]
 		public bool NoRecurse;
 
-		[XmlAttribute("version")]
+		[XmlAttribute ("version")]
 		public string Version;
 
-		[XmlAttribute("when")]
+		[XmlAttribute ("when")]
 		public string When;
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("return-value")]
+		[XmlElement ("return-value")]
 		public ReturnValue ReturnValue { get; set; }
 
-		[XmlArray("parameters")]
-		[XmlArrayItem("parameter", Type = typeof(Parameter))]
-		[XmlArrayItem("instance-parameter", Type = typeof(InstanceParameter))]
+		[XmlArray ("parameters")]
+		[XmlArrayItem ("parameter", Type = typeof (Parameter))]
+		[XmlArrayItem ("instance-parameter", Type = typeof (InstanceParameter))]
 		public List<Parameter> Parameters { get; set; }
 
 	}

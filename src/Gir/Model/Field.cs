@@ -1,32 +1,31 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Gir
 {
 	public partial class Field
 	{
-		[XmlAttribute("bits")]
+		[XmlAttribute ("bits")]
 		public int Bits;
 
-		[XmlAttribute("introspectable")]
+		[XmlAttribute ("introspectable")]
 		public bool Introspectable;
 
-		[XmlAttribute("name")]
+		[XmlAttribute ("name")]
 		public string Name { get; set; }
 
-		[XmlAttribute("private")]
+		[XmlAttribute ("private")]
 		public bool Private;
 
-		[XmlAttribute("readable")]
+		[XmlAttribute ("readable")]
 		public bool Readable;
 
-		[XmlAttribute("writable")]
+		[XmlAttribute ("writable")]
 		public bool Writable;
 
-		[XmlElement("doc")]
+		[XmlElement ("doc")]
 		public Documentation Doc { get; set; }
 
-		[XmlElement("type")]
+		[XmlElement ("type")]
 		public Type Type { get; set; }
 	}
 }

@@ -4,13 +4,13 @@ namespace Gir
 {
 	public enum TransferOwnership
 	{
-		[XmlEnum("full")]
+		[XmlEnum ("full")]
 		Full,
-		[XmlEnum("none")]
+		[XmlEnum ("none")]
 		None,
-		[XmlEnum("container")]
+		[XmlEnum ("container")]
 		Container,
-		[XmlEnum("floating")]
+		[XmlEnum ("floating")]
 		Floating
 	}
 }
