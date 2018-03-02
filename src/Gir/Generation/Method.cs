@@ -8,13 +8,10 @@ namespace Gir
 
 		public void Generate (IGeneratable parent, IndentWriter writer)
 		{
-			if (parent is Interface)
-				Modifiers = "public";
-
 			if (Deprecated)
 				writer.WriteLine ($"[Obsolete (\"(Version: {DeprecatedVersion}) {DocDeprecated.Text}\")]");
 
-			this.GenerateCallableDefinition (writer);
+			this.GenerateCallableDefinition (parent, writer);
 		}
 
 		public bool NewlineAfterGeneration (GenerationOptions opts) => true;

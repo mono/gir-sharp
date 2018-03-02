@@ -7,7 +7,7 @@ namespace Gir
 
 		public void Generate (IGeneratable parent, IndentWriter writer)
 		{
-			this.GenerateCallableDefinition (writer);
+			this.GenerateCallableDefinition (parent, writer);
 		}
 
 		public bool NewlineAfterGeneration (GenerationOptions opts) => true;

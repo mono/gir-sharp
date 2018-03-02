@@ -30,7 +30,7 @@ namespace Gir
 				var member = array [i];
 
 				// Generate pinvoke signature for a method
-				if (member is ICallable callable)
+				if (!(gen is Interface) && member is ICallable callable)
 					callable.GenerateImport (gen, writer);
 
 				// Generate documentation is a member supports it.
@@ -60,12 +60,12 @@ namespace Gir
 			return callable.ReturnValue?.Type?.GetSymbol (writer.Options).CSharpType ?? "void";
 		}
 
-		public static void GenerateCallableDefinition (this ICallable callable, IndentWriter writer)
+		public static void GenerateCallableDefinition (this ICallable callable, IGeneratable gen, IndentWriter writer)
 		{
 			callable.ReturnValue.GenerateDocumentation (writer);
 
 			writer.WriteIndent ();
-			if (!string.IsNullOrEmpty (callable.Modifiers))
+			if (!string.IsNullOrEmpty (callable.Modifiers) && !(gen is Interface))
 				writer.Write (callable.Modifiers + " ");
 
 			var returnType = callable.GetReturnCSharpType (writer);
