@@ -12,7 +12,6 @@ namespace Gir.Tests
 			// Test is incomplete, as record is not fully generated atm.
 			var result = GenerateType (Gio2, "BufferedOutputStream");
 
-
 			// Need to map pointers at symbol level.
 			Assert.AreEqual (@"namespace Gio
 {
@@ -61,13 +60,13 @@ namespace Gir.Tests
 		/// %TRUE if the @stream's buffer automatically grows,
 		/// %FALSE otherwise.
 		///</returns>
-		bool GetAutoGrow PARAMS
+		bool GetAutoGrow (BufferedOutputStream stream);
 
 		static extern UIntPtr g_buffered_output_stream_get_buffer_size PARAMS
 
 		///<summary>Gets the size of the buffer in the @stream.</summary>
 		///<returns>the current size of the buffer.</returns>
-		UIntPtr GetBufferSize PARAMS
+		UIntPtr GetBufferSize (BufferedOutputStream stream);
 
 		static extern void g_buffered_output_stream_set_auto_grow PARAMS
 
@@ -77,12 +76,12 @@ namespace Gir.Tests
 		/// larger, and you must manually flush the buffer to actually write out
 		/// the data to the underlying stream.
 		///</summary>
-		void SetAutoGrow PARAMS
+		void SetAutoGrow (BufferedOutputStream stream, gboolean auto_grow);
 
 		static extern void g_buffered_output_stream_set_buffer_size PARAMS
 
 		///<summary>Sets the size of the internal buffer to @size.</summary>
-		void SetBufferSize PARAMS
+		void SetBufferSize (BufferedOutputStream stream, gsize size);
 	}
 }
 ", result);

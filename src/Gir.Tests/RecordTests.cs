@@ -35,7 +35,7 @@ namespace Gir.Tests
 		/// The array will grow in size automatically if necessary.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void Append PARAMS
+		static void Append ( array, guint8 data, guint len);
 
 		static extern byte g_byte_array_free PARAMS
 
@@ -49,7 +49,7 @@ namespace Gir.Tests
 		/// the element data if @free_segment is %FALSE, otherwise
 		///          %NULL.  The element data should be freed using g_free().
 		///</returns>
-		static byte Free PARAMS
+		static byte Free ( array, gboolean free_segment);
 
 		static extern Bytes g_byte_array_free_to_bytes PARAMS
 
@@ -67,13 +67,13 @@ namespace Gir.Tests
 		/// a new immutable #GBytes representing same
 		///     byte data that was in the array
 		///</returns>
-		static Bytes FreeToBytes PARAMS
+		static Bytes FreeToBytes ( array);
 
 		static extern void g_byte_array_new PARAMS
 
 		///<summary>Creates a new #GByteArray with a reference count of 1.</summary>
 		///<returns>the new #GByteArray</returns>
-		static void New PARAMS
+		static void New ();
 
 		static extern void g_byte_array_new_take PARAMS
 
@@ -82,7 +82,7 @@ namespace Gir.Tests
 		/// and will be freed with g_free(), i.e. it could be allocated using g_strdup().
 		///</summary>
 		///<returns>a new #GByteArray</returns>
-		static void NewTake PARAMS
+		static void NewTake ( data, gsize len);
 
 		static extern void g_byte_array_prepend PARAMS
 
@@ -91,7 +91,7 @@ namespace Gir.Tests
 		/// The array will grow in size automatically if necessary.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void Prepend PARAMS
+		static void Prepend ( array, guint8 data, guint len);
 
 		static extern void g_byte_array_ref PARAMS
 
@@ -100,7 +100,7 @@ namespace Gir.Tests
 		/// This function is thread-safe and may be called from any thread.
 		///</summary>
 		///<returns>The passed in #GByteArray</returns>
-		static void Ref PARAMS
+		static void Ref ( array);
 
 		static extern void g_byte_array_remove_index PARAMS
 
@@ -109,7 +109,7 @@ namespace Gir.Tests
 		/// The following bytes are moved down one place.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void RemoveIndex PARAMS
+		static void RemoveIndex ( array, guint index_);
 
 		static extern void g_byte_array_remove_index_fast PARAMS
 
@@ -120,7 +120,7 @@ namespace Gir.Tests
 		/// than g_byte_array_remove_index().
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void RemoveIndexFast PARAMS
+		static void RemoveIndexFast ( array, guint index_);
 
 		static extern void g_byte_array_remove_range PARAMS
 
@@ -129,13 +129,13 @@ namespace Gir.Tests
 		/// #GByteArray.  The following elements are moved to close the gap.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		static void RemoveRange PARAMS
+		static void RemoveRange ( array, guint index_, guint length);
 
 		static extern void g_byte_array_set_size PARAMS
 
 		///<summary>Sets the size of the #GByteArray, expanding it if necessary.</summary>
 		///<returns>the #GByteArray</returns>
-		static void SetSize PARAMS
+		static void SetSize ( array, guint length);
 
 		static extern void g_byte_array_sized_new PARAMS
 
@@ -146,7 +146,7 @@ namespace Gir.Tests
 		/// 0.
 		///</summary>
 		///<returns>the new #GByteArray</returns>
-		static void SizedNew PARAMS
+		static void SizedNew (guint reserved_size);
 
 		static extern void g_byte_array_sort PARAMS
 
@@ -162,7 +162,7 @@ namespace Gir.Tests
 		/// if two elements would otherwise compare equal, compares them by
 		/// their addresses.
 		///</summary>
-		static void Sort PARAMS
+		static void Sort ( array, CompareFunc compare_func);
 
 		static extern void g_byte_array_sort_with_data PARAMS
 
@@ -170,7 +170,7 @@ namespace Gir.Tests
 		/// Like g_byte_array_sort(), but the comparison function takes an extra
 		/// user data argument.
 		///</summary>
-		static void SortWithData PARAMS
+		static void SortWithData ( array, CompareDataFunc compare_func, gpointer user_data);
 
 		static extern void g_byte_array_unref PARAMS
 
@@ -180,7 +180,7 @@ namespace Gir.Tests
 		/// released. This function is thread-safe and may be called from any
 		/// thread.
 		///</summary>
-		static void Unref PARAMS
+		static void Unref ( array);
 	}
 }
 ", result);

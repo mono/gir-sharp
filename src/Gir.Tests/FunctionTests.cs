@@ -19,7 +19,7 @@ namespace Gir.Tests
 /// The array will grow in size automatically if necessary.
 ///</summary>
 ///<returns>the #GByteArray</returns>
-static void Append PARAMS
+static void Append ( array, guint8 data, guint len);
 ", result);
 		}
 	}

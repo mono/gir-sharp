@@ -33,13 +33,13 @@ namespace Gir.Tests
 
 		///<summary>Tests if the stream supports the #GSeekableIface.</summary>
 		///<returns>%TRUE if @seekable can be seeked. %FALSE otherwise.</returns>
-		public bool CanSeek PARAMS
+		public bool CanSeek (Seekable seekable);
 
 		static extern bool g_seekable_can_truncate PARAMS
 
 		///<summary>Tests if the stream can be truncated.</summary>
 		///<returns>%TRUE if the stream can be truncated, %FALSE otherwise.</returns>
-		public bool CanTruncate PARAMS
+		public bool CanTruncate (Seekable seekable);
 
 		static extern bool g_seekable_seek PARAMS
 
@@ -64,13 +64,13 @@ namespace Gir.Tests
 		///     has occurred, this function will return %FALSE and set @error
 		///     appropriately if present.
 		///</returns>
-		public bool Seek PARAMS
+		public bool Seek (Seekable seekable, gint64 offset, GLib.SeekType type, Cancellable cancellable);
 
 		static extern long g_seekable_tell PARAMS
 
 		///<summary>Tells the current position within the stream.</summary>
 		///<returns>the offset from the beginning of the buffer.</returns>
-		public long Tell PARAMS
+		public long Tell (Seekable seekable);
 
 		static extern bool g_seekable_truncate PARAMS
 
@@ -88,7 +88,7 @@ namespace Gir.Tests
 		///     has occurred, this function will return %FALSE and set @error
 		///     appropriately if present.
 		///</returns>
-		public bool Truncate PARAMS
+		public bool Truncate (Seekable seekable, gint64 offset, Cancellable cancellable);
 	}
 }
 ", result);
@@ -104,23 +104,23 @@ namespace Gir.Tests
 	{
 		static extern bool g_seekable_can_seek PARAMS
 
-		public bool CanSeek PARAMS
+		public bool CanSeek (Seekable seekable);
 
 		static extern bool g_seekable_can_truncate PARAMS
 
-		public bool CanTruncate PARAMS
+		public bool CanTruncate (Seekable seekable);
 
 		static extern bool g_seekable_seek PARAMS
 
-		public bool Seek PARAMS
+		public bool Seek (Seekable seekable, gint64 offset, GLib.SeekType type, Cancellable cancellable);
 
 		static extern long g_seekable_tell PARAMS
 
-		public long Tell PARAMS
+		public long Tell (Seekable seekable);
 
 		static extern bool g_seekable_truncate PARAMS
 
-		public bool Truncate PARAMS
+		public bool Truncate (Seekable seekable, gint64 offset, Cancellable cancellable);
 	}
 }
 ", result);
@@ -157,7 +157,7 @@ namespace Gir.Tests
 		/// a handler id which can be used in atk_component_remove_focus_handler()
 		/// or zero if the handler was already added.
 		///</returns>
-		public uint AddFocusHandler PARAMS
+		public uint AddFocusHandler (Component component, FocusHandler handler);
 
 		static extern bool atk_component_contains PARAMS
 
@@ -172,7 +172,7 @@ namespace Gir.Tests
 		/// %TRUE or %FALSE indicating whether the specified point is within
 		/// the extent of the @component or not
 		///</returns>
-		public bool Contains PARAMS
+		public bool Contains (Component component, gint x, gint y, CoordType coord_type);
 
 		static extern double atk_component_get_alpha PARAMS
 
@@ -182,18 +182,18 @@ namespace Gir.Tests
 		/// (fully opaque).
 		///</summary>
 		///<returns>An alpha value from 0 to 1.0, inclusive.</returns>
-		public double GetAlpha PARAMS
+		public double GetAlpha (Component component);
 
 		static extern void atk_component_get_extents PARAMS
 
 		///<summary>Gets the rectangle which gives the extent of the @component.</summary>
-		public void GetExtents PARAMS
+		public void GetExtents (Component component, gint x, gint y, gint width, gint height, CoordType coord_type);
 
 		static extern Layer atk_component_get_layer PARAMS
 
 		///<summary>Gets the layer of the component.</summary>
 		///<returns>an #AtkLayer which is the layer of the component</returns>
-		public Layer GetLayer PARAMS
+		public Layer GetLayer (Component component);
 
 		static extern int atk_component_get_mdi_zorder PARAMS
 
@@ -206,7 +206,7 @@ namespace Gir.Tests
 		/// which the component is shown in relation to other components in the same
 		/// container.
 		///</returns>
-		public int GetMdiZorder PARAMS
+		public int GetMdiZorder (Component component);
 
 		static extern void atk_component_get_position PARAMS
 
@@ -214,18 +214,18 @@ namespace Gir.Tests
 		/// Gets the position of @component in the form of
 		/// a point specifying @component's top-left corner.
 		///</summary>
-		public void GetPosition PARAMS
+		public void GetPosition (Component component, gint x, gint y, CoordType coord_type);
 
 		static extern void atk_component_get_size PARAMS
 
 		///<summary>Gets the size of the @component in terms of width and height.</summary>
-		public void GetSize PARAMS
+		public void GetSize (Component component, gint width, gint height);
 
 		static extern bool atk_component_grab_focus PARAMS
 
 		///<summary>Grabs focus for this @component.</summary>
 		///<returns>%TRUE if successful, %FALSE otherwise.</returns>
-		public bool GrabFocus PARAMS
+		public bool GrabFocus (Component component);
 
 		static extern Object atk_component_ref_accessible_at_point PARAMS
 
@@ -237,7 +237,7 @@ namespace Gir.Tests
 		/// a reference to the accessible
 		/// child, if one exists
 		///</returns>
-		public Object RefAccessibleAtPoint PARAMS
+		public Object RefAccessibleAtPoint (Component component, gint x, gint y, CoordType coord_type);
 
 		static extern void atk_component_remove_focus_handler PARAMS
 
@@ -246,25 +246,94 @@ namespace Gir.Tests
 		/// functions to be executed when this object receives focus events
 		/// (in or out).
 		///</summary>
-		public void RemoveFocusHandler PARAMS
+		public void RemoveFocusHandler (Component component, guint handler_id);
 
 		static extern bool atk_component_set_extents PARAMS
 
 		///<summary>Sets the extents of @component.</summary>
 		///<returns>%TRUE or %FALSE whether the extents were set or not</returns>
-		public bool SetExtents PARAMS
+		public bool SetExtents (Component component, gint x, gint y, gint width, gint height, CoordType coord_type);
 
 		static extern bool atk_component_set_position PARAMS
 
 		///<summary>Sets the postition of @component.</summary>
 		///<returns>%TRUE or %FALSE whether or not the position was set or not</returns>
-		public bool SetPosition PARAMS
+		public bool SetPosition (Component component, gint x, gint y, CoordType coord_type);
 
 		static extern bool atk_component_set_size PARAMS
 
 		///<summary>Set the size of the @component in terms of width and height.</summary>
 		///<returns>%TRUE or %FALSE whether the size was set or not</returns>
-		public bool SetSize PARAMS
+		public bool SetSize (Component component, gint width, gint height);
+	}
+}
+", result);
+		}
+
+		[Test]
+		public void GenerateAtkComponentInterfaceCompat ()
+		{
+			var result = GenerateType (Atk1, "Component", true);
+
+			Assert.AreEqual (@"namespace Atk
+{
+	public interface Component
+	{
+		static extern uint atk_component_add_focus_handler PARAMS
+
+		public uint AddFocusHandler (Component component, FocusHandler handler);
+
+		static extern bool atk_component_contains PARAMS
+
+		public bool Contains (Component component, gint x, gint y, CoordType coord_type);
+
+		static extern double atk_component_get_alpha PARAMS
+
+		public double GetAlpha (Component component);
+
+		static extern void atk_component_get_extents PARAMS
+
+		public void GetExtents (Component component, gint x, gint y, gint width, gint height, CoordType coord_type);
+
+		static extern Layer atk_component_get_layer PARAMS
+
+		public Layer GetLayer (Component component);
+
+		static extern int atk_component_get_mdi_zorder PARAMS
+
+		public int GetMdiZorder (Component component);
+
+		static extern void atk_component_get_position PARAMS
+
+		public void GetPosition (Component component, gint x, gint y, CoordType coord_type);
+
+		static extern void atk_component_get_size PARAMS
+
+		public void GetSize (Component component, gint width, gint height);
+
+		static extern bool atk_component_grab_focus PARAMS
+
+		public bool GrabFocus (Component component);
+
+		static extern Object atk_component_ref_accessible_at_point PARAMS
+
+		public Object RefAccessibleAtPoint (Component component, gint x, gint y, CoordType coord_type);
+
+		static extern void atk_component_remove_focus_handler PARAMS
+
+		public void RemoveFocusHandler (Component component, guint handler_id);
+
+		static extern bool atk_component_set_extents PARAMS
+
+		public bool SetExtents (Component component, gint x, gint y, gint width, gint height, CoordType coord_type);
+
+		static extern bool atk_component_set_position PARAMS
+
+		public bool SetPosition (Component component, gint x, gint y, CoordType coord_type);
+
+		static extern bool atk_component_set_size PARAMS
+
+		public bool SetSize (Component component, gint width, gint height);
 	}
 }
 ", result);
