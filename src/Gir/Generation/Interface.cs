@@ -3,7 +3,6 @@ namespace Gir
 {
 	public partial class Interface : IGeneratable, IDocumented
 	{
-		// TODO, We should probably add 'I' to 'Name' unless in compat mode
 		public void Generate (GenerationOptions opts)
 		{
 			using (var writer = this.GetWriter (opts)) {
@@ -11,7 +10,8 @@ namespace Gir
 				writer.WriteLine ("{");
 				using (writer.Indent ()) {
 					this.GenerateDocumentation (writer);
-					writer.WriteLine ($"public interface {Name}");
+					var interfaceName = (opts.Compat) ? Name : $"I{Name}";
+					writer.WriteLine ($"public interface {interfaceName}");
 					writer.WriteLine ("{");
 
 					using (writer.Indent ()) {

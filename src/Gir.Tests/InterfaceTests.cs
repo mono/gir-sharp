@@ -27,7 +27,7 @@ namespace Gir.Tests
 	/// lseek() on a normal file.  Seeking past the end and writing data will
 	/// usually cause the stream to resize by introducing zero bytes.
 	///</summary>
-	public interface Seekable
+	public interface ISeekable
 	{
 		static extern bool g_seekable_can_seek PARAMS
 
@@ -89,6 +89,182 @@ namespace Gir.Tests
 		///     appropriately if present.
 		///</returns>
 		bool Truncate PARAMS
+	}
+}
+", result);
+		}
+
+		[Test]
+		public void TestSeekableInterfaceIsGeneratedCompatEnabled()
+		{
+			var result = GenerateType(Gio2, "Seekable", true);
+			Assert.AreEqual(@"namespace Gio
+{
+	public interface Seekable
+	{
+		static extern bool g_seekable_can_seek PARAMS
+
+		bool CanSeek PARAMS
+
+		static extern bool g_seekable_can_truncate PARAMS
+
+		bool CanTruncate PARAMS
+
+		static extern bool g_seekable_seek PARAMS
+
+		bool Seek PARAMS
+
+		static extern long g_seekable_tell PARAMS
+
+		long Tell PARAMS
+
+		static extern bool g_seekable_truncate PARAMS
+
+		bool Truncate PARAMS
+	}
+}
+", result);
+		}
+
+		[Test]
+		public void GenerateAtkComponentInterface ()
+		{
+			var result = GenerateType(Atk1, "Component");
+			Assert.AreEqual(@"namespace Atk
+{
+	///<summary>
+	/// #AtkComponent should be implemented by most if not all UI elements
+	/// with an actual on-screen presence, i.e. components which can be
+	/// said to have a screen-coordinate bounding box.  Virtually all
+	/// widgets will need to have #AtkComponent implementations provided
+	/// for their corresponding #AtkObject class.  In short, only UI
+	/// elements which are *not* GUI elements will omit this ATK interface.
+	/// 
+	/// A possible exception might be textual information with a
+	/// transparent background, in which case text glyph bounding box
+	/// information is provided by #AtkText.
+	///</summary>
+	public interface IComponent
+	{
+		static extern uint atk_component_add_focus_handler PARAMS
+
+		///<summary>
+		/// Add the specified handler to the set of functions to be called
+		/// when this object receives focus events (in or out). If the handler is
+		/// already added it is not added again
+		///</summary>
+		///<returns>
+		/// a handler id which can be used in atk_component_remove_focus_handler()
+		/// or zero if the handler was already added.
+		///</returns>
+		uint AddFocusHandler PARAMS
+
+		static extern bool atk_component_contains PARAMS
+
+		///<summary>
+		/// Checks whether the specified point is within the extent of the @component.
+		/// 
+		/// Toolkit implementor note: ATK provides a default implementation for
+		/// this virtual method. In general there are little reason to
+		/// re-implement it.
+		///</summary>
+		///<returns>
+		/// %TRUE or %FALSE indicating whether the specified point is within
+		/// the extent of the @component or not
+		///</returns>
+		bool Contains PARAMS
+
+		static extern double atk_component_get_alpha PARAMS
+
+		///<summary>
+		/// Returns the alpha value (i.e. the opacity) for this
+		/// @component, on a scale from 0 (fully transparent) to 1.0
+		/// (fully opaque).
+		///</summary>
+		///<returns>An alpha value from 0 to 1.0, inclusive.</returns>
+		double GetAlpha PARAMS
+
+		static extern void atk_component_get_extents PARAMS
+
+		///<summary>Gets the rectangle which gives the extent of the @component.</summary>
+		void GetExtents PARAMS
+
+		static extern Layer atk_component_get_layer PARAMS
+
+		///<summary>Gets the layer of the component.</summary>
+		///<returns>an #AtkLayer which is the layer of the component</returns>
+		Layer GetLayer PARAMS
+
+		static extern int atk_component_get_mdi_zorder PARAMS
+
+		///<summary>
+		/// Gets the zorder of the component. The value G_MININT will be returned
+		/// if the layer of the component is not ATK_LAYER_MDI or ATK_LAYER_WINDOW.
+		///</summary>
+		///<returns>
+		/// a gint which is the zorder of the component, i.e. the depth at
+		/// which the component is shown in relation to other components in the same
+		/// container.
+		///</returns>
+		int GetMdiZorder PARAMS
+
+		static extern void atk_component_get_position PARAMS
+
+		///<summary>
+		/// Gets the position of @component in the form of
+		/// a point specifying @component's top-left corner.
+		///</summary>
+		void GetPosition PARAMS
+
+		static extern void atk_component_get_size PARAMS
+
+		///<summary>Gets the size of the @component in terms of width and height.</summary>
+		void GetSize PARAMS
+
+		static extern bool atk_component_grab_focus PARAMS
+
+		///<summary>Grabs focus for this @component.</summary>
+		///<returns>%TRUE if successful, %FALSE otherwise.</returns>
+		bool GrabFocus PARAMS
+
+		static extern Object atk_component_ref_accessible_at_point PARAMS
+
+		///<summary>
+		/// Gets a reference to the accessible child, if one exists, at the
+		/// coordinate point specified by @x and @y.
+		///</summary>
+		///<returns>
+		/// a reference to the accessible
+		/// child, if one exists
+		///</returns>
+		Object RefAccessibleAtPoint PARAMS
+
+		static extern void atk_component_remove_focus_handler PARAMS
+
+		///<summary>
+		/// Remove the handler specified by @handler_id from the list of
+		/// functions to be executed when this object receives focus events
+		/// (in or out).
+		///</summary>
+		void RemoveFocusHandler PARAMS
+
+		static extern bool atk_component_set_extents PARAMS
+
+		///<summary>Sets the extents of @component.</summary>
+		///<returns>%TRUE or %FALSE whether the extents were set or not</returns>
+		bool SetExtents PARAMS
+
+		static extern bool atk_component_set_position PARAMS
+
+		///<summary>Sets the postition of @component.</summary>
+		///<returns>%TRUE or %FALSE whether or not the position was set or not</returns>
+		bool SetPosition PARAMS
+
+		static extern bool atk_component_set_size PARAMS
+
+		///<summary>Set the size of the @component in terms of width and height.</summary>
+		///<returns>%TRUE or %FALSE whether the size was set or not</returns>
+		bool SetSize PARAMS
 	}
 }
 ", result);
