@@ -185,18 +185,18 @@ namespace Gir.Tests
 ", result);
 		}
 
-		[Test]
-		[Ignore ("This currently fails. NRE w/ do_action field")]
-		public void CanGenerateActionIfaceRecord ()
-		{
-			// Test is incomplete, as record is not fully generated atm.
-			var result = GenerateType (Atk1, "ActionIface");
+//		[Test]
+//		[Ignore ("This currently fails. NRE w/ do_action field")]
+//		public void CanGenerateActionIfaceRecord ()
+//		{
+//			// Test is incomplete, as record is not fully generated atm.
+//			var result = GenerateType(Atk1, "ActionIface");
 
 
-			// Need to map pointers at symbol level.
-			Assert.AreEqual (@"namespace Atk
-{
-}", result);
-		}
+//			// Need to map pointers at symbol level.
+//			Assert.AreEqual(@"namespace Atk
+//{
+//}", result);
+//}
 	}
 }
