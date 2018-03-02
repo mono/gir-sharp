@@ -41,11 +41,11 @@ namespace Gir.Tests
 		{
 		}
 
-		static extern OutputStream g_buffered_output_stream_new_sized (OutputStream base_stream, gsize size);
+		static extern OutputStream g_buffered_output_stream_new_sized (OutputStream base_stream, UIntPtr size);
 
 		///<summary>Creates a new buffered output stream with a given buffer size.</summary>
 		///<returns>a #GOutputStream with an internal buffer set to @size.</returns>
-		public BufferedOutputStream (OutputStream base_stream, gsize size) : base (base_stream, size)
+		public BufferedOutputStream (OutputStream base_stream, UIntPtr size) : base (base_stream, size)
 		{
 		}
 
@@ -68,7 +68,7 @@ namespace Gir.Tests
 		///<returns>the current size of the buffer.</returns>
 		public UIntPtr GetBufferSize ();
 
-		static extern void g_buffered_output_stream_set_auto_grow (BufferedOutputStream stream, gboolean auto_grow);
+		static extern void g_buffered_output_stream_set_auto_grow (BufferedOutputStream stream, bool auto_grow);
 
 		///<summary>
 		/// Sets whether or not the @stream's buffer should automatically grow.
@@ -76,12 +76,12 @@ namespace Gir.Tests
 		/// larger, and you must manually flush the buffer to actually write out
 		/// the data to the underlying stream.
 		///</summary>
-		public void SetAutoGrow (gboolean auto_grow);
+		public void SetAutoGrow (bool auto_grow);
 
-		static extern void g_buffered_output_stream_set_buffer_size (BufferedOutputStream stream, gsize size);
+		static extern void g_buffered_output_stream_set_buffer_size (BufferedOutputStream stream, UIntPtr size);
 
 		///<summary>Sets the size of the internal buffer to @size.</summary>
-		public void SetBufferSize (gsize size);
+		public void SetBufferSize (UIntPtr size);
 	}
 }
 ", result);

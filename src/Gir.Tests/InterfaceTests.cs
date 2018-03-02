@@ -58,7 +58,7 @@ namespace Gir.Tests
 		///     has occurred, this function will return %FALSE and set @error
 		///     appropriately if present.
 		///</returns>
-		bool Seek (Seekable seekable, gint64 offset, GLib.SeekType type, Cancellable cancellable);
+		bool Seek (Seekable seekable, long offset, GLib.SeekType type, Cancellable cancellable);
 
 		///<summary>Tells the current position within the stream.</summary>
 		///<returns>the offset from the beginning of the buffer.</returns>
@@ -78,7 +78,7 @@ namespace Gir.Tests
 		///     has occurred, this function will return %FALSE and set @error
 		///     appropriately if present.
 		///</returns>
-		bool Truncate (Seekable seekable, gint64 offset, Cancellable cancellable);
+		bool Truncate (Seekable seekable, long offset, Cancellable cancellable);
 	}
 }
 ", result);
@@ -96,11 +96,11 @@ namespace Gir.Tests
 
 		bool CanTruncate ();
 
-		bool Seek (gint64 offset, GLib.SeekType type, Cancellable cancellable);
+		bool Seek (long offset, SeekType type, Cancellable cancellable);
 
 		long Tell ();
 
-		bool Truncate (gint64 offset, Cancellable cancellable);
+		bool Truncate (long offset, Cancellable cancellable);
 	}
 }
 ", result);
@@ -150,7 +150,7 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		/// %TRUE or %FALSE indicating whether the specified point is within
 		/// the extent of the @component or not
 		///</returns>
-		bool Contains (gint x, gint y, CoordType coord_type);
+		bool Contains (int x, int y, CoordType coord_type);
 
 		///<summary>
 		/// Returns the alpha value (i.e. the opacity) for this
@@ -161,7 +161,7 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		double GetAlpha ();
 
 		///<summary>Gets the rectangle which gives the extent of the @component.</summary>
-		void GetExtents (gint x, gint y, gint width, gint height, CoordType coord_type);
+		void GetExtents (int x, int y, int width, int height, CoordType coord_type);
 
 		///<summary>Gets the layer of the component.</summary>
 		///<returns>an #AtkLayer which is the layer of the component</returns>
@@ -183,11 +183,11 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		/// a point specifying @component's top-left corner.
 		///</summary>
 		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
-		void GetPosition (gint x, gint y, CoordType coord_type);
+		void GetPosition (int x, int y, CoordType coord_type);
 
 		///<summary>Gets the size of the @component in terms of width and height.</summary>
 		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
-		void GetSize (gint width, gint height);
+		void GetSize (int width, int height);
 
 		///<summary>Grabs focus for this @component.</summary>
 		///<returns>%TRUE if successful, %FALSE otherwise.</returns>
@@ -201,7 +201,7 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		/// a reference to the accessible
 		/// child, if one exists
 		///</returns>
-		Object RefAccessibleAtPoint (gint x, gint y, CoordType coord_type);
+		Object RefAccessibleAtPoint (int x, int y, CoordType coord_type);
 
 		///<summary>
 		/// Remove the handler specified by @handler_id from the list of
@@ -210,19 +210,19 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		///</summary>
 		[Obsolete (""(Version: 2.9.4) If you need to track when an object gains or
 lose the focus, use the #AtkObject::state-change ""focused"" notification instead."")]
-		void RemoveFocusHandler (guint handler_id);
+		void RemoveFocusHandler (uint handler_id);
 
 		///<summary>Sets the extents of @component.</summary>
 		///<returns>%TRUE or %FALSE whether the extents were set or not</returns>
-		bool SetExtents (gint x, gint y, gint width, gint height, CoordType coord_type);
+		bool SetExtents (int x, int y, int width, int height, CoordType coord_type);
 
 		///<summary>Sets the postition of @component.</summary>
 		///<returns>%TRUE or %FALSE whether or not the position was set or not</returns>
-		bool SetPosition (gint x, gint y, CoordType coord_type);
+		bool SetPosition (int x, int y, CoordType coord_type);
 
 		///<summary>Set the size of the @component in terms of width and height.</summary>
 		///<returns>%TRUE or %FALSE whether the size was set or not</returns>
-		bool SetSize (gint width, gint height);
+		bool SetSize (int width, int height);
 
 		event Bounds-changed;
 	}
@@ -243,35 +243,35 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 lose the focus, use the #AtkObject::state-change ""focused"" notification instead."")]
 		uint AddFocusHandler (FocusHandler handler);
 
-		bool Contains (gint x, gint y, CoordType coord_type);
+		bool Contains (int x, int y, CoordType coord_type);
 
 		double GetAlpha ();
 
-		void GetExtents (gint x, gint y, gint width, gint height, CoordType coord_type);
+		void GetExtents (int x, int y, int width, int height, CoordType coord_type);
 
 		Layer GetLayer ();
 
 		int GetMdiZorder ();
 
 		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
-		void GetPosition (gint x, gint y, CoordType coord_type);
+		void GetPosition (int x, int y, CoordType coord_type);
 
 		[Obsolete (""(Version: ) Since 2.12. Use atk_component_get_extents() instead."")]
-		void GetSize (gint width, gint height);
+		void GetSize (int width, int height);
 
 		bool GrabFocus ();
 
-		Object RefAccessibleAtPoint (gint x, gint y, CoordType coord_type);
+		Object RefAccessibleAtPoint (int x, int y, CoordType coord_type);
 
 		[Obsolete (""(Version: 2.9.4) If you need to track when an object gains or
 lose the focus, use the #AtkObject::state-change ""focused"" notification instead."")]
-		void RemoveFocusHandler (guint handler_id);
+		void RemoveFocusHandler (uint handler_id);
 
-		bool SetExtents (gint x, gint y, gint width, gint height, CoordType coord_type);
+		bool SetExtents (int x, int y, int width, int height, CoordType coord_type);
 
-		bool SetPosition (gint x, gint y, CoordType coord_type);
+		bool SetPosition (int x, int y, CoordType coord_type);
 
-		bool SetSize (gint width, gint height);
+		bool SetSize (int width, int height);
 
 		event Bounds-changed;
 	}

@@ -26,9 +26,10 @@ namespace Gir
 
 	public interface ICallable : IMemberGeneratable, IDocumented
 	{
-		bool IsInstanceCallable { get; }
+		bool IsInstanceCallable (IGeneratable parent, GenerationOptions opts);
+		string GetModifiers (IGeneratable parent, GenerationOptions opts);
+
 		string CIdentifier { get; }
-		string GetModifiers (IGeneratable parent);
 		ReturnValue ReturnValue { get; }
 		List<Parameter> Parameters { get; }
 	}

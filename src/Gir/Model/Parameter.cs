@@ -3,7 +3,7 @@
 namespace Gir
 {
 	[XmlInclude (typeof (InstanceParameter))]
-	public partial class Parameter
+	public partial class Parameter : ITypeOrArray
 	{
 		[XmlAttribute ("allow-none")]
 		public bool AllowNone;
@@ -39,7 +39,10 @@ namespace Gir
 		public Documentation Doc { get; set; }
 
 		[XmlElement ("type")]
-		public Type Type;
+		public Type Type { get; set; }
+
+		[XmlElement ("array")]
+		public Array Array { get; set; }
 
 		[XmlElement ("varargs")]
 		public Varargs Varargs;

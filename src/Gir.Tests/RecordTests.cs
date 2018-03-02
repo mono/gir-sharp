@@ -27,16 +27,16 @@ namespace Gir.Tests
 		///<summary>the number of elements in the #GByteArray</summary>
 		uint Len;
 
-		static extern ByteArray g_byte_array_append ( array, guint8 data, guint len);
+		static extern ByteArray g_byte_array_append (ByteArray array, byte data, uint len);
 
 		///<summary>
 		/// Adds the given bytes to the end of the #GByteArray.
 		/// The array will grow in size automatically if necessary.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		public static ByteArray Append ( array, guint8 data, guint len);
+		public ByteArray Append (byte data, uint len);
 
-		static extern byte g_byte_array_free ( array, gboolean free_segment);
+		static extern byte g_byte_array_free (ByteArray array, bool free_segment);
 
 		///<summary>
 		/// Frees the memory allocated by the #GByteArray. If @free_segment is
@@ -48,9 +48,9 @@ namespace Gir.Tests
 		/// the element data if @free_segment is %FALSE, otherwise
 		///          %NULL.  The element data should be freed using g_free().
 		///</returns>
-		public static byte Free ( array, gboolean free_segment);
+		public byte Free (bool free_segment);
 
-		static extern Bytes g_byte_array_free_to_bytes ( array);
+		static extern Bytes g_byte_array_free_to_bytes (ByteArray array);
 
 		///<summary>
 		/// Transfers the data from the #GByteArray into a new immutable #GBytes.
@@ -66,7 +66,7 @@ namespace Gir.Tests
 		/// a new immutable #GBytes representing same
 		///     byte data that was in the array
 		///</returns>
-		public static Bytes FreeToBytes ( array);
+		public Bytes FreeToBytes ();
 
 		static extern ByteArray g_byte_array_new ();
 
@@ -74,43 +74,43 @@ namespace Gir.Tests
 		///<returns>the new #GByteArray</returns>
 		public static ByteArray New ();
 
-		static extern ByteArray g_byte_array_new_take ( data, gsize len);
+		static extern ByteArray g_byte_array_new_take (byte data, UIntPtr len);
 
 		///<summary>
 		/// Create byte array containing the data. The data will be owned by the array
 		/// and will be freed with g_free(), i.e. it could be allocated using g_strdup().
 		///</summary>
 		///<returns>a new #GByteArray</returns>
-		public static ByteArray NewTake ( data, gsize len);
+		public static ByteArray NewTake (byte data, UIntPtr len);
 
-		static extern ByteArray g_byte_array_prepend ( array, guint8 data, guint len);
+		static extern ByteArray g_byte_array_prepend (ByteArray array, byte data, uint len);
 
 		///<summary>
 		/// Adds the given data to the start of the #GByteArray.
 		/// The array will grow in size automatically if necessary.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		public static ByteArray Prepend ( array, guint8 data, guint len);
+		public ByteArray Prepend (byte data, uint len);
 
-		static extern ByteArray g_byte_array_ref ( array);
+		static extern ByteArray g_byte_array_ref (ByteArray array);
 
 		///<summary>
 		/// Atomically increments the reference count of @array by one.
 		/// This function is thread-safe and may be called from any thread.
 		///</summary>
 		///<returns>The passed in #GByteArray</returns>
-		public static ByteArray Ref ( array);
+		public ByteArray Ref ();
 
-		static extern ByteArray g_byte_array_remove_index ( array, guint index_);
+		static extern ByteArray g_byte_array_remove_index (ByteArray array, uint index_);
 
 		///<summary>
 		/// Removes the byte at the given index from a #GByteArray.
 		/// The following bytes are moved down one place.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		public static ByteArray RemoveIndex ( array, guint index_);
+		public ByteArray RemoveIndex (uint index_);
 
-		static extern ByteArray g_byte_array_remove_index_fast ( array, guint index_);
+		static extern ByteArray g_byte_array_remove_index_fast (ByteArray array, uint index_);
 
 		///<summary>
 		/// Removes the byte at the given index from a #GByteArray. The last
@@ -119,24 +119,24 @@ namespace Gir.Tests
 		/// than g_byte_array_remove_index().
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		public static ByteArray RemoveIndexFast ( array, guint index_);
+		public ByteArray RemoveIndexFast (uint index_);
 
-		static extern ByteArray g_byte_array_remove_range ( array, guint index_, guint length);
+		static extern ByteArray g_byte_array_remove_range (ByteArray array, uint index_, uint length);
 
 		///<summary>
 		/// Removes the given number of bytes starting at the given index from a
 		/// #GByteArray.  The following elements are moved to close the gap.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		public static ByteArray RemoveRange ( array, guint index_, guint length);
+		public ByteArray RemoveRange (uint index_, uint length);
 
-		static extern ByteArray g_byte_array_set_size ( array, guint length);
+		static extern ByteArray g_byte_array_set_size (ByteArray array, uint length);
 
 		///<summary>Sets the size of the #GByteArray, expanding it if necessary.</summary>
 		///<returns>the #GByteArray</returns>
-		public static ByteArray SetSize ( array, guint length);
+		public ByteArray SetSize (uint length);
 
-		static extern ByteArray g_byte_array_sized_new (guint reserved_size);
+		static extern ByteArray g_byte_array_sized_new (uint reserved_size);
 
 		///<summary>
 		/// Creates a new #GByteArray with @reserved_size bytes preallocated.
@@ -145,9 +145,9 @@ namespace Gir.Tests
 		/// 0.
 		///</summary>
 		///<returns>the new #GByteArray</returns>
-		public static ByteArray SizedNew (guint reserved_size);
+		public static ByteArray SizedNew (uint reserved_size);
 
-		static extern void g_byte_array_sort ( array, CompareFunc compare_func);
+		static extern void g_byte_array_sort (ByteArray array, CompareFunc compare_func);
 
 		///<summary>
 		/// Sorts a byte array, using @compare_func which should be a
@@ -161,17 +161,17 @@ namespace Gir.Tests
 		/// if two elements would otherwise compare equal, compares them by
 		/// their addresses.
 		///</summary>
-		public static void Sort ( array, CompareFunc compare_func);
+		public void Sort (CompareFunc compare_func);
 
-		static extern void g_byte_array_sort_with_data ( array, CompareDataFunc compare_func, gpointer user_data);
+		static extern void g_byte_array_sort_with_data (ByteArray array, CompareDataFunc compare_func, IntPtr user_data);
 
 		///<summary>
 		/// Like g_byte_array_sort(), but the comparison function takes an extra
 		/// user data argument.
 		///</summary>
-		public static void SortWithData ( array, CompareDataFunc compare_func, gpointer user_data);
+		public void SortWithData (CompareDataFunc compare_func, IntPtr user_data);
 
-		static extern void g_byte_array_unref ( array);
+		static extern void g_byte_array_unref (ByteArray array);
 
 		///<summary>
 		/// Atomically decrements the reference count of @array by one. If the
@@ -179,7 +179,7 @@ namespace Gir.Tests
 		/// released. This function is thread-safe and may be called from any
 		/// thread.
 		///</summary>
-		public static void Unref ( array);
+		public void Unref ();
 	}
 }
 ", result);

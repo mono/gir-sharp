@@ -3,7 +3,7 @@ namespace Gir
 {
 	public partial class Constructor : ICallable, IDocumented
 	{
-		public string GetModifiers (IGeneratable parent)
+		public string GetModifiers (IGeneratable parent, GenerationOptions opts)
 		{
 			if (parent is Class @class && @class.Abstract)
 				return "protected";
@@ -21,6 +21,6 @@ namespace Gir
 			return true;
 		}
 
-		public bool IsInstanceCallable => false;
+		bool ICallable.IsInstanceCallable (IGeneratable parent, GenerationOptions opts) => false;
 	}
 }

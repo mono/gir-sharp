@@ -4,7 +4,7 @@ namespace Gir
 {
 	public partial class Method : ICallable
 	{
-		public string GetModifiers (IGeneratable parent) => "public";
+		public string GetModifiers (IGeneratable parent, GenerationOptions opts) => "public";
 
 		public void Generate (IGeneratable parent, IndentWriter writer)
 		{
@@ -15,6 +15,6 @@ namespace Gir
 		}
 
 		public bool NewlineAfterGeneration (GenerationOptions opts) => true;
-		public bool IsInstanceCallable => true;
+		public bool IsInstanceCallable (IGeneratable parent, GenerationOptions opts) => true;
 	}
 }

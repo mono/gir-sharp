@@ -49,7 +49,7 @@ namespace Gir
 		{
 			var retType = GetReturnCSharpType (callable, writer);
 
-			var (typesAndNames, names) = BuildParameters (callable.Parameters, appendInstanceParameters: true);
+			var (typesAndNames, names) = BuildParameters (callable, writer.Options, appendInstanceParameters: true);
 			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} ({typesAndNames});");
 			writer.WriteLine ();
 		}
@@ -63,7 +63,7 @@ namespace Gir
 			// TODO: Handle marshalling.
 
 			// Try getting the array return value, then the type one.
-			var retSymbol = retVal.Array?.GetSymbol (writer.Options) ?? retVal.Type.GetSymbol (writer.Options);
+			var retSymbol = retVal.Resolve (writer.Options);
 			return retSymbol.CSharpType;
 		}
 
@@ -72,13 +72,13 @@ namespace Gir
 			callable.ReturnValue.GenerateDocumentation (writer);
 
 			writer.WriteIndent ();
-			if (!string.IsNullOrEmpty (callable.GetModifiers (gen)) && !(gen is Interface))
-				writer.Write (callable.GetModifiers (gen) + " ");
+			if (!string.IsNullOrEmpty (callable.GetModifiers (gen, writer.Options)) && !(gen is Interface))
+				writer.Write (callable.GetModifiers (gen, writer.Options) + " ");
 
 			var returnType = callable.GetReturnCSharpType (writer);
 
 			// generate ReturnValue then Parameters
-			var (typesAndNames, names) = BuildParameters (callable.Parameters, !callable.IsInstanceCallable);
+			var (typesAndNames, names) = BuildParameters (callable, writer.Options, !callable.IsInstanceCallable (gen, writer.Options));
 			writer.Write (string.Format ("{0} {1} ({2});", returnType, callable.Name.ToCSharp (), typesAndNames));
 			writer.WriteLine ();
 		}
@@ -87,9 +87,9 @@ namespace Gir
 		{
 			callable.ReturnValue.GenerateDocumentation (writer);
 
-			var modifier = callable.GetModifiers (parent);
+			var modifier = callable.GetModifiers (parent, writer.Options);
 
-			var (typesAndNames, names) = BuildParameters (callable.Parameters, !callable.IsInstanceCallable);
+			var (typesAndNames, names) = BuildParameters (callable, writer.Options, !callable.IsInstanceCallable (parent, writer.Options));
 
 			// FIXME, should check to see if it is deprecated
 			writer.WriteLine ($"{modifier} {parent.Name} ({typesAndNames}) : base ({names})");
@@ -97,19 +97,25 @@ namespace Gir
 			writer.WriteLine ("}");
 		}
 
-		public static (string both, string names) BuildParameters (List<Parameter> parameters, bool appendInstanceParameters)
+		public static (string both, string names) BuildParameters (ICallable callable, GenerationOptions opts, bool appendInstanceParameters)
 		{
+			var parameters = callable.Parameters;
 			var typeAndName = new List<string> (parameters.Count);
 			var parameterNames = new List<string> (parameters.Count);
 
 			for (int i = 0; i < parameters.Count; ++i) {
 				var parameter = parameters [i];
-				if (!appendInstanceParameters && parameter is InstanceParameter) {
-					continue;
+				if (!appendInstanceParameters) {
+					if (parameter is InstanceParameter)
+						continue;
+					
+					// HACK: Make this proper
+					if (i == 0 && callable is Function)
+						continue;
 				}
 
-				// FIXME, Arrays don't have a 'Type' set
-				typeAndName.Add(parameter.Type?.Name + " " + parameter.Name);
+				var symbol = parameter.Resolve(opts);
+				typeAndName.Add(symbol.CSharpType + " " + parameter.Name);
 				parameterNames.Add(parameter.Name);
 			}
 

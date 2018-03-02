@@ -114,6 +114,8 @@
     <Compile Include="Generation\Property.cs" />
     <Compile Include="Generation\Signal.cs" />
     <Compile Include="Marshal\Array.cs" />
+    <Compile Include="Marshal\ITypeOrArray.cs" />
+    <Compile Include="Marshal\Callback.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />

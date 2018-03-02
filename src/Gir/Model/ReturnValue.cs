@@ -2,7 +2,7 @@
 
 namespace Gir
 {
-	public partial class ReturnValue : IDocumented
+	public partial class ReturnValue : IDocumented, ITypeOrArray
 	{
 		[XmlAttribute ("nullable")]
 		public bool Nullable;
