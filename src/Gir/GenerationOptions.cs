@@ -38,8 +38,8 @@ namespace Gir
 			this.compat = compat;
 			RedirectStream = redirectStream;
 
-			// This may contain multiple libraries, so get the first one.
-			LibraryName = repo.Namespace.SharedLibrary.Split (',') [0];
+			// This may contain multiple libraries, so get the first one. Also, hack a string.Empty for xlib.
+			LibraryName = repo.Namespace.SharedLibrary?.Split (',') [0] ?? "";
 
 			SymbolTable = new SymbolTable (Statistics, win64Longs);
 			SymbolTable.AddTypes (allRepos.SelectMany (x => x.GetSymbols ()));

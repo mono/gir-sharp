@@ -19,6 +19,12 @@ namespace Gir.Tests
 	[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
 	internal delegate void TreeModelFilterModifyFuncNative (ITreeModel model, TreeIter iter, Value value, int column, IntPtr data)
 
+	internal static class TreeModelFilterModifyFuncWrapper
+	{
+		public static void NativeCallback (ITreeModel model, TreeIter iter, Value value, int column, IntPtr data)
+		{
+		}
+	}
 }
 ", result);
 		}

@@ -29,6 +29,15 @@ namespace Gir
 
 					// Generate wrapper class - static if we can use gchandle, otherwise instance
 					// Check callback convention - async, notify, call
+					writer.WriteLine ($"internal static class {Name}Wrapper");
+					writer.WriteLine ("{");
+					using (writer.Indent ()) {
+						writer.WriteLine ($"public static void NativeCallback ({typesAndNames})");
+						writer.WriteLine ("{");
+						// TODO: marshal params, call, handle exceptions
+						writer.WriteLine ("}");
+					}
+					writer.WriteLine ("}");
 				}
 				writer.WriteLine ("}");
 			}
