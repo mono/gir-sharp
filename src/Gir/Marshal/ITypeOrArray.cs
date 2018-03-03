@@ -5,13 +5,14 @@ namespace Gir
 	{
 		Type Type { get; }
 		Array Array { get; }
+		Varargs Varargs { get; }
 	}
 
 	public static class ITypeOrArrayExtensions
 	{
 		public static ISymbol Resolve (this ITypeOrArray toResolve, GenerationOptions opts)
 		{
-			return toResolve.Array?.GetSymbol(opts) ?? toResolve.Type.GetSymbol(opts);
+			return toResolve.Array?.GetSymbol(opts) ?? toResolve.Type?.GetSymbol(opts) ?? toResolve.Varargs;
 		}
 	}
 }

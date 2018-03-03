@@ -18,5 +18,8 @@ namespace Gir
 
 		[XmlElement ("array")]
 		public Array Array { get; set; }
+
+		[XmlElement ("varargs")]
+		public Varargs Varargs { get; set; }
 	}
 }

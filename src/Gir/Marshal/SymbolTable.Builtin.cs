@@ -51,6 +51,8 @@ namespace Gir
 			AddType (new Primitive ("size_t", "UIntPtr", "UIntPtr.Zero"));
 			AddType (new Primitive ("gsize", "UIntPtr", "UIntPtr.Zero"));
 
+			AddType (new Primitive ("va_list", "...", ""));
+
 			RegisterLongTypes (nativeWin64);
 		}
 

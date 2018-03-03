@@ -41,13 +41,22 @@ namespace Gir
 			statistics.RegisterType (symbol);
 		}
 
+		static int GetIndexOfStartSkipping (string str, int start, string toSkip)
+		{
+			if (toSkip.Length <= str.Length - start)
+				if (str.IndexOf (toSkip, start, toSkip.Length, StringComparison.Ordinal) == start)
+					start += toSkip.Length;
+
+			return start;
+		}
+
 		const string constPrefix = "const ";
+		const string volatilePrefix = "volatile ";
 		static string TrimConstAndPointer (string type)
 		{
 			int start = 0;
-			if (type.StartsWith (constPrefix, StringComparison.Ordinal)) {
-				start = constPrefix.Length;
-			}
+			start = GetIndexOfStartSkipping (type, start, constPrefix);
+			start = GetIndexOfStartSkipping (type, start, volatilePrefix);
 
 			// Look for the first pointer symbol
 			int end = type.IndexOf ('*', start, type.Length - start);
