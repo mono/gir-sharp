@@ -278,5 +278,82 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 }
 ", result);
 		}
+
+		[Test]
+		public void GenerateAtkDriveInterfaceCompat()
+		{
+			var result = GenerateType(Gio2, "Drive", true);
+
+			Assert.AreEqual(@"namespace Gio
+{
+	public interface Drive
+	{
+		bool CanEject ();
+
+		bool CanPollForMedia ();
+
+		bool CanStart ();
+
+		bool CanStartDegraded ();
+
+		bool CanStop ();
+
+		[Obsolete (""(Version: 2.22) Use g_drive_eject_with_operation() instead."")]
+		void Eject (MountUnmountFlags flags, Cancellable cancellable, AsyncReadyCallback callback, IntPtr user_data);
+
+		[Obsolete (""(Version: 2.22) Use g_drive_eject_with_operation_finish() instead."")]
+		bool EjectFinish (IAsyncResult result);
+
+		void EjectWithOperation (MountUnmountFlags flags, MountOperation mount_operation, Cancellable cancellable, AsyncReadyCallback callback, IntPtr user_data);
+
+		bool EjectWithOperationFinish (IAsyncResult result);
+
+		string EnumerateIdentifiers ();
+
+		IIcon GetIcon ();
+
+		string GetIdentifier (string kind);
+
+		string GetName ();
+
+		string GetSortKey ();
+
+		DriveStartStopType GetStartStopType ();
+
+		IIcon GetSymbolicIcon ();
+
+		List GetVolumes ();
+
+		bool HasMedia ();
+
+		bool HasVolumes ();
+
+		bool IsMediaCheckAutomatic ();
+
+		bool IsMediaRemovable ();
+
+		void PollForMedia (Cancellable cancellable, AsyncReadyCallback callback, IntPtr user_data);
+
+		bool PollForMediaFinish (IAsyncResult result);
+
+		void Start (DriveStartFlags flags, MountOperation mount_operation, Cancellable cancellable, AsyncReadyCallback callback, IntPtr user_data);
+
+		bool StartFinish (IAsyncResult result);
+
+		void Stop (MountUnmountFlags flags, MountOperation mount_operation, Cancellable cancellable, AsyncReadyCallback callback, IntPtr user_data);
+
+		bool StopFinish (IAsyncResult result);
+
+		event Changed;
+
+		event Disconnected;
+
+		event Eject-button;
+
+		event Stop-button;
+	}
+}
+", result);
+		}
 	}
 }
