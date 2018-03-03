@@ -20,10 +20,10 @@ namespace Gir
 			};
 		}
 
-		public void WriteHeader ()
+		public IndentWriter WriteHeader ()
 		{
 			if (!Options.WriteHeader)
-				return;
+				return this;
 			
 			WriteLine ("using System;");
 			// TODO: Uncomment this when we know exactly which namespaces to include.
@@ -37,6 +37,8 @@ namespace Gir
 			WriteLine ($"namespace {Options.Namespace}");
 			WriteLine ("{");
 			Indent ();
+
+			return this;
 		}
 
 		public IndentWriter (TextWriter tw)
