@@ -16,7 +16,7 @@ namespace Gir
 
 		void RegisterPrimitives (bool nativeWin64)
 		{
-			AddType (new Primitive ("void", "void", string.Empty));
+			AddType (new Primitive ("none", "void", string.Empty));
 			AddType (new Primitive ("gpointer", "IntPtr", "IntPtr.Zero"));
 			AddType (new Primitive ("gconstpointer", "IntPtr", "IntPtr.Zero"));
 			AddType (new Primitive ("gboolean", "bool", "false"));

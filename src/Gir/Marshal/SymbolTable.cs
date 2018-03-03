@@ -111,7 +111,7 @@ namespace Gir
 				var toType = alias.Type.Name;
 				if (!typeMap.TryGetValue(toType, out target)) {
 					statistics.RegisterError(new AliasRegistrationError(alias));
-					return this["void"];
+					return this["none"];
 				}
 			}
 			return target;
@@ -128,7 +128,7 @@ namespace Gir
 					toType = $"{repository}.{alias.Type.Name}";
 					if (!typeMap.TryGetValue (toType, out target)) {
 						statistics.RegisterError(new AliasRegistrationError(alias));
-						return this["void"];
+						return this["none"];
 					}
 				}
 			}
