@@ -6,7 +6,7 @@ namespace Gir
 		public void Generate (IGeneratable parent, IndentWriter writer)
 		{
 			// Simple uncorrect gen for now
-			var managedType = this.GetSymbol (writer.Options);
+			var managedType = this.Resolve (writer.Options);
 
 			// We need something that will tell us the equivalent C# type
 			// including the number of pointers.

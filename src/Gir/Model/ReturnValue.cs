@@ -21,5 +21,8 @@ namespace Gir
 
 		[XmlElement ("varargs")]
 		public Varargs Varargs { get; set; }
+
+		[XmlElement ("callback")]
+		public Callback Callback { get; set; }
 	}
 }

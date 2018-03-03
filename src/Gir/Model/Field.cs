@@ -27,5 +27,11 @@ namespace Gir
 
 		[XmlElement ("type")]
 		public Type Type { get; set; }
+
+		[XmlElement ("callback")]
+		public Callback Callback { get; set; }
+
+		[XmlElement("array")]
+		public Array Array { get; set; }
 	}
 }

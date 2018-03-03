@@ -7,7 +7,12 @@ namespace Gir
 		{
 			using (var writer = this.GetWriter (opts)) {
 				this.GenerateDocumentation (writer);
-				writer.WriteLine ("public struct " + Name);
+
+				var access = "public";
+				if (!string.IsNullOrEmpty (GLibIsGTypeStructFor))
+					access = "internal";
+
+				writer.WriteLine ($"{access} struct {Name}");
 				writer.WriteLine ("{");
 
 				using (writer.Indent ()) {

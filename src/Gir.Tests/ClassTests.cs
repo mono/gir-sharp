@@ -246,7 +246,6 @@ result);
 		{
 			var result = GenerateType(GObject, "Object", true);
 
-			System.Console.WriteLine (result);
 			Assert.AreEqual (@"using System;
 
 namespace GObject

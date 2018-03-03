@@ -47,6 +47,9 @@ namespace Gir
 		[XmlElement ("varargs")]
 		public Varargs Varargs { get; set; }
 
+		[XmlElement ("callback")]
+		public Callback Callback { get; set; }
+
 		public bool IsPointer => Type.CType.EndsWith ("*", System.StringComparison.Ordinal);
 
 		public bool IsArray => Type.Array != null;

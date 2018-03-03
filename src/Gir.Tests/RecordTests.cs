@@ -200,5 +200,65 @@ namespace GLib
 //{
 //}", result);
 //}
+
+		[Test]
+		public void GTypeStructsAreInternal ()
+		{
+			var result = GenerateType(GObject, "ObjectClass", true);
+
+			System.Console.WriteLine (result);
+			Assert.AreEqual (@"using System;
+
+namespace GObject
+{
+	internal struct ObjectClass
+	{
+		TypeClass GTypeClass;
+
+		SList ConstructProperties;
+
+		constructor Constructor;
+
+		set_property SetProperty;
+
+		get_property GetProperty;
+
+		dispose Dispose;
+
+		finalize Finalize;
+
+		dispatch_properties_changed DispatchPropertiesChanged;
+
+		notify Notify;
+
+		constructed Constructed;
+
+		UIntPtr Flags;
+
+		IntPtr Pdummy;
+
+		static extern ParamSpec g_object_class_find_property (ObjectClass oclass, string property_name);
+
+		public ParamSpec FindProperty (string property_name);
+
+		static extern void g_object_class_install_properties (ObjectClass oclass, uint n_pspecs, ParamSpec pspecs);
+
+		public void InstallProperties (uint n_pspecs, ParamSpec pspecs);
+
+		static extern void g_object_class_install_property (ObjectClass oclass, uint property_id, ParamSpec pspec);
+
+		public void InstallProperty (uint property_id, ParamSpec pspec);
+
+		static extern ParamSpec g_object_class_list_properties (ObjectClass oclass, uint n_properties);
+
+		public ParamSpec ListProperties (uint n_properties);
+
+		static extern void g_object_class_override_property (ObjectClass oclass, uint property_id, string name);
+
+		public void OverrideProperty (uint property_id, string name);
+	}
+}
+", result);
+		}
 	}
 }

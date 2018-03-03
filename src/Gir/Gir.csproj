@@ -99,7 +99,7 @@
     <Compile Include="Generation\Record.cs" />
     <Compile Include="Generation\Member.cs" />
     <Compile Include="Marshal\Type.cs" />
-    <Compile Include="Marshal\IHasType.cs" />
+    <Compile Include="Marshal\IType.cs" />
     <Compile Include="Marshal\Field.cs" />
     <Compile Include="Generation\Array.cs" />
     <Compile Include="Generation\Constant.cs" />
