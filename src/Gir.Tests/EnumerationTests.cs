@@ -11,7 +11,9 @@ namespace Gir.Tests
 		{
 			var result = GenerateType (Pango, "Alignment");
 
-			Assert.AreEqual (@"namespace Pango
+			Assert.AreEqual (@"using System;
+
+namespace Pango
 {
 	///<summary>
 	/// A #PangoAlignment describes how to align the lines of a #PangoLayout within the

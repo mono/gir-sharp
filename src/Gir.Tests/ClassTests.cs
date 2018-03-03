@@ -13,7 +13,9 @@ namespace Gir.Tests
 			var result = GenerateType (Gio2, "BufferedOutputStream");
 
 			// Need to map pointers at symbol level.
-			Assert.AreEqual (@"namespace Gio
+			Assert.AreEqual (@"using System;
+
+namespace Gio
 {
 	///<summary>
 	/// Buffered output stream implements #GFilterOutputStream and provides

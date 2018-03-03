@@ -66,9 +66,13 @@ namespace Gir.Tests
 			return Encoding.UTF8.GetString (ms.ToArray ());
 		}
 
-		protected static GenerationOptions GetOptions (IEnumerable<Repository> repositories, Repository mainRepository, bool compat = false)
+		protected static GenerationOptions GetOptions (IEnumerable<Repository> repositories, Repository mainRepository, bool compat = false, bool generateMember = false)
 		{
-			return new GenerationOptions ("", repositories, mainRepository, compat, new MemoryStream ());
+			return new GenerationOptions ("", repositories, mainRepository, new GenerationOptions.ToggleOptions {
+				Compat = compat,
+				RedirectStream = new MemoryStream (),
+				WriteHeader = !generateMember,
+			});
 		}
 
 		protected static void GenerateType (Repository repo, GenerationOptions opts, string typeName)
@@ -98,7 +102,7 @@ namespace Gir.Tests
 		protected static string GenerateMember (string girFile, string typeName, string memberName, bool compat = false)
 		{
 			var repositories = ParseGirFile (girFile, out var mainRepository);
-			var opts = GetOptions (repositories, mainRepository, compat);
+			var opts = GetOptions (repositories, mainRepository, compat, generateMember: true);
 
 			GenerateMember (mainRepository, opts, typeName, memberName);
 

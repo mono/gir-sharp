@@ -6,19 +6,13 @@ namespace Gir
 		public void Generate (GenerationOptions opts)
 		{
 			using (var writer = this.GetWriter (opts)) {
-				writer.WriteLine ("using System;\n");
-				writer.WriteLine ("namespace " + opts.Namespace.Name);
+				this.GenerateDocumentation (writer);
+				var interfaceName = (opts.GenerateInterfacesWithIPrefix) ? $"I{Name}" : Name;
+				writer.WriteLine ($"public interface {interfaceName}");
 				writer.WriteLine ("{");
-				using (writer.Indent ()) {
-					this.GenerateDocumentation (writer);
-					var interfaceName = (opts.GenerateInterfacesWithIPrefix) ? $"I{Name}" : Name;
-					writer.WriteLine ($"public interface {interfaceName}");
-					writer.WriteLine ("{");
 
-					using (writer.Indent ()) {
-						this.GenerateMembers (writer);
-					}
-					writer.WriteLine ("}");
+				using (writer.Indent ()) {
+					this.GenerateMembers (writer);
 				}
 				writer.WriteLine ("}");
 			}

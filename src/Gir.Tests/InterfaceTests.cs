@@ -9,7 +9,9 @@ namespace Gir.Tests
 		public void TestSeekableInterfaceIsGenerated()
 		{
 			var result = GenerateType(Gio2, "Seekable");
-			Assert.AreEqual(@"namespace Gio
+			Assert.AreEqual(@"using System;
+
+namespace Gio
 {
 	///<summary>
 	/// #GSeekable is implemented by streams (implementations of
@@ -373,7 +375,9 @@ namespace Gio
 		{
 			var result = GenerateType(Gtk3, "AboutDialog", true);
 
-			Assert.AreEqual (@"namespace Gtk
+			Assert.AreEqual (@"using System;
+
+namespace Gtk
 {
 	public class AboutDialog : Dialog, Atk.ImplementorIface, Buildable
 	{

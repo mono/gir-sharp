@@ -11,7 +11,9 @@ namespace Gir.Tests
 		{
 			var result = GenerateType (Gtk3, "TreeModelFilterModifyFunc");
 
-			Assert.AreEqual (@"namespace Gtk
+			Assert.AreEqual (@"using System;
+
+namespace Gtk
 {
 	[UnmanagedFunctionPointer (CallingConvention.Cdecl)]
 	public delegate void TreeModelFilterModifyFunc (ITreeModel model, TreeIter iter, Value value, int column, IntPtr data)

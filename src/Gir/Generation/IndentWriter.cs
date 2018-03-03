@@ -15,9 +15,32 @@ namespace Gir
 			var toStream = opts.RedirectStream ?? File.Open (path, FileMode.Create);
 			var sw = new StreamWriter (toStream);
 
-			return new IndentWriter (sw) {
+			var writer = new IndentWriter (sw) {
 				Options = opts,
 			};
+
+			writer.WriteHeader ();
+
+			return writer;
+		}
+
+		public void WriteHeader ()
+		{
+			if (!Options.WriteHeader)
+				return;
+			
+			WriteLine ("using System;");
+			// TODO: Uncomment this when we know exactly which namespaces to include.
+			//foreach (var include in Options.UsingNamespaces) {
+			//	if (include == Options.Namespace)
+			//		continue;
+			//	WriteLine ($"using {include};");
+			//}
+			WriteLine ();
+
+			WriteLine ($"namespace {Options.Namespace}");
+			WriteLine ("{");
+			Indent ();
 		}
 
 		public IndentWriter (TextWriter tw)
@@ -27,8 +50,15 @@ namespace Gir
 
 		public void Dispose ()
 		{
-			writer?.Dispose ();
-			writer = null;
+			if (writer != null) {
+				if (Options.WriteHeader) {
+					Unindent ();
+					WriteLine ("}");
+				}
+
+				writer?.Dispose ();
+				writer = null;
+			}
 		}
 
 		public IndentWriter WriteDocumentation (Documentation doc, string tag)

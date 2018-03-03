@@ -10,7 +10,9 @@ namespace Gir.Tests
 		public void GenerateDocumentationWhenCompatFalse ()
 		{
 			var result = GenerateType (Pango, "FontMask");
-			Assert.AreEqual (@"namespace Pango
+			Assert.AreEqual (@"using System;
+
+namespace Pango
 {
 	///<summary>
 	/// The bits in a #PangoFontMask correspond to fields in a
@@ -49,7 +51,9 @@ namespace Gir.Tests
 		{
 			var result = GenerateType (Pango, "FontMask", compat: true);
 
-			Assert.AreEqual (@"namespace Pango
+			Assert.AreEqual (@"using System;
+
+namespace Pango
 {
 	[Flags]
 	public enum FontMask

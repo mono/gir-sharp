@@ -13,7 +13,9 @@ namespace Gir.Tests
 			var result = GenerateType (GLib, "ByteArray");
 
 			// Need to map pointers at symbol level.
-			Assert.AreEqual (@"namespace GLib
+			Assert.AreEqual (@"using System;
+
+namespace GLib
 {
 	///<summary>Contains the public fields of a GByteArray.</summary>
 	public struct ByteArray

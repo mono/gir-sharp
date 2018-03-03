@@ -46,7 +46,7 @@ namespace Gir
 			//if (dir != "" || assembly_name != "" || glue_filename != "" || glue_includes != "" || gluelib_name != "")
 			//gen_info = new GenerationInfo(dir, custom_dir, assembly_name, glue_filename, glue_includes, gluelib_name);
 
-			var genOpts = new GenerationOptions (opt.OutputDirectory, opt.AllRepositories, opt.GenerationRepository, false);
+			var genOpts = new GenerationOptions (opt.OutputDirectory, opt.AllRepositories, opt.GenerationRepository);
 
 			if (!Directory.Exists (opt.OutputDirectory))
 				Directory.CreateDirectory (opt.OutputDirectory);
