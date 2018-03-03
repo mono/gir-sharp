@@ -21,7 +21,7 @@ namespace Gir
 
 			var repositories = ParseRecursive (mainRepository, includeDir, new Dictionary<string, Repository> ()).ToList ();
 			// The first repository is the main repository
-			repositories.RemoveAt(0);
+			//repositories.RemoveAt(0);
 			return repositories;
 		}
 

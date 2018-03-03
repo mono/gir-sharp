@@ -53,9 +53,9 @@ namespace Gir
 			LibraryName = repo.Namespace.SharedLibrary?.Split (',') [0] ?? "";
 
 			SymbolTable = new SymbolTable(Statistics, options.Win64Longs);
-			SymbolTable.AddTypes(repo.GetSymbols());
+			SymbolTable.AddTypes (repo.GetSymbols());
 			foreach (var repository in resolvedRepos) {
-				SymbolTable.AddTypes(repository.GetSymbols(), repository);
+				SymbolTable.AddTypes (repository.GetSymbols(), repository);
 			}
 			SymbolTable.ProcessAliases();
 		}

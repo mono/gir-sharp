@@ -48,6 +48,7 @@ namespace Gir.Tests
 		}
 
 		[Test]
+		[Ignore("there is no void*")]
 		public void VoidPointerWorks ()
 		{
 			var repo = ParseGirFile (GLib, out var mainRepository);

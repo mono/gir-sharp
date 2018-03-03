@@ -12,6 +12,7 @@ namespace Gir
 			AddType (new StringMarshal ("gfilename", "string", "", "IntPtr"));//, "GLib.Marshaller.StringToFilenamePtr({0})", "GLib.Marshaller.FilenamePtrToStringGFree({0})"));
 			AddType (new StringMarshal ("gchar", "string", "", "IntPtr"));//, "GLib.Marshaller.StringToPtrGStrdup({0})", "GLib.Marshaller.PtrToStringGFree({0})"));
 			AddType (new StringMarshal ("char", "string", "", "IntPtr"));//, "GLib.Marshaller.StringToPtrGStrdup({0})", "GLib.Marshaller.PtrToStringGFree({0})"));
+			AddType (new StringMarshal ("utf8", "string", "", "IntPtr"));//, "GLib.Marshaller.StringToPtrGStrdup({0})", "GLib.Marshaller.PtrToStringGFree({0})"));
 		}
 
 		void RegisterPrimitives (bool nativeWin64)
@@ -53,6 +54,20 @@ namespace Gir
 			AddType (new Primitive ("gsize", "UIntPtr", "UIntPtr.Zero"));
 
 			AddType (new Primitive ("va_list", "...", ""));
+
+			var alias = new Alias {
+				Type = new Type {
+					CType = "GType",
+					Name = "GLib.Type",
+					Array = null
+				},
+				Doc = new Documentation {
+					Text = ""
+				},
+				CType = "GType",
+				Name = "GType"
+			};
+			AddType (alias);
 
 			RegisterLongTypes (nativeWin64);
 		}
