@@ -14,11 +14,11 @@ namespace Gir
 		public string DirectoryPath { get; }
 		public string Namespace => Repository.Namespace.Name;
 		public IEnumerable<string> UsingNamespaces => AllRepositories.Select (x => x.Namespace.Name);
-		public Repository Repository { get; }
-		public IEnumerable<Repository> AllRepositories { get; }
 		public Stream RedirectStream => Options.RedirectStream;
 
 		public string LibraryName { get; }
+
+		public IEnumerable<IGeneratable> AllGeneratables => Repository.GetGeneratables ();
 		#endregion
 
 		#region Generation toggles
@@ -33,6 +33,9 @@ namespace Gir
 		#region Symbols
 
 		#endregion
+
+		Repository Repository { get; }
+		IEnumerable<Repository> AllRepositories { get; }
 
 		public GenerationOptions (string dir, IEnumerable<Repository> allRepos, Repository repo, ToggleOptions options = null)
 		{

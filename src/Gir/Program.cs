@@ -51,7 +51,7 @@ namespace Gir
 			if (!Directory.Exists (opt.OutputDirectory))
 				Directory.CreateDirectory (opt.OutputDirectory);
 
-			foreach (IGeneratable gen in opt.GenerationRepository.GetGeneratables ()) {
+			foreach (IGeneratable gen in genOpts.AllGeneratables) {
 				gen.Generate (genOpts);
 			}
 
