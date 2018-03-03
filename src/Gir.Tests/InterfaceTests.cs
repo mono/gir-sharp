@@ -228,7 +228,7 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		///<returns>%TRUE or %FALSE whether the size was set or not</returns>
 		bool SetSize (int width, int height);
 
-		event Bounds-changed;
+		event BoundsChanged;
 	}
 }
 ", result);
@@ -279,7 +279,7 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 
 		bool SetSize (int width, int height);
 
-		event Bounds-changed;
+		event BoundsChanged;
 	}
 }
 ", result);
@@ -356,9 +356,9 @@ namespace Gio
 
 		event Disconnected;
 
-		event Eject-button;
+		event EjectButton;
 
-		event Stop-button;
+		event StopButton;
 	}
 }
 ", result);

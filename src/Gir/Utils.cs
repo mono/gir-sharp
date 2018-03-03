@@ -16,7 +16,7 @@ namespace Gir
 
 			bool isUpper = true;
 			foreach (var c in cname) {
-				if (c == '_') {
+				if (c == '_' || c == '-') {
 					isUpper = true;
 					continue;
 				}
