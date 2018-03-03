@@ -16,7 +16,11 @@ namespace Gir
 				inheritanceList.AddRange (Implements.Select (x => opts.GenerateInterfacesWithIPrefix ? "I" + x.Name : x.Name));
 
 				var inheritanceString = string.Join (", ", inheritanceList.ToArray ());
-				writer.WriteLine ($"public class {Name} : {inheritanceString}");
+				if (!string.IsNullOrEmpty (inheritanceString)) {
+					writer.WriteLine ($"public class {Name} : {inheritanceString}");
+				} else {
+					writer.WriteLine ($"public class {Name}");
+				}
 				writer.WriteLine ("{");
 
 				using (writer.Indent ()) {

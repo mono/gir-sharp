@@ -61,8 +61,8 @@
     <Compile Include="Model\Parameter.cs" />
     <Compile Include="Model\Prerequisite.cs" />
     <Compile Include="Model\Property.cs" />
-    <Compile Include="Model\Record.cs" />
     <Compile Include="Model\Repository.cs" />
+    <Compile Include="Model\Record.cs" />
     <Compile Include="Model\ReturnValue.cs" />
     <Compile Include="Model\Scope.cs" />
     <Compile Include="Model\Signal.cs" />

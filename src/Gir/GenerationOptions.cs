@@ -18,7 +18,7 @@ namespace Gir
 
 		public string LibraryName { get; }
 
-		public IEnumerable<IGeneratable> AllGeneratables => Repository.GetGeneratables ();
+		public IEnumerable<IGeneratable> AllGeneratables => allGeneratables;
 		#endregion
 
 		#region Generation toggles
@@ -34,8 +34,9 @@ namespace Gir
 
 		#endregion
 
-		Repository Repository { get; }
 		IEnumerable<Repository> AllRepositories { get; }
+		Repository Repository { get; }
+		List<IGeneratable> allGeneratables = new List<IGeneratable> ();
 
 		public GenerationOptions (string dir, IEnumerable<Repository> allRepos, Repository repo, ToggleOptions options = null)
 		{
@@ -45,6 +46,7 @@ namespace Gir
 			DirectoryPath = dir;
 			AllRepositories = allRepos;
 			Repository = repo;
+			allGeneratables.AddRange (Repository.GetGeneratables ());
 
 			// This may contain multiple libraries, so get the first one. Also, hack a string.Empty for xlib.
 			LibraryName = repo.Namespace.SharedLibrary?.Split (',') [0] ?? "";
