@@ -4,7 +4,6 @@ using System.Xml.Serialization;
 
 namespace Gir
 {
-	[Serializable]
 	[XmlRoot ("repository", Namespace = "http://www.gtk.org/introspection/core/1.0")]
 	public partial class Repository
 	{
