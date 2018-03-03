@@ -11,7 +11,6 @@ namespace Gir.Tests
 		{
 			var result = GenerateType(GLib, "List", true);
 
-			Console.WriteLine (result);
 			Assert.AreEqual (@"using System;
 
 namespace GLib
@@ -148,7 +147,8 @@ namespace GLib
 
 		public List SortWithData (CompareDataFunc compare_func, IntPtr user_data);
 	}
-}", result);
+}
+", result);
 		}
 	}
 }
