@@ -228,7 +228,11 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		///<returns>%TRUE or %FALSE whether the size was set or not</returns>
 		bool SetSize (int width, int height);
 
-		event BoundsChanged;
+		///<summary>
+		/// The 'bounds-changed"" signal is emitted when the bposition or
+		/// size of the component changes.
+		///</summary>
+		event System.EventHandler BoundsChanged;
 	}
 }
 ", result);
@@ -279,7 +283,7 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 
 		bool SetSize (int width, int height);
 
-		event BoundsChanged;
+		event System.EventHandler BoundsChanged;
 	}
 }
 ", result);
@@ -352,13 +356,13 @@ namespace Gio
 
 		bool StopFinish (IAsyncResult result);
 
-		event Changed;
+		event System.EventHandler Changed;
 
-		event Disconnected;
+		event System.EventHandler Disconnected;
 
-		event EjectButton;
+		event System.EventHandler EjectButton;
 
-		event StopButton;
+		event System.EventHandler StopButton;
 	}
 }
 ", result);
@@ -507,7 +511,7 @@ namespace Gio
 
 		public void SetWrapLicense (bool wrap_license);
 
-		event ActivateLink;
+		event AboutDialog.activate-linkHandler ActivateLink;
 	}
 }
 ",
