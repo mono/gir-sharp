@@ -88,7 +88,9 @@ namespace Gir.Tests
 		public void TestSeekableInterfaceIsGeneratedCompatEnabled()
 		{
 			var result = GenerateType(Gio2, "Seekable", true);
-			Assert.AreEqual(@"namespace Gio
+			Assert.AreEqual(@"using System;
+
+namespace Gio
 {
 	public interface Seekable
 	{
@@ -110,7 +112,9 @@ namespace Gir.Tests
 		public void GenerateAtkComponentInterface ()
 		{
 			var result = GenerateType(Atk1, "Component");
-			Assert.AreEqual(@"namespace Atk
+			Assert.AreEqual(@"using System;
+
+namespace Atk
 {
 	///<summary>
 	/// #AtkComponent should be implemented by most if not all UI elements
@@ -235,7 +239,9 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		{
 			var result = GenerateType (Atk1, "Component", true);
 
-			Assert.AreEqual (@"namespace Atk
+			Assert.AreEqual (@"using System;
+
+namespace Atk
 {
 	public interface Component
 	{
@@ -284,7 +290,9 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 		{
 			var result = GenerateType(Gio2, "Drive", true);
 
-			Assert.AreEqual(@"namespace Gio
+			Assert.AreEqual(@"using System;
+
+namespace Gio
 {
 	public interface Drive
 	{
