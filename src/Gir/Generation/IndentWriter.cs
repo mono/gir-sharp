@@ -15,13 +15,9 @@ namespace Gir
 			var toStream = opts.RedirectStream ?? File.Open (path, FileMode.Create);
 			var sw = new StreamWriter (toStream);
 
-			var writer = new IndentWriter (sw) {
+			return new IndentWriter (sw) {
 				Options = opts,
 			};
-
-			writer.WriteHeader ();
-
-			return writer;
 		}
 
 		public void WriteHeader ()
