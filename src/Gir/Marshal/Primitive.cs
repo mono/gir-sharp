@@ -16,4 +16,14 @@ namespace Gir
 			DefaultValue = defaultValue;
 		}
 	}
+
+	public class StringMarshal : Primitive
+	{
+		public string MarshalType { get; }
+
+		public StringMarshal (string ctype, string csharpType, string defaultValue, string marshalType) : base (ctype, csharpType, defaultValue)
+		{
+			MarshalType = marshalType;
+		}
+	}
 }

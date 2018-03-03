@@ -5,14 +5,12 @@ namespace Gir
 	{
 		public void Generate(IGeneratable parent, IndentWriter writer)
 		{
-			// FIXME, Signal isn't being populated correctly
-			//writer.WriteLine($"event {EventHandlerQualifiedName(parent)} {Name.ToCSharp()};");
-			writer.WriteLine ($"event {Name.ToCSharp ()};");
+			writer.WriteLine($"event {EventHandlerQualifiedName(parent)} {Name.ToCSharp()};");
 		}
 
 		bool IsEventHandler {
 			get {
-				return ReturnValue.Type.Name == "void" && Parameters.Count == 1;// && (Parameters[0] is Object || Parameters[0] is Interface);
+				return ReturnValue.Type.CType == "void" && Parameters.Count == 0;// && (Parameters[0] is Object || Parameters[0] is Interface);
 			}
 		}
 

@@ -6,6 +6,7 @@ namespace Gir
 		public void Generate (GenerationOptions opts)
 		{
 			using (var writer = this.GetWriter (opts)) {
+				writer.WriteLine ("using System;\n");
 				writer.WriteLine ("namespace " + opts.Namespace.Name);
 				writer.WriteLine ("{");
 				using (writer.Indent ()) {
