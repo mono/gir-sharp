@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -13,7 +14,7 @@ namespace Gir
 		#region Generation information
 		public string DirectoryPath { get; }
 		public string Namespace => Repository.Namespace.Name;
-		public IEnumerable<string> UsingNamespaces => AllRepositories.Select (x => x.Namespace.Name);
+		public IEnumerable<string> UsingNamespaces => ResolvedRepositories.Select (x => x.Namespace.Name);
 		public Stream RedirectStream => Options.RedirectStream;
 
 		public string LibraryName { get; }
@@ -34,26 +35,29 @@ namespace Gir
 
 		#endregion
 
-		IEnumerable<Repository> AllRepositories { get; }
+		IEnumerable<Repository> ResolvedRepositories { get; }
 		Repository Repository { get; }
 		List<IGeneratable> allGeneratables = new List<IGeneratable> ();
 
-		public GenerationOptions (string dir, IEnumerable<Repository> allRepos, Repository repo, ToggleOptions options = null)
+		public GenerationOptions (string dir, IEnumerable<Repository> resolvedRepos, Repository repo, ToggleOptions options = null)
 		{
 			// Set options to default if none
 			Options = options ?? new ToggleOptions ();
 
 			DirectoryPath = dir;
-			AllRepositories = allRepos;
+			ResolvedRepositories = resolvedRepos;
 			Repository = repo;
 			allGeneratables.AddRange (Repository.GetGeneratables ());
 
 			// This may contain multiple libraries, so get the first one. Also, hack a string.Empty for xlib.
 			LibraryName = repo.Namespace.SharedLibrary?.Split (',') [0] ?? "";
 
-			SymbolTable = new SymbolTable (Statistics, options.Win64Longs);
-			SymbolTable.AddTypes (allRepos.SelectMany (x => x.GetSymbols ()));
-			SymbolTable.ProcessAliases ();
+			SymbolTable = new SymbolTable(Statistics, options.Win64Longs);
+			SymbolTable.AddTypes(repo.GetSymbols());
+			foreach (var repository in resolvedRepos) {
+				SymbolTable.AddTypes(repository.GetSymbols(), repository);
+			}
+			SymbolTable.ProcessAliases();
 		}
 
 		public class ToggleOptions

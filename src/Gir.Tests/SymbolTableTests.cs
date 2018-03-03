@@ -62,7 +62,7 @@ namespace Gir.Tests
 			var repo = ParseGirFile (Gtk3, out var mainRepository);
 			var opts = GetOptions (repo, mainRepository);
 
-			Assert.NotNull (opts.SymbolTable ["Gdk.PixbufError"]);
+			Assert.NotNull (opts.SymbolTable["GdkPixbuf.PixbufError"]);
 		}
 	}
 }

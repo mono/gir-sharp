@@ -23,6 +23,12 @@ namespace Gir
 				AddType (symbol);
 		}
 
+		public void AddTypes (IEnumerable<ISymbol> symbols, Repository repository)
+		{
+			foreach (var symbol in symbols)
+				AddType(symbol, repository);
+		}
+
 		public void AddType (ISymbol symbol)
 		{
 			// TODO, not all <class> tags have a CType
@@ -39,6 +45,14 @@ namespace Gir
 
 			typeMap [symbol.Name] = symbol;
 			statistics.RegisterType (symbol);
+		}
+
+		public void AddType (ISymbol symbol, Repository repository)
+		{
+			if (symbol.Name == null) return;
+
+			typeMap[$"{repository.Namespace.Name}.{symbol.Name}"] = symbol;
+			statistics.RegisterType(symbol);
 		}
 
 		static int GetIndexOfStartSkipping (string str, int start, string toSkip)
@@ -79,7 +93,13 @@ namespace Gir
 			var copy = typeMap.ToDictionary (x => x.Key, x => x.Value);
 			foreach (var kvp in copy) {
 				if (kvp.Value is Alias alias) {
-					typeMap [kvp.Key] = Dealias (alias);
+					// This is inside a resolved repository
+					if (kvp.Key.Contains (".")) {
+						typeMap[kvp.Key] = Dealias (alias, kvp.Key.Split ('.')[0]);
+					}
+					else {
+						typeMap[kvp.Key] = Dealias (alias);
+					}
 				}
 			}
 		}
@@ -96,6 +116,25 @@ namespace Gir
 			}
 			return target;
 		}
+
+		ISymbol Dealias (Alias original, string repository)
+		{
+			ISymbol target = original;
+			while (target is Alias alias) {
+				var toType = $"{alias.Type.Name}";
+
+				if (!typeMap.TryGetValue(toType, out target)) {
+					// HACK?!: this might be in a included repository but these are prefixed in symbol table
+					toType = $"{repository}.{alias.Type.Name}";
+					if (!typeMap.TryGetValue (toType, out target)) {
+						statistics.RegisterError(new AliasRegistrationError(alias));
+						return this["void"];
+					}
+				}
+			}
+			return target;
+		}
+
 
 		public IEnumerator<ISymbol> GetEnumerator ()
 		{
