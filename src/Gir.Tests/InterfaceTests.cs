@@ -9,7 +9,9 @@ namespace Gir.Tests
 		public void TestSeekableInterfaceIsGenerated()
 		{
 			var result = GenerateType(Gio2, "Seekable");
-			Assert.AreEqual(@"namespace Gio
+			Assert.AreEqual(@"using System;
+
+namespace Gio
 {
 	///<summary>
 	/// #GSeekable is implemented by streams (implementations of
@@ -366,156 +368,6 @@ namespace Gio
 	}
 }
 ", result);
-		}
-
-		[Test]
-		public void GenerateGtkAboutDialog ()
-		{
-			var result = GenerateType(Gtk3, "AboutDialog", true);
-
-			Assert.AreEqual (@"namespace Gtk
-{
-	public class AboutDialog : Dialog, Atk.ImplementorIface, Buildable
-	{
-		static extern Widget gtk_about_dialog_new ();
-
-		public AboutDialog () : base ()
-		{
-		}
-
-		Dialog ParentInstance;
-
-		AboutDialogPrivate Priv;
-
-		static extern void gtk_about_dialog_add_credit_section (AboutDialog about, string section_name, string people);
-
-		public void AddCreditSection (string section_name, string people);
-
-		static extern string gtk_about_dialog_get_artists (AboutDialog about);
-
-		public string GetArtists ();
-
-		static extern string gtk_about_dialog_get_authors (AboutDialog about);
-
-		public string GetAuthors ();
-
-		static extern string gtk_about_dialog_get_comments (AboutDialog about);
-
-		public string GetComments ();
-
-		static extern string gtk_about_dialog_get_copyright (AboutDialog about);
-
-		public string GetCopyright ();
-
-		static extern string gtk_about_dialog_get_documenters (AboutDialog about);
-
-		public string GetDocumenters ();
-
-		static extern string gtk_about_dialog_get_license (AboutDialog about);
-
-		public string GetLicense ();
-
-		static extern License gtk_about_dialog_get_license_type (AboutDialog about);
-
-		public License GetLicenseType ();
-
-		static extern Pixbuf gtk_about_dialog_get_logo (AboutDialog about);
-
-		public Pixbuf GetLogo ();
-
-		static extern string gtk_about_dialog_get_logo_icon_name (AboutDialog about);
-
-		public string GetLogoIconName ();
-
-		static extern string gtk_about_dialog_get_program_name (AboutDialog about);
-
-		public string GetProgramName ();
-
-		static extern string gtk_about_dialog_get_translator_credits (AboutDialog about);
-
-		public string GetTranslatorCredits ();
-
-		static extern string gtk_about_dialog_get_version (AboutDialog about);
-
-		public string GetVersion ();
-
-		static extern string gtk_about_dialog_get_website (AboutDialog about);
-
-		public string GetWebsite ();
-
-		static extern string gtk_about_dialog_get_website_label (AboutDialog about);
-
-		public string GetWebsiteLabel ();
-
-		static extern bool gtk_about_dialog_get_wrap_license (AboutDialog about);
-
-		public bool GetWrapLicense ();
-
-		static extern void gtk_about_dialog_set_artists (AboutDialog about, string artists);
-
-		public void SetArtists (string artists);
-
-		static extern void gtk_about_dialog_set_authors (AboutDialog about, string authors);
-
-		public void SetAuthors (string authors);
-
-		static extern void gtk_about_dialog_set_comments (AboutDialog about, string comments);
-
-		public void SetComments (string comments);
-
-		static extern void gtk_about_dialog_set_copyright (AboutDialog about, string copyright);
-
-		public void SetCopyright (string copyright);
-
-		static extern void gtk_about_dialog_set_documenters (AboutDialog about, string documenters);
-
-		public void SetDocumenters (string documenters);
-
-		static extern void gtk_about_dialog_set_license (AboutDialog about, string license);
-
-		public void SetLicense (string license);
-
-		static extern void gtk_about_dialog_set_license_type (AboutDialog about, License license_type);
-
-		public void SetLicenseType (License license_type);
-
-		static extern void gtk_about_dialog_set_logo (AboutDialog about, Pixbuf logo);
-
-		public void SetLogo (Pixbuf logo);
-
-		static extern void gtk_about_dialog_set_logo_icon_name (AboutDialog about, string icon_name);
-
-		public void SetLogoIconName (string icon_name);
-
-		static extern void gtk_about_dialog_set_program_name (AboutDialog about, string name);
-
-		public void SetProgramName (string name);
-
-		static extern void gtk_about_dialog_set_translator_credits (AboutDialog about, string translator_credits);
-
-		public void SetTranslatorCredits (string translator_credits);
-
-		static extern void gtk_about_dialog_set_version (AboutDialog about, string version);
-
-		public void SetVersion (string version);
-
-		static extern void gtk_about_dialog_set_website (AboutDialog about, string website);
-
-		public void SetWebsite (string website);
-
-		static extern void gtk_about_dialog_set_website_label (AboutDialog about, string website_label);
-
-		public void SetWebsiteLabel (string website_label);
-
-		static extern void gtk_about_dialog_set_wrap_license (AboutDialog about, bool wrap_license);
-
-		public void SetWrapLicense (bool wrap_license);
-
-		event AboutDialog.activate-linkHandler ActivateLink;
-	}
-}
-",
-result);
 		}
 	}
 }

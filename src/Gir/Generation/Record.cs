@@ -6,17 +6,17 @@ namespace Gir
 		public void Generate (GenerationOptions opts)
 		{
 			using (var writer = this.GetWriter (opts)) {
-				writer.WriteLine ("namespace " + opts.Namespace.Name);
-				writer.WriteLine ("{");
-				using (writer.Indent ()) {
-					this.GenerateDocumentation (writer);
-					writer.WriteLine ("public struct " + Name);
-					writer.WriteLine ("{");
+				this.GenerateDocumentation (writer);
 
-					using (writer.Indent ()) {
-						this.GenerateMembers (writer);
-					}
-					writer.WriteLine ("}");
+				var access = "public";
+				if (!string.IsNullOrEmpty (GLibIsGTypeStructFor))
+					access = "internal";
+
+				writer.WriteLine ($"{access} struct {Name}");
+				writer.WriteLine ("{");
+
+				using (writer.Indent ()) {
+					this.GenerateMembers (writer);
 				}
 				writer.WriteLine ("}");
 			}

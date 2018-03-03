@@ -61,8 +61,8 @@
     <Compile Include="Model\Parameter.cs" />
     <Compile Include="Model\Prerequisite.cs" />
     <Compile Include="Model\Property.cs" />
-    <Compile Include="Model\Record.cs" />
     <Compile Include="Model\Repository.cs" />
+    <Compile Include="Model\Record.cs" />
     <Compile Include="Model\ReturnValue.cs" />
     <Compile Include="Model\Scope.cs" />
     <Compile Include="Model\Signal.cs" />
@@ -99,7 +99,7 @@
     <Compile Include="Generation\Record.cs" />
     <Compile Include="Generation\Member.cs" />
     <Compile Include="Marshal\Type.cs" />
-    <Compile Include="Marshal\IHasType.cs" />
+    <Compile Include="Marshal\IType.cs" />
     <Compile Include="Marshal\Field.cs" />
     <Compile Include="Generation\Array.cs" />
     <Compile Include="Generation\Constant.cs" />
@@ -117,6 +117,7 @@
     <Compile Include="Marshal\ITypeOrArray.cs" />
     <Compile Include="Marshal\Callback.cs" />
     <Compile Include="Generation\Callback.cs" />
+    <Compile Include="Marshal\Varargs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\c.xsd" />

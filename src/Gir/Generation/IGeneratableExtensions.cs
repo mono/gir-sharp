@@ -12,7 +12,7 @@ namespace Gir
 		public static IndentWriter GetWriter (this IGeneratable gen, GenerationOptions opts)
 		{
 			var path = Path.Combine (opts.DirectoryPath, gen.Name + CSharpFileExtension);
-			return IndentWriter.OpenWrite (path, opts);
+			return IndentWriter.OpenWrite (path, opts).WriteHeader ();
 		}
 
 		public static void GenerateDocumentation (this IDocumented gen, IndentWriter writer)

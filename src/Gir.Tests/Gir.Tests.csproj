@@ -45,9 +45,12 @@
     <Compile Include="ClassTests.cs" />
     <Compile Include="InterfaceTests.cs" />
     <Compile Include="CallbackTests.cs" />
+    <Compile Include="ImportantGeneratables\GObject.cs" />
+    <Compile Include="ImportantGeneratables\List.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestFiles\" />
+    <Folder Include="ImportantGeneratables\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestFiles\Atk-1.0.gir">

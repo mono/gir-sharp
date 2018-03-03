@@ -18,6 +18,7 @@ namespace Gir
 		{
 			AddType (new Primitive ("void", "void", string.Empty));
 			AddType (new Primitive ("gpointer", "IntPtr", "IntPtr.Zero"));
+			AddType (new Primitive ("gconstpointer", "IntPtr", "IntPtr.Zero"));
 			AddType (new Primitive ("gboolean", "bool", "false"));
 			AddType (new Primitive ("gint", "int", "0"));
 			AddType (new Primitive ("guint", "uint", "0"));
@@ -50,6 +51,8 @@ namespace Gir
 			AddType (new Primitive ("gssize", "IntPtr", "IntPtr.Zero"));
 			AddType (new Primitive ("size_t", "UIntPtr", "UIntPtr.Zero"));
 			AddType (new Primitive ("gsize", "UIntPtr", "UIntPtr.Zero"));
+
+			AddType (new Primitive ("va_list", "...", ""));
 
 			RegisterLongTypes (nativeWin64);
 		}
