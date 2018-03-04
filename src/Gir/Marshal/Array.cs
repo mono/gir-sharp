@@ -5,7 +5,12 @@ namespace Gir
 	{
 		public ISymbol GetSymbol (GenerationOptions opts)
 		{
-			return opts.SymbolTable [Type.Name];
+			if (Name != null) {
+				return opts.SymbolTable [Name];
+			}
+			else {
+				return opts.SymbolTable [Type.Name];
+			}
 		}
 	}
 }
