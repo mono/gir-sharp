@@ -48,16 +48,6 @@ namespace Gir.Tests
 		}
 
 		[Test]
-		[Ignore("there is no void*")]
-		public void VoidPointerWorks ()
-		{
-			var repo = ParseGirFile (GLib, out var mainRepository);
-			var opts = GetOptions (repo, mainRepository);
-
-			Assert.AreEqual ("gpointer", opts.SymbolTable ["void*"].Name);
-		}
-
-		[Test]
 		public void CanResolveIncludedFiles ()
 		{
 			var repo = ParseGirFile (Gtk3, out var mainRepository);
