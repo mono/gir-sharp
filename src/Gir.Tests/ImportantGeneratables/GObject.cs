@@ -23,7 +23,7 @@ namespace GObject
 		{
 		}
 
-		static extern IntPtr g_object_newv (UIntPtr object_type, uint n_parameters, Parameter parameters);
+		static extern Object g_object_newv (UIntPtr object_type, uint n_parameters, Parameter parameters);
 
 		public Object (UIntPtr object_type, uint n_parameters, Parameter parameters) : base (object_type, n_parameters, parameters)
 		{
@@ -43,17 +43,17 @@ namespace GObject
 
 		public void AddWeakPointer (IntPtr weak_pointer_location);
 
-		static extern Binding g_object_bind_property (IntPtr source, string source_property, IntPtr target, string target_property, BindingFlags flags);
+		static extern Binding g_object_bind_property (Object source, string source_property, Object target, string target_property, BindingFlags flags);
 
-		public Binding BindProperty (string source_property, IntPtr target, string target_property, BindingFlags flags);
+		public Binding BindProperty (string source_property, Object target, string target_property, BindingFlags flags);
 
-		static extern Binding g_object_bind_property_full (IntPtr source, string source_property, IntPtr target, string target_property, BindingFlags flags, BindingTransformFunc transform_to, BindingTransformFunc transform_from, IntPtr user_data, DestroyNotify notify);
+		static extern Binding g_object_bind_property_full (Object source, string source_property, Object target, string target_property, BindingFlags flags, BindingTransformFunc transform_to, BindingTransformFunc transform_from, IntPtr user_data, DestroyNotify notify);
 
-		public Binding BindPropertyFull (string source_property, IntPtr target, string target_property, BindingFlags flags, BindingTransformFunc transform_to, BindingTransformFunc transform_from, IntPtr user_data, DestroyNotify notify);
+		public Binding BindPropertyFull (string source_property, Object target, string target_property, BindingFlags flags, BindingTransformFunc transform_to, BindingTransformFunc transform_from, IntPtr user_data, DestroyNotify notify);
 
-		static extern Binding g_object_bind_property_with_closures (IntPtr source, string source_property, IntPtr target, string target_property, BindingFlags flags, Closure transform_to, Closure transform_from);
+		static extern Binding g_object_bind_property_with_closures (Object source, string source_property, Object target, string target_property, BindingFlags flags, Closure transform_to, Closure transform_from);
 
-		public Binding BindPropertyWithClosures (string source_property, IntPtr target, string target_property, BindingFlags flags, Closure transform_to, Closure transform_from);
+		public Binding BindPropertyWithClosures (string source_property, Object target, string target_property, BindingFlags flags, Closure transform_to, Closure transform_from);
 
 		static extern IntPtr g_object_dup_data (Object object, string key, DuplicateFunc dup_func, IntPtr user_data);
 
@@ -87,7 +87,7 @@ namespace GObject
 
 		public void GetValist (string first_property_name, ... var_args);
 
-		static extern bool g_object_is_floating (IntPtr object);
+		static extern bool g_object_is_floating (Object object);
 
 		public bool IsFloating ();
 
@@ -99,13 +99,13 @@ namespace GObject
 
 		public void NotifyByPspec (ParamSpec pspec);
 
-		static extern IntPtr g_object_ref (IntPtr object);
+		static extern Object g_object_ref (Object object);
 
-		public IntPtr Ref ();
+		public Object Ref ();
 
-		static extern IntPtr g_object_ref_sink (IntPtr object);
+		static extern Object g_object_ref_sink (Object object);
 
-		public IntPtr RefSink ();
+		public Object RefSink ();
 
 		static extern void g_object_remove_toggle_ref (Object object, ToggleNotify notify, IntPtr data);
 
@@ -163,7 +163,7 @@ namespace GObject
 
 		public void ThawNotify ();
 
-		static extern void g_object_unref (IntPtr object);
+		static extern void g_object_unref (Object object);
 
 		public void Unref ();
 
