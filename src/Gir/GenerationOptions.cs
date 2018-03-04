@@ -14,7 +14,7 @@ namespace Gir
 		#region Generation information
 		public string DirectoryPath { get; }
 		public string Namespace => Repository.Namespace.Name;
-		public IEnumerable<string> UsingNamespaces => ResolvedRepositories.Select (x => x.Namespace.Name);
+		public IEnumerable<string> UsingNamespaces => AllRepositories.Select (x => x.Namespace.Name);
 		public Stream RedirectStream => Options.RedirectStream;
 
 		public string LibraryName { get; }
@@ -35,17 +35,17 @@ namespace Gir
 
 		#endregion
 
-		IEnumerable<Repository> ResolvedRepositories { get; }
+		IEnumerable<Repository> AllRepositories { get; }
 		Repository Repository { get; }
 		List<IGeneratable> allGeneratables = new List<IGeneratable> ();
 
-		public GenerationOptions (string dir, IEnumerable<Repository> resolvedRepos, Repository repo, ToggleOptions options = null)
+		public GenerationOptions (string dir, IEnumerable<Repository> allRepos, Repository repo, ToggleOptions options = null)
 		{
 			// Set options to default if none
 			Options = options ?? new ToggleOptions ();
 
 			DirectoryPath = dir;
-			ResolvedRepositories = resolvedRepos;
+			AllRepositories = allRepos;
 			Repository = repo;
 			allGeneratables.AddRange (Repository.GetGeneratables ());
 
@@ -54,7 +54,7 @@ namespace Gir
 
 			SymbolTable = new SymbolTable(Statistics, options.Win64Longs);
 			SymbolTable.AddTypes (repo.GetSymbols());
-			foreach (var repository in resolvedRepos) {
+			foreach (var repository in allRepos) {
 				SymbolTable.AddTypes (repository.GetSymbols(), repository);
 			}
 			SymbolTable.ProcessAliases();
