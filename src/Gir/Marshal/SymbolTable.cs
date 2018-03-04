@@ -64,28 +64,6 @@ namespace Gir
 			return start;
 		}
 
-		const string constPrefix = "const ";
-		const string volatilePrefix = "volatile ";
-		static string TrimConstAndPointer (string type)
-		{
-			int start = 0;
-			start = GetIndexOfStartSkipping (type, start, constPrefix);
-			start = GetIndexOfStartSkipping (type, start, volatilePrefix);
-
-			// Look for the first pointer symbol
-			int end = type.IndexOf ('*', start, type.Length - start);
-			if (end == -1) {
-				end = type.Length;
-			}
-			else if (type.IndexOf ("void", start, StringComparison.Ordinal) == 0) {
-				// Special case in case of pointers for void*,
-				// otherwise we'll get void from the symbol table
-				return "gpointer";
-			}
-
-			return type.Substring (start, end - start);
-		}
-
 		public ISymbol this[string type] => typeMap[type];
 
 		public void ProcessAliases ()
