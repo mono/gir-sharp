@@ -17,92 +17,71 @@ namespace Gir
 			RegisterBuiltIn (nativeWin64);
 		}
 
-		public void AddTypes (IEnumerable<ISymbol> symbols)
+		public void AddTypes (IEnumerable<ISymbol> symbols, Repository repository = null)
 		{
+			string nsPrefix = repository != null ? repository.Namespace.Name + "." : string.Empty;
+
 			foreach (var symbol in symbols)
-				AddType (symbol);
+				AddTypeCommon (nsPrefix + symbol.Name, symbol);
 		}
 
-		public void AddType (ISymbol symbol)
+		public void AddType (ISymbol symbol, Repository repository = null)
 		{
-			// TODO, not all <class> tags have a CType
-			// https://raw.githubusercontent.com/gtk-rs/gir-files/master/Gtk-3.0.gir
-			// <class name="EntryIconAccessible"
-			//     c: symbol - prefix = "entry_icon_accessible"
-			//     parent = "Atk.Object"
-			//     glib: type - name = "GtkEntryIconAccessible"
-			//     glib: get - type = "gtk_entry_icon_accessible_get_type" >
-			//   <implements name = "Atk.Action" />
-			//   <implements name = "Atk.Component" />
-			// </class>
-			if (symbol.CType == null) return;
-
-			typeMap [symbol.CType] = symbol;
-			statistics.RegisterType (symbol);
+			string nsPrefix = repository != null ? repository.Namespace.Name + "." : string.Empty;
+			AddTypeCommon (nsPrefix + symbol.Name, symbol);
 		}
 
-		static int GetIndexOfStartSkipping (string str, int start, string toSkip)
+		void AddTypeCommon (string key, ISymbol symbol)
 		{
-			if (toSkip.Length <= str.Length - start)
-				if (str.IndexOf (toSkip, start, toSkip.Length, StringComparison.Ordinal) == start)
-					start += toSkip.Length;
+			typeMap [key] = symbol;
 
-			return start;
+			// Maybe do not register the type if we didn't pass in the repository, so we don't count things twice.
+			statistics.RegisterType(symbol);
 		}
 
-		const string constPrefix = "const ";
-		const string volatilePrefix = "volatile ";
-		static string TrimConstAndPointer (string type)
-		{
-			int start = 0;
-			start = GetIndexOfStartSkipping (type, start, constPrefix);
-			start = GetIndexOfStartSkipping (type, start, volatilePrefix);
-
-			// Look for the first pointer symbol
-			int end = type.IndexOf ('*', start, type.Length - start);
-			if (end == -1) {
-				end = type.Length;
-			}
-			else if (type.IndexOf ("void", start, StringComparison.Ordinal) == 0) {
-				// Special case in case of pointers for void*,
-				// otherwise we'll get void from the symbol table
-				return "gpointer";
-			}
-
-			return type.Substring (start, end - start);
-		}
-
-		public ISymbol this [string type] {
-			get {
-				var actualType = TrimConstAndPointer (type);
-
-				return typeMap [actualType];
-			}
-		}
+		public ISymbol this [string type] => typeMap[type];
 
 		public void ProcessAliases ()
 		{
+			char [] separator = { '.' };
+
 			var copy = typeMap.ToDictionary (x => x.Key, x => x.Value);
 			foreach (var kvp in copy) {
 				if (kvp.Value is Alias alias) {
-					typeMap [kvp.Key] = Dealias (alias);
+					// This is inside a resolved repository
+					string repository = null;
+					if (kvp.Key.Contains ('.')) {
+						repository = kvp.Key.Split (separator) [0];
+					}
+					typeMap[kvp.Key] = Dealias (alias, repository);
 				}
 			}
 		}
 
-		ISymbol Dealias (Alias original)
+		ISymbol Dealias (Alias original, string repository = null)
 		{
 			ISymbol target = original;
 			while (target is Alias alias) {
-				var toType = TrimConstAndPointer (alias.Type.CType);
-				if (!typeMap.TryGetValue (toType, out target)) {
-					statistics.RegisterError (new AliasRegistrationError (alias));
-					return this ["void"];
+				var toType = alias.Type.Name;
+				if (typeMap.TryGetValue (toType, out target))
+					continue;
+
+				if (repository != null) {
+					// HACK?!: this might be in a included repository but these are prefixed in symbol table
+					toType = $"{repository}.{alias.Type.Name}";
+					if (typeMap.TryGetValue (toType, out target))
+						continue;
 				}
+
+				statistics.RegisterError(new AliasRegistrationError(alias));
+				return this["none"];
 			}
+
 			return target;
 		}
 
+		// This might contain duplicate symbols since we register the main repo as fully qualified and non-fully qualified.
+		// Perhaps the better fix is for generatables to handle appending the namespace so it's fully qualified?
 		public IEnumerator<ISymbol> GetEnumerator ()
 		{
 			return typeMap.Values.GetEnumerator ();

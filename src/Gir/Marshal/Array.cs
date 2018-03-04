@@ -5,7 +5,11 @@ namespace Gir
 	{
 		public ISymbol GetSymbol (GenerationOptions opts)
 		{
-			return opts.SymbolTable [CType];
+			if (Name != null)
+				return opts.SymbolTable [Name];
+
+			// TODO: Here, we need to return a custom ISymbol implementation for a plain array in case name is not null.
+			return opts.SymbolTable [Type.Name];
 		}
 	}
 }

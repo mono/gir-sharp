@@ -5,7 +5,7 @@ namespace Gir
 	{
 		public string CSharpType => "...";
 
-		public string CType => "va_list";
+		public string Name => "va_list";
 
 		public string DefaultValue => "";
 	}

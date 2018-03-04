@@ -13,7 +13,7 @@ namespace Gir.Tests
 			var repo = ParseGirFile (GLib, out var mainRepository);
 			var opts = GetOptions (repo, mainRepository);
 
-			Assert.AreEqual (opts.SymbolTable ["guint8"], opts.SymbolTable ["GDateDay"]);
+			Assert.AreEqual (opts.SymbolTable ["guint8"], opts.SymbolTable ["DateDay"]);
 		}
 
 		[TestCase (Gdk3, 0)]
@@ -48,21 +48,12 @@ namespace Gir.Tests
 		}
 
 		[Test]
-		public void VoidPointerWorks ()
-		{
-			var repo = ParseGirFile (GLib, out var mainRepository);
-			var opts = GetOptions (repo, mainRepository);
-
-			Assert.AreEqual ("gpointer", opts.SymbolTable ["void*"].CType);
-		}
-
-		[Test]
 		public void CanResolveIncludedFiles ()
 		{
 			var repo = ParseGirFile (Gtk3, out var mainRepository);
 			var opts = GetOptions (repo, mainRepository);
 
-			Assert.NotNull (opts.SymbolTable ["GdkPixbufError"]);
+			Assert.NotNull (opts.SymbolTable["GdkPixbuf.PixbufError"]);
 		}
 	}
 }

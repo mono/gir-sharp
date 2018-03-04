@@ -13,9 +13,9 @@ namespace Gir
 				this.alias = alias;
 			}
 
-			public override string Message => string.Format ("Alias {0} pointing to non-registered {1}, setting to 'void'", alias.CType, alias.Type.CType);
+			public override string Message => $"Alias {alias.Name} pointing to non-registered {alias.Type.Name}, setting to 'none'";
 
-			string DebuggerDisplay => $"{alias.CType} alias failure to {alias.Type.CType}";
+			string DebuggerDisplay => $"{alias.Name} alias failure to {alias.Type.Name}";
 		}
 	}
 }

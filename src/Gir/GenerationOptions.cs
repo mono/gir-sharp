@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -51,9 +52,14 @@ namespace Gir
 			// This may contain multiple libraries, so get the first one. Also, hack a string.Empty for xlib.
 			LibraryName = repo.Namespace.SharedLibrary?.Split (',') [0] ?? "";
 
-			SymbolTable = new SymbolTable (Statistics, options.Win64Longs);
-			SymbolTable.AddTypes (allRepos.SelectMany (x => x.GetSymbols ()));
-			SymbolTable.ProcessAliases ();
+			SymbolTable = new SymbolTable(Statistics, options.Win64Longs);
+
+			// Register the main repository once without namespace names and once with them.
+			SymbolTable.AddTypes (repo.GetSymbols());
+			foreach (var repository in allRepos) {
+				SymbolTable.AddTypes (repository.GetSymbols(), repository);
+			}
+			SymbolTable.ProcessAliases();
 		}
 
 		public class ToggleOptions

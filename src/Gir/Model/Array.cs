@@ -18,5 +18,8 @@ namespace Gir
 
 		[XmlAttribute ("type", Namespace = "http://www.gtk.org/introspection/c/1.0")]
 		public string CType { get; set; }
+
+		[XmlElement("type")]
+		public Type Type { get; set; }
 	}
 }
