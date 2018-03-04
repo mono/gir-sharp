@@ -6,7 +6,7 @@ namespace Gir
 	public partial class VirtualMethod
 	{
 		[XmlAttribute ("deprecated")]
-		public bool Deprecated;
+		public string Deprecated;
 
 		[XmlAttribute ("deprecated-version")]
 		public string DeprecatedVersion;

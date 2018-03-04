@@ -11,7 +11,7 @@ namespace Gir
 		public bool ConstructOnly;
 
 		[XmlAttribute ("deprecated")]
-		public bool Deprecated;
+		public string Deprecated;
 
 		[XmlAttribute ("deprecated-version")]
 		public string DeprecatedVersion;

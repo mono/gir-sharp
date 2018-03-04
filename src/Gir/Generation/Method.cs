@@ -8,9 +8,14 @@ namespace Gir
 
 		public void Generate (IGeneratable parent, IndentWriter writer)
 		{
-			if (Deprecated)
-				writer.WriteLine ($"[Obsolete (\"(Version: {DeprecatedVersion}) {DocDeprecated.Text}\")]");
-
+			if (!string.IsNullOrEmpty (Deprecated)) {
+				if (Deprecated == "0") {
+				}
+				else if (Deprecated == "1")
+					writer.WriteLine ($"[Obsolete (\"(Version: {DeprecatedVersion}) {DocDeprecated.Text}\")]");
+				else
+					writer.WriteLine ($"[Obsolete (\"{Deprecated}\")]");
+			}
 			this.GenerateCallableDefinition (parent, writer);
 		}
 
