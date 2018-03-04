@@ -53,6 +53,8 @@ namespace Gir
 			LibraryName = repo.Namespace.SharedLibrary?.Split (',') [0] ?? "";
 
 			SymbolTable = new SymbolTable(Statistics, options.Win64Longs);
+
+			// Register the main repository once without namespace names and once with them.
 			SymbolTable.AddTypes (repo.GetSymbols());
 			foreach (var repository in allRepos) {
 				SymbolTable.AddTypes (repository.GetSymbols(), repository);

@@ -9,10 +9,7 @@ namespace Gir
 			RegisterPrimitives (nativeWin64);
 
 			//AddType(new MarshalGen("time_t", "System.DateTime", "IntPtr", "GLib.Marshaller.DateTimeTotime_t ({0})", "GLib.Marshaller.time_tToDateTime ({0})"));
-			AddType (new StringMarshal ("gfilename", "string", "", "IntPtr"));//, "GLib.Marshaller.StringToFilenamePtr({0})", "GLib.Marshaller.FilenamePtrToStringGFree({0})"));
-			AddType (new StringMarshal ("gchar", "string", "", "IntPtr"));//, "GLib.Marshaller.StringToPtrGStrdup({0})", "GLib.Marshaller.PtrToStringGFree({0})"));
-			AddType (new StringMarshal ("char", "string", "", "IntPtr"));//, "GLib.Marshaller.StringToPtrGStrdup({0})", "GLib.Marshaller.PtrToStringGFree({0})"));
-			AddType (new StringMarshal ("utf8", "string", "", "IntPtr"));//, "GLib.Marshaller.StringToPtrGStrdup({0})", "GLib.Marshaller.PtrToStringGFree({0})"));
+			AddType (new StringMarshal ("utf8", "string", "string.Empty", "IntPtr"));//, "GLib.Marshaller.StringToPtrGStrdup({0})", "GLib.Marshaller.PtrToStringGFree({0})"));
 		}
 
 		void RegisterPrimitives (bool nativeWin64)
@@ -55,6 +52,13 @@ namespace Gir
 
 			AddType (new Primitive ("va_list", "...", ""));
 
+			RegisterGTypeHack ();
+			RegisterLongTypes (nativeWin64);
+		}
+
+		void RegisterGTypeHack ()
+		{
+			// It seems like GType is kind of a primitive since in GObject GType is used without a prefix even though the definition is in GLib.
 			var alias = new Alias {
 				Type = new Type {
 					CType = "GType",
@@ -68,8 +72,6 @@ namespace Gir
 				Name = "GType"
 			};
 			AddType (alias);
-
-			RegisterLongTypes (nativeWin64);
 		}
 
 		void RegisterLongTypes (bool nativeWin64)
