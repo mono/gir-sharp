@@ -20,6 +20,8 @@ namespace Gir.Tests
 		protected const string Gio2 = "Gio-2.0";
 		protected const string Atk1 = "Atk-1.0";
 
+		protected const string GIMarshallingTests = "GIMarshallingTests-1.0";
+
 		static IEnumerable<Stream> GetResourceStreams (string name = null)
 		{
 			var assembly = Assembly.GetExecutingAssembly ();

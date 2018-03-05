@@ -65,6 +65,9 @@
     <EmbeddedResource Include="TestFiles\GdkPixbuf-2.0.gir">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="TestFiles\GIMarshallingTests-1.0.gir">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="TestFiles\Gio-2.0.gir">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

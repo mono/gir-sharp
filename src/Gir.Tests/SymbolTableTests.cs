@@ -20,6 +20,7 @@ namespace Gir.Tests
 		[TestCase (GLib, 0)]
 		[TestCase (Gtk3, 0)]
 		[TestCase (Pango, 0)]
+		[TestCase (GIMarshallingTests, 0)]
 		public void TestSymbolTableErrorsTracker (string girFile, int errorCount)
 		{
 			var repo = ParseGirFile (girFile, out var mainRepository);
