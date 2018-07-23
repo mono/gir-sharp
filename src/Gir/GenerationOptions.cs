@@ -52,7 +52,7 @@ namespace Gir
 			// This may contain multiple libraries, so get the first one. Also, hack a string.Empty for xlib.
 			LibraryName = repo.Namespace.SharedLibrary?.Split (',') [0] ?? "";
 
-			SymbolTable = new SymbolTable(Statistics, options.Win64Longs);
+			SymbolTable = new SymbolTable(Statistics, Options.Win64Longs);
 
 			// Register the main repository once without namespace names and once with them.
 			SymbolTable.AddTypes (repo.GetSymbols());
