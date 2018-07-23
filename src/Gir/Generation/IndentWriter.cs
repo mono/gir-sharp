@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace Gir
@@ -13,7 +13,9 @@ namespace Gir
 		public static IndentWriter OpenWrite (string path, GenerationOptions opts)
 		{
 			var toStream = opts.RedirectStream ?? File.Open (path, FileMode.Create);
-			var sw = new StreamWriter (toStream);
+			var sw = new StreamWriter (toStream) {
+				NewLine = opts.NewLine
+			};
 
 			return new IndentWriter (sw) {
 				Options = opts,

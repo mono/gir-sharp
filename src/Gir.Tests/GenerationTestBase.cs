@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -75,6 +75,8 @@ namespace Gir.Tests
 				Compat = compat,
 				RedirectStream = new MemoryStream (),
 				WriteHeader = !generateMember,
+				// Note, all of the tests assume "\n" and not "\r\n"
+				NewLine = "\n"
 			});
 		}
 
