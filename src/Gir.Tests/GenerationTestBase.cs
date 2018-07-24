@@ -28,23 +28,27 @@ namespace Gir.Tests
 		protected const string Gio2 = "Gtk3.Gio-2.0";
 		protected const string Atk1 = "Gtk3.Atk-1.0";
 
-		protected const string GIMarshallingTests = "GIMarshallingTests-1.0";
+		protected const string GIMarshallingTests = "Gtk3.GIMarshallingTests-1.0";
 
-		public static string IncludeDirectory = Gtk3Directory;
-		static IEnumerable<Stream> GetResourceStreams (string name = null)
+		static IEnumerable<(Stream ResourceStream, string IncludeDirectory)> GetResourceStreams (string name = null)
 		{
 			var assembly = Assembly.GetExecutingAssembly ();
 
 			var names = assembly.GetManifestResourceNames ();
 			foreach (var resName in names) {
-				if (string.IsNullOrEmpty (resName) || resName.EndsWith (name + ".gir", StringComparison.OrdinalIgnoreCase))
-					yield return assembly.GetManifestResourceStream (resName);
+				if (string.IsNullOrEmpty (resName) || resName.EndsWith (name + ".gir", StringComparison.OrdinalIgnoreCase)) {
+					var includeDirectory = Gtk3Directory;
+					if (resName.Contains ("Gtk2"))
+						includeDirectory = Gtk2Directory;
+
+					yield return (assembly.GetManifestResourceStream (resName), includeDirectory);
+				}
 			}
 		}
 
-		static string GetIncludeDirectory ()
+		static string GetIncludeDirectory (string includeDirectory)
 		{
-			return Path.Combine (Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location), "TestFiles", IncludeDirectory);
+			return Path.Combine (Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location), "TestFiles", includeDirectory);
 		}
 
 		protected static IEnumerable<Tuple<Repository, IEnumerable<Repository>>> ParseAllGirFiles ()
@@ -56,13 +60,8 @@ namespace Gir.Tests
 			}
 		}
 
-		protected static Stream GetGirFile (string name)
+		protected static (Stream stream, string includeDirectory) GetGirFile (string name)
 		{
-			if (name.Contains ("Gtk2"))
-				IncludeDirectory = Gtk2Directory;
-			if (name.Contains ("Gtk3"))
-				IncludeDirectory = Gtk3Directory;
-
 			return GetResourceStreams (name).Single ();
 		}
 
@@ -71,9 +70,9 @@ namespace Gir.Tests
 			return ParseGirStream (GetGirFile (name), out mainRepository);
 		}
 
-		protected static IEnumerable<Repository> ParseGirStream (Stream gir, out Repository mainRepository)
+		protected static IEnumerable<Repository> ParseGirStream ((Stream stream, string includeDirectory) gir, out Repository mainRepository)
 		{
-			return Parser.Parse (gir, GetIncludeDirectory (), out mainRepository);
+			return Parser.Parse (gir.stream, GetIncludeDirectory (gir.includeDirectory), out mainRepository);
 		}
 
 
