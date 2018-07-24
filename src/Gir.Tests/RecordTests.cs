@@ -36,7 +36,10 @@ namespace GLib
 		/// The array will grow in size automatically if necessary.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		public ByteArray Append (byte data, uint len);
+		public ByteArray Append (byte data, uint len)
+		{
+			return g_byte_array_append (data, len);
+		}
 
 		static extern byte g_byte_array_free (ByteArray array, bool free_segment);
 
@@ -50,7 +53,10 @@ namespace GLib
 		/// the element data if @free_segment is %FALSE, otherwise
 		///          %NULL.  The element data should be freed using g_free().
 		///</returns>
-		public byte Free (bool free_segment);
+		public byte Free (bool free_segment)
+		{
+			return g_byte_array_free (free_segment);
+		}
 
 		static extern Bytes g_byte_array_free_to_bytes (ByteArray array);
 
@@ -68,13 +74,19 @@ namespace GLib
 		/// a new immutable #GBytes representing same
 		///     byte data that was in the array
 		///</returns>
-		public Bytes FreeToBytes ();
+		public Bytes FreeToBytes ()
+		{
+			return g_byte_array_free_to_bytes ();
+		}
 
 		static extern ByteArray g_byte_array_new ();
 
 		///<summary>Creates a new #GByteArray with a reference count of 1.</summary>
 		///<returns>the new #GByteArray</returns>
-		public static ByteArray New ();
+		public static ByteArray New ()
+		{
+			return g_byte_array_new ();
+		}
 
 		static extern ByteArray g_byte_array_new_take (byte data, UIntPtr len);
 
@@ -83,7 +95,10 @@ namespace GLib
 		/// and will be freed with g_free(), i.e. it could be allocated using g_strdup().
 		///</summary>
 		///<returns>a new #GByteArray</returns>
-		public static ByteArray NewTake (byte[] data, UIntPtr len);
+		public static ByteArray NewTake (byte[] data, UIntPtr len)
+		{
+			return g_byte_array_new_take (data, len);
+		}
 
 		static extern ByteArray g_byte_array_prepend (ByteArray array, byte data, uint len);
 
@@ -92,7 +107,10 @@ namespace GLib
 		/// The array will grow in size automatically if necessary.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		public ByteArray Prepend (byte data, uint len);
+		public ByteArray Prepend (byte data, uint len)
+		{
+			return g_byte_array_prepend (data, len);
+		}
 
 		static extern ByteArray g_byte_array_ref (ByteArray array);
 
@@ -101,7 +119,10 @@ namespace GLib
 		/// This function is thread-safe and may be called from any thread.
 		///</summary>
 		///<returns>The passed in #GByteArray</returns>
-		public ByteArray Ref ();
+		public ByteArray Ref ()
+		{
+			return g_byte_array_ref ();
+		}
 
 		static extern ByteArray g_byte_array_remove_index (ByteArray array, uint index_);
 
@@ -110,7 +131,10 @@ namespace GLib
 		/// The following bytes are moved down one place.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		public ByteArray RemoveIndex (uint index_);
+		public ByteArray RemoveIndex (uint index_)
+		{
+			return g_byte_array_remove_index (index_);
+		}
 
 		static extern ByteArray g_byte_array_remove_index_fast (ByteArray array, uint index_);
 
@@ -121,7 +145,10 @@ namespace GLib
 		/// than g_byte_array_remove_index().
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		public ByteArray RemoveIndexFast (uint index_);
+		public ByteArray RemoveIndexFast (uint index_)
+		{
+			return g_byte_array_remove_index_fast (index_);
+		}
 
 		static extern ByteArray g_byte_array_remove_range (ByteArray array, uint index_, uint length);
 
@@ -130,13 +157,19 @@ namespace GLib
 		/// #GByteArray.  The following elements are moved to close the gap.
 		///</summary>
 		///<returns>the #GByteArray</returns>
-		public ByteArray RemoveRange (uint index_, uint length);
+		public ByteArray RemoveRange (uint index_, uint length)
+		{
+			return g_byte_array_remove_range (index_, length);
+		}
 
 		static extern ByteArray g_byte_array_set_size (ByteArray array, uint length);
 
 		///<summary>Sets the size of the #GByteArray, expanding it if necessary.</summary>
 		///<returns>the #GByteArray</returns>
-		public ByteArray SetSize (uint length);
+		public ByteArray SetSize (uint length)
+		{
+			return g_byte_array_set_size (length);
+		}
 
 		static extern ByteArray g_byte_array_sized_new (uint reserved_size);
 
@@ -147,7 +180,10 @@ namespace GLib
 		/// 0.
 		///</summary>
 		///<returns>the new #GByteArray</returns>
-		public static ByteArray SizedNew (uint reserved_size);
+		public static ByteArray SizedNew (uint reserved_size)
+		{
+			return g_byte_array_sized_new (reserved_size);
+		}
 
 		static extern void g_byte_array_sort (ByteArray array, CompareFunc compare_func);
 
@@ -163,7 +199,10 @@ namespace GLib
 		/// if two elements would otherwise compare equal, compares them by
 		/// their addresses.
 		///</summary>
-		public void Sort (CompareFunc compare_func);
+		public void Sort (CompareFunc compare_func)
+		{
+			g_byte_array_sort (compare_func);
+		}
 
 		static extern void g_byte_array_sort_with_data (ByteArray array, CompareDataFunc compare_func, IntPtr user_data);
 
@@ -171,7 +210,10 @@ namespace GLib
 		/// Like g_byte_array_sort(), but the comparison function takes an extra
 		/// user data argument.
 		///</summary>
-		public void SortWithData (CompareDataFunc compare_func, IntPtr user_data);
+		public void SortWithData (CompareDataFunc compare_func, IntPtr user_data)
+		{
+			g_byte_array_sort_with_data (compare_func, user_data);
+		}
 
 		static extern void g_byte_array_unref (ByteArray array);
 
@@ -181,7 +223,10 @@ namespace GLib
 		/// released. This function is thread-safe and may be called from any
 		/// thread.
 		///</summary>
-		public void Unref ();
+		public void Unref ()
+		{
+			g_byte_array_unref ();
+		}
 	}
 }
 ", result);
