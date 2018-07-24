@@ -21,6 +21,7 @@ namespace Gir.Tests
 		[TestCase (Gtk3, 0)]
 		[TestCase (Pango, 0)]
 		[TestCase (GIMarshallingTests, 0)]
+		[TestCase (Gtk2, 3)] // FIXME
 		public void TestSymbolTableErrorsTracker (string girFile, int errorCount)
 		{
 			var repo = ParseGirFile (girFile, out var mainRepository);
@@ -29,10 +30,10 @@ namespace Gir.Tests
 			var stats = opts.Statistics.Errors.ToArray ();
 
 			// FUTURE: This should be 0.
-			Assert.AreEqual (errorCount, stats.Length);
 			foreach (var error in stats) {
 				Console.WriteLine (error.Message);
 			}
+			Assert.AreEqual (errorCount, stats.Length);
 		}
 
 		[TestCase (Library.Gtk2)]
