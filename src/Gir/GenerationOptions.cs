@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,6 +29,8 @@ namespace Gir
 
 		// Try to find better logic for detecting this.
 		public bool NativeWin64 => Options.Win64Longs;
+
+		public string NewLine => Options.NewLine;
 		#endregion
 
 		#region Symbols
@@ -68,6 +70,7 @@ namespace Gir
 			public Stream RedirectStream;
 			public bool Win64Longs;
 			public bool WriteHeader = true;
+			public string NewLine = Environment.NewLine;
 		}
 	}
 }
