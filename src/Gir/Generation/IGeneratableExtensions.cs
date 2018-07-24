@@ -88,8 +88,23 @@ static class <LibraryName>Constants
 
 			// generate ReturnValue then Parameters
 			var result = BuildParameters (callable, writer.Options, !callable.IsInstanceCallable (gen, writer.Options));
-			writer.Write (string.Format ("{0} {1} ({2});", returnType, callable.Name.ToCSharp (), result.TypesAndNames));
-			writer.WriteLine ();
+			writer.Write (string.Format ("{0} {1} ({2})", returnType, callable.Name.ToCSharp (), result.TypesAndNames));
+
+			if (gen is Interface)
+			{
+				writer.Write(";");
+				writer.WriteLine();
+				return;
+			}
+
+			writer.WriteLine();
+			writer.WriteLine("{");
+			using (writer.Indent())
+			{
+				string prefix = returnType != "void" ? "return " : string.Empty;
+				writer.WriteLine($"{prefix}{callable.CIdentifier} ({result.Names});");
+			}
+			writer.WriteLine("}");
 		}
 
 		public static void GenerateConstructor (this INativeCallable callable, IGeneratable parent, IndentWriter writer)

@@ -19,7 +19,10 @@ namespace Gir.Tests
 /// The array will grow in size automatically if necessary.
 ///</summary>
 ///<returns>the #GByteArray</returns>
-public ByteArray Append (byte data, uint len);
+public ByteArray Append (byte data, uint len)
+{
+	return g_byte_array_append (data, len);
+}
 ", result);
 		}
 	}
