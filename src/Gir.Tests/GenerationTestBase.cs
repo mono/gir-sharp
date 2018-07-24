@@ -9,11 +9,16 @@ using NUnit.Framework;
 
 namespace Gir.Tests
 {
+	// Use directory name
+	public enum Library
+	{
+		Gtk2,
+		Gtk3
+	}
+
 	[TestFixture]
 	public abstract class GenerationTestBase
 	{
-		protected const string Gtk2Directory = "Gtk2";
-		protected const string Gtk3Directory = "Gtk3";
 
 		protected const string Gtk2Gdk2 = "Gtk2.Gdk-2.0";
 		protected const string Gtk2GLib = "Gtk2.GLib-2.0";
@@ -30,18 +35,15 @@ namespace Gir.Tests
 
 		protected const string GIMarshallingTests = "Gtk3.GIMarshallingTests-1.0";
 
-		static IEnumerable<(Stream ResourceStream, string IncludeDirectory)> GetResourceStreams (string name = null)
+		static IEnumerable<(string Name, Stream ResourceStream, string IncludeDirectory)> GetResourceStreams (string name = null)
 		{
 			var assembly = Assembly.GetExecutingAssembly ();
 
 			var names = assembly.GetManifestResourceNames ();
 			foreach (var resName in names) {
 				if (string.IsNullOrEmpty (resName) || resName.EndsWith (name + ".gir", StringComparison.OrdinalIgnoreCase)) {
-					var includeDirectory = Gtk3Directory;
-					if (resName.Contains ("Gtk2"))
-						includeDirectory = Gtk2Directory;
-
-					yield return (assembly.GetManifestResourceStream (resName), includeDirectory);
+					var targetLibrary = (!string.IsNullOrEmpty (name)) ? GetLibraryFromGirFile (name) : GetLibraryFromGirFile (resName);
+					yield return (resName, assembly.GetManifestResourceStream (resName), targetLibrary.ToString ());
 				}
 			}
 		}
@@ -51,17 +53,21 @@ namespace Gir.Tests
 			return Path.Combine (Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location), "TestFiles", includeDirectory);
 		}
 
-		protected static IEnumerable<Tuple<Repository, IEnumerable<Repository>>> ParseAllGirFiles ()
+		protected static IEnumerable<Tuple<Repository, IEnumerable<Repository>>> ParseAllGirFiles (Library library)
 		{
 			foreach (var stream in GetResourceStreams ()) {
+				if (stream.IncludeDirectory != library.ToString ())
+					continue;
+
 				var repos = ParseGirStream (stream, out Repository mainRepository);
 
 				yield return new Tuple<Repository, IEnumerable<Repository>> (mainRepository, repos);
 			}
 		}
 
-		protected static (Stream stream, string includeDirectory) GetGirFile (string name)
+		protected static (String Name, Stream stream, string includeDirectory) GetGirFile (string name)
 		{
+			var framework = GetLibraryFromGirFile (name);
 			return GetResourceStreams (name).Single ();
 		}
 
@@ -70,7 +76,7 @@ namespace Gir.Tests
 			return ParseGirStream (GetGirFile (name), out mainRepository);
 		}
 
-		protected static IEnumerable<Repository> ParseGirStream ((Stream stream, string includeDirectory) gir, out Repository mainRepository)
+		protected static IEnumerable<Repository> ParseGirStream ((string Name, Stream stream, string includeDirectory) gir, out Repository mainRepository)
 		{
 			return Parser.Parse (gir.stream, GetIncludeDirectory (gir.includeDirectory), out mainRepository);
 		}
@@ -125,6 +131,15 @@ namespace Gir.Tests
 			GenerateMember (mainRepository, opts, typeName, memberName);
 
 			return GetGenerationResult (opts);
+		}
+
+		static Library GetLibraryFromGirFile (string girFile)
+		{
+			if (girFile.Contains ("Gtk2"))
+				return Library.Gtk2;
+
+			//if (girFile.Contains ("Gtk3"))
+				return Library.Gtk3;
 		}
 	}
 }

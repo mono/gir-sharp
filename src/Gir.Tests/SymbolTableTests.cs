@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using NUnit.Framework;
 
@@ -35,10 +35,11 @@ namespace Gir.Tests
 			}
 		}
 
-		[Test]
-		public void NoAliasTypeAfterProcessing ()
+		[TestCase (Library.Gtk2)]
+		[TestCase (Library.Gtk3)]
+		public void NoAliasTypeAfterProcessing (Library library)
 		{
-			foreach (var tpl in ParseAllGirFiles ()) {
+			foreach (var tpl in ParseAllGirFiles (library)) {
 				var repo = tpl.Item2;
 				var mainRepository = tpl.Item1;
 
