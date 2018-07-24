@@ -12,16 +12,25 @@ namespace Gir.Tests
 	[TestFixture]
 	public abstract class GenerationTestBase
 	{
-		protected const string Gdk3 = "Gdk-3.0";
-		protected const string GLib = "GLib-2.0";
-		protected const string Gtk3 = "Gtk-3.0";
-		protected const string GObject = "GObject-2.0";
-		protected const string Pango = "Pango-1.0";
-		protected const string Gio2 = "Gio-2.0";
-		protected const string Atk1 = "Atk-1.0";
+		protected const string Gtk2Directory = "Gtk2";
+		protected const string Gtk3Directory = "Gtk3";
+
+		protected const string Gtk2Gdk2 = "Gtk2.Gdk-2.0";
+		protected const string Gtk2GLib = "Gtk2.GLib-2.0";
+		protected const string Gtk2Atk1 = "Gtk2.Atk-1.0";
+		protected const string Gtk2 = "Gtk2.Gtk-2.0";
+
+		protected const string Gdk3 = "Gtk3.Gdk-3.0";
+		protected const string GLib = "Gtk3.GLib-2.0";
+		protected const string Gtk3 = "Gtk3.Gtk-3.0";
+		protected const string GObject = "Gtk3.GObject-2.0";
+		protected const string Pango = "Gtk3.Pango-1.0";
+		protected const string Gio2 = "Gtk3.Gio-2.0";
+		protected const string Atk1 = "Gtk3.Atk-1.0";
 
 		protected const string GIMarshallingTests = "GIMarshallingTests-1.0";
 
+		public static string IncludeDirectory = Gtk3Directory;
 		static IEnumerable<Stream> GetResourceStreams (string name = null)
 		{
 			var assembly = Assembly.GetExecutingAssembly ();
@@ -35,10 +44,10 @@ namespace Gir.Tests
 
 		static string GetIncludeDirectory ()
 		{
-			return Path.Combine (Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location), "TestFiles");
+			return Path.Combine (Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location), "TestFiles", IncludeDirectory);
 		}
 
-		static protected IEnumerable<Tuple<Repository, IEnumerable<Repository>>> ParseAllGirFiles ()
+		protected static IEnumerable<Tuple<Repository, IEnumerable<Repository>>> ParseAllGirFiles ()
 		{
 			foreach (var stream in GetResourceStreams ()) {
 				var repos = ParseGirStream (stream, out Repository mainRepository);
@@ -47,17 +56,22 @@ namespace Gir.Tests
 			}
 		}
 
-		static protected Stream GetGIRFile (string name)
+		protected static Stream GetGirFile (string name)
 		{
+			if (name.Contains ("Gtk2"))
+				IncludeDirectory = Gtk2Directory;
+			if (name.Contains ("Gtk3"))
+				IncludeDirectory = Gtk3Directory;
+
 			return GetResourceStreams (name).Single ();
 		}
 
-		static protected IEnumerable<Repository> ParseGirFile (string name, out Repository mainRepository)
+		protected static IEnumerable<Repository> ParseGirFile (string name, out Repository mainRepository)
 		{
-			return ParseGirStream (GetGIRFile (name), out mainRepository);
+			return ParseGirStream (GetGirFile (name), out mainRepository);
 		}
 
-		static protected IEnumerable<Repository> ParseGirStream (Stream gir, out Repository mainRepository)
+		protected static IEnumerable<Repository> ParseGirStream (Stream gir, out Repository mainRepository)
 		{
 			return Parser.Parse (gir, GetIncludeDirectory (), out mainRepository);
 		}

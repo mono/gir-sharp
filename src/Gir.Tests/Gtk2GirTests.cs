@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace Gir.Tests
 {
 	[TestFixture]
-	public class Gtk2GirTests : GenerationGtk2TestBase
+	public class Gtk2GirTests : GenerationTestBase
 	{
 		[Test]
 		public void GenerateGtkWindow ()
