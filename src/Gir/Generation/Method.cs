@@ -1,4 +1,3 @@
-using System;
 
 namespace Gir
 {
@@ -8,9 +7,12 @@ namespace Gir
 
 		public void Generate (IGeneratable parent, IndentWriter writer)
 		{
-			if (Deprecated)
-				writer.WriteLine ($"[Obsolete (\"(Version: {DeprecatedVersion}) {DocDeprecated.Text}\")]");
-
+			if (!string.IsNullOrEmpty (Deprecated)) {
+				if (Deprecated == "1")
+					writer.WriteLine ($"[Obsolete (\"(Version: {DeprecatedVersion}) {DocDeprecated.Text}\")]");
+				else if (Deprecated != "0")
+					writer.WriteLine ($"[Obsolete (\"{Deprecated}\")]");
+			}
 			this.GenerateCallableDefinition (parent, writer);
 		}
 

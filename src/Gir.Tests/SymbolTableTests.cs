@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using NUnit.Framework;
 
@@ -21,6 +21,8 @@ namespace Gir.Tests
 		[TestCase (Gtk3, 0)]
 		[TestCase (Pango, 0)]
 		[TestCase (GIMarshallingTests, 0)]
+		[TestCase (Gdk2, 1)] // FIXME
+		[TestCase (Gtk2, 3)] // FIXME
 		public void TestSymbolTableErrorsTracker (string girFile, int errorCount)
 		{
 			var repo = ParseGirFile (girFile, out var mainRepository);
@@ -29,16 +31,17 @@ namespace Gir.Tests
 			var stats = opts.Statistics.Errors.ToArray ();
 
 			// FUTURE: This should be 0.
-			Assert.AreEqual (errorCount, stats.Length);
 			foreach (var error in stats) {
 				Console.WriteLine (error.Message);
 			}
+			Assert.AreEqual (errorCount, stats.Length);
 		}
 
-		[Test]
-		public void NoAliasTypeAfterProcessing ()
+		[TestCase (Library.Gtk2)]
+		[TestCase (Library.Gtk3)]
+		public void NoAliasTypeAfterProcessing (Library library)
 		{
-			foreach (var tpl in ParseAllGirFiles ()) {
+			foreach (var tpl in ParseAllGirFiles (library)) {
 				var repo = tpl.Item2;
 				var mainRepository = tpl.Item1;
 
@@ -48,10 +51,11 @@ namespace Gir.Tests
 			}
 		}
 
-		[Test]
-		public void CanResolveIncludedFiles ()
+		[TestCase (Gtk2)]
+		[TestCase (Gtk3)]
+		public void CanResolveIncludedFiles (string girFile)
 		{
-			var repo = ParseGirFile (Gtk3, out var mainRepository);
+			var repo = ParseGirFile (girFile, out var mainRepository);
 			var opts = GetOptions (repo, mainRepository);
 
 			Assert.NotNull (opts.SymbolTable["GdkPixbuf.PixbufError"]);

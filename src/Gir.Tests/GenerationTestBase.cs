@@ -9,57 +9,76 @@ using NUnit.Framework;
 
 namespace Gir.Tests
 {
+	// Use directory name
+	public enum Library
+	{
+		Gtk2,
+		Gtk3
+	}
+
 	[TestFixture]
 	public abstract class GenerationTestBase
 	{
-		protected const string Gdk3 = "Gdk-3.0";
-		protected const string GLib = "GLib-2.0";
-		protected const string Gtk3 = "Gtk-3.0";
-		protected const string GObject = "GObject-2.0";
-		protected const string Pango = "Pango-1.0";
-		protected const string Gio2 = "Gio-2.0";
-		protected const string Atk1 = "Atk-1.0";
 
-		protected const string GIMarshallingTests = "GIMarshallingTests-1.0";
+		protected const string Gdk2 = "Gtk2.Gdk-2.0";
+		protected const string Gtk2GLib = "Gtk2.GLib-2.0";
+		protected const string Gtk2Atk1 = "Gtk2.Atk-1.0";
+		protected const string Gtk2 = "Gtk2.Gtk-2.0";
 
-		static IEnumerable<Stream> GetResourceStreams (string name = null)
+		protected const string Gdk3 = "Gtk3.Gdk-3.0";
+		protected const string GLib = "Gtk3.GLib-2.0";
+		protected const string Gtk3 = "Gtk3.Gtk-3.0";
+		protected const string GObject = "Gtk3.GObject-2.0";
+		protected const string Pango = "Gtk3.Pango-1.0";
+		protected const string Gio2 = "Gtk3.Gio-2.0";
+		protected const string Atk1 = "Gtk3.Atk-1.0";
+
+		protected const string GIMarshallingTests = "Gtk3.GIMarshallingTests-1.0";
+
+		static IEnumerable<(string Name, Stream ResourceStream, string IncludeDirectory)> GetResourceStreams (string name = null)
 		{
 			var assembly = Assembly.GetExecutingAssembly ();
 
 			var names = assembly.GetManifestResourceNames ();
 			foreach (var resName in names) {
-				if (string.IsNullOrEmpty (resName) || resName.EndsWith (name + ".gir", StringComparison.OrdinalIgnoreCase))
-					yield return assembly.GetManifestResourceStream (resName);
+				if (string.IsNullOrEmpty (resName) || resName.EndsWith (name + ".gir", StringComparison.OrdinalIgnoreCase)) {
+					var targetLibrary = (!string.IsNullOrEmpty (name)) ? GetLibraryFromGirFile (name) : GetLibraryFromGirFile (resName);
+					yield return (resName, assembly.GetManifestResourceStream (resName), targetLibrary.ToString ());
+				}
 			}
 		}
 
-		static string GetIncludeDirectory ()
+		static string GetIncludeDirectory (string includeDirectory)
 		{
-			return Path.Combine (Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location), "TestFiles");
+			return Path.Combine (Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location), "TestFiles", includeDirectory);
 		}
 
-		static protected IEnumerable<Tuple<Repository, IEnumerable<Repository>>> ParseAllGirFiles ()
+		protected static IEnumerable<Tuple<Repository, IEnumerable<Repository>>> ParseAllGirFiles (Library library)
 		{
 			foreach (var stream in GetResourceStreams ()) {
+				if (stream.IncludeDirectory != library.ToString ())
+					continue;
+
 				var repos = ParseGirStream (stream, out Repository mainRepository);
 
 				yield return new Tuple<Repository, IEnumerable<Repository>> (mainRepository, repos);
 			}
 		}
 
-		static protected Stream GetGIRFile (string name)
+		protected static (String Name, Stream stream, string includeDirectory) GetGirFile (string name)
 		{
+			var framework = GetLibraryFromGirFile (name);
 			return GetResourceStreams (name).Single ();
 		}
 
-		static protected IEnumerable<Repository> ParseGirFile (string name, out Repository mainRepository)
+		protected static IEnumerable<Repository> ParseGirFile (string name, out Repository mainRepository)
 		{
-			return ParseGirStream (GetGIRFile (name), out mainRepository);
+			return ParseGirStream (GetGirFile (name), out mainRepository);
 		}
 
-		static protected IEnumerable<Repository> ParseGirStream (Stream gir, out Repository mainRepository)
+		protected static IEnumerable<Repository> ParseGirStream ((string Name, Stream stream, string includeDirectory) gir, out Repository mainRepository)
 		{
-			return Parser.Parse (gir, GetIncludeDirectory (), out mainRepository);
+			return Parser.Parse (gir.stream, GetIncludeDirectory (gir.includeDirectory), out mainRepository);
 		}
 
 
@@ -112,6 +131,15 @@ namespace Gir.Tests
 			GenerateMember (mainRepository, opts, typeName, memberName);
 
 			return GetGenerationResult (opts);
+		}
+
+		static Library GetLibraryFromGirFile (string girFile)
+		{
+			if (girFile.Contains ("Gtk2"))
+				return Library.Gtk2;
+
+			//if (girFile.Contains ("Gtk3"))
+				return Library.Gtk3;
 		}
 	}
 }
