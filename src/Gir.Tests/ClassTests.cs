@@ -112,7 +112,7 @@ namespace Gtk
 
 		static extern void gtk_about_dialog_add_credit_section (AboutDialog about, string section_name, string people);
 
-		public void AddCreditSection (string section_name, string people);
+		public void AddCreditSection (string section_name, string[] people);
 
 		static extern string gtk_about_dialog_get_artists (AboutDialog about);
 
@@ -176,11 +176,11 @@ namespace Gtk
 
 		static extern void gtk_about_dialog_set_artists (AboutDialog about, string artists);
 
-		public void SetArtists (string artists);
+		public void SetArtists (string[] artists);
 
 		static extern void gtk_about_dialog_set_authors (AboutDialog about, string authors);
 
-		public void SetAuthors (string authors);
+		public void SetAuthors (string[] authors);
 
 		static extern void gtk_about_dialog_set_comments (AboutDialog about, string comments);
 
@@ -192,7 +192,7 @@ namespace Gtk
 
 		static extern void gtk_about_dialog_set_documenters (AboutDialog about, string documenters);
 
-		public void SetDocumenters (string documenters);
+		public void SetDocumenters (string[] documenters);
 
 		static extern void gtk_about_dialog_set_license (AboutDialog about, string license);
 
