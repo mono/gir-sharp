@@ -21,6 +21,7 @@ namespace Gir.Tests
 		[TestCase (Gtk3, 0)]
 		[TestCase (Pango, 0)]
 		[TestCase (GIMarshallingTests, 0)]
+		[TestCase (Gdk2, 1)] // FIXME
 		[TestCase (Gtk2, 3)] // FIXME
 		public void TestSymbolTableErrorsTracker (string girFile, int errorCount)
 		{
@@ -50,10 +51,11 @@ namespace Gir.Tests
 			}
 		}
 
-		[Test]
-		public void CanResolveIncludedFiles ()
+		[TestCase (Gtk2)]
+		[TestCase (Gtk3)]
+		public void CanResolveIncludedFiles (string girFile)
 		{
-			var repo = ParseGirFile (Gtk3, out var mainRepository);
+			var repo = ParseGirFile (girFile, out var mainRepository);
 			var opts = GetOptions (repo, mainRepository);
 
 			Assert.NotNull (opts.SymbolTable["GdkPixbuf.PixbufError"]);

@@ -20,7 +20,7 @@ namespace Gir.Tests
 	public abstract class GenerationTestBase
 	{
 
-		protected const string Gtk2Gdk2 = "Gtk2.Gdk-2.0";
+		protected const string Gdk2 = "Gtk2.Gdk-2.0";
 		protected const string Gtk2GLib = "Gtk2.GLib-2.0";
 		protected const string Gtk2Atk1 = "Gtk2.Atk-1.0";
 		protected const string Gtk2 = "Gtk2.Gtk-2.0";
