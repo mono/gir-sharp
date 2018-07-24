@@ -83,7 +83,7 @@ namespace GLib
 		/// and will be freed with g_free(), i.e. it could be allocated using g_strdup().
 		///</summary>
 		///<returns>a new #GByteArray</returns>
-		public static ByteArray NewTake (byte data, UIntPtr len);
+		public static ByteArray NewTake (byte[] data, UIntPtr len);
 
 		static extern ByteArray g_byte_array_prepend (ByteArray array, byte data, uint len);
 

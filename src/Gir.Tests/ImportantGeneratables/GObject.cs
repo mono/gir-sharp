@@ -25,7 +25,7 @@ namespace GObject
 
 		static extern Object g_object_newv (UIntPtr object_type, uint n_parameters, Parameter parameters);
 
-		public Object (UIntPtr object_type, uint n_parameters, Parameter parameters) : base (object_type, n_parameters, parameters)
+		public Object (UIntPtr object_type, uint n_parameters, Parameter[] parameters) : base (object_type, n_parameters, parameters)
 		{
 		}
 
@@ -262,7 +262,7 @@ namespace GObject
 
 		static extern void g_object_class_install_properties (ObjectClass oclass, uint n_pspecs, ParamSpec pspecs);
 
-		public void InstallProperties (uint n_pspecs, ParamSpec pspecs);
+		public void InstallProperties (uint n_pspecs, ParamSpec[] pspecs);
 
 		static extern void g_object_class_install_property (ObjectClass oclass, uint property_id, ParamSpec pspec);
 

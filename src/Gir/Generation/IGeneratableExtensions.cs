@@ -49,7 +49,7 @@ namespace Gir
 		{
 			var retType = GetReturnCSharpType (callable, writer);
 
-			var (typesAndNames, names) = BuildParameters (callable, writer.Options, appendInstanceParameters: true);
+			var parameters = BuildParameters (callable, writer.Options, appendInstanceParameters: true);
 
 			// TODO: Better than using the constant string, insert a custom generatable which contains the import string as a constant.
 			/* i.e.
@@ -59,7 +59,7 @@ static class <LibraryName>Constants
 }
 			 */
 			//writer.WriteLine ($"[DllImport (\"{writer.Options.LibraryName}\", CallingConvention=CallingConvention.Cdecl)]");
-			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} ({typesAndNames});");
+			writer.WriteLine ($"static extern {retType} {callable.CIdentifier} ({parameters.MarshalTypesAndNames});");
 			writer.WriteLine ();
 		}
 
@@ -87,8 +87,8 @@ static class <LibraryName>Constants
 			var returnType = callable.GetReturnCSharpType (writer);
 
 			// generate ReturnValue then Parameters
-			var (typesAndNames, names) = BuildParameters (callable, writer.Options, !callable.IsInstanceCallable (gen, writer.Options));
-			writer.Write (string.Format ("{0} {1} ({2});", returnType, callable.Name.ToCSharp (), typesAndNames));
+			var result = BuildParameters (callable, writer.Options, !callable.IsInstanceCallable (gen, writer.Options));
+			writer.Write (string.Format ("{0} {1} ({2});", returnType, callable.Name.ToCSharp (), result.TypesAndNames));
 			writer.WriteLine ();
 		}
 
@@ -98,17 +98,18 @@ static class <LibraryName>Constants
 
 			var modifier = callable.GetModifiers (parent, writer.Options);
 
-			var (typesAndNames, names) = BuildParameters (callable, writer.Options, !callable.IsInstanceCallable (parent, writer.Options));
+			var result = BuildParameters (callable, writer.Options, !callable.IsInstanceCallable (parent, writer.Options));
 
 			// FIXME, should check to see if it is deprecated
-			writer.WriteLine ($"{modifier} {parent.Name} ({typesAndNames}) : base ({names})");
+			writer.WriteLine ($"{modifier} {parent.Name} ({result.TypesAndNames}) : base ({result.Names})");
 			writer.WriteLine ("{");
 			writer.WriteLine ("}");
 		}
 
-		public static (string both, string names) BuildParameters (this IMethodLike callable, GenerationOptions opts, bool appendInstanceParameters)
+		public static ParametersResult BuildParameters(this IMethodLike callable, GenerationOptions opts, bool appendInstanceParameters)
 		{
 			var parameters = callable.Parameters;
+			var marshalTypeAndName = new List<string>(parameters.Count);
 			var typeAndName = new List<string> (parameters.Count);
 			var parameterNames = new List<string> (parameters.Count);
 
@@ -124,20 +125,36 @@ static class <LibraryName>Constants
 				}
 
 				var symbol = parameter.Resolve(opts);
-				typeAndName.Add(symbol.CSharpType + " " + parameter.Name);
+				marshalTypeAndName.Add(symbol.CSharpType + " " + parameter.Name);
+				typeAndName.Add(symbol.CSharpType + (parameter.Array != null ? "[]" : "") + " " + parameter.Name);
 				parameterNames.Add(parameter.Name);
 			}
 
 			// PERF: Use an array as the string[] overload of Join is way more efficient than the IEnumerable<string> one.
+			string marshalParameterString = string.Join(", ", marshalTypeAndName.ToArray());
 			string parameterString = string.Join (", ", typeAndName.ToArray ());
 			string baseParams = string.Join (", ", parameterNames.ToArray ());
 
-			return (parameterString, baseParams);
+			return new ParametersResult(marshalParameterString, parameterString, baseParams);
 		}
 
 		static IEnumerable<IMemberGeneratable> GetMemberGeneratables (this IGeneratable gen)
 		{
 			return Utils.GetAllCollectionMembers<IMemberGeneratable> (gen);
+		}
+	}
+
+	public class ParametersResult
+	{
+		public string MarshalTypesAndNames { get; }
+		public string TypesAndNames { get; }
+		public string Names { get; }
+
+		public ParametersResult(string marshalTypesAndNames, string typesAndNames, string names)
+		{
+			MarshalTypesAndNames = marshalTypesAndNames;
+			TypesAndNames = typesAndNames;
+			Names = names;
 		}
 	}
 }
