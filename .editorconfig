@@ -9,6 +9,7 @@ charset = utf-8
 indent_style = tab
 trim_trailing_whitespace = true
 max_line_length = 120
+end_of_line = lf
 
 # MSBuild
 [*.{csproj,proj,projitems,shproj,fsproj,target,props}]

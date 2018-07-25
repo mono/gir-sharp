@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -88,11 +88,10 @@ static class <LibraryName>Constants
 
 			// generate ReturnValue then Parameters
 			var result = BuildParameters (callable, writer.Options, !callable.IsInstanceCallable (gen, writer.Options));
-			writer.Write (string.Format ("{0} {1} ({2})", returnType, callable.Name.ToCSharp (), result.TypesAndNames));
+			writer.Write ($"{returnType} {callable.Name.ToCSharp ()} ({result.TypesAndNames})");
 
-			if (gen is Interface)
-			{
-				writer.Write(";");
+			if (gen is Interface) {
+				writer.Write (";");
 				writer.WriteLine();
 				return;
 			}

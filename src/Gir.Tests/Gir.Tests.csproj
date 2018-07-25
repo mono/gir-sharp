@@ -33,6 +33,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gtk2\Atk\AtkTests.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="EnumerationTests.cs" />
     <Compile Include="GenerationTestBase.cs" />
