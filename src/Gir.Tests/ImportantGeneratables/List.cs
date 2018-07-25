@@ -15,6 +15,7 @@ namespace Gir.Tests
 
 namespace GLib
 {
+	[StructLayout(LayoutKind.Sequential)]
 	public struct List
 	{
 		IntPtr Data;

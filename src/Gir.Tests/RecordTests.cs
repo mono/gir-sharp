@@ -18,6 +18,7 @@ namespace Gir.Tests
 namespace GLib
 {
 	///<summary>Contains the public fields of a GByteArray.</summary>
+	[StructLayout(LayoutKind.Sequential)]
 	public struct ByteArray
 	{
 		///<summary>

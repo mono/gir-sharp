@@ -365,6 +365,7 @@ namespace GObject
 
 namespace GObject
 {
+	[StructLayout(LayoutKind.Sequential)]
 	internal struct ObjectClass
 	{
 		TypeClass GTypeClass;
