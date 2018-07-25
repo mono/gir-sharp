@@ -12,6 +12,7 @@ namespace Gir.Tests
 			var result = GenerateType (Gtk3, "TreeModelFilterModifyFunc");
 
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace Gtk
 {

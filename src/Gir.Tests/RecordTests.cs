@@ -14,6 +14,7 @@ namespace Gir.Tests
 
 			// Need to map pointers at symbol level.
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace GLib
 {

@@ -12,6 +12,7 @@ namespace Gir.Tests
 			var result = GenerateType (Pango, "Alignment");
 
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace Pango
 {

@@ -12,6 +12,7 @@ namespace Gir.Tests
 			var result = GenerateType (GObject, "Object", true);
 
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace GObject
 {
@@ -362,6 +363,7 @@ namespace GObject
 			var result = GenerateType (GObject, "ObjectClass", true);
 
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace GObject
 {

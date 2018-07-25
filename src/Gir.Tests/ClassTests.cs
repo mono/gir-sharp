@@ -14,6 +14,7 @@ namespace Gir.Tests
 
 			// Need to map pointers at symbol level.
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace Gio
 {
@@ -107,6 +108,7 @@ namespace Gio
 			var result = GenerateType(Gtk3, "AboutDialog", true);
 
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace Gtk
 {

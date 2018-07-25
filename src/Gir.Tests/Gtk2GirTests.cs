@@ -11,6 +11,7 @@ namespace Gir.Tests
 			var result = GenerateType (Gtk2, "Window", true);
 
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace Gtk
 {
