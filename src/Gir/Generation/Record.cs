@@ -12,6 +12,7 @@ namespace Gir
 				if (!string.IsNullOrEmpty (GLibIsGTypeStructFor))
 					access = "internal";
 
+				writer.WriteLine ("[StructLayout(LayoutKind.Sequential)]");
 				writer.WriteLine ($"{access} struct {Name}");
 				writer.WriteLine ("{");
 

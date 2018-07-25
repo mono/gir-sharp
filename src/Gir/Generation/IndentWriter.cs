@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 
 namespace Gir
@@ -28,6 +28,7 @@ namespace Gir
 				return this;
 			
 			WriteLine ("using System;");
+			WriteLine ("using System.Runtime.InteropServices;");
 			// TODO: Uncomment this when we know exactly which namespaces to include.
 			//foreach (var include in Options.UsingNamespaces) {
 			//	if (include == Options.Namespace)

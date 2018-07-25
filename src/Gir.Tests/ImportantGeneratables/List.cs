@@ -12,9 +12,11 @@ namespace Gir.Tests
 			var result = GenerateType(GLib, "List", true);
 
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace GLib
 {
+	[StructLayout(LayoutKind.Sequential)]
 	public struct List
 	{
 		IntPtr Data;

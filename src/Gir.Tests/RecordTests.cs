@@ -14,10 +14,12 @@ namespace Gir.Tests
 
 			// Need to map pointers at symbol level.
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace GLib
 {
 	///<summary>Contains the public fields of a GByteArray.</summary>
+	[StructLayout(LayoutKind.Sequential)]
 	public struct ByteArray
 	{
 		///<summary>

@@ -11,6 +11,7 @@ namespace Gir.Tests
 		{
 			var result = GenerateType (Pango, "FontMask");
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace Pango
 {
@@ -52,6 +53,7 @@ namespace Pango
 			var result = GenerateType (Pango, "FontMask", compat: true);
 
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace Pango
 {

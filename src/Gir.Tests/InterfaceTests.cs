@@ -91,6 +91,7 @@ namespace Gio
 		{
 			var result = GenerateType(Gio2, "Seekable", true);
 			Assert.AreEqual(@"using System;
+using System.Runtime.InteropServices;
 
 namespace Gio
 {
@@ -115,6 +116,7 @@ namespace Gio
 		{
 			var result = GenerateType(Atk1, "Component");
 			Assert.AreEqual(@"using System;
+using System.Runtime.InteropServices;
 
 namespace Atk
 {
@@ -246,6 +248,7 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 			var result = GenerateType (Atk1, "Component", true);
 
 			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
 
 namespace Atk
 {
@@ -297,6 +300,7 @@ lose the focus, use the #AtkObject::state-change ""focused"" notification instea
 			var result = GenerateType(Gio2, "Drive", true);
 
 			Assert.AreEqual(@"using System;
+using System.Runtime.InteropServices;
 
 namespace Gio
 {
