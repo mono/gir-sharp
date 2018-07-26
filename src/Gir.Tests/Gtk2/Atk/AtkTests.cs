@@ -181,6 +181,7 @@ namespace Atk
 	public struct Attribute
 	{
 		string Name;
+
 		string Value;
 	}
 }

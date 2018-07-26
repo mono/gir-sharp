@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 
 namespace GLib
 {
-	[StructLayout(LayoutKind.Sequential)]
+	[StructLayout (LayoutKind.Sequential)]
 	public struct List
 	{
 		IntPtr Data;

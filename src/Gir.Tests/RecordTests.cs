@@ -1,4 +1,4 @@
-﻿
+
 using NUnit.Framework;
 
 namespace Gir.Tests
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 namespace GLib
 {
 	///<summary>Contains the public fields of a GByteArray.</summary>
-	[StructLayout(LayoutKind.Sequential)]
+	[StructLayout (LayoutKind.Sequential)]
 	public struct ByteArray
 	{
 		///<summary>
