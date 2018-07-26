@@ -1,4 +1,4 @@
-﻿
+
 namespace Gir
 {
 	public partial class Record : IGeneratable, IDocumented
@@ -12,7 +12,7 @@ namespace Gir
 				if (!string.IsNullOrEmpty (GLibIsGTypeStructFor))
 					access = "internal";
 
-				writer.WriteLine ("[StructLayout(LayoutKind.Sequential)]");
+				writer.WriteLine ("[StructLayout (LayoutKind.Sequential)]");
 				writer.WriteLine ($"{access} struct {Name}");
 				writer.WriteLine ("{");
 

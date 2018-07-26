@@ -367,7 +367,7 @@ using System.Runtime.InteropServices;
 
 namespace GObject
 {
-	[StructLayout(LayoutKind.Sequential)]
+	[StructLayout (LayoutKind.Sequential)]
 	internal struct ObjectClass
 	{
 		TypeClass GTypeClass;
