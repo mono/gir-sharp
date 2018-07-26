@@ -166,5 +166,25 @@ namespace Atk
 }
 ", result);
 		}
+
+		[Test]
+		public void GenerateAttribute ()
+		{
+			var result = GenerateType (Gtk2Atk1, "Attribute", true);
+
+			Assert.AreEqual (@"using System;
+using System.Runtime.InteropServices;
+
+namespace Atk
+{
+	[StructLayout (LayoutKind.Sequential)]
+	public struct Attribute
+	{
+		string Name;
+		string Value;
+	}
+}
+", result);
+		}
 	}
 }
