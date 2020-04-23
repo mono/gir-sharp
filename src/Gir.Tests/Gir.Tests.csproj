@@ -1,54 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{51FB7677-5684-4664-A59C-075CA6976F57}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Gir.Tests</RootNamespace>
-    <AssemblyName>Gir.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFrameworks>netcoreapp3.0;net472</TargetFrameworks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Xml">
-      <HintPath>..\..\..\..\..\..\..\Library\Frameworks\Mono.framework\Versions\5.13.0\lib\mono\4.7-api\System.Xml.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Gtk2\Atk\AtkTests.cs" />
-    <Compile Include="Test.cs" />
-    <Compile Include="EnumerationTests.cs" />
-    <Compile Include="GenerationTestBase.cs" />
-    <Compile Include="GenerationOptionsTests.cs" />
-    <Compile Include="BitFieldTests.cs" />
-    <Compile Include="SymbolTableTests.cs" />
-    <Compile Include="RecordTests.cs" />
-    <Compile Include="FunctionTests.cs" />
-    <Compile Include="ClassTests.cs" />
-    <Compile Include="InterfaceTests.cs" />
-    <Compile Include="CallbackTests.cs" />
-    <Compile Include="ImportantGeneratables\GObject.cs" />
-    <Compile Include="ImportantGeneratables\List.cs" />
-    <Compile Include="Gtk2GirTests.cs" />
-  </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="TestFiles\Gtk2\Gtk-2.0.gir">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -195,6 +150,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="TestFiles\Gtk3\cairo-1.0.gir">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -230,16 +186,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Gir\Gir.csproj">
-      <Project>{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}</Project>
-      <Name>Gir</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="NUnit">
-      <Version>3.10.1</Version>
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gir\Gir.csproj" />
+  </ItemGroup>
+
 </Project>

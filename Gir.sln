@@ -1,6 +1,7 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30014.187
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gir", "src\Gir\Gir.csproj", "{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gir.Tests", "src\Gir.Tests\Gir.Tests.csproj", "{51FB7677-5684-4664-A59C-075CA6976F57}"
@@ -11,13 +12,19 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Debug|x86.ActiveCfg = Debug|x86
-		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Debug|x86.Build.0 = Debug|x86
-		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Release|x86.ActiveCfg = Release|x86
-		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Release|x86.Build.0 = Release|x86
+		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Debug|x86.Build.0 = Debug|Any CPU
+		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Release|x86.ActiveCfg = Release|Any CPU
+		{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}.Release|x86.Build.0 = Release|Any CPU
 		{51FB7677-5684-4664-A59C-075CA6976F57}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{51FB7677-5684-4664-A59C-075CA6976F57}.Debug|x86.Build.0 = Debug|Any CPU
 		{51FB7677-5684-4664-A59C-075CA6976F57}.Release|x86.ActiveCfg = Release|Any CPU
 		{51FB7677-5684-4664-A59C-075CA6976F57}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13C16ACC-6523-43F7-8F15-9CA70BDF9E81}
 	EndGlobalSection
 EndGlobal
