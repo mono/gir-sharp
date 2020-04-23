@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace Gir
 {
 	public class IndentWriter : IDisposable
 	{
+		bool isDisposed;
 		TextWriter writer;
 		int indent;
 
@@ -51,15 +52,27 @@ namespace Gir
 
 		public void Dispose ()
 		{
-			if (writer != null) {
-				if (Options.WriteHeader) {
-					Unindent ();
-					WriteLine ("}");
-				}
+			Dispose (true);
+			GC.SuppressFinalize (this);
+		}
 
-				writer?.Dispose ();
-				writer = null;
+		protected virtual void Dispose (bool disposing)
+		{
+			if (isDisposed) return;
+
+			if (disposing) {
+				if (writer != null) {
+					if (Options.WriteHeader) {
+						Unindent ();
+						WriteLine ("}");
+					}
+
+					writer?.Dispose ();
+					writer = null;
+				}
 			}
+
+			isDisposed = true;
 		}
 
 		public IndentWriter WriteDocumentation (Documentation doc, string tag)
