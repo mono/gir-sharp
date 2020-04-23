@@ -5,7 +5,7 @@ namespace Gir
 	{
 		public string FormatValue (string value)
 		{
-			int intValue = int.Parse (value);
+			var intValue = int.Parse (value);
 
 			// Maybe pad with leading zeroes based on the value?
 			return $"0x{intValue:X}";

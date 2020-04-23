@@ -2,9 +2,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30014.187
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gir", "src\Gir\Gir.csproj", "{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gir", "src\Gir\Gir.csproj", "{D8FC3B49-B1A1-4DEB-8E76-EE537195AD38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gir.Tests", "src\Gir.Tests\Gir.Tests.csproj", "{51FB7677-5684-4664-A59C-075CA6976F57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gir.Tests", "src\Gir.Tests\Gir.Tests.csproj", "{51FB7677-5684-4664-A59C-075CA6976F57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{489766B3-C14A-4C72-A8D1-F3340A835755}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		.jenkins.groovy = .jenkins.groovy
+		.jenkins.pullrequest.groovy = .jenkins.pullrequest.groovy
+		CODEOWNERS = CODEOWNERS
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

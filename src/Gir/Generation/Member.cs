@@ -1,4 +1,4 @@
-﻿
+
 namespace Gir
 {
 	public partial class Member : IMemberGeneratable, IDocumented
@@ -7,7 +7,7 @@ namespace Gir
 
 		public void Generate (IGeneratable parent, IndentWriter writer)
 		{
-			string value = Value;
+			var value = Value;
 			if (parent is IEnumFormatter formatter)
 				value = formatter.FormatValue (value);
 

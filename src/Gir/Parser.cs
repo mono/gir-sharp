@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace Gir
 {
 	public static class Parser
 	{
-
 		public static IEnumerable<Repository> Parse (string fileName, string includeDir, out Repository mainRepository)
 		{
 			using var fs = File.OpenRead (fileName);
@@ -15,7 +15,7 @@ namespace Gir
 
 		public static IEnumerable<Repository> Parse (Stream s, string includeDir, out Repository mainRepository)
 		{
-			var serializer = new System.Xml.Serialization.XmlSerializer (typeof (Repository));
+			var serializer = new XmlSerializer (typeof (Repository));
 			mainRepository = (Repository)serializer.Deserialize (s);
 
 			var repositories = ParseRecursive (mainRepository, includeDir, new Dictionary<string, Repository> ()).ToList ();
@@ -32,7 +32,7 @@ namespace Gir
 
 				foreach (var include in repository.Includes) {
 					using var fs = File.OpenRead (Path.Combine (includeDir, include.GirName));
-					var serializer = new System.Xml.Serialization.XmlSerializer (typeof (Repository));
+					var serializer = new XmlSerializer (typeof (Repository));
 					var repo = (Repository)serializer.Deserialize (fs);
 
 
