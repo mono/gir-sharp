@@ -39,7 +39,7 @@ namespace Gir
 
 		IEnumerable<Repository> AllRepositories { get; }
 		Repository Repository { get; }
-		List<IGeneratable> allGeneratables = new List<IGeneratable> ();
+		readonly List<IGeneratable> allGeneratables = new List<IGeneratable> ();
 
 		public GenerationOptions (string dir, IEnumerable<Repository> allRepos, Repository repo, ToggleOptions options = null)
 		{

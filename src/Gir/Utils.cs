@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -14,7 +14,7 @@ namespace Gir
 			// Capitalize the first letter, and parse for underscores, capitalizing the letters after them
 			var sb = new StringBuilder (cname.Length);
 
-			bool isUpper = true;
+			var isUpper = true;
 			foreach (var c in cname) {
 				if (c == '_' || c == '-') {
 					isUpper = true;
@@ -57,7 +57,7 @@ namespace Gir
 					continue;
 
 				var args = @interface.GetGenericArguments ();
-				bool isOfT = typeof (T).IsAssignableFrom (args [0]);
+				var isOfT = typeof (T).IsAssignableFrom (args [0]);
 				if (isOfT)
 					return true;
 			}

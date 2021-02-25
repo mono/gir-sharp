@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -45,7 +45,7 @@ namespace Gir
 		public void RegisterType (ISymbol symbol)
 		{
 			var type = symbol.GetType ();
-			RegisteredCount.TryGetValue (type, out int count);
+			RegisteredCount.TryGetValue (type, out var count);
 			RegisteredCount [type] = ++count;
 		}
 

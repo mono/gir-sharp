@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -37,7 +37,7 @@ namespace Gir
 			}
 
 			var opt = new OptionSet ();
-			foreach (string arg in args)
+			foreach (var arg in args)
 				ParseArg (opt, arg);
 
 			opt.AllRepositories = Parser.Parse (args [0], opt.IncludeSearchDirectory, out opt.GenerationRepository);
@@ -51,7 +51,7 @@ namespace Gir
 			if (!Directory.Exists (opt.OutputDirectory))
 				Directory.CreateDirectory (opt.OutputDirectory);
 
-			foreach (IGeneratable gen in genOpts.AllGeneratables) {
+			foreach (var gen in genOpts.AllGeneratables) {
 				gen.Generate (genOpts);
 			}
 

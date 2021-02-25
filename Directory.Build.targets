@@ -1,0 +1,8 @@
+<Project>
+    <ItemGroup>
+        <None Remove="*.txt" />
+        <None Remove="*.raw" />
+        <None Remove="*.custom" />
+        <None Remove="*.metadata" />
+    </ItemGroup>
+</Project>

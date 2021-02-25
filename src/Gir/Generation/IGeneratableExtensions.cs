@@ -26,7 +26,7 @@ namespace Gir
 		public static void GenerateMembers (this IGeneratable gen, IndentWriter writer, Func<IMemberGeneratable, bool> where = null)
 		{
 			var array = gen.GetMemberGeneratables ().Where (x => where == null || where (x)).ToArray ();
-			for (int i = 0; i < array.Length; ++i) {
+			for (var i = 0; i < array.Length; ++i) {
 				var member = array [i];
 
 				// Generate pinvoke signature for a method
@@ -100,7 +100,7 @@ static class <LibraryName>Constants
 			writer.WriteLine("{");
 			using (writer.Indent())
 			{
-				string prefix = returnType != "void" ? "return " : string.Empty;
+				var prefix = returnType != "void" ? "return " : string.Empty;
 				writer.WriteLine($"{prefix}{callable.CIdentifier} ({result.Names});");
 			}
 			writer.WriteLine("}");
@@ -127,7 +127,7 @@ static class <LibraryName>Constants
 			var typeAndName = new List<string> (parameters.Count);
 			var parameterNames = new List<string> (parameters.Count);
 
-			for (int i = 0; i < parameters.Count; ++i) {
+			for (var i = 0; i < parameters.Count; ++i) {
 				var parameter = parameters [i];
 				if (!appendInstanceParameters) {
 					if (parameter is InstanceParameter)
@@ -145,9 +145,9 @@ static class <LibraryName>Constants
 			}
 
 			// PERF: Use an array as the string[] overload of Join is way more efficient than the IEnumerable<string> one.
-			string marshalParameterString = string.Join(", ", marshalTypeAndName.ToArray());
-			string parameterString = string.Join (", ", typeAndName.ToArray ());
-			string baseParams = string.Join (", ", parameterNames.ToArray ());
+			var marshalParameterString = string.Join(", ", marshalTypeAndName.ToArray());
+			var parameterString = string.Join (", ", typeAndName.ToArray ());
+			var baseParams = string.Join (", ", parameterNames.ToArray ());
 
 			return new ParametersResult(marshalParameterString, parameterString, baseParams);
 		}

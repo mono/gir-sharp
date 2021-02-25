@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ namespace Gir
 	public partial class SymbolTable : IEnumerable<ISymbol>
 	{
 		readonly Dictionary<string, ISymbol> typeMap = new Dictionary<string, ISymbol> ();
-		Statistics statistics;
+		readonly Statistics statistics;
 
 		public SymbolTable (Statistics statistics, bool nativeWin64)
 		{
@@ -19,7 +19,7 @@ namespace Gir
 
 		public void AddTypes (IEnumerable<ISymbol> symbols, Repository repository = null)
 		{
-			string nsPrefix = repository != null ? repository.Namespace.Name + "." : string.Empty;
+			var nsPrefix = repository != null ? repository.Namespace.Name + "." : string.Empty;
 
 			foreach (var symbol in symbols)
 				AddTypeCommon (nsPrefix + symbol.Name, symbol);
@@ -27,7 +27,7 @@ namespace Gir
 
 		public void AddType (ISymbol symbol, Repository repository = null)
 		{
-			string nsPrefix = repository != null ? repository.Namespace.Name + "." : string.Empty;
+			var nsPrefix = repository != null ? repository.Namespace.Name + "." : string.Empty;
 			AddTypeCommon (nsPrefix + symbol.Name, symbol);
 		}
 
